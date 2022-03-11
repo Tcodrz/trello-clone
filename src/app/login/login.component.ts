@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -6,10 +7,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
-  constructor() { }
+  loginForm!: FormGroup;
+  messages: string[] = [''];
+  constructor(
+    private fb: FormBuilder,
+  ) { }
 
   ngOnInit(): void {
+    this.loginForm = this.fb.group({
+      email: this.fb.control('', [Validators.required]),
+      password: this.fb.control('', [Validators.required])
+    });
+  }
+  onSubmit(): void {
+    if (this.loginForm.invalid) {
+      this.showMessage('Looks like one or more details is incorrect.');
+    }
+    console.log(this.loginForm.value);
+  }
+
+  showMessage(message: string): void {
+    this.messages.push(message);
+    setTimeout(() => {
+      this.messages = [''];
+    }, 2000);
   }
 
 }

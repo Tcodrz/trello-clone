@@ -49,10 +49,18 @@ $sizes: 1 2 3 4 5 6 7 8 9 10;
   }
 }
 
-$colors: blue grey white lightgrey;
+$colors: blue grey white lightgrey red;
 
 @each $color in $colors {
   .c-#{$color} {
     color: getColor($color);
+  }
+}
+
+$fontSizes: 'sm''regular''md''lg''xl';
+
+@each $size in $fontSizes {
+  .font-#{$size} {
+    font-size: getFontSize($size);
   }
 }

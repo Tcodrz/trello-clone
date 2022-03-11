@@ -9,7 +9,7 @@
 body {
   margin: 0;
   font-family: 'Fredoka', sans-serif;
-  font-size: 20px;
+  font-size: $FontRegular;
   color: $Black;
 }
 
@@ -24,6 +24,14 @@ h6 {
 
 h1 {
   font-size: 40px;
+}
+
+h5 {
+  font-size: $FontMedium;
+}
+
+div.br {
+  border-bottom: 1px solid $LightGrey;
 }
 
 .bg-light {

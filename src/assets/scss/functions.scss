@@ -20,4 +20,30 @@
   @if $color==lightgrey {
     @return $LightGrey;
   }
+
+  @if $color==red {
+    @return $Red;
+  }
+}
+
+@function getFontSize($size) {
+  @if $size=='sm' {
+    @return $FontSmall;
+  }
+
+  @if $size=='regular' {
+    @return $FontRegular;
+  }
+
+  @if $size=='md' {
+    @return $FontMedium;
+  }
+
+  @if $size=='lg' {
+    @return $FontLarge;
+  }
+
+  @if $size=='xl' {
+    @return $FontXL;
+  }
 }

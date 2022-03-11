@@ -2,15 +2,24 @@
 
 input {
   color: $Grey;
-  font-size: 20px;
-  padding: 6px 12px;
-  border: 1px solid $LightGrey;
-  border-radius: $BorderRadius;
-  height: 45px;
+  padding: 4px 8px;
+  font-size: $FontSmall;
+  border: none;
+  outline: 1px solid $InputBorder;
+  border-radius: 3px;
+  height: 40px;
+  width: -webkit-fill-available;
+  background-color: $InputBackground;
+
+  &.ng-invalid.ng-touched {
+    outline: 2px solid $Red;
+  }
 
   &:focus {
     outline: none;
-    border-color: $LightBlue;
-    box-shadow: 0 0 0 4px $BlueShadow;
+
+    &:not(.ng-invalid.ng-touched) {
+      outline: 2px solid #4C9AFF;
+    }
   }
 }

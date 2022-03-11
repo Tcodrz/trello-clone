@@ -4,10 +4,15 @@ button {
   display: inline-block;
   text-align: center;
   border-radius: $BorderRadius;
-  padding: 8px 16px;
+  padding: 16px 24px;
   border: none;
-  font-size: 20px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
+
+  &:focus:not(.raised) {
+    outline: none;
+  }
 
   &.primary {
     color: $White;
@@ -48,6 +53,58 @@ button {
 
     &:hover {
       background-color: $LightGreen;
+      transition: $transition;
+    }
+  }
+
+  &.primary.raised {
+    color: $White;
+    background-color: $Blue;
+    box-shadow: 0 4px 8px #6a5959;
+
+    &:hover {
+      background-color: $DarkBlue;
+      transition: $transition;
+    }
+
+    &:active {
+      transform: translateY(2px);
+      transition: all ease-out .1s;
+      box-shadow: 0 0 4px $Shadow;
+    }
+  }
+
+  &.success.raised {
+    color: $White;
+    background-color: $Green;
+    box-shadow: 0 4px 8px #6a5959;
+
+    &:hover {
+      background-color: $LightGreen;
+      transition: $transition;
+    }
+
+    &:active {
+      transform: translateY(2px);
+      transition: all ease-out .1s;
+      box-shadow: 0 0 4px $Shadow;
+    }
+  }
+
+  &.raised {
+    background-color: transparent;
+    box-shadow: 0 2px 10px $Shadow;
+    color: $GreyText;
+
+    &:hover {
+      background-color: $WhiteHover;
+      transition: $transition;
+    }
+
+    &:active {
+      transform: translateY(2px);
+      transition: all ease-out .1s;
+      box-shadow: 0 0 4px $Shadow;
     }
   }
 }
