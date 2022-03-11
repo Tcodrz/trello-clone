@@ -1,3 +1,4 @@
+import { LayoutModule } from './../layout/layout.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login.component';
@@ -9,7 +10,8 @@ import { LoginComponent } from './login.component';
     LoginComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    LayoutModule,
   ]
 })
 export class LoginModule { }

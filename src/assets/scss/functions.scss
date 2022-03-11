@@ -1,0 +1,23 @@
+@import "constants";
+
+@function times8($num) {
+  @return #{$num * 8}px;
+}
+
+@function getColor($color) {
+  @if $color==blue {
+    @return $Blue;
+  }
+
+  @if $color==grey {
+    @return $GreyText;
+  }
+
+  @if $color==white {
+    @return $White;
+  }
+
+  @if $color==lightgrey {
+    @return $LightGrey;
+  }
+}

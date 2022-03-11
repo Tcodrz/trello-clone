@@ -1,0 +1,11 @@
+@import "constants";
+@import "functions";
+
+.card {
+  box-shadow: $BoxShadow;
+  width: fit-content;
+  padding: times8(2) times8(3);
+  border-radius: $BorderRadius;
+  margin: 0 auto;
+  background-color: $White;
+}

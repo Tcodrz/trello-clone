@@ -4,6 +4,7 @@
 @import "buttons";
 @import "form";
 @import "media";
+@import "global";
 
 body {
   margin: 0;
@@ -12,13 +13,25 @@ body {
   color: $Black;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
 
 h1 {
   font-size: 40px;
-  font-weight: 500;
 }
 
 .bg-light {
   background: rgb(255, 255, 255);
   background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(234, 230, 255, 1) 100%);
+}
+
+.center {
+  display: grid;
+  place-content: center;
 }
