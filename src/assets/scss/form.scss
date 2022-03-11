@@ -1,0 +1,16 @@
+@import "constants";
+
+input {
+  color: $Grey;
+  font-size: 20px;
+  padding: 6px 12px;
+  border: 1px solid $LightGrey;
+  border-radius: $BorderRadius;
+  height: 45px;
+
+  &:focus {
+    outline: none;
+    border-color: $LightBlue;
+    box-shadow: 0 0 0 4px $BlueShadow;
+  }
+}

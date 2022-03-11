@@ -1,0 +1,44 @@
+@import "constants";
+
+button {
+  display: inline-block;
+  text-align: center;
+  border-radius: $BorderRadius;
+  padding: 8px 16px;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+
+  &.primary {
+    color: white;
+    background-color: $Blue;
+
+    &:hover {
+      background-color: $DarkBlue;
+      transition: $transition;
+    }
+  }
+
+  &.primary-outline {
+    color: $Blue;
+    border: 1px solid $Blue;
+    background-color: transparent;
+
+    &:hover {
+      background-color: $Blue;
+      color: white;
+      transition: $transition;
+    }
+  }
+
+  &.link {
+    color: $Blue;
+    font-weight: 600;
+    background-color: transparent;
+
+    &:hover {
+      text-decoration: underline;
+      transition: $transition;
+    }
+  }
+}
