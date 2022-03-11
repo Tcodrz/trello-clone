@@ -1,5 +1,7 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { ReactiveFormsModule } from '@angular/forms';
+import { LayoutModule } from './../layout/layout.module';
 import { RegisterComponent } from './register.component';
 
 
@@ -9,7 +11,9 @@ import { RegisterComponent } from './register.component';
     RegisterComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    LayoutModule,
+    ReactiveFormsModule,
   ]
 })
 export class RegisterModule { }

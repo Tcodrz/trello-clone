@@ -1,3 +1,4 @@
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
-  constructor() { }
-
+  registerForm!: FormGroup;
+  constructor(
+    private fb: FormBuilder,
+  ) { }
   ngOnInit(): void {
+    this.registerForm = this.fb.group({
+      email: this.fb.control('', [Validators.required])
+    });
+  }
+  onSubmit() {
+    console.log(this.registerForm.value);
   }
 
 }

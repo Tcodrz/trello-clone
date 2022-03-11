@@ -51,7 +51,7 @@ button {
     color: $White;
     background-color: $Green;
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: $LightGreen;
       transition: $transition;
     }
@@ -79,7 +79,7 @@ button {
     background-color: $Green;
     box-shadow: 0 4px 8px #6a5959;
 
-    &:hover {
+    &:hover:not(disabled) {
       background-color: $LightGreen;
       transition: $transition;
     }
@@ -107,4 +107,10 @@ button {
       box-shadow: 0 0 4px $Shadow;
     }
   }
+
+  &:disabled {
+    background-color: $LightGrey;
+    cursor: initial;
+  }
+
 }
