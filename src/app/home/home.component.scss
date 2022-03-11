@@ -1,0 +1,97 @@
+@import "media";
+
+.home {
+  .topbar {
+    margin: 0 0 50px 0;
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+
+    .logo {
+      font-size: 32px;
+    }
+
+    .actions {
+      button {
+        margin-left: 16px;
+      }
+    }
+  }
+
+  .container {
+    padding: 0 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .title {
+      h1 {
+        margin-bottom: 20px;
+      }
+    }
+
+    .signup {
+      margin-top: 32px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      flex-grow: 1 2;
+      width: 100%;
+
+      input {
+        width: 65%;
+      }
+
+
+    }
+  }
+}
+
+@media only screen and (max-width: $LargeScreen) {
+  .home {
+    .container {
+      padding: 0 250px;
+
+      .signup {
+        input {
+          width: 65%;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $MediumScreen) {
+  .home {
+    .container {
+      padding: 0 100px;
+
+      .signup {
+        input {
+          width: 60%;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $SmallScreen) {
+  .home {
+
+    .container {
+      padding: 0 50px;
+
+      .signup {
+        input {
+          width: 100%;
+        }
+
+        button {
+          width: 100%;
+          margin-top: 16px;
+        }
+      }
+    }
+  }
+}
