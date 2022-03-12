@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { Icons } from '../layout/icon/icon.component';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
   messages: string[] = [''];
+  Icons = Icons;
   constructor(
     private fb: FormBuilder,
   ) { }

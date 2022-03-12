@@ -12,10 +12,11 @@
         <p *ngFor="let message of messages" class="font-sm center c-red"> {{ message }} </p>
       </div>
       <div>
-        <button type="submit" class="success width-10 mt-2">Log in</button>
+        <app-button className="success width-10 mt-2" type="submit">Log in</app-button>
         <div class="text-center mt-2 c-lightgrey">OR</div>
-        <button type="button" class="raised width-10 mt-2">Log in with Google</button>
-        <button type="button" class="raised width-10 mt-2">Log in with Facebook</button>
+        <app-button className="raised width-10 mt-2" [icon]="Icons.Google">Log in with Google</app-button>
+        <app-button className="raised width-10 mt-2" [icon]="Icons.Microsoft">Log in with Microsoft</app-button>
+        <app-button className="raised width-10 mt-2" [icon]="Icons.Apple">Log in with Apple</app-button>
       </div>
     </form>
   </app-card>

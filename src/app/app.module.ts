@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HomeModule } from './home/home.module';
 import { LoginModule } from './login/login.module';
 import { RegisterModule } from './register/register.module';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
@@ -17,6 +18,7 @@ import { RegisterModule } from './register/register.module';
     HomeModule,
     LoginModule,
     RegisterModule,
+    FontAwesomeModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,8 @@
+<button [type]="type" [class]="className" [disabled]="disabled">
+  <div class="content">
+    <app-icon *ngIf="icon" [icon]="icon"></app-icon>
+    <span class="btn-text">
+      <ng-content></ng-content>
+    </span>
+  </div>
+</button>

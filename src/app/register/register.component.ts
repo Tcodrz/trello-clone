@@ -1,3 +1,4 @@
+import { Icons } from './../layout/icon/icon.component';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
+  Icons = Icons;
   constructor(
     private fb: FormBuilder,
   ) { }

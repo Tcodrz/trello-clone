@@ -1,7 +1,9 @@
 @import "constants";
+@import "functions";
 
 button {
-  display: inline-block;
+  display: block;
+  justify-content: space-around;
   text-align: center;
   border-radius: $BorderRadius;
   padding: 16px 24px;
@@ -9,6 +11,20 @@ button {
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
+
+  .content {
+    min-width: fit-content;
+
+  }
+
+  app-icon {
+    display: inline-block;
+
+    fa-icon {
+      margin: 0 times8(1);
+    }
+
+  }
 
   &:focus:not(.raised) {
     outline: none;
