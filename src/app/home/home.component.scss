@@ -1,21 +1,16 @@
 @import "media";
+@import "constants";
 
 .home {
   .topbar {
     margin: 0 0 50px 0;
-    padding: 0 16px;
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: center;
 
     .logo {
-      font-size: 32px;
-    }
-
-    .actions {
-      button {
-        margin-left: 16px;
-      }
+      font-size: $FontXL;
+      display: flex;
     }
   }
 
@@ -25,25 +20,16 @@
     flex-direction: column;
     align-items: center;
 
-    .title {
-      h1 {
-        margin-bottom: 20px;
-      }
-    }
-
     .signup {
-      margin-top: 32px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       flex-wrap: wrap;
-      flex-grow: 1 2;
       width: 100%;
 
       input {
         width: 65%;
       }
-
-
     }
   }
 }
@@ -78,7 +64,6 @@
 
 @media only screen and (max-width: $SmallScreen) {
   .home {
-
     .container {
       padding: 0 50px;
 

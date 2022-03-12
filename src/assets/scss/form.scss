@@ -13,6 +13,7 @@ input {
 
   &.ng-invalid.ng-touched {
     outline: 2px solid $Red;
+    animation: shadowBlink 1s ease-in-out;
   }
 
   &:focus {
@@ -21,5 +22,17 @@ input {
     &:not(.ng-invalid.ng-touched) {
       outline: 2px solid #4C9AFF;
     }
+  }
+}
+
+
+@keyframes shadowBlink {
+  0% {
+    box-shadow: 0 0 20px $Red;
+  }
+
+  100% {
+
+    box-shadow: 0 0 0 $Red;
   }
 }
