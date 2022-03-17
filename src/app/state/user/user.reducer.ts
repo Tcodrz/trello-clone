@@ -1,22 +1,30 @@
-import { IAction } from './../index';
-import { AppState, Reducer } from "..";
+import { Action, Reducer } from '../types';
+import { UserActions } from './user.actions';
 
 export interface User {
-  id: string;
-  name: string;
+  readonly id: string;
+  readonly email: string;
+  readonly name: string;
 }
 
+export interface UserState {
+  readonly user: User;
+  readonly isLoggedIn: boolean;
+}
 
-export const userReducer: Reducer = (state: AppState, action: IAction): AppState => {
+export const userReducer: Reducer<UserState> = (state: UserState, action: Action<unknown>): UserState => {
   switch (action.type) {
-    case 'LOGIN':
+    case UserActions.Login:
       return {
-        user: action.payload
+        user: action.payload,
+        isLoggedIn: true,
       }
-    case 'LOGOUT':
+    case UserActions.Logout:
       return {
-        user: action.payload
+        user: action.payload,
+        isLoggedIn: false
       }
     default: return state;
   }
 }
+

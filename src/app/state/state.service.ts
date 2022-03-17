@@ -1,18 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AppState, State } from '.';
-import { Login } from './user/user.actions';
-
-
-
-
-
-
+import { Store } from '.';
+import { AppState } from './types';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class StateService extends State {
+export class StoreService extends Store<AppState> {
 
   constructor() {
     super({} as AppState);

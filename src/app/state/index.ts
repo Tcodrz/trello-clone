@@ -1,23 +1,17 @@
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { Login } from './user/user.actions';
-import { User, userReducer } from './user/user.reducer';
-export interface IAction {
-  type: string;
-  payload?: any;
-  actionType: keyof AppState;
-}
+import { Action, AppState, Reducer } from './types';
+import { userReducer } from './user/user.reducer';
 
-export type Reducer = (state: AppState, action: IAction) => AppState;
 
-export class State {
-  private readonly _state: BehaviorSubject<AppState>
-  constructor(initialState: AppState) {
+export class Store<T> {
+  private readonly _state: BehaviorSubject<T>
+  constructor(initialState: T) {
     this._state = new BehaviorSubject(initialState);
   }
-  get state(): Observable<AppState> { return this._state.asObservable(); }
-  dispatch(action: IAction) {
+  get(): Observable<T> { return this._state.asObservable(); }
+  dispatch<K>(action: Action<K>) {
     switch (action.actionType) {
-      case 'user':
+      case 'userState':
         const state = this._state.getValue();
         const reducer = reducers.get(action.actionType);
         if (!!reducer)
@@ -25,18 +19,14 @@ export class State {
         break;
     }
   }
-  select(key: keyof AppState): Observable<AppState[keyof AppState]> {
+  select(key: keyof T): Observable<T[keyof T]> {
     return this._state.asObservable().pipe(
       map(state => state[key])
     );
   }
 }
 
-export interface AppState {
-  user: User;
-}
 
-
-const reducers = new Map<keyof AppState, Reducer>();
-reducers.set('user', userReducer);
+const reducers = new Map<keyof AppState, Reducer<any>>();
+reducers.set('userState', userReducer);
 
