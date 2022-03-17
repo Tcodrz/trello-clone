@@ -1,0 +1,32 @@
+@import 'constants';
+
+:host {
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $TopnavBackground;
+    color: $White;
+
+    .left {
+      display: flex;
+
+      .logo {
+        font-size: $FontLarge;
+      }
+
+      .menus {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+
+        .menu {}
+      }
+    }
+
+    .right {
+      .actions {}
+    }
+  }
+}
