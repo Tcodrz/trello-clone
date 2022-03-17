@@ -1,6 +1,8 @@
-import { Icons } from './../layout/icon/icon.component';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../core/services/user.service';
+import { GotoService } from './../core/services/goto.service';
+import { Icons } from './../layout/icon/icon.component';
 
 @Component({
   selector: 'app-register',
@@ -12,14 +14,17 @@ export class RegisterComponent implements OnInit {
   Icons = Icons;
   constructor(
     private fb: FormBuilder,
+    private userService: UserService,
+    private goto: GotoService,
   ) { }
   ngOnInit(): void {
     this.registerForm = this.fb.group({
-      email: this.fb.control('', [Validators.required])
+      email: this.fb.control('', [Validators.required, Validators.email])
     });
   }
   onSubmit() {
-    console.log(this.registerForm.value);
+    this.userService.register(this.registerForm.value);
+    this.goto.dashboard();
   }
 
 }

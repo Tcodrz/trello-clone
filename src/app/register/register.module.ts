@@ -1,3 +1,4 @@
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -14,6 +15,7 @@ import { RegisterComponent } from './register.component';
     CommonModule,
     LayoutModule,
     ReactiveFormsModule,
+    RouterModule,
   ]
 })
 export class RegisterModule { }
