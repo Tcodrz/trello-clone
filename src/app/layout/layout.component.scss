@@ -1,0 +1,14 @@
+:host {
+  display: grid;
+  grid-template: "topnav topnav"auto "sidebar content"1fr / 25vw 1fr;
+
+  app-sidebar {
+    grid-area: sidebar;
+  }
+
+  app-topnav {
+    grid-area: topnav;
+  }
+
+  .content {}
+}
