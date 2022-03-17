@@ -1,5 +1,7 @@
+import { Component, Input } from '@angular/core';
 import { Icons } from './../icon/icon.component';
-import { Component, Input, OnInit } from '@angular/core';
+
+export type ButtonTypes = 'button' | 'submit';
 
 @Component({
   selector: 'app-button',
@@ -7,7 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./button.component.scss']
 })
 export class ButtonComponent {
-  @Input() type: 'button' | 'submit' = 'button';
+  @Input() type: ButtonTypes = 'button';
   @Input() icon: Icons = Icons.None;
   @Input() className: string = '';
   @Input() disabled: boolean = false;
