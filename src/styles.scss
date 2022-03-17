@@ -34,6 +34,10 @@ div.br {
   border-bottom: 1px solid $LightGrey;
 }
 
+.d-flex {
+  display: flex;
+}
+
 .bg-light {
   background: rgb(255, 255, 255);
   background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(234, 230, 255, 1) 100%);
