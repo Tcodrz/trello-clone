@@ -1,0 +1,10 @@
+<div class="sidebar">
+  <div class="links mt-5">
+    <div class="link ml-2 mr-2" *ngFor="let link of links">
+      <a [routerLink]="[link.route]" routerLinkActive="active">
+        <app-icon [icon]="link.icon"></app-icon>
+        {{link.label}}
+      </a>
+    </div>
+  </div>
+</div>
