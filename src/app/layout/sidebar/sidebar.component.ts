@@ -13,7 +13,6 @@ export interface Link {
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  @Output() toggle: EventEmitter<void> = new EventEmitter();
   Icons = Icons;
   links: Link[] = [
     {
@@ -39,7 +38,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
   }
   onToggle() {
-    this.toggle.emit();
+    this.elementRef.nativeElement.classList.toggle('closed');
   }
 
 }
