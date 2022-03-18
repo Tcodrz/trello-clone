@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Icons } from '../icon/icon.component';
+import { Component, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
+import { Icons } from './../icon/icon.component';
 
 export interface Link {
   label: string;
@@ -13,6 +13,8 @@ export interface Link {
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+  @Output() toggle: EventEmitter<void> = new EventEmitter();
+  Icons = Icons;
   links: Link[] = [
     {
       label: 'Boards',
@@ -30,9 +32,14 @@ export class SidebarComponent implements OnInit {
       icon: Icons.Home
     }
   ];
-  constructor() { }
+  constructor(
+    private elementRef: ElementRef,
+  ) { }
 
   ngOnInit(): void {
+  }
+  onToggle() {
+    this.toggle.emit();
   }
 
 }

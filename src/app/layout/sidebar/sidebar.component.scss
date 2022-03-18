@@ -2,6 +2,19 @@
 
 :host {
   .sidebar {
+    app-icon.toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background-color: $White;
+      border-radius: 50%;
+      box-shadow: $BoxShadow;
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-content: center;
+    }
+
     .links {
       .link {
         height: 30px;
@@ -29,6 +42,17 @@
             background-color: $SidebarLinkActive;
           }
         }
+      }
+    }
+  }
+
+  &.closed {
+
+    .sidebar {
+      app-icon.toggle {
+        transform: rotateZ(540deg);
+        transition: all .3s ease-in-out;
+        right: -14px;
       }
     }
   }
