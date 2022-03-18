@@ -17,7 +17,7 @@ export class SidebarComponent implements OnInit {
   links: Link[] = [
     {
       label: 'Boards',
-      route: '/dashboard/feed',
+      route: '/dashboard/boards',
       icon: Icons.ClipBoard
     },
     {

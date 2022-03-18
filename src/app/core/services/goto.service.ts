@@ -15,6 +15,6 @@ export class GotoService {
     this.router.navigate(commands);
   }
   dashboard() {
-    this.goto('dashboard/feed');
+    this.goto('dashboard/boards');
   }
 }
