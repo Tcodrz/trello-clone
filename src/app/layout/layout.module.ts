@@ -6,6 +6,8 @@ import { ButtonComponent } from './button/button.component';
 import { CardComponent } from './card/card.component';
 import { IconComponent } from './icon/icon.component';
 import { LayoutComponent } from './layout.component';
+import { MenuComponent } from './menu/menu.component';
+import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { TopnavComponent } from './topnav/topnav.component';
 
@@ -17,6 +19,8 @@ import { TopnavComponent } from './topnav/topnav.component';
     CardComponent,
     IconComponent,
     LayoutComponent,
+    MenuComponent,
+    NavMenuComponent,
     SidebarComponent,
     TopnavComponent,
   ],
@@ -30,6 +34,7 @@ import { TopnavComponent } from './topnav/topnav.component';
     CardComponent,
     IconComponent,
     LayoutComponent,
+    MenuComponent,
   ]
 })
 export class LayoutModule { }

@@ -1,0 +1,16 @@
+@import "constants";
+
+:host {
+  div {
+    position: relative;
+
+    app-menu {
+      position: absolute;
+      left: 0;
+      top: 20px;
+      color: $Black;
+      z-index: 10000;
+      width: 300px;
+    }
+  }
+}

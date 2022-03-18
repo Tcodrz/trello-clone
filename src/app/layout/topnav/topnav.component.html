@@ -1,12 +1,15 @@
 <div class="navbar p-1">
   <div class="left">
-    <div class="logo">
-      Trello
+    <div class="logo ml-1">
+      <app-icon [icon]="Icons.Trello"></app-icon>
+      <span class="ml-1">
+        Trello
+      </span>
     </div>
-    <div class="menus">
-      <div class="menu ml-3">Workspaces</div>
-      <div class="menu ml-2">Recent</div>
-      <div class="menu ml-2">More</div>
+    <div class="menus ml-3">
+      <app-nav-menu [title]="'Workspaces'"></app-nav-menu>
+      <app-nav-menu [title]="'Recent'"></app-nav-menu>
+      <app-nav-menu [title]="'More'"></app-nav-menu>
     </div>
   </div>
   <div class="right">

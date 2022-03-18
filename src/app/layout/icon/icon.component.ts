@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faUser, faClipboard, faBorderAll, faHome, faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import { faGoogle, faMicrosoft, faApple } from '@fortawesome/free-brands-svg-icons';
+import { faUser, faClipboard, faBorderAll, faHome, faChevronLeft, } from '@fortawesome/free-solid-svg-icons';
+import { faGoogle, faMicrosoft, faApple, faTrello } from '@fortawesome/free-brands-svg-icons';
 
 export enum Icons {
   None = '',
@@ -13,6 +13,7 @@ export enum Icons {
   BorderAll = 'faBorderAll',
   Home = 'faHome',
   ChevronLeft = 'faChevronLeft',
+  Trello = 'faTrello',
 }
 
 @Component({
@@ -39,6 +40,7 @@ export class IconComponent implements OnChanges {
       case Icons.BorderAll: return faBorderAll;
       case Icons.Home: return faHome;
       case Icons.ChevronLeft: return faChevronLeft;
+      case Icons.Trello: return faTrello;
       default: return null;
     }
   }
