@@ -1,19 +1,22 @@
-<div class="navbar p-1">
+<div class="navbar">
   <div class="left">
     <div class="logo ml-1">
       <app-icon [icon]="Icons.Trello"></app-icon>
       <span class="ml-1">Trello</span>
     </div>
     <div class="menus ml-3">
-      <app-nav-menu [title]="'Workspaces'"></app-nav-menu>
-      <app-nav-menu [title]="'Recent'"></app-nav-menu>
-      <app-nav-menu [title]="'More'"></app-nav-menu>
+      <app-nav-menu [title]="'Workspaces'" position="right"></app-nav-menu>
+      <app-nav-menu [title]="'Recent'" position="right"></app-nav-menu>
+      <app-nav-menu [title]="'More'" position="right"></app-nav-menu>
     </div>
   </div>
   <div class="right">
     <div class="actions">
-      <div class="search"></div>
-      <div class="profile"></div>
+      <div class="search">
+        <input type="text">
+      </div>
+      <div class="profile" *ngIf="(user$ | async)">
+        <img [src]="(user$ | async)?.picture" alt="" class="pic pointer" (click)="menu.toggle()">
+        <app-menu [title]="'Account'" [position]="'left'" #menu></app-menu>
+      </div>
     </div>
-  </div>
-</div>

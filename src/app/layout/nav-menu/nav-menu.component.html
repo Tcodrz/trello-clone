@@ -1,4 +1,2 @@
-<div class="ml-2 mr-2" (click)="menu.toggle()">
-  <span class="pointer">{{title}}</span>
-  <app-menu [title]="title" #menu></app-menu>
-</div>
+<app-button (click)="menu.toggle()">{{ title }}</app-button>
+<app-menu [title]="title" [position]="position" #menu></app-menu>

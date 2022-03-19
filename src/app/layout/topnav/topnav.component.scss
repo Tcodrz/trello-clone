@@ -8,9 +8,11 @@
     align-items: center;
     background-color: $TopnavBackground;
     color: $White;
+    height: $TopnavHeight;
 
     .left {
       display: flex;
+      align-items: center;
 
       .logo {
         font-size: $FontLarge;
@@ -21,12 +23,39 @@
         flex-direction: row;
         align-items: center;
 
-        .menu {}
+        .menu {
+          position: relative;
+        }
       }
     }
 
     .right {
-      .actions {}
+      .actions {
+        display: flex;
+
+        .search {
+          display: grid;
+          place-content: center;
+
+          input {
+            height: 20px;
+            outline: none;
+          }
+        }
+      }
+
+      .profile {
+        display: grid;
+        place-content: center;
+        margin: 0 8px 0 24px;
+        position: relative;
+
+        .pic {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+        }
+      }
     }
   }
 }

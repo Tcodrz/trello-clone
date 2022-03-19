@@ -9,7 +9,8 @@ button {
   padding: times8(2) times8(3);
   border: none;
   font-size: 14px;
-  font-weight: 600;
+  background-color: transparent;
+  color: inherit;
   cursor: pointer;
 
   .content {
@@ -23,7 +24,6 @@ button {
     height: times8(4);
     display: grid;
     place-content: center;
-    background-color: transparent;
 
     &:hover {
       background-color: $SidbarLinkHover;
@@ -45,6 +45,7 @@ button {
   &.primary {
     color: $White;
     background-color: $Blue;
+    font-weight: 600;
 
     &:hover {
       background-color: $DarkBlue;
@@ -55,7 +56,7 @@ button {
   &.primary-outline {
     color: $Blue;
     border: 1px solid $Blue;
-    background-color: transparent;
+    font-weight: 600;
 
     &:hover {
       background-color: $Blue;
@@ -67,7 +68,6 @@ button {
   &.link {
     color: $Blue;
     font-weight: 600;
-    background-color: transparent;
 
     &:hover {
       text-decoration: underline;
