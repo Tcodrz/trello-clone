@@ -1,0 +1,12 @@
+<div class="dropdown" #dropdown>
+  <div class="header" (click)="onToggle()">
+    <span class="title">{{ title }}</span>
+    <app-icon class="pointer" #icon [icon]="Icons.ChevronDown"></app-icon>
+  </div>
+  <div class="items">
+    <div *ngFor="let item of items" class="item">
+      <app-icon *ngIf="item.icon" [icon]="item.icon" class="mr-2"></app-icon>
+      <span>{{ item.label }}</span>
+    </div>
+  </div>
+</div>

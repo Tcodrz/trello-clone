@@ -10,6 +10,7 @@ import { MenuComponent } from './menu/menu.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { TopnavComponent } from './topnav/topnav.component';
+import { SidebarDropdownComponent } from './sidebar-dropdown/sidebar-dropdown.component';
 
 
 
@@ -23,6 +24,7 @@ import { TopnavComponent } from './topnav/topnav.component';
     NavMenuComponent,
     SidebarComponent,
     TopnavComponent,
+    SidebarDropdownComponent,
   ],
   imports: [
     CommonModule,
