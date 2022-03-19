@@ -5,6 +5,7 @@ export interface User {
   readonly id: string;
   readonly email: string;
   readonly name: string;
+  readonly picture: string;
 }
 
 export interface UserState {

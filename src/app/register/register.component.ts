@@ -24,7 +24,9 @@ export class RegisterComponent implements OnInit {
   }
   onSubmit() {
     this.userService.register(this.registerForm.value);
-    this.goto.dashboard();
+  }
+  onSignInWithGoogle() {
+    this.userService.signInWithGoogle();
   }
 
 }

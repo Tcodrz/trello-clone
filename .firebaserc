@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "trello-clone-v01": {
+      "hosting": {
+        "trello-clone": [
+          "trello-clone-v01"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "trello-clone-v01"
+  }
+}

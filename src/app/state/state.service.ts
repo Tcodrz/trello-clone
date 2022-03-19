@@ -11,7 +11,7 @@ export class StoreService extends Store<AppState> {
   constructor() {
     const initialState: AppState = {
       userState: {
-        user: { name: 'Tom', id: '1', email: 'tom@email.com' },
+        user: { name: '', id: '', email: '', picture: '' },
         isLoggedIn: false,
       },
       workspaceState: {
@@ -24,6 +24,5 @@ export class StoreService extends Store<AppState> {
     }
     super(initialState);
   }
-
 
 }
