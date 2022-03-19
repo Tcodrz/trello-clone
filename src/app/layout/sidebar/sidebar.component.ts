@@ -1,5 +1,9 @@
+import { MenuItem } from './../menu/menu.component';
+import { Observable, of, map } from 'rxjs';
+import { StoreService } from './../../state/state.service';
 import { Component, ElementRef, EventEmitter, OnInit, Output } from '@angular/core';
 import { Icons } from './../icon/icon.component';
+import { Workspace, WorkspaceState } from 'src/app/state/workspaces/workspaces.reducer';
 
 export interface Link {
   label: string;
@@ -13,6 +17,7 @@ export interface Link {
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+  workspaces$: Observable<Workspace[]> = of([]);
   Icons = Icons;
   links: Link[] = [
     {
@@ -31,11 +36,36 @@ export class SidebarComponent implements OnInit {
       icon: Icons.Home
     }
   ];
+  workspaceMenuItems: MenuItem[] = [
+    {
+      label: 'Boards',
+      icon: Icons.ClipBoard
+    },
+    {
+      label: 'Highlights',
+      icon: Icons.Heart,
+    },
+    {
+      label: 'Views',
+      icon: Icons.BorderAll,
+    },
+    {
+      label: 'Members',
+      icon: Icons.Users
+    },
+    {
+      label: 'settings',
+      icon: Icons.Settings,
+    }
+  ]
   constructor(
     private elementRef: ElementRef,
+    private store: StoreService,
   ) { }
 
   ngOnInit(): void {
+    this.workspaces$ = this.store.select('workspaceState').pipe(
+      map((state) => (state as WorkspaceState).allWorkspaces));
   }
   onToggle() {
     this.elementRef.nativeElement.classList.toggle('closed');

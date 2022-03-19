@@ -8,4 +8,15 @@
       </a>
     </div>
   </div>
+  <div class="workspaces">
+    <div class="header mb-2">
+      <span>Workspaces</span>
+      <app-button [icon]="Icons.Plus" className="icon"></app-button>
+    </div>
+    <ng-container *ngFor="let workspace of workspaces$ | async">
+      <div class="workspace">
+        <app-sidebar-dropdown [title]="workspace.name" [items]="workspaceMenuItems"></app-sidebar-dropdown>
+      </div>
+    </ng-container>
+  </div>
 </div>
