@@ -1,3 +1,4 @@
+import { WorkspaceState } from './workspaces/workspaces.actions';
 import { UserState } from './user/user.reducer';
 
 export type Reducer<T> = (state: T, action: Action<unknown>) => T;
@@ -15,7 +16,12 @@ export class Action<T> {
   get type(): string { return this._type; }
   get payload(): any { return this._payload; }
 }
-
+export function createAction<T>(type: string, key: keyof AppState): (payload: T) => Action<T> {
+  return function (payload: T): Action<T> {
+    return new Action<T>(key, type, payload);
+  }
+}
 export interface AppState {
   readonly userState: UserState;
+  readonly workspaceState: WorkspaceState;
 }

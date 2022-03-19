@@ -9,7 +9,20 @@ import { AppState } from './types';
 export class StoreService extends Store<AppState> {
 
   constructor() {
-    super({} as AppState);
+    const initialState: AppState = {
+      userState: {
+        user: { name: 'Tom', id: '1', email: 'tom@email.com' },
+        isLoggedIn: false,
+      },
+      workspaceState: {
+        allWorkspaces: [
+          { name: 'First Workspace' },
+          { name: 'Second Workspace' },
+        ],
+        currentWorkSpace: null,
+      }
+    }
+    super(initialState);
   }
 
 
