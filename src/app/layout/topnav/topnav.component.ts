@@ -1,9 +1,10 @@
-import { User } from 'src/app/state/user/user.reducer';
-import { map, Observable, of } from 'rxjs';
-import { UserState } from './../../state/user/user.reducer';
 import { Component, OnInit } from '@angular/core';
+import { map, Observable, of } from 'rxjs';
+import { User } from 'src/app/state/user/user.reducer';
 import { Icons } from '../icon/icon.component';
+import { ScreenSize } from './../../core/interface/screen-size.enum';
 import { StoreService } from './../../state/state.service';
+import { UserState } from './../../state/user/user.reducer';
 
 export interface Link {
   route: string;
@@ -21,7 +22,10 @@ export class TopnavComponent implements OnInit {
   constructor(
     private store: StoreService,
   ) { }
-
+  get smallScreen(): boolean {
+    const width = window.innerWidth
+    return width <= ScreenSize.Medium;
+  }
   ngOnInit(): void {
     this.user$ = this.store.select('userState').pipe(
       map(state => (state as UserState).user));

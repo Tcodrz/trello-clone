@@ -12,6 +12,7 @@ import {
   faUsers,
   faHeart,
   faScrewdriver,
+  faSearch,
 } from '@fortawesome/free-solid-svg-icons';
 
 export enum Icons {
@@ -30,6 +31,7 @@ export enum Icons {
   Heart = 'faHeart',
   Users = 'faUsers',
   Settings = 'faScrewdriver',
+  Search = 'faSearch',
 }
 
 @Component({
@@ -64,6 +66,7 @@ export class IconComponent implements OnChanges {
       case Icons.Heart: return faHeart;
       case Icons.Users: return faUsers;
       case Icons.Settings: return faScrewdriver;
+      case Icons.Search: return faSearch;
       default: return null;
     }
   }

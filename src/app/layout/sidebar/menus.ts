@@ -1,6 +1,6 @@
 import { MenuItem } from './../menu/menu.component';
 import { Icons } from './../icon/icon.component';
-import { Link } from "./sidebar.component";
+import { Link } from 'src/app/core/interface/link.interface';
 
 export const dashboardSidebarLinks: Link[] = [
   {

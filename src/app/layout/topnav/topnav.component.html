@@ -4,16 +4,21 @@
       <app-icon [icon]="Icons.Trello"></app-icon>
       <span class="pointer ml-1" [routerLink]="['boards']">Trello</span>
     </div>
-    <div class="menus ml-3">
+    <div class="menus ml-3" *ngIf="!smallScreen">
       <app-nav-menu [title]="'Workspaces'" position="right"></app-nav-menu>
       <app-nav-menu [title]="'Recent'" position="right"></app-nav-menu>
       <app-nav-menu [title]="'More'" position="right"></app-nav-menu>
+    </div>
+    <div class="menus ml-3" *ngIf="smallScreen">
+      <app-button (click)="menu.toggle()">More</app-button>
+      <app-menu #menu></app-menu>
     </div>
   </div>
   <div class="right">
     <div class="actions">
       <div class="search">
-        <input type="text">
+        <input type="text" *ngIf="!smallScreen">
+        <app-button *ngIf="smallScreen" className="icon" [icon]="Icons.Search"></app-button>
       </div>
       <div class="profile" *ngIf="(user$ | async)">
         <img [src]="(user$ | async)?.picture" alt="" class="pic pointer" (click)="menu.toggle()">
