@@ -1,3 +1,9 @@
+@import "constants";
+
 .register {
   height: 100vh;
+
+  app-card {
+    width: $CardWidthDefualt;
+  }
 }

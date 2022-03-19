@@ -1,9 +1,9 @@
 <ng-container *ngIf="_show">
   <app-card>
     <div class="menu">
-      <span class="title">{{ title }}</span>
-      <div class="br mt-1"></div>
-      <div class="items"></div>
+      <div class="title">{{ title }}</div>
+      <div class="br"></div>
+      <ng-content></ng-content>
     </div>
   </app-card>
 </ng-container>

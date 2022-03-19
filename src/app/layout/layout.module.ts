@@ -8,9 +8,10 @@ import { IconComponent } from './icon/icon.component';
 import { LayoutComponent } from './layout.component';
 import { MenuComponent } from './menu/menu.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
+import { ProfileMenuComponent } from './profile-menu/profile-menu.component';
+import { SidebarDropdownComponent } from './sidebar-dropdown/sidebar-dropdown.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { TopnavComponent } from './topnav/topnav.component';
-import { SidebarDropdownComponent } from './sidebar-dropdown/sidebar-dropdown.component';
 
 
 
@@ -22,9 +23,10 @@ import { SidebarDropdownComponent } from './sidebar-dropdown/sidebar-dropdown.co
     LayoutComponent,
     MenuComponent,
     NavMenuComponent,
+    ProfileMenuComponent,
     SidebarComponent,
-    TopnavComponent,
     SidebarDropdownComponent,
+    TopnavComponent,
   ],
   imports: [
     CommonModule,

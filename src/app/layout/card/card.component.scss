@@ -3,8 +3,8 @@
 
 .card {
   box-shadow: $BoxShadow;
-  padding: times8(2) times8(3);
   border-radius: $BorderRadius;
   margin: 0 auto;
   background-color: $White;
+  padding: times8(1);
 }

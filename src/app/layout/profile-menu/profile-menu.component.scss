@@ -1,0 +1,36 @@
+@import "functions";
+
+:host {
+  padding: 0 8px;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: times8(2);
+    padding-left: times8(2);
+    padding-right: times8(2);
+
+    .profile-pic {
+      display: grid;
+      place-content: center;
+
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+      }
+    }
+
+    .details {
+      .username {
+        font-weight: 500;
+      }
+
+      .email {
+        font-weight: 300;
+        font-size: $FontSmall;
+      }
+    }
+  }
+}

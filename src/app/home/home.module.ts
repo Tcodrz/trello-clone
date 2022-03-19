@@ -1,3 +1,4 @@
+import { LayoutModule } from './../layout/layout.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -13,9 +14,10 @@ const routes: Routes = []
   ],
   imports: [
     CommonModule,
+    LayoutModule,
     LoginModule,
     RegisterModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
   ]
 })
 export class HomeModule { }

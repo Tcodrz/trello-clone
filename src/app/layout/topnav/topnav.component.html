@@ -17,6 +17,8 @@
       </div>
       <div class="profile" *ngIf="(user$ | async)">
         <img [src]="(user$ | async)?.picture" alt="" class="pic pointer" (click)="menu.toggle()">
-        <app-menu [title]="'Account'" [position]="'left'" #menu></app-menu>
+        <app-menu [title]="'Account'" [position]="'left'" #menu>
+          <app-profile-menu [user]="user$"></app-profile-menu>
+        </app-menu>
       </div>
     </div>

@@ -1,5 +1,6 @@
 @import "media";
 @import "constants";
+@import "functions";
 
 .home {
   .topbar {
@@ -11,6 +12,12 @@
     .logo {
       font-size: $FontXL;
       display: flex;
+      align-items: center;
+      column-gap: times8(1);
+
+      app-icon {
+        color: $Blue;
+      }
     }
   }
 

@@ -1,7 +1,15 @@
-.login {
-  height: 100vh;
+@import "constants";
 
-  .messages {
-    height: 30px;
+:host {
+  .login {
+    height: 100vh;
+
+    app-card {
+      width: $CardWidthDefualt;
+
+      .messages {
+        height: 30px;
+      }
+    }
   }
 }
