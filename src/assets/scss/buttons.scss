@@ -6,7 +6,7 @@ button {
   justify-content: space-around;
   text-align: center;
   border-radius: $BorderRadius;
-  padding: 16px 24px;
+  padding: times8(2) times8(3);
   border: none;
   font-size: 14px;
   font-weight: 600;
@@ -17,13 +17,25 @@ button {
 
   }
 
+  &.icon {
+    padding: 0;
+    width: times8(4);
+    height: times8(4);
+    display: grid;
+    place-content: center;
+    background-color: transparent;
+
+    &:hover {
+      background-color: $SidbarLinkHover;
+    }
+  }
+
   app-icon {
     display: inline-block;
 
     fa-icon {
       margin: 0 times8(1);
     }
-
   }
 
   &:focus:not(.raised) {

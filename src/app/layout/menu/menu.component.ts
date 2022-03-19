@@ -1,7 +1,9 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Icons } from './../icon/icon.component';
 
 export interface MenuItem {
   label: string;
+  icon?: Icons;
 }
 export interface Menu {
   toggle: () => void;

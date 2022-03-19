@@ -1,7 +1,18 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges } from '@angular/core';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faUser, faClipboard, faBorderAll, faHome, faChevronLeft, } from '@fortawesome/free-solid-svg-icons';
-import { faGoogle, faMicrosoft, faApple, faTrello } from '@fortawesome/free-brands-svg-icons';
+import { faApple, faGoogle, faMicrosoft, faTrello } from '@fortawesome/free-brands-svg-icons';
+import {
+  faBorderAll,
+  faChevronDown,
+  faChevronLeft,
+  faClipboard,
+  faHome,
+  faPlus,
+  faUser,
+  faUsers,
+  faHeart,
+  faScrewdriver,
+} from '@fortawesome/free-solid-svg-icons';
 
 export enum Icons {
   None = '',
@@ -14,6 +25,11 @@ export enum Icons {
   Home = 'faHome',
   ChevronLeft = 'faChevronLeft',
   Trello = 'faTrello',
+  Plus = 'faPlus',
+  ChevronDown = 'faChevronDown',
+  Heart = 'faHeart',
+  Users = 'faUsers',
+  Settings = 'faScrewdriver',
 }
 
 @Component({
@@ -24,7 +40,9 @@ export enum Icons {
 export class IconComponent implements OnChanges {
   @Input() icon: Icons = Icons.None;
   _icon: IconProp | null = null;
-  constructor() { }
+  constructor(
+    public elementRef: ElementRef,
+  ) { }
 
   ngOnChanges(): void {
     this._icon = this.getIcon(this.icon);
@@ -41,6 +59,11 @@ export class IconComponent implements OnChanges {
       case Icons.Home: return faHome;
       case Icons.ChevronLeft: return faChevronLeft;
       case Icons.Trello: return faTrello;
+      case Icons.Plus: return faPlus;
+      case Icons.ChevronDown: return faChevronDown;
+      case Icons.Heart: return faHeart;
+      case Icons.Users: return faUsers;
+      case Icons.Settings: return faScrewdriver;
       default: return null;
     }
   }
