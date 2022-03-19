@@ -4,6 +4,7 @@ import { Workspace, WorkspaceState } from 'src/app/state/workspaces/workspaces.r
 import { StoreService } from './../../state/state.service';
 import { Icons } from './../icon/icon.component';
 import { MenuItem } from './../menu/menu.component';
+import { dashboardSidebarLinks, workspaceMenuItems } from './menus';
 
 export interface Link {
   label: string;
@@ -19,47 +20,11 @@ export interface Link {
 export class SidebarComponent implements OnInit {
   @Output() open: EventEmitter<boolean> = new EventEmitter();
   workspaces$: Observable<Workspace[]> = of([]);
+  showToggler$: Observable<boolean> = of(false);
   isOpen: boolean = true;
   Icons = Icons;
-  links: Link[] = [
-    {
-      label: 'Boards',
-      route: '/dashboard/boards',
-      icon: Icons.ClipBoard
-    },
-    {
-      label: 'Templates',
-      route: '/dashboard/templates',
-      icon: Icons.BorderAll
-    },
-    {
-      label: 'Home',
-      route: '/dashboard/home',
-      icon: Icons.Home
-    }
-  ];
-  workspaceMenuItems: MenuItem[] = [
-    {
-      label: 'Boards',
-      icon: Icons.ClipBoard
-    },
-    {
-      label: 'Highlights',
-      icon: Icons.Heart,
-    },
-    {
-      label: 'Views',
-      icon: Icons.BorderAll,
-    },
-    {
-      label: 'Members',
-      icon: Icons.Users
-    },
-    {
-      label: 'settings',
-      icon: Icons.Settings,
-    }
-  ]
+  links: Link[] = dashboardSidebarLinks;
+  workspaceMenuItems: MenuItem[] = workspaceMenuItems;
   constructor(
     private elementRef: ElementRef,
     private store: StoreService,
@@ -68,6 +33,8 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.workspaces$ = this.store.select('workspaceState').pipe(
       map((state) => (state as WorkspaceState).allWorkspaces));
+    this.showToggler$ = this.store.select('workspaceState').pipe(
+      map((state) => !!(state as WorkspaceState).currentWorkSpace));
   }
   onToggle() {
     this.elementRef.nativeElement.classList.toggle('closed');
