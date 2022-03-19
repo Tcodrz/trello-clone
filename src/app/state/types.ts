@@ -2,7 +2,6 @@ import { UserState } from './user/user.reducer';
 import { WorkspaceState } from './workspaces/workspaces.reducer';
 
 export type Reducer<T> = (state: T, action: Action<unknown>) => T;
-export type ActionCreator<T> = (payload: T) => Action<T>;
 export class Action<T> {
   private _actionType: keyof AppState;
   private _type: string;
