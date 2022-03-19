@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UserService } from '../core/services/user.service';
 import { Icons } from '../layout/icon/icon.component';
 @Component({
   selector: 'app-login',
@@ -11,6 +12,7 @@ export class LoginComponent implements OnInit {
   messages: string[] = [''];
   Icons = Icons;
   constructor(
+    private userService: UserService,
     private fb: FormBuilder,
   ) { }
 
@@ -33,5 +35,7 @@ export class LoginComponent implements OnInit {
       this.messages = [''];
     }, 2000);
   }
-
+  onLogInWithGoogle() {
+    this.userService.signInWithGoogle();
+  }
 }

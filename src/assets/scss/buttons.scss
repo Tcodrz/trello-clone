@@ -8,13 +8,17 @@ button {
   border-radius: $BorderRadius;
   padding: times8(2) times8(3);
   border: none;
-  font-size: 14px;
   background-color: transparent;
   color: inherit;
   cursor: pointer;
 
   .content {
     min-width: fit-content;
+
+    span {
+      font-weight: 500;
+      font-size: 16px;
+    }
 
   }
 

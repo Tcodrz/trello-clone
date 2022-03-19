@@ -14,7 +14,8 @@
       <div>
         <app-button className="success width-10 mt-2" type="submit">Log in</app-button>
         <div class="text-center mt-2 c-lightgrey">OR</div>
-        <app-button className="raised width-10 mt-2" [icon]="Icons.Google">Log in with Google</app-button>
+        <app-button className="raised width-10 mt-2" (click)="onLogInWithGoogle()" [icon]="Icons.Google">Log in with
+          Google</app-button>
         <app-button className="raised width-10 mt-2" [icon]="Icons.Microsoft">Log in with Microsoft</app-button>
         <app-button className="raised width-10 mt-2" [icon]="Icons.Apple">Log in with Apple</app-button>
       </div>
