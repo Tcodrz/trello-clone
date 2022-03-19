@@ -9,7 +9,7 @@ export interface User {
 }
 
 export interface UserState {
-  readonly user: User;
+  readonly user: User | null;
   readonly isLoggedIn: boolean;
 }
 

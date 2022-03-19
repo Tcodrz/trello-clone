@@ -17,4 +17,7 @@ export class GotoService {
   dashboard() {
     this.goto('dashboard/boards');
   }
+  login() {
+    this.goto('home');
+  }
 }

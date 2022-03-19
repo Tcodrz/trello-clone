@@ -1,3 +1,4 @@
+import { CacheKeys, CacheService } from './cache.service';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import firebase from 'firebase/compat/app';
@@ -16,6 +17,7 @@ export class UserService {
   constructor(
     private store: StoreService,
     private goto: GotoService,
+    private cacheService: CacheService,
     private auth: AngularFireAuth,
   ) { }
 
@@ -25,11 +27,15 @@ export class UserService {
   }
   signInWithGoogle() {
     this.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider()).then(creds => {
-      if (creds.additionalUserInfo?.profile) {
-        const profile = creds.additionalUserInfo.profile.valueOf() as User;
-        this.store.dispatch(UserActions.Login(profile));
-        this.goto.dashboard();
+      const user: User = {
+        id: creds.user?.uid as string,
+        name: creds.user?.displayName as string,
+        email: creds.user?.email as string,
+        picture: creds.user?.photoURL as string,
       }
+      this.store.dispatch(UserActions.Login(user));
+      this.cacheService.setItem(CacheKeys.User, user);
+      this.goto.dashboard();
     });
   }
   isLoggedIn(): Observable<boolean> {
