@@ -1,3 +1,4 @@
+import { UserState } from './../../state/user/user.reducer';
 import { StoreService } from './../../state/state.service';
 import { Injectable } from '@angular/core';
 import * as UserActions from 'src/app/state/user/user.actions';
@@ -18,7 +19,7 @@ export class UserService {
   }
   isLoggedIn(): Observable<boolean> {
     return this.store.select('userState').pipe(
-      map(userState => userState.isLoggedIn)
+      map(userState => (userState as UserState).isLoggedIn)
     );
   }
 }

@@ -1,5 +1,5 @@
-import { WorkspaceState } from './workspaces/workspaces.actions';
 import { UserState } from './user/user.reducer';
+import { WorkspaceState } from './workspaces/workspaces.reducer';
 
 export type Reducer<T> = (state: T, action: Action<unknown>) => T;
 export type ActionCreator<T> = (payload: T) => Action<T>;
