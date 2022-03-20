@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import { map, Observable, of, BehaviorSubject } from 'rxjs';
+import { map, Observable, of, BehaviorSubject, mergeMap } from 'rxjs';
 import { Link } from 'src/app/core/interface/link.interface';
 import { Workspace, WorkspaceState } from 'src/app/state/workspaces/workspaces.reducer';
 import { ScreenSize } from './../../core/interface/screen-size.enum';
@@ -17,11 +17,12 @@ export class SidebarComponent implements OnInit {
   @Output() open: EventEmitter<boolean> = new EventEmitter();
   workspaces$: Observable<Workspace[]> = of([]);
   inWorkspace$: Observable<boolean> = of(false);
-  showToggler$ = new BehaviorSubject<boolean>(false);
+  isSmallScreen$ = new BehaviorSubject<boolean>(false);
   isOpen: boolean = true;
   Icons = Icons;
   links: Link[] = dashboardSidebarLinks;
   workspaceMenuItems: MenuItem[] = workspaceMenuItems;
+  showToggler$: Observable<boolean> = of(false);
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) { this.initSidebar(event); }
   constructor(
@@ -35,15 +36,17 @@ export class SidebarComponent implements OnInit {
       map((state) => (state as WorkspaceState).allWorkspaces));
     this.inWorkspace$ = this.store.select('workspaceState').pipe(
       map((state) => !!(state as WorkspaceState).currentWorkSpace));
+    this.showToggler$ = this.isSmallScreen$.pipe(
+      mergeMap(isSmallScreen => of(isSmallScreen) || this.inWorkspace$));
   }
   initSidebar(event?: Event) {
     const width = (event?.target as Window)?.innerWidth || window.innerWidth;
     const isSmallScreen = width <= ScreenSize.Small;
     if (isSmallScreen) {
-      this.showToggler$.next(true);
+      this.isSmallScreen$.next(true);
       this.hide();
     } else {
-      this.showToggler$.next(false);
+      this.isSmallScreen$.next(false);
       this.show();
     }
   }

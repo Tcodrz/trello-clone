@@ -5,9 +5,21 @@ $SidebarWidth: 300px;
 
 :host {
   display: grid;
-  grid-template: "topnav topnav"45px "sidebar content"calc(100vh - 45px) / 300px 1fr;
-  grid-template-rows: $TopnavHeight calc(100vh - $TopnavHeight);
-  transition: all 3s ease-in-out;
+  grid-template: "topnav topnav"45px "sidebar content"calc(100vh - 45px) / 300px calc(100% - 300px);
+
+  &:not(.closed) {
+    .content {
+      transform: translate3d(0, 0, 0);
+      transition: all .3s ease-in-out;
+    }
+  }
+
+  &.closed {
+    .content {
+      transform: translate3d(-270px, 0, 0);
+      transition: all .3s ease-in-out;
+    }
+  }
 
   app-sidebar {
     grid-area: sidebar;
@@ -25,7 +37,7 @@ $SidebarWidth: 300px;
     transition: all .3s ease-in-out;
   }
 
-  @media only screen and(max-width: $MediumScreen) {
+  @media only screen and(max-width: $LargeScreen) {
     app-sidebar {
       padding-left: 0;
     }

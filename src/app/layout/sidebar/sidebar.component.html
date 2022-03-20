@@ -1,6 +1,6 @@
 <div class="sidebar">
-  <app-icon *ngIf="(showToggler$ | async) || (inWorkspace$ | async)" [icon]="Icons.ChevronLeft" (click)="onToggle()"
-    class="toggle pointer"></app-icon>
+  <app-icon *ngIf="showToggler$ | async" [icon]="Icons.ChevronLeft" (click)="onToggle()" class="toggle pointer">
+  </app-icon>
   <div class="links mt-8">
     <div class="link ml-2 mr-2" *ngFor="let link of links">
       <a [routerLink]="[link.route]" routerLinkActive="active">
