@@ -1,4 +1,4 @@
-import { Icons } from './../../layout/icon/icon.component';
+import { Icons } from '../../ui-components/button/icon/icon.component';
 export interface Link {
   label: string;
   route: string;

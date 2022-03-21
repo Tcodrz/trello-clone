@@ -2,9 +2,6 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeModule } from './home/home.module';
-import { LoginModule } from './login/login.module';
-import { RegisterModule } from './register/register.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
@@ -20,10 +17,6 @@ import { AngularFireStorageModule } from '@angular/fire/compat/storage';
   imports: [
     AppRoutingModule,
     BrowserModule,
-    HomeModule,
-    LoginModule,
-    RegisterModule,
-    FontAwesomeModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
