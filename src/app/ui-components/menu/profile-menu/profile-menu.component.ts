@@ -1,6 +1,5 @@
-import { MenuItem } from '../menu/menu.component';
+import { Component, Input, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { Component, OnInit, Input } from '@angular/core';
 import { User } from 'src/app/state/user/user.reducer';
 
 @Component({

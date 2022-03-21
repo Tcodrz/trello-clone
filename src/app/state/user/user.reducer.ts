@@ -10,7 +10,6 @@ export interface User {
 
 export interface UserState {
   readonly user: User | null;
-  readonly isLoggedIn: boolean;
 }
 
 export const userReducer: Reducer<UserState> = (state: UserState, action: Action<unknown>): UserState => {
@@ -18,12 +17,10 @@ export const userReducer: Reducer<UserState> = (state: UserState, action: Action
     case UserActions.Login:
       return {
         user: action.payload,
-        isLoggedIn: true,
       }
     case UserActions.Logout:
       return {
-        user: action.payload,
-        isLoggedIn: false
+        user: null
       }
     default: return state;
   }

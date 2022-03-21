@@ -12,7 +12,6 @@ export class StoreService extends Store<AppState> {
     const initialState: AppState = {
       userState: {
         user: null,
-        isLoggedIn: false,
       },
       workspaceState: {
         allWorkspaces: [

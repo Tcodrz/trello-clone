@@ -7,6 +7,6 @@ export enum UserActions {
 }
 
 export const Login = createAction<User>(UserActions.Login, 'userState');
-export const Logout = createAction<User>(UserActions.Logout, 'userState');
+export const Logout = createAction<null>(UserActions.Logout, 'userState');
 
 

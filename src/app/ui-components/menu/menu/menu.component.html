@@ -10,7 +10,7 @@
         <div class="br mt-1 mb-1"></div>
         <div class="headline">{{ list.headline }}</div>
         <ng-container *ngFor="let item of list.items">
-          <div class="item">{{ item.label }}</div>
+          <div class="item" (click)="onItemClick(item)">{{ item.label }}</div>
         </ng-container>
       </div>
     </div>
