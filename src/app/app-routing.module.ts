@@ -4,9 +4,9 @@ import { LoggedInGuard } from './core/guards/logged-in.guard';
 import { UserGuard } from './core/guards/user.guard';
 
 const routes: Routes = [
-  { path: 'home', loadChildren: () => import('./features/home/home.module').then(m => m.HomeModule), canLoad: [LoggedInGuard] },
-  { path: 'login', loadChildren: () => import('./features/login/login.module').then(m => m.LoginModule), canLoad: [LoggedInGuard] },
-  { path: 'register', loadChildren: () => import('./features/register/register.module').then(m => m.RegisterModule), canLoad: [LoggedInGuard] },
+  { path: '', loadChildren: () => import('./features/welcome/welcome.module').then(m => m.WelcomeModule) },
+  { path: 'login', loadChildren: () => import('./features/login/login.module').then(m => m.LoginModule) },
+  { path: 'register', loadChildren: () => import('./features/register/register.module').then(m => m.RegisterModule) },
   { path: 'dashboard', loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule), canLoad: [UserGuard] },
 
 ];

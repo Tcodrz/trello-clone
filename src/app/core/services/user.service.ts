@@ -1,3 +1,4 @@
+import { Logout } from './../../state/user/user.actions';
 import { CacheKeys, CacheService } from './cache.service';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
@@ -38,9 +39,7 @@ export class UserService {
       this.goto.dashboard();
     });
   }
-  isLoggedIn(): Observable<boolean> {
-    return this.store.select('userState').pipe(
-      map(userState => (userState as UserState).isLoggedIn)
-    );
+  logout() {
+    this.store.dispatch(Logout(null))
   }
 }
