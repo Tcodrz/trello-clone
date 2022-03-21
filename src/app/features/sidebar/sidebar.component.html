@@ -16,7 +16,7 @@
     </div>
     <ng-container *ngFor="let workspace of workspaces$ | async">
       <div class="workspace">
-        <!-- <app-sidebar-dropdown [title]="workspace.name" [items]="workspaceMenuItems"></app-sidebar-dropdown> -->
+        <app-sidebar-dropdown [title]="workspace.name" [items]="workspaceMenuItems"></app-sidebar-dropdown>
       </div>
     </ng-container>
   </div>
