@@ -2,24 +2,24 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutModule } from '../layout/layout.module';
-import { ButtonModule } from './../../ui-components/button/button.module';
-import { HomeRoutingModule } from './home-routing.module';
-import { HomeComponent } from './home.component';
+import { ButtonModule } from '../../ui-components/button/button.module';
+import { WelcomeRoutingModule } from './welcome-routing.module';
+import { WelcomeComponent } from './welcome.component';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent }
+  { path: '', component: WelcomeComponent }
 ]
 
 @NgModule({
   declarations: [
-    HomeComponent,
+    WelcomeComponent,
   ],
   imports: [
     ButtonModule,
     CommonModule,
-    HomeRoutingModule,
+    WelcomeRoutingModule,
     LayoutModule,
     RouterModule.forChild(routes),
   ]
 })
-export class HomeModule { }
+export class WelcomeModule { }

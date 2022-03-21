@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Icons } from '../../ui-components/button/icon/icon.component';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-welcome',
+  templateUrl: './welcome.component.html',
+  styleUrls: ['./welcome.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class WelcomeComponent implements OnInit {
   Icons = Icons;
   constructor() { }
 
