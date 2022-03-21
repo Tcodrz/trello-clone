@@ -1,6 +1,3 @@
-import { HomeComponent } from './home/home.component';
-import { TemplatesComponent } from './templates/templates.component';
-import { BoardsComponent } from './boards/boards.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent } from './dashboard.component';
@@ -8,9 +5,9 @@ import { DashboardComponent } from './dashboard.component';
 const routes: Routes = [
   {
     path: '', component: DashboardComponent, children: [
-      { path: 'boards', component: BoardsComponent },
-      { path: 'templates', component: TemplatesComponent },
-      { path: 'home', component: HomeComponent },
+      { path: 'boards', loadChildren: () => import('./boards/boards.module').then(m => m.BoardsModule) },
+      { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
+      { path: 'templates', loadChildren: () => import('./templates/templates.module').then(m => m.TemplatesModule) },
     ]
   },
 ];
