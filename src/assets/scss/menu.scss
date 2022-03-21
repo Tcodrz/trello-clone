@@ -31,3 +31,15 @@ app-menu {
     }
   }
 }
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: $Grey;
+  font-weight: 400;
+
+  &:hover {
+    background-color: $SidbarLinkHover;
+  }
+}

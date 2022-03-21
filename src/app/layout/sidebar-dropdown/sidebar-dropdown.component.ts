@@ -14,7 +14,7 @@ export class SidebarDropdownComponent implements OnInit {
   @ViewChild('icon') iconElement?: TemplateRef<IconComponent>;
   Icons = Icons;
   icon: Icons = Icons.None;
-  private ITEM_HEIGHT = 40;
+  private ITEM_HEIGHT = 35;
   private _isOpen: boolean = false;
   get isOpen(): boolean { return this._isOpen; }
   constructor() { }
@@ -22,7 +22,7 @@ export class SidebarDropdownComponent implements OnInit {
   }
   onToggle() {
     if (!this.dropdown) return;
-    const initialHeight = 40;
+    const initialHeight = this.ITEM_HEIGHT;
     const height = initialHeight + (this.items.length * this.ITEM_HEIGHT);
     if (!this._isOpen) {
       this.dropdown.nativeElement.style.height = `${height}px`;
@@ -30,7 +30,7 @@ export class SidebarDropdownComponent implements OnInit {
       this._isOpen = true;
     }
     else {
-      this.dropdown.nativeElement.style.height = initialHeight + 'px';
+      this.dropdown.nativeElement.style.height = `${initialHeight}px`;
       this.iconElement?.elementRef.nativeElement.classList.remove('open');
       this._isOpen = false;
     }

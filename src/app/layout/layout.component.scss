@@ -10,20 +10,21 @@ $SidebarWidth: 300px;
   &:not(.closed) {
     .content {
       transform: translate3d(0, 0, 0);
-      transition: all .3s ease-in-out;
+      transition: $transition;
     }
   }
 
   &.closed {
     .content {
       transform: translate3d(-270px, 0, 0);
-      transition: all .3s ease-in-out;
+      transition: $transition;
     }
   }
 
   app-sidebar {
     grid-area: sidebar;
     width: $SidebarWidth;
+    transition: $transition;
     padding-left: 300px;
   }
 
@@ -34,7 +35,7 @@ $SidebarWidth: 300px;
   .content {
     margin-left: 300px;
     transform: translate3d(0%, 0, 0);
-    transition: all .3s ease-in-out;
+    transition: $transition;
   }
 
   @media only screen and(max-width: $LargeScreen) {
@@ -44,6 +45,20 @@ $SidebarWidth: 300px;
 
     .content {
       margin-left: 0;
+    }
+  }
+
+  @media only screen and(max-width: $SmallScreen) {
+    &:not(.closed) {
+      .content {
+        transform: translate3d(-270px, 0, 0);
+        z-index: 1;
+      }
+
+      app-sidebar {
+        z-index: 2;
+        background-color: $White;
+      }
     }
   }
 }

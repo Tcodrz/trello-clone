@@ -37,7 +37,10 @@ export class SidebarComponent implements OnInit {
     this.inWorkspace$ = this.store.select('workspaceState').pipe(
       map((state) => !!(state as WorkspaceState).currentWorkSpace));
     this.showToggler$ = this.isSmallScreen$.pipe(
-      mergeMap(isSmallScreen => of(isSmallScreen) || this.inWorkspace$));
+      mergeMap(isSmallScreen => {
+        if (isSmallScreen) return of(true);
+        else return this.inWorkspace$
+      }));
   }
   initSidebar(event?: Event) {
     const width = (event?.target as Window)?.innerWidth || window.innerWidth;

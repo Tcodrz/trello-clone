@@ -10,13 +10,7 @@ import { User } from 'src/app/state/user/user.reducer';
 })
 export class ProfileMenuComponent implements OnInit {
   @Input() user: Observable<User | null> = of(null);
-  items: MenuItem[] = [
-    { label: 'Profile and visibility' },
-    { label: 'Activity' },
-    { label: 'Cards' },
-    { label: 'Settings' },
-    { label: 'Logout' }
-  ]
+
   constructor() { }
   ngOnInit(): void { }
 }

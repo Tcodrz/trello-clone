@@ -8,7 +8,10 @@ export interface MenuItem {
 export interface Menu {
   toggle: () => void;
 }
-
+export interface MenuItems {
+  headline: string;
+  items: MenuItem[];
+}
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -16,7 +19,7 @@ export interface Menu {
 })
 export class MenuComponent implements OnInit, Menu {
   @Input() title: string = '';
-  @Input() items: MenuItem[] = [];
+  @Input() menus: MenuItems[] = [];
   @Input() set position(val: 'left' | 'right') {
     if (!val) val = 'left';
     switch (val) {
