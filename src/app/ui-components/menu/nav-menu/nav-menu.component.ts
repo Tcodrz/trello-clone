@@ -1,3 +1,4 @@
+import { MenuItem, MenuItems } from './../menu/menu.component';
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -8,6 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class NavMenuComponent implements OnInit {
   @Input() title: string = '';
   @Input() position: 'right' | 'left' = 'left';
+  @Input() items: MenuItems[] = [];
   constructor() { }
   ngOnInit(): void { }
 }

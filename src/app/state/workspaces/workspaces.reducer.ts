@@ -1,9 +1,6 @@
+import { Workspace } from "src/app/core/interface/workspace.interface";
 import { Action, Reducer } from "../types";
 import { WorkspaceActions } from "./workspaces.actions";
-
-export interface Workspace {
-  name: string;
-}
 
 export interface WorkspaceState {
   currentWorkSpace: Workspace | null;

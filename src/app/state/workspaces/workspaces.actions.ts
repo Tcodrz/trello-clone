@@ -1,5 +1,5 @@
+import { Workspace } from "src/app/core/interface/workspace.interface";
 import { createAction } from "../types";
-import { Workspace } from "./workspaces.reducer";
 
 export enum WorkspaceActions {
   Load = 'WORKSPACE LOAD',

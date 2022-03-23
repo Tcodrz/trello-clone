@@ -20,4 +20,7 @@ export class GotoService {
   login() {
     this.goto('home');
   }
+  workspace(workspaceID: string) {
+    this.goto('workspace', { workspaceID });
+  }
 }

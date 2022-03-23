@@ -15,8 +15,8 @@ export class StoreService extends Store<AppState> {
       },
       workspaceState: {
         allWorkspaces: [
-          { name: 'First Workspace' },
-          { name: 'Second Workspace' },
+          { name: 'First Workspace', id: '1', userID: '' },
+          { name: 'Second Workspace', id: '2', userID: '' },
         ],
         currentWorkSpace: null,
       }

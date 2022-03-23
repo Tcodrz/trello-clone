@@ -8,3 +8,8 @@
 
   dynamic component loading
 </pre>
+
+
+<div *ngFor="let workspace of workspaces$ | async">
+  <app-button [routerLink]="['/workspace', { workspaceID: workspace.id }]"> {{ workspace.name }} </app-button>
+</div>

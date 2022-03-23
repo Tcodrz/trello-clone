@@ -47,6 +47,7 @@ export class MenuComponent implements OnInit, Menu {
     this._show = !this._show;
   }
   onItemClick(item: MenuItem) {
+    if (!!item.command) item.command();
     this.itemClick.emit(item);
   }
 }

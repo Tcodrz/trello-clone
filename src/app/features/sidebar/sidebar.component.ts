@@ -1,7 +1,8 @@
 import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { map, Observable, of, BehaviorSubject, mergeMap } from 'rxjs';
 import { Link } from 'src/app/core/interface/link.interface';
-import { Workspace, WorkspaceState } from 'src/app/state/workspaces/workspaces.reducer';
+import { Workspace } from 'src/app/core/interface/workspace.interface';
+import { WorkspaceState } from 'src/app/state/workspaces/workspaces.reducer';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
 import { StoreService } from '../../state/state.service';
 import { Icons } from '../../ui-components/button/icon/icon.component';
