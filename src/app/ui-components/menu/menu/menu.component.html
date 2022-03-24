@@ -3,11 +3,10 @@
     <div class="menu">
       <ng-container *ngIf="title">
         <div class="title">{{ title }}</div>
-        <div class="br"></div>
       </ng-container>
       <ng-content></ng-content>
       <div class="items" *ngFor="let list of menus">
-        <div class="br mt-1 mb-1"></div>
+        <div class="br mb-1 mt-1"></div>
         <div class="headline">{{ list.headline }}</div>
         <ng-container *ngFor="let item of list.items">
           <div class="item" (click)="onItemClick(item)">{{ item.label }}</div>
