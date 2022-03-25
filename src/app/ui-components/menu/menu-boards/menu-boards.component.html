@@ -1,0 +1,6 @@
+<ng-container *ngIf="menuItems">
+  <div class="sub-menu">
+    <div class="header">{{ menuItems.headline }}</div>
+    <app-sidebar-links [menuItems]="menuItems.items"></app-sidebar-links>
+  </div>
+</ng-container>

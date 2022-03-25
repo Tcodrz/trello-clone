@@ -1,3 +1,4 @@
+import { Board } from './../interface/board.interface';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -14,19 +15,10 @@ export class GotoService {
     if (!!params) commands.push(params);
     this.router.navigate(commands);
   }
-  home() {
-    this.goto('');
-  }
-  dashboard() {
-    this.goto('dashboard/boards');
-  }
-  login() {
-    this.goto('home');
-  }
-  workspace() {
-    this.goto('workspace');
-  }
-  boards() {
-    this.goto('/dashboard/boards');
-  }
+  home() { this.goto(''); }
+  dashboard() { this.goto('dashboard/boards'); }
+  login() { this.goto('home'); }
+  workspace() { this.goto('workspace'); }
+  boards() { this.goto('/dashboard/boards'); }
+  board() { this.goto(`board`); }
 }

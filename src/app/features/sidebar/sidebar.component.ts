@@ -1,6 +1,7 @@
+import { Board } from './../../core/interface/board.interface';
 import { SidebarService } from './../../core/services/sidebar.service';
 import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, switchMap, tap } from 'rxjs';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
 import { StateService } from '../../state/state.service';
@@ -17,11 +18,13 @@ export class SidebarComponent implements OnInit {
   @Output() open: EventEmitter<boolean> = new EventEmitter();
   workspaces$: Observable<Workspace[]> = of([]);
   workspace$: Observable<Workspace | null> = of(null);
+  boards$: Observable<Board[]> = of([]);
   menuLinks$: Observable<MenuItem[]> = of([]);
   isSmallScreen$ = new BehaviorSubject<boolean>(false);
   showToggler$: Observable<boolean> = of(false);
   isOpen: boolean = true;
   Icons = Icons;
+  sidebarLinksStyle = {};
   @HostListener('window:resize', ['$event']) onResize(event: Event) {
     this.initSidebar(event);
   }
@@ -34,7 +37,12 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.initSidebar();
     this.workspaces$ = this.state.getWorkspaces();
-    this.workspace$ = this.state.getCurrentWorkspace();
+    this.workspace$ = this.state.getCurrentWorkspace()
+      .pipe(tap(workspace => {
+        if (!workspace) this.sidebarLinksStyle = { 'display': 'block', 'margin-top': '30px' };
+        else this.sidebarLinksStyle = {};
+      }));
+    this.boards$ = this.state.getBoards();
     this.menuLinks$ = this.sidebar.getMenuLinks();
     this.showToggler$ = this.isSmallScreen$.pipe(
       switchMap(isSmallScreen =>

@@ -1,0 +1,11 @@
+<div class="sub-menu">
+  <div class="header">
+    <span>Workspaces</span>
+    <app-button [icon]="Icons.Plus" className="icon"></app-button>
+  </div>
+  <ng-container *ngFor="let workspace of workspaces">
+    <div class="workspace">
+      <app-sidebar-dropdown [title]="workspace.name" [items]="workspaceMenuItems"></app-sidebar-dropdown>
+    </div>
+  </ng-container>
+</div>

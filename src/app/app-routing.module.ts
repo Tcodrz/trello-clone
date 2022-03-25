@@ -8,6 +8,7 @@ const routes: Routes = [
   { path: 'register', loadChildren: () => import('./features/register/register.module').then(m => m.RegisterModule) },
   { path: 'dashboard', loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule), canLoad: [UserGuard] },
   { path: 'workspace', loadChildren: () => import('./features/workspace/workspace.module').then(m => m.WorkspaceModule) },
+  { path: 'board', loadChildren: () => import('./features/board/board.module').then(m => m.BoardModule) },
 ];
 
 @NgModule({

@@ -2,8 +2,6 @@
 @import "functions";
 
 .dropdown {
-  margin-left: times8(3);
-  margin-right: times8(3);
   height: 40px;
   overflow: hidden;
   margin-top: times8(1);
@@ -42,7 +40,7 @@
     margin-top: times8(1);
 
     .menu-item {
-      padding-left: times8(3);
+      padding-left: times8(7);
       height: times8(4);
       font-size: $FontSmall;
     }

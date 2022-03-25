@@ -1,4 +1,4 @@
-<div class="links mt-4">
+<div class="links">
   <div class="link ml-2 mr-2" *ngFor="let item of menuItems">
     <a [routerLink]="[item.route]" routerLinkActive="active" (click)="onItmeClick(item)">
       <app-icon [icon]="item.icon"></app-icon>

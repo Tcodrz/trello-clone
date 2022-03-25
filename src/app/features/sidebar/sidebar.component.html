@@ -4,6 +4,12 @@
   </div>
   <app-icon *ngIf="showToggler$ | async" [icon]="Icons.ChevronLeft" (click)="onToggle()" class="toggle pointer">
   </app-icon>
-  <app-sidebar-links [menuItems]="menuLinks$ | async"></app-sidebar-links>
-  <app-menu-workspaces [workspaces]="workspaces$ | async"></app-menu-workspaces>
+  <app-sidebar-links [ngStyle]="sidebarLinksStyle" [menuItems]="menuLinks$ | async"></app-sidebar-links>
+  <ng-container *ngIf="!(workspace$ | async)">
+    <app-menu-workspaces [workspaces]="workspaces$ | async"></app-menu-workspaces>
+  </ng-container>
+  <ng-container *ngIf="workspace$ | async">
+    <app-menu-boards [boards]="boards$ | async"></app-menu-boards>
+  </ng-container>
+
 </div>
