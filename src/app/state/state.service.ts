@@ -14,7 +14,7 @@ export class StateService {
   private user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
   private workspaces$: BehaviorSubject<Workspace[]> = new BehaviorSubject<Workspace[]>([]);
   constructor() { }
-  loadWorkspace(workspace: Workspace) {
+  loadWorkspace(workspace: Workspace | null) {
     this.currentWorkspace$.next(workspace);
   }
   setUser(user: User | null) {

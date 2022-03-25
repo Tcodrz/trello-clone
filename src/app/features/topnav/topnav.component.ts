@@ -4,7 +4,7 @@ import { UserService } from 'src/app/core/services/user.service';
 import { User } from 'src/app/state/user/user.reducer';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
 import { StateService } from '../../state/state.service';
-import { Icons } from '../../ui-components/button/icon/icon.component';
+import { Icons } from '../../ui-components/button/icon/icons';
 import { MenuItem } from '../../ui-components/menu/menu/menu.component';
 import { GotoService } from './../../core/services/goto.service';
 import { WorkspaceService } from './../../core/services/workspace.service';
@@ -48,6 +48,10 @@ export class TopnavComponent implements OnInit {
   }
   onMenuItemClick(item: MenuItem) {
     if (item.command) item.command();
+  }
+  gotoDashboard() {
+    this.state.loadWorkspace(null);
+    this.goto.dashboard();
   }
   private initProfileMenu() {
     this.profileMenuItems = [

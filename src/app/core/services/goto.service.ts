@@ -26,4 +26,7 @@ export class GotoService {
   workspace() {
     this.goto('workspace');
   }
+  boards() {
+    this.goto('/dashboard/boards');
+  }
 }

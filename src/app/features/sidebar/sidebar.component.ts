@@ -1,12 +1,12 @@
+import { SidebarService } from './../../core/services/sidebar.service';
 import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
 import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';
-import { Link } from 'src/app/core/interface/link.interface';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
 import { StateService } from '../../state/state.service';
-import { Icons } from '../../ui-components/button/icon/icon.component';
+import { Icons } from '../../ui-components/button/icon/icons';
 import { MenuItem } from '../../ui-components/menu/menu/menu.component';
-import { dashboardSidebarLinks, workspaceMenuItems } from './menus';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -16,24 +16,26 @@ import { dashboardSidebarLinks, workspaceMenuItems } from './menus';
 export class SidebarComponent implements OnInit {
   @Output() open: EventEmitter<boolean> = new EventEmitter();
   workspaces$: Observable<Workspace[]> = of([]);
+  workspace$: Observable<Workspace | null> = of(null);
+  menuLinks$: Observable<MenuItem[]> = of([]);
   isSmallScreen$ = new BehaviorSubject<boolean>(false);
+  showToggler$: Observable<boolean> = of(false);
   isOpen: boolean = true;
   Icons = Icons;
-  links: Link[] = dashboardSidebarLinks;
-  workspaceMenuItems: MenuItem[] = workspaceMenuItems;
-  showToggler$: Observable<boolean> = of(false);
-  @HostListener('window:resize', ['$event'])
-  onResize(event: Event) { this.initSidebar(event); }
-  workspace$: Observable<Workspace | null> = of(null);
+  @HostListener('window:resize', ['$event']) onResize(event: Event) {
+    this.initSidebar(event);
+  }
   constructor(
     private elementRef: ElementRef,
     private state: StateService,
+    private sidebar: SidebarService,
   ) { }
 
   ngOnInit(): void {
     this.initSidebar();
     this.workspaces$ = this.state.getWorkspaces();
     this.workspace$ = this.state.getCurrentWorkspace();
+    this.menuLinks$ = this.sidebar.getMenuLinks();
     this.showToggler$ = this.isSmallScreen$.pipe(
       switchMap(isSmallScreen =>
         this.workspace$.pipe(map(workspace => {
@@ -63,5 +65,4 @@ export class SidebarComponent implements OnInit {
     this.isOpen = true;
     this.open.emit(this.isOpen);
   }
-
 }

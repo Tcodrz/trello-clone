@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Icons } from '../icon/icon.component';
+import { Icons } from '../icon/icons';
 
 export type ButtonTypes = 'button' | 'submit';
 

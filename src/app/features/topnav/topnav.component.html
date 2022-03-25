@@ -2,7 +2,7 @@
   <div class="left">
     <div class="logo ml-1">
       <app-icon [icon]="Icons.Trello"></app-icon>
-      <span class="pointer ml-1" [routerLink]="['boards']">Trello</span>
+      <span class="pointer ml-1" [routerLink]="['boards']" (click)="gotoDashboard()">Trello</span>
     </div>
     <div class="menus ml-3" *ngIf="!smallScreen">
       <app-nav-menu [title]="'Workspaces'" position="right" [items]="workspaceMenu$ | async "></app-nav-menu>

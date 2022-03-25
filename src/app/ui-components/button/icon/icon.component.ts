@@ -14,25 +14,9 @@ import {
   faScrewdriver,
   faSearch,
 } from '@fortawesome/free-solid-svg-icons';
+import { Icons } from './icons';
 
-export enum Icons {
-  None = '',
-  User = 'faUser',
-  Google = 'faGoogle',
-  Microsoft = 'faMicrosoft',
-  Apple = 'faApple',
-  ClipBoard = 'faClipboard',
-  BorderAll = 'faBorderAll',
-  Home = 'faHome',
-  ChevronLeft = 'faChevronLeft',
-  Trello = 'faTrello',
-  Plus = 'faPlus',
-  ChevronDown = 'faChevronDown',
-  Heart = 'faHeart',
-  Users = 'faUsers',
-  Settings = 'faScrewdriver',
-  Search = 'faSearch',
-}
+
 
 @Component({
   selector: 'app-icon[icon]',
@@ -40,14 +24,15 @@ export enum Icons {
   styleUrls: ['./icon.component.scss']
 })
 export class IconComponent implements OnChanges {
-  @Input() icon: Icons = Icons.None;
+  @Input() icon: Icons | undefined = Icons.None;
   _icon: IconProp | null = null;
   constructor(
     public elementRef: ElementRef,
   ) { }
 
   ngOnChanges(): void {
-    this._icon = this.getIcon(this.icon);
+    if (!!this.icon)
+      this._icon = this.getIcon(this.icon);
   }
 
   getIcon(icon: Icons): IconProp | null {

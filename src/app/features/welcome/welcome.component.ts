@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Icons } from '../../ui-components/button/icon/icon.component';
+import { Icons } from '../../ui-components/button/icon/icons';
 
 @Component({
   selector: 'app-welcome',

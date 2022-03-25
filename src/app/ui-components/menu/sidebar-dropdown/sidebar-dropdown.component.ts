@@ -1,6 +1,7 @@
 import { Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MenuItem } from '../menu/menu.component';
-import { IconComponent, Icons } from '../../button/icon/icon.component';
+import { IconComponent } from '../../button/icon/icon.component';
+import { Icons } from '../../button/icon/icons';
 
 @Component({
   selector: 'app-sidebar-dropdown',

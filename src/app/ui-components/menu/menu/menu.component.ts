@@ -1,10 +1,11 @@
 import { Component, Input, OnInit, ElementRef, HostListener, Output, EventEmitter } from '@angular/core';
-import { Icons } from '../../button/icon/icon.component';
+import { Icons } from '../../button/icon/icons';
 
 export interface MenuItem {
   label: string;
   icon?: Icons;
-  command?: (...args: any) => void
+  command?: (...args: any) => void;
+  route?: string;
 }
 export interface Menu {
   toggle: () => void;

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../core/services/user.service';
-import { GotoService } from '../../core/services/goto.service';
-import { Icons } from '../../ui-components/button/icon/icon.component';
+import { Icons } from '../../ui-components/button/icon/icons';
 
 @Component({
   selector: 'app-register',
@@ -15,7 +14,6 @@ export class RegisterComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
-    private goto: GotoService,
   ) { }
   ngOnInit(): void {
     this.registerForm = this.fb.group({

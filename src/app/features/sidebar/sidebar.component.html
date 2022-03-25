@@ -4,23 +4,6 @@
   </div>
   <app-icon *ngIf="showToggler$ | async" [icon]="Icons.ChevronLeft" (click)="onToggle()" class="toggle pointer">
   </app-icon>
-  <div class="links mt-4">
-    <div class="link ml-2 mr-2" *ngFor="let link of links">
-      <a [routerLink]="[link.route]" routerLinkActive="active">
-        <app-icon [icon]="link.icon"></app-icon>
-        {{link.label}}
-      </a>
-    </div>
-  </div>
-  <div class="workspaces">
-    <div class="header mb-2">
-      <span>Workspaces</span>
-      <app-button [icon]="Icons.Plus" className="icon"></app-button>
-    </div>
-    <ng-container *ngFor="let workspace of workspaces$ | async">
-      <div class="workspace">
-        <app-sidebar-dropdown [title]="workspace.name" [items]="workspaceMenuItems"></app-sidebar-dropdown>
-      </div>
-    </ng-container>
-  </div>
+  <app-sidebar-links [menuItems]="menuLinks$ | async"></app-sidebar-links>
+  <app-menu-workspaces [workspaces]="workspaces$ | async"></app-menu-workspaces>
 </div>
