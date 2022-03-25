@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { User } from 'src/app/state/user/user.reducer';
+import { User } from '../../../core/interface/user.interface';
 
 @Component({
   selector: 'app-profile-menu',

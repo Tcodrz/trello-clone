@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Store } from '.';
 import { Board } from '../core/interface/board.interface';
+import { User } from '../core/interface/user.interface';
 import { Workspace } from '../core/interface/workspace.interface';
-import { AppState } from './types';
-import { User } from './user/user.reducer';
 
 
 @Injectable({

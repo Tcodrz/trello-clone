@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
+import { User } from 'src/app/core/interface/user.interface';
 import { UserService } from 'src/app/core/services/user.service';
-import { User } from 'src/app/state/user/user.reducer';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
 import { StateService } from '../../state/state.service';
 import { Icons } from '../../ui-components/button/icon/icons';

@@ -1,14 +1,10 @@
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Logout } from './../../state/user/user.actions';
-import { CacheKeys, CacheService } from './cache.service';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
-import { map, Observable } from 'rxjs';
-import * as UserActions from 'src/app/state/user/user.actions';
-import { User } from 'src/app/state/user/user.reducer';
+import { User } from '../interface/user.interface';
 import { StateService } from './../../state/state.service';
-import { UserState } from './../../state/user/user.reducer';
+import { CacheKeys, CacheService } from './cache.service';
 import { GotoService } from './goto.service';
 
 @Injectable({
