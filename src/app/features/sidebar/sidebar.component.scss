@@ -1,4 +1,5 @@
 @import 'constants';
+@import 'functions';
 
 :host {
   transform: translate3d(0%, 0, 0);
@@ -7,8 +8,8 @@
   .sidebar {
     app-icon.toggle {
       position: absolute;
-      top: 20px;
-      right: 20px;
+      top: times8(4);
+      right: times8(3);
       background-color: transparent;
       display: grid;
       place-content: center;
@@ -19,6 +20,12 @@
         transition: all .3s ease-in-out;
         background-color: $SidbarLinkHover;
       }
+    }
+
+    .current-workspace {
+      margin: 0 24px;
+      height: times8(7);
+      border-bottom: 1px solid $LightGrey;
     }
 
     .links {

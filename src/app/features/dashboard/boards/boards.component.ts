@@ -1,4 +1,3 @@
-import { StoreService } from '../../../state/state.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,14 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardsComponent implements OnInit {
 
-  constructor(
-    private store: StoreService,
-  ) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.store.select('workspaceState').subscribe(state => {
-      console.log(state);
-    })
+
   }
 
 }

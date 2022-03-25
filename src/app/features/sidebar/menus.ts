@@ -38,7 +38,7 @@ export const workspaceMenuItems: MenuItem[] = [
     icon: Icons.Users
   },
   {
-    label: 'settings',
+    label: 'Settings',
     icon: Icons.Settings,
   }
 ]

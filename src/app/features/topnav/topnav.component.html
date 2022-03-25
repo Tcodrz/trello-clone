@@ -5,7 +5,7 @@
       <span class="pointer ml-1" [routerLink]="['boards']">Trello</span>
     </div>
     <div class="menus ml-3" *ngIf="!smallScreen">
-      <app-nav-menu [title]="'Workspaces'" position="right"></app-nav-menu>
+      <app-nav-menu [title]="'Workspaces'" position="right" [items]="workspaceMenu$ | async "></app-nav-menu>
       <app-nav-menu [title]="'Recent'" position="right"></app-nav-menu>
       <app-nav-menu [title]="'More'" position="right"></app-nav-menu>
     </div>

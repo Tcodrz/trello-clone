@@ -1,13 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { map, Observable, of } from 'rxjs';
 import { UserService } from 'src/app/core/services/user.service';
 import { User } from 'src/app/state/user/user.reducer';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
-import { StoreService } from '../../state/state.service';
-import { UserState } from '../../state/user/user.reducer';
+import { StateService } from '../../state/state.service';
 import { Icons } from '../../ui-components/button/icon/icon.component';
-import { MenuItem, MenuItems } from '../../ui-components/menu/menu/menu.component';
+import { MenuItem } from '../../ui-components/menu/menu/menu.component';
+import { GotoService } from './../../core/services/goto.service';
+import { WorkspaceService } from './../../core/services/workspace.service';
+import { MenuItems } from './../../ui-components/menu/menu/menu.component';
 
 export interface Link {
   route: string;
@@ -20,13 +21,15 @@ export interface Link {
   styleUrls: ['./topnav.component.scss']
 })
 export class TopnavComponent implements OnInit {
-  Icons = Icons;
   user$: Observable<User | null> = of(null);
+  workspaceMenu$: Observable<MenuItems[]> = of([]);
   profileMenuItems: MenuItems[] = [];
+  Icons = Icons;
   constructor(
-    private store: StoreService,
+    private goto: GotoService,
+    private state: StateService,
     private userService: UserService,
-    private router: Router,
+    private workspaceService: WorkspaceService,
   ) { }
   get smallScreen(): boolean {
     const width = window.innerWidth
@@ -34,8 +37,14 @@ export class TopnavComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initProfileMenu();
-    this.user$ = this.store.select('userState').pipe(
-      map(state => (state as UserState).user));
+    this.user$ = this.state.getUser().pipe(
+      map(user => {
+        if (!!user) this.initWorkspaceMenu(user.id);
+        return user;
+      }));
+  }
+  initWorkspaceMenu(userID: string): void {
+    this.workspaceMenu$ = this.workspaceService.getMenuItems(userID);
   }
   onMenuItemClick(item: MenuItem) {
     if (item.command) item.command();
@@ -56,7 +65,7 @@ export class TopnavComponent implements OnInit {
           {
             label: 'Logout', command: () => {
               this.userService.logout();
-              this.router.navigateByUrl('');
+              this.goto.home();
             }
           }
         ],

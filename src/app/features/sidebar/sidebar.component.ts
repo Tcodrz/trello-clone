@@ -1,10 +1,9 @@
 import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import { map, Observable, of, BehaviorSubject, mergeMap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, switchMap } from 'rxjs';
 import { Link } from 'src/app/core/interface/link.interface';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
-import { WorkspaceState } from 'src/app/state/workspaces/workspaces.reducer';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
-import { StoreService } from '../../state/state.service';
+import { StateService } from '../../state/state.service';
 import { Icons } from '../../ui-components/button/icon/icon.component';
 import { MenuItem } from '../../ui-components/menu/menu/menu.component';
 import { dashboardSidebarLinks, workspaceMenuItems } from './menus';
@@ -17,7 +16,6 @@ import { dashboardSidebarLinks, workspaceMenuItems } from './menus';
 export class SidebarComponent implements OnInit {
   @Output() open: EventEmitter<boolean> = new EventEmitter();
   workspaces$: Observable<Workspace[]> = of([]);
-  inWorkspace$: Observable<boolean> = of(false);
   isSmallScreen$ = new BehaviorSubject<boolean>(false);
   isOpen: boolean = true;
   Icons = Icons;
@@ -26,33 +24,30 @@ export class SidebarComponent implements OnInit {
   showToggler$: Observable<boolean> = of(false);
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) { this.initSidebar(event); }
+  workspace$: Observable<Workspace | null> = of(null);
   constructor(
     private elementRef: ElementRef,
-    private store: StoreService,
+    private state: StateService,
   ) { }
 
   ngOnInit(): void {
     this.initSidebar();
-    this.workspaces$ = this.store.select('workspaceState').pipe(
-      map((state) => (state as WorkspaceState).allWorkspaces));
-    this.inWorkspace$ = this.store.select('workspaceState').pipe(
-      map((state) => !!(state as WorkspaceState).currentWorkSpace));
+    this.workspaces$ = this.state.getWorkspaces();
+    this.workspace$ = this.state.getCurrentWorkspace();
     this.showToggler$ = this.isSmallScreen$.pipe(
-      mergeMap(isSmallScreen => {
-        if (isSmallScreen) return of(true);
-        else return this.inWorkspace$
-      }));
+      switchMap(isSmallScreen =>
+        this.workspace$.pipe(map(workspace => {
+          if (isSmallScreen) return true;
+          else return !!workspace;
+        }))
+      ));
   }
   initSidebar(event?: Event) {
     const width = (event?.target as Window)?.innerWidth || window.innerWidth;
     const isSmallScreen = width <= ScreenSize.Small;
-    if (isSmallScreen) {
-      this.isSmallScreen$.next(true);
-      this.hide();
-    } else {
-      this.isSmallScreen$.next(false);
-      this.show();
-    }
+    this.isSmallScreen$.next(isSmallScreen);
+    if (isSmallScreen) this.hide();
+    else this.show();
   }
   onToggle() {
     if (this.isOpen) this.hide();

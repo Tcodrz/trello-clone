@@ -9,7 +9,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class NavMenuComponent implements OnInit {
   @Input() title: string = '';
   @Input() position: 'right' | 'left' = 'left';
-  @Input() items: MenuItems[] = [];
+  @Input() items: MenuItems[] | null = [];
   constructor() { }
   ngOnInit(): void { }
 }

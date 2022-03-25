@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
+import { UserService } from 'src/app/core/services/user.service';
 import { CacheKeys, CacheService } from './core/services/cache.service';
-import { StoreService } from './state/state.service';
-import { Login } from './state/user/user.actions';
 import { User } from './state/user/user.reducer';
 
 @Component({
@@ -12,12 +11,12 @@ import { User } from './state/user/user.reducer';
 export class AppComponent {
   constructor(
     private cacheService: CacheService,
-    private store: StoreService,
+    private userService: UserService
   ) { }
   ngOnInit() {
     const user = this.cacheService.getItem<User>(CacheKeys.User);
     if (!!user) {
-      this.store.dispatch(Login(user));
+      this.userService.login(user);
     }
   }
 }

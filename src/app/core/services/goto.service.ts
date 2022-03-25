@@ -14,13 +14,16 @@ export class GotoService {
     if (!!params) commands.push(params);
     this.router.navigate(commands);
   }
+  home() {
+    this.goto('');
+  }
   dashboard() {
     this.goto('dashboard/boards');
   }
   login() {
     this.goto('home');
   }
-  workspace(workspaceID: string) {
-    this.goto('workspace', { workspaceID });
+  workspace() {
+    this.goto('workspace');
   }
 }

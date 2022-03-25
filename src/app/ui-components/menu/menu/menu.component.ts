@@ -20,7 +20,7 @@ export interface MenuItems {
 })
 export class MenuComponent implements OnInit, Menu {
   @Input() title: string = '';
-  @Input() menus: MenuItems[] = [];
+  @Input() menus: MenuItems[] | null = [];
   @Input() set position(val: 'left' | 'right') {
     if (!val) val = 'left';
     switch (val) {
@@ -48,6 +48,7 @@ export class MenuComponent implements OnInit, Menu {
   }
   onItemClick(item: MenuItem) {
     if (!!item.command) item.command();
+    this.toggle();
     this.itemClick.emit(item);
   }
 }

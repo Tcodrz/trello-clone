@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Observable, of, tap } from 'rxjs';
+import { Workspace } from 'src/app/core/interface/workspace.interface';
+import { StateService } from './../../state/state.service';
 
 @Component({
   selector: 'app-workspace',
@@ -7,13 +9,16 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./workspace.component.scss']
 })
 export class WorkspaceComponent implements OnInit {
-
+  workspace$: Observable<Workspace | null> = of(null);
   constructor(
-    private activeRoute: ActivatedRoute,
+    private state: StateService,
   ) { }
 
   ngOnInit(): void {
-    this.activeRoute.params.subscribe(console.log);
+    this.workspace$ = this.state.getCurrentWorkspace().pipe(
+      tap((workspace) => console.log(workspace))
+    );
+
   }
 
 }
