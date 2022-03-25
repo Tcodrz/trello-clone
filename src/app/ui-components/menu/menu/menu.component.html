@@ -5,10 +5,10 @@
         <div class="title">{{ title }}</div>
       </ng-container>
       <ng-content></ng-content>
-      <div class="items" *ngFor="let list of menus">
+      <div class="items" *ngFor="let menu of menus">
         <div class="br mb-1 mt-1"></div>
-        <div class="headline">{{ list.headline }}</div>
-        <ng-container *ngFor="let item of list.items">
+        <div class="headline">{{ menu.headline }}</div>
+        <ng-container *ngFor="let item of menu.items">
           <div class="item" (click)="onItemClick(item)">{{ item.label }}</div>
         </ng-container>
       </div>
