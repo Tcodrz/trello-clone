@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { User } from 'src/app/core/interface/user.interface';
 import { UserService } from 'src/app/core/services/user.service';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
@@ -35,13 +35,8 @@ export class TopnavComponent implements OnInit {
   }
   ngOnInit(): void {
     this.initProfileMenu();
-    this.user$ = this.userService.getUser().pipe(
-      tap(user => {
-        if (!!user) this.initWorkspaceMenu(user.id);
-      }));
-  }
-  initWorkspaceMenu(userID: string): void {
-    this.workspaceMenu$ = this.workspaceService.getMenuItems(userID);
+    this.workspaceMenu$ = this.workspaceService.getMenuItems();
+    this.user$ = this.userService.getUser();
   }
   onMenuItemClick(item: MenuItem) {
     if (item.command) item.command();

@@ -5,9 +5,9 @@ input {
   padding: 4px 8px;
   font-size: $FontSmall;
   border: none;
-  outline: 1px solid $InputBorder;
+  border: 1px solid $InputBorder;
   border-radius: 3px;
-  height: 40px;
+  height: times8(3);
   width: -webkit-fill-available;
   background-color: $InputBackground;
 

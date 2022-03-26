@@ -1,0 +1,34 @@
+@import "constants";
+@import "functions";
+
+:host {
+
+  .title {
+    color: $GreyText;
+    font-size: $FontMedium;
+  }
+
+  .boards-preview {
+    display: flex;
+    align-items: center;
+
+
+    .board {
+      position: relative;
+      width: 150px;
+      height: 150px;
+      font-size: $FontSmall;
+      background-color: $LightGrey;
+      display: grid;
+      place-content: center;
+      margin-left: times8(2);
+      cursor: pointer;
+      line-break: loose;
+
+      h3 {
+        color: $Grey;
+        text-align: center;
+      }
+    }
+  }
+}

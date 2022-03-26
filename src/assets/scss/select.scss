@@ -1,0 +1,50 @@
+@import "constants";
+@import "functions";
+
+app-select {
+  .select {
+
+    .input {
+      input {
+        cursor: pointer;
+      }
+
+      &.open {
+        input {
+          border-bottom: none;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+      }
+
+      position: relative;
+
+      app-icon {
+        position: absolute;
+        right: times8(1);
+        top: calc(50% - times8(1));
+      }
+    }
+
+    .options {
+      display: none;
+      border: 1px solid $InputBorder;
+      border-radius: $BorderRadius;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+
+      &.open {
+        display: block;
+        border-top: none;
+      }
+
+      .option {
+        padding: 8px 8px;
+
+        &:hover {
+          background-color: $SidbarLinkHover;
+        }
+      }
+    }
+  }
+}

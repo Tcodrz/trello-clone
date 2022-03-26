@@ -1,4 +1,4 @@
 <app-layout>
-  {{ (workspace$ | async)?.name }}
-  {{ boards$ | async | json }}
+  <app-boards-preview-list [boards]="boards$ | async" [workspaces]="workspaces$ | async"
+    [workspace]="workspace$ | async" (boardClick)="onBoardClick($event)"></app-boards-preview-list>
 </app-layout>

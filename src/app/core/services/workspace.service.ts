@@ -23,14 +23,18 @@ export class WorkspaceService {
     const currentWorkspace = this.cache.getItem<Workspace>(CacheKeys.CurrentWorkspace);
     if (!!currentWorkspace) this.state.workspaceSetCurrent(currentWorkspace);
   }
-  loadAll(userID: string): Observable<Workspace[]> {
+  loadAll(): Observable<Workspace[]> {
     this.logger.logAction({ action: Action.WorkspaceGet, value: this });
     const collection = this.firestore.collection('workspace');
-    return collection.get().pipe(
-      map(ref => ref.docs.map(x => ({ ...x.data() as Workspace, id: x.id }))),
-      map(workspaces => workspaces.filter(x => x.userID === userID)),
-      map(workspaces => this.state.setWorkspaces(workspaces)),
-      switchMap(() => this.state.getWorkspaces())
+    return this.state.getUser().pipe(
+      switchMap(user => {
+        return collection.get().pipe(
+          map(ref => ref.docs.map(x => ({ ...x.data() as Workspace, id: x.id }))),
+          map(workspaces => workspaces.filter(x => x.userID === user?.id)),
+          map(workspaces => this.state.setWorkspaces(workspaces)),
+          switchMap(() => this.state.getWorkspaces())
+        );
+      })
     );
   }
   getCurrentWorkspace(): Observable<Workspace | null> {
@@ -60,8 +64,8 @@ export class WorkspaceService {
       map(ref => ref.data() as Workspace)
     );
   }
-  getMenuItems(userID: string): Observable<MenuItems[]> {
-    return this.loadAll(userID).pipe(
+  getMenuItems(): Observable<MenuItems[]> {
+    return this.loadAll().pipe(
       map(workspaces => {
         const menuItems: MenuItems = {
           headline: '',

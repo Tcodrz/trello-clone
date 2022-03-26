@@ -1,0 +1,12 @@
+<div class="title">Your boards</div>
+<div class="boards-preview">
+  <div class="board" (click)="!menu.isOpen() ? menu.toggle() : ''">
+    <h3> Create new board </h3>
+    <app-menu #menu [position]="'mid-right'" [title]="'Creat new board'" [disableToggleOnClick]="true">
+      <app-new-board-menu [workspaces]="workspaces" [currentWorkspace]="workspace"></app-new-board-menu>
+    </app-menu>
+  </div>
+  <div class="board" *ngFor="let board of boards" (click)="onBoardClick(board)">
+    <h3> {{ board.name }} </h3>
+  </div>
+</div>

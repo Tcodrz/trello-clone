@@ -35,22 +35,16 @@ export class SidebarComponent implements OnInit, OnDestroy {
     private boardsService: BoardsService,
     private elementRef: ElementRef,
     private sidebarSercvice: SidebarService,
-    private userService: UserService,
     private workspaceService: WorkspaceService,
   ) { }
 
   ngOnInit(): void {
     this.initSidebar();
     this.workspaceService.init();
-    this.userSubscription = this.userService.getUser().subscribe(user => {
-      if (!!user) {
-        this.workspaces$ = this.workspaceService.loadAll(user.id);
-        this.workspace$ = this.workspaceService.getCurrentWorkspace()
-          .pipe(tap(workspace => {
-            this.sidebarLinksStyle = !!workspace ? {} : { 'display': 'block', 'margin-top': '30px' };
-          }));
-      }
-    });
+    this.workspaces$ = this.workspaceService.loadAll();
+    this.workspace$ = this.workspaceService.getCurrentWorkspace().pipe(tap(workspace => {
+      this.sidebarLinksStyle = !!workspace ? {} : { 'display': 'block', 'margin-top': '30px' };
+    }));
     this.boards$ = this.boardsService.getBoards();
     this.menuLinks$ = this.sidebarSercvice.getMenuLinks();
     this.showToggler$ = this.isSmallScreen$.pipe(

@@ -22,7 +22,7 @@ export interface MenuItems {
 export class MenuComponent implements OnInit, Menu {
   @Input() title: string = '';
   @Input() menus: MenuItems[] | null = [];
-  @Input() set position(val: 'left' | 'right') {
+  @Input() set position(val: 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'mid-right' | 'mid-left') {
     if (!val) val = 'left';
     switch (val) {
       case 'left':
@@ -31,8 +31,34 @@ export class MenuComponent implements OnInit, Menu {
       case 'right':
         this.elementRef.nativeElement.style.left = 0;
         break;
+      case 'top-left':
+        this.elementRef.nativeElement.style.top = 0;
+        this.elementRef.nativeElement.style.right = 0;
+        break;
+      case 'top-right':
+        this.elementRef.nativeElement.style.top = 0;
+        this.elementRef.nativeElement.style.left = 0;
+        break;
+      case 'bottom-right':
+        this.elementRef.nativeElement.style.bottom = 0;
+        this.elementRef.nativeElement.style.left = 0;
+        break;
+      case 'bottom-left':
+        this.elementRef.nativeElement.style.bottom = 0;
+        this.elementRef.nativeElement.style.right = 0;
+        break;
+      case 'mid-right':
+        this.elementRef.nativeElement.style.top = '50%';
+        this.elementRef.nativeElement.style.left = 0;
+        break;
+      case 'mid-left':
+        this.elementRef.nativeElement.style.top = '50%';
+        this.elementRef.nativeElement.style.right = 0;
+        break;
+
     }
   }
+  @Input() disableToggleOnClick: boolean = false;
   @Output() itemClick: EventEmitter<MenuItem> = new EventEmitter();
   _show: boolean = false;
   @HostListener('document:click', ['$event']) onBlur(event: Event) {
@@ -49,7 +75,10 @@ export class MenuComponent implements OnInit, Menu {
   }
   onItemClick(item: MenuItem) {
     if (!!item.command) item.command();
-    this.toggle();
+    if (!this.disableToggleOnClick) this.toggle();
     this.itemClick.emit(item);
+  }
+  isOpen() {
+    return this._show;
   }
 }

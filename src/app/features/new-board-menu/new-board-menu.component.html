@@ -1,0 +1,11 @@
+<div class="br mb-1"></div>
+<form [formGroup]="newBoard">
+  <div class="form-group">
+    <label for="">Board name</label>
+    <input type="text" formControlName="boardName">
+  </div>
+  <div class="form-group mt-2">
+    <app-select [label]="'Workspace'" [options]="workspaceOptions" formControlName="workspaceID">
+    </app-select>
+  </div>
+</form>
