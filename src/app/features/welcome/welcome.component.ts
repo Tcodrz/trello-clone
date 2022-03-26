@@ -1,3 +1,4 @@
+import { CacheService, CacheKeys } from './../../core/services/cache.service';
 import { Component, OnInit } from '@angular/core';
 import { Icons } from '../../ui-components/button/icon/icons';
 
@@ -8,9 +9,13 @@ import { Icons } from '../../ui-components/button/icon/icons';
 })
 export class WelcomeComponent implements OnInit {
   Icons = Icons;
-  constructor() { }
+  constructor(
+    private cache: CacheService,
+  ) { }
 
   ngOnInit(): void {
+    this.cache.deleteItem(CacheKeys.CurrentWorkspace);
+    this.cache.deleteItem(CacheKeys.CurrentBoard);
   }
 
 }
