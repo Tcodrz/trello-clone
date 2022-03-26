@@ -1,7 +1,7 @@
-import { Board } from './../../core/interface/board.interface';
-import { Observable, of } from 'rxjs';
-import { StateService } from './../../state/state.service';
 import { Component, OnInit } from '@angular/core';
+import { Observable, of, tap } from 'rxjs';
+import { Board } from './../../core/interface/board.interface';
+import { BoardsService } from './../../core/services/boards.service';
 
 @Component({
   selector: 'app-board',
@@ -12,11 +12,12 @@ export class BoardComponent implements OnInit {
 
   board$: Observable<Board | null> = of(null);
   constructor(
-    private state: StateService
+    private boardService: BoardsService,
   ) { }
 
   ngOnInit(): void {
-    this.board$ = this.state.getCurrentBoard();
+    this.boardService.init();
+    this.board$ = this.boardService.getCurrentBoard();
   }
 
 }

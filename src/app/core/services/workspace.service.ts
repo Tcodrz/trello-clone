@@ -2,20 +2,29 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map, Observable, switchMap } from 'rxjs';
 import { Workspace } from '../interface/workspace.interface';
-import { StateService } from './../../state/state.service';
+import { Action, StateService } from './../../state/state.service';
 import { MenuItem, MenuItems } from './../../ui-components/menu/menu/menu.component';
+import { CacheKeys, CacheService } from './cache.service';
 import { GotoService } from './goto.service';
+import { LogService } from './log.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class WorkspaceService {
   constructor(
+    private cache: CacheService,
     private firestore: AngularFirestore,
-    private state: StateService,
     private goto: GotoService,
+    private logger: LogService,
+    private state: StateService,
   ) { }
+  init() {
+    const currentWorkspace = this.cache.getItem<Workspace>(CacheKeys.CurrentWorkspace);
+    if (!!currentWorkspace) this.state.workspaceSetCurrent(currentWorkspace);
+  }
   loadAll(userID: string): Observable<Workspace[]> {
+    this.logger.logAction({ action: Action.WorkspaceGet, value: this });
     const collection = this.firestore.collection('workspace');
     return collection.get().pipe(
       map(ref => ref.docs.map(x => ({ ...x.data() as Workspace, id: x.id }))),
@@ -23,6 +32,13 @@ export class WorkspaceService {
       map(workspaces => this.state.setWorkspaces(workspaces)),
       switchMap(() => this.state.getWorkspaces())
     );
+  }
+  getCurrentWorkspace(): Observable<Workspace | null> {
+    this.logger.logAction({ action: Action.WorkspaceLoad, value: this });
+    return this.state.getCurrentWorkspace();
+  }
+  setCurrentWorkspace(workspace: Workspace | null) {
+    this.state.workspaceSetCurrent(workspace);
   }
   create(workspace: Partial<Workspace>): Observable<Workspace> {
     const collection = this.firestore.collection('workspace');
@@ -39,6 +55,7 @@ export class WorkspaceService {
     });
   }
   getWorkspaceByID(workspaceID: string): Observable<Workspace> {
+    this.logger.logAction({ action: Action.WorkspaceGetByID, value: this });
     return this.firestore.doc(`workspaces/${workspaceID}`).get().pipe(
       map(ref => ref.data() as Workspace)
     );
@@ -59,7 +76,7 @@ export class WorkspaceService {
       label: workspace.name,
       id: workspace.id,
       command: () => {
-        this.state.loadWorkspace(workspace);
+        this.state.workspaceSetCurrent(workspace);
         this.goto.workspace()
       }
     }));

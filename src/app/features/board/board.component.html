@@ -1,3 +1,5 @@
 <app-layout>
-  {{ board$ | async | json }}
+  <div *ngIf=" board$ | async">
+    {{ board$ | async | json }}
+  </div>
 </app-layout>

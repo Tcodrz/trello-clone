@@ -11,7 +11,7 @@ import { CacheKeys, CacheService } from './core/services/cache.service';
 export class AppComponent {
   constructor(
     private cacheService: CacheService,
-    private userService: UserService
+    private userService: UserService,
   ) { }
   ngOnInit() {
     const user = this.cacheService.getItem<User>(CacheKeys.User);

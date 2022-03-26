@@ -47,7 +47,7 @@ export class SidebarService {
         route: '/dashboard/boards',
         icon: Icons.ClipBoard,
         command: () => {
-          this.state.loadWorkspace(null);
+          this.state.workspaceSetCurrent(null);
         }
       },
       {

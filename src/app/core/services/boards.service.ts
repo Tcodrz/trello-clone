@@ -1,8 +1,11 @@
-import { StateService } from './../../state/state.service';
-import { map, switchMap, Observable } from 'rxjs';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { map, mergeMap, Observable, switchMap } from 'rxjs';
 import { Board } from '../interface/board.interface';
+import { Action, StateService } from './../../state/state.service';
+import { CacheKeys, CacheService } from './cache.service';
+import { LogService } from './log.service';
+import { WorkspaceService } from './workspace.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,16 +13,33 @@ import { Board } from '../interface/board.interface';
 export class BoardsService {
 
   constructor(
+    private cache: CacheService,
     private firestore: AngularFirestore,
+    private logger: LogService,
     private state: StateService,
+    private workspaceService: WorkspaceService,
   ) { }
-  getBoards(workspaceID: string): Observable<Board[]> {
+  init() {
+    const currentBoard = this.cache.getItem<Board>(CacheKeys.CurrentBoard);
+    if (!!currentBoard) this.state.boardSetCurrent(currentBoard);
+  }
+  getBoards(): Observable<Board[]> {
+    this.logger.logAction({ action: Action.BoardsGet, value: this });
     const collection = this.firestore.collection<Board>('board');
     return collection.get().pipe(
       map(ref => ref.docs.map(x => ({ ...x.data() as Board, id: x.id }))),
-      map(boards => boards.filter(x => x.workspaceID === workspaceID)),
-      map(boards => this.state.setBoards(boards)),
-      switchMap(() => this.state.getBoards())
+      mergeMap((boards) => this.workspaceService.getCurrentWorkspace().pipe(
+        map(workspace => boards.filter(x => x.workspaceID === workspace?.id)),
+        map(boards => this.state.setBoards(boards)),
+        switchMap(() => this.state.getBoards())
+      ))
     );
+  }
+  getCurrentBoard(): Observable<Board | null> {
+    this.logger.logAction({ action: Action.BoardLoad, value: this });
+    return this.state.getCurrentBoard();
+  }
+  setCurrentBoard(board: Board | null) {
+    this.state.boardSetCurrent(board);
   }
 }

@@ -1,4 +1,4 @@
 <app-layout>
-  {{ workspace$ | async | json }}
+  {{ (workspace$ | async)?.name }}
   {{ boards$ | async | json }}
 </app-layout>

@@ -1,12 +1,14 @@
-import { Board } from './../../core/interface/board.interface';
-import { SidebarService } from './../../core/services/sidebar.service';
-import { Component, ElementRef, EventEmitter, HostListener, OnInit, Output } from '@angular/core';
-import { BehaviorSubject, map, Observable, of, switchMap, tap } from 'rxjs';
+import { Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
+import { BehaviorSubject, map, Observable, of, Subscription, switchMap, tap } from 'rxjs';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
+import { UserService } from 'src/app/core/services/user.service';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
-import { StateService } from '../../state/state.service';
 import { Icons } from '../../ui-components/button/icon/icons';
 import { MenuItem } from '../../ui-components/menu/menu/menu.component';
+import { Board } from './../../core/interface/board.interface';
+import { BoardsService } from './../../core/services/boards.service';
+import { SidebarService } from './../../core/services/sidebar.service';
+import { WorkspaceService } from './../../core/services/workspace.service';
 
 
 @Component({
@@ -14,7 +16,7 @@ import { MenuItem } from '../../ui-components/menu/menu/menu.component';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent implements OnInit, OnDestroy {
   @Output() open: EventEmitter<boolean> = new EventEmitter();
   workspaces$: Observable<Workspace[]> = of([]);
   workspace$: Observable<Workspace | null> = of(null);
@@ -25,25 +27,32 @@ export class SidebarComponent implements OnInit {
   isOpen: boolean = true;
   Icons = Icons;
   sidebarLinksStyle = {};
+  userSubscription: Subscription = new Subscription();
   @HostListener('window:resize', ['$event']) onResize(event: Event) {
     this.initSidebar(event);
   }
   constructor(
+    private boardsService: BoardsService,
     private elementRef: ElementRef,
-    private state: StateService,
-    private sidebar: SidebarService,
+    private sidebarSercvice: SidebarService,
+    private userService: UserService,
+    private workspaceService: WorkspaceService,
   ) { }
 
   ngOnInit(): void {
     this.initSidebar();
-    this.workspaces$ = this.state.getWorkspaces();
-    this.workspace$ = this.state.getCurrentWorkspace()
-      .pipe(tap(workspace => {
-        if (!workspace) this.sidebarLinksStyle = { 'display': 'block', 'margin-top': '30px' };
-        else this.sidebarLinksStyle = {};
-      }));
-    this.boards$ = this.state.getBoards();
-    this.menuLinks$ = this.sidebar.getMenuLinks();
+    this.workspaceService.init();
+    this.userSubscription = this.userService.getUser().subscribe(user => {
+      if (!!user) {
+        this.workspaces$ = this.workspaceService.loadAll(user.id);
+        this.workspace$ = this.workspaceService.getCurrentWorkspace()
+          .pipe(tap(workspace => {
+            this.sidebarLinksStyle = !!workspace ? {} : { 'display': 'block', 'margin-top': '30px' };
+          }));
+      }
+    });
+    this.boards$ = this.boardsService.getBoards();
+    this.menuLinks$ = this.sidebarSercvice.getMenuLinks();
     this.showToggler$ = this.isSmallScreen$.pipe(
       switchMap(isSmallScreen =>
         this.workspace$.pipe(map(workspace => {
@@ -51,6 +60,9 @@ export class SidebarComponent implements OnInit {
           else return !!workspace;
         }))
       ));
+  }
+  ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
   }
   initSidebar(event?: Event) {
     const width = (event?.target as Window)?.innerWidth || window.innerWidth;

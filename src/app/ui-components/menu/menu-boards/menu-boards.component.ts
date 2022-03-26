@@ -1,6 +1,6 @@
-import { StateService } from './../../../state/state.service';
-import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Board } from './../../../core/interface/board.interface';
+import { BoardsService } from './../../../core/services/boards.service';
 import { GotoService } from './../../../core/services/goto.service';
 import { MenuItems } from './../menu/menu.component';
 
@@ -13,8 +13,8 @@ export class MenuBoardsComponent implements OnInit, OnChanges {
   @Input() boards: Board[] | null = [];
   menuItems: MenuItems | null = null;
   constructor(
+    private boardsService: BoardsService,
     private goto: GotoService,
-    private state: StateService,
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
     this.initMenuItems();
@@ -27,12 +27,12 @@ export class MenuBoardsComponent implements OnInit, OnChanges {
     const boardItems = this.boards?.map(board => ({
       label: board.name,
       command: () => {
-        this.state.loadBoard(board);
+        this.boardsService.setCurrentBoard(board);
         this.goto.board();
       }
     }));
     this.menuItems = {
-      headline: 'Yor boards',
+      headline: 'Your boards',
       items: boardItems,
     }
   }
