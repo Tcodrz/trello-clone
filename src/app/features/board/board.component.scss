@@ -1,0 +1,21 @@
+@import "functions";
+@import "constants";
+
+
+.lists {
+  margin-top: times8(4);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  column-gap: times8(2);
+  overflow: scroll;
+  height: 100%;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  .list {
+    min-width: 200px;
+  }
+}

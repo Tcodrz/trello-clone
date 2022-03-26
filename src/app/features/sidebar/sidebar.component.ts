@@ -45,7 +45,8 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.workspace$ = this.workspaceService.getCurrentWorkspace().pipe(tap(workspace => {
       this.sidebarLinksStyle = !!workspace ? {} : { 'display': 'block', 'margin-top': '30px' };
     }));
-    this.boards$ = this.boardsService.getBoards();
+    this.boards$ = this.boardsService.getBoards().pipe(
+      map(boards => boards.sort((a, b) => b.updatedAt - a.updatedAt)));
     this.menuLinks$ = this.sidebarSercvice.getMenuLinks();
     this.showToggler$ = this.isSmallScreen$.pipe(
       switchMap(isSmallScreen =>

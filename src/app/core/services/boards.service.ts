@@ -1,11 +1,11 @@
-import { Workspace } from './../interface/workspace.interface';
-import { GotoService } from './goto.service';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map, mergeMap, Observable, switchMap } from 'rxjs';
+import { map, mergeMap, Observable, of, switchMap } from 'rxjs';
 import { Board } from '../interface/board.interface';
 import { Action, StateService } from './../../state/state.service';
+import { List } from '../interface/list.interface';
 import { CacheKeys, CacheService } from './cache.service';
+import { GotoService } from './goto.service';
 import { LogService } from './log.service';
 import { WorkspaceService } from './workspace.service';
 
@@ -40,17 +40,63 @@ export class BoardsService {
   }
   getCurrentBoard(): Observable<Board | null> {
     this.logger.logAction({ action: Action.BoardLoad, value: this });
-    return this.state.getCurrentBoard();
+    return this.state.getCurrentBoard().pipe(
+      mergeMap(board => {
+        if (!!board) {
+          const collection = this.firestore.collection<List>('list');
+          return collection.get().pipe(map(ref => {
+            const lists = ref.docs.map(list => ({ ...list.data() as List, id: list.id }))
+              .filter(list => board.listIDs.includes(list.id));
+            board.lists = lists.sort((a, b) => a.position - b.position);
+            return board;
+          }));
+        }
+        return of(board);
+      })
+    );
   }
   setCurrentBoard(board: Board | null) {
     this.state.boardSetCurrent(board);
   }
   createNewBoard(newBoard: Partial<Board>) {
     const id = this.firestore.createId();
-    const board: Board = { ...newBoard, id } as Board;
-    this.firestore.doc<Board>(`board/${id}`).set(board);
-    this.state.boardSetCurrent(board);
-    this.workspaceService.setCurrentWorkspaceByID(board.workspaceID);
-    this.goto.board();
+    const lists = this.initNewBoardCards();
+    const listIDs: string[] = lists.map(x => x.id);
+    Promise.all(lists.map(list => this.firestore.doc(`list/${list.id}`).set(list)))
+      .then(() => {
+        const board: Board = {
+          ...newBoard, id,
+          listIDs: listIDs,
+          createdAt: new Date().getTime(),
+          updatedAt: new Date().getTime(),
+        } as Board;
+        this.firestore.doc<Board>(`board/${id}`).set(board);
+        this.state.boardSetCurrent(board);
+        this.workspaceService.setCurrentWorkspaceByID(board.workspaceID);
+        this.goto.board();
+      })
+  }
+  initNewBoardCards(): List[] {
+    const cards: List[] = [
+      {
+        id: this.firestore.createId(),
+        name: 'Todo',
+        position: 1,
+      },
+      {
+        id: this.firestore.createId(),
+        name: 'Doing',
+        position: 2,
+      },
+      {
+        id: this.firestore.createId(),
+        name: 'Done',
+        position: 3,
+      }
+    ];
+    cards.forEach(card => {
+      this.firestore.doc(`card/${card.id}`).set(card);
+    });
+    return cards;
   }
 }

@@ -1,5 +1,13 @@
 <app-layout>
-  <div *ngIf=" board$ | async">
-    {{ board$ | async | json }}
+  <div *ngIf=" board$ | async" class="lists">
+    <ng-container *ngFor="let list of (board$ | async)?.lists">
+      <app-card class="list">
+        <div>{{ list.name }}</div>
+        <app-button [className]="'raised width-10'">Add card</app-button>
+      </app-card>
+    </ng-container>
+    <app-card class="list">
+      <div>Create a new List...</div>
+    </app-card>
   </div>
 </app-layout>

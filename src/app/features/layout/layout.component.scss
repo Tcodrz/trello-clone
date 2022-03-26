@@ -5,7 +5,7 @@ $SidebarWidth: 300px;
 
 :host {
   display: grid;
-  grid-template: "topnav topnav"45px "sidebar content"calc(100% - 45px) / 300px calc(100% - 300px);
+  grid-template: "topnav topnav"45px "sidebar content"100vh / 300px calc(100% - 300px);
 
   &:not(.closed) {
     .content {
@@ -15,7 +15,7 @@ $SidebarWidth: 300px;
   }
 
   &.closed {
-    grid-template: "topnav topnav"45px "sidebar content"calc(100% - 45px) / 7% 93%;
+    grid-template: "topnav topnav"45px "sidebar content"calc(100vh - 45px) / 7% 93%;
 
     .content {
       transition: $transition;

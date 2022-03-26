@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 import { BehaviorSubject, map, mergeMap } from 'rxjs';
 import { ScreenSize } from 'src/app/core/interface/screen-size.enum';
+import { BoardsService } from './../../core/services/boards.service';
 import { WorkspaceService } from './../../core/services/workspace.service';
 import { SidebarComponent } from './../sidebar/sidebar.component';
 
@@ -20,6 +21,7 @@ export class LayoutComponent implements AfterViewInit {
   constructor(
     private elementRef: ElementRef,
     private workspaceService: WorkspaceService,
+    private boardsService: BoardsService,
   ) { }
   ngAfterViewInit(): void {
     this.isSmallScreen$.asObservable().pipe(
@@ -32,8 +34,17 @@ export class LayoutComponent implements AfterViewInit {
             this.sidebar.elementRef.nativeElement.style.paddingLeft = '0';
             this.content.nativeElement.style.marginLeft = '0';
           }
-        })
-      ))).subscribe();
+          return workspace;
+        }),
+      )),
+      mergeMap(workspace =>
+        this.boardsService.getCurrentBoard().pipe(
+          map(board => {
+            if (!!board)
+              this.elementRef.nativeElement.style.backgroundColor = workspace?.backgroundColor;
+            else this.elementRef.nativeElement.style.backgroundColor = 'transparent';
+          })
+        ))).subscribe();
   }
   onSidebarToggle(isOpen: boolean): void {
     if (isOpen) this.elementRef.nativeElement.classList.remove('closed');
