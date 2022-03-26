@@ -1,6 +1,6 @@
 import { GotoService } from './../../core/services/goto.service';
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { map, Observable, of } from 'rxjs';
 import { Board } from 'src/app/core/interface/board.interface';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { BoardsService } from './../../core/services/boards.service';
@@ -30,5 +30,8 @@ export class WorkspaceComponent implements OnInit {
   onBoardClick(board: Board) {
     this.boardsService.setCurrentBoard(board);
     this.goto.board();
+  }
+  onCreateBoard(board: Partial<Board>) {
+    this.boardsService.createNewBoard(board);
   }
 }

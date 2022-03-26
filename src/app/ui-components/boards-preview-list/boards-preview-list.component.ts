@@ -13,6 +13,7 @@ export class BoardsPreviewListComponent implements OnInit {
   @Input() workspaces: Workspace[] | null = [];
   @Input() workspace: Workspace | null = null;
   @Output() boardClick: EventEmitter<Board> = new EventEmitter();
+  @Output() createBoard: EventEmitter<Partial<Board>> = new EventEmitter();
   @ViewChild('newBoardMenu', { static: false }) newBoardMenu!: MenuComponent;
   constructor() { }
   ngOnInit(): void { }
@@ -20,11 +21,12 @@ export class BoardsPreviewListComponent implements OnInit {
     this.boardClick.emit(board);
   }
   onSubmit(newBoard: Partial<Board>) {
-    this.newBoardMenu.toggle();
+    this.newBoardMenu.onToggle();
+    this.createBoard.emit(newBoard);
   }
   toggleIfClosed() {
     if (!this.newBoardMenu.isOpen()) {
-      this.newBoardMenu.toggle();
+      this.newBoardMenu.onToggle();
     }
   }
 }

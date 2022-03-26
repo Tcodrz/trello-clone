@@ -11,9 +11,21 @@
   .boards-preview {
     display: flex;
     align-items: center;
-
+    column-gap: times8(2);
+    row-gap: times8(2);
+    flex-wrap: wrap;
 
     .board {
+      &:nth-child(1) {
+        border: 1px solid $InputBorder;
+        background-color: $White;
+
+        &:hover {
+          background-color: $LightGrey;
+        }
+      }
+
+      border-radius: $BorderRadius;
       position: relative;
       width: 150px;
       height: 150px;
@@ -21,7 +33,6 @@
       background-color: $LightGrey;
       display: grid;
       place-content: center;
-      margin-left: times8(2);
       cursor: pointer;
       line-break: loose;
 

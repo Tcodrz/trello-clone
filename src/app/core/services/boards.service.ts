@@ -1,3 +1,5 @@
+import { Workspace } from './../interface/workspace.interface';
+import { GotoService } from './goto.service';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map, mergeMap, Observable, switchMap } from 'rxjs';
@@ -15,6 +17,7 @@ export class BoardsService {
   constructor(
     private cache: CacheService,
     private firestore: AngularFirestore,
+    private goto: GotoService,
     private logger: LogService,
     private state: StateService,
     private workspaceService: WorkspaceService,
@@ -41,5 +44,13 @@ export class BoardsService {
   }
   setCurrentBoard(board: Board | null) {
     this.state.boardSetCurrent(board);
+  }
+  createNewBoard(newBoard: Partial<Board>) {
+    const id = this.firestore.createId();
+    const board: Board = { ...newBoard, id } as Board;
+    this.firestore.doc<Board>(`board/${id}`).set(board);
+    this.state.boardSetCurrent(board);
+    this.workspaceService.setCurrentWorkspaceByID(board.workspaceID);
+    this.goto.board();
   }
 }

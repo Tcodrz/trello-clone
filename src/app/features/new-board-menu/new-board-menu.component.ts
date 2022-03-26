@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, OnDestroy, Output, ElementRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { DropdownOption } from '../../core/interface/dropdown-option.interface';
@@ -16,10 +16,15 @@ export class NewBoardMenuComponent implements OnChanges, OnDestroy {
   };
   @Input() currentWorkspace: Workspace | null = null;
   @Output() submitNewBoard: EventEmitter<Partial<Board>> = new EventEmitter();
+  @HostListener('document:click', ['$event']) onClick(event: Event) {
+    const isOutside = !this.elementRef.nativeElement.contains(event.target);
+    if (isOutside) this.newBoardForm.reset();
+  }
   newBoardForm!: FormGroup;
   workspaceOptions: DropdownOption[] = [];
   constructor(
     private fb: FormBuilder,
+    private elementRef: ElementRef,
   ) { }
   ngOnDestroy(): void { this.newBoardForm.reset(); }
   ngOnChanges(): void {

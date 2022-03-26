@@ -2,11 +2,37 @@
 @import "functions";
 
 app-select {
+
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+
   .select {
+    &:focus {
+      border: 3px solid black;
+    }
 
     .input {
       input {
         cursor: pointer;
+        caret-color: transparent;
+
+        &[type=button] {
+          text-align: left;
+        }
+
+        &:focus {
+          text-decoration: none;
+          text-emphasis: none;
+        }
       }
 
       &.open {
@@ -38,12 +64,15 @@ app-select {
       &.open {
         display: block;
         border-top: none;
+        border: 2px solid $InputBorderFocus;
+        border-top: none;
       }
 
       .option {
         padding: 8px 8px;
 
         &:hover {
+
           background-color: $SidbarLinkHover;
         }
       }

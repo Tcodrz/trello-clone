@@ -10,7 +10,7 @@
       <app-nav-menu [title]="'More'" position="right"></app-nav-menu>
     </div>
     <div class="menus ml-3" *ngIf="smallScreen">
-      <app-button (click)="menu.toggle()">More</app-button>
+      <app-button (click)="menu.onToggle()">More</app-button>
       <app-menu #menu></app-menu>
     </div>
   </div>
@@ -21,7 +21,7 @@
         <app-button *ngIf="smallScreen" className="icon" [icon]="Icons.Search"></app-button>
       </div>
       <div class="profile" *ngIf="(user$ | async)">
-        <img [src]="(user$ | async)?.picture" alt="" class="pic pointer" (click)="menu.toggle()">
+        <img [src]="(user$ | async)?.picture" alt="" class="pic pointer" (click)="menu.onToggle()">
         <app-menu [title]="'Account'" [position]="'left'" [menus]="profileMenuItems" #menu
           (itemClick)="onMenuItemClick($event)">
           <app-profile-menu [user]="user$"></app-profile-menu>

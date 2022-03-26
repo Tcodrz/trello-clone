@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map, Observable, switchMap } from 'rxjs';
+import { Board } from '../interface/board.interface';
 import { Workspace } from '../interface/workspace.interface';
 import { Action, StateService } from './../../state/state.service';
 import { MenuItem, MenuItems } from './../../ui-components/menu/menu/menu.component';
@@ -12,6 +13,7 @@ import { LogService } from './log.service';
   providedIn: 'root'
 })
 export class WorkspaceService {
+  private _workspaces: Workspace[] = [];
   constructor(
     private cache: CacheService,
     private firestore: AngularFirestore,
@@ -25,13 +27,15 @@ export class WorkspaceService {
   }
   loadAll(): Observable<Workspace[]> {
     this.logger.logAction({ action: Action.WorkspaceGet, value: this });
-    const collection = this.firestore.collection('workspace');
+    const collection = this.firestore.collection<Workspace>('workspace');
     return this.state.getUser().pipe(
       switchMap(user => {
-        return collection.get().pipe(
-          map(ref => ref.docs.map(x => ({ ...x.data() as Workspace, id: x.id }))),
+        return collection.valueChanges().pipe(
           map(workspaces => workspaces.filter(x => x.userID === user?.id)),
-          map(workspaces => this.state.setWorkspaces(workspaces)),
+          map(workspaces => {
+            this._workspaces = workspaces;
+            this.state.setWorkspaces(workspaces)
+          }),
           switchMap(() => this.state.getWorkspaces())
         );
       })
@@ -40,6 +44,10 @@ export class WorkspaceService {
   getCurrentWorkspace(): Observable<Workspace | null> {
     this.logger.logAction({ action: Action.WorkspaceLoad, value: this });
     return this.state.getCurrentWorkspace();
+  }
+  setCurrentWorkspaceByID(workspaceID: string) {
+    const workspace = this._workspaces.find(x => x.id === workspaceID);
+    if (!!workspace) this.setCurrentWorkspace(workspace);
   }
   setCurrentWorkspace(workspace: Workspace | null) {
     this.state.workspaceSetCurrent(workspace);

@@ -1,7 +1,7 @@
-import { Icons } from './../button/icon/icons';
-import { DropdownOption } from '../../core/interface/dropdown-option.interface';
-import { Component, Input, OnInit, ViewChild, ElementRef, OnChanges, SimpleChanges, AfterContentChecked, AfterContentInit, ChangeDetectionStrategy } from '@angular/core';
+import { AfterContentChecked, ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { DropdownOption } from '../../core/interface/dropdown-option.interface';
+import { Icons } from './../button/icon/icons';
 
 @Component({
   selector: 'app-select',
@@ -21,6 +21,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentChecke
   @Input() options: DropdownOption[] = [];
   @ViewChild('dropdown') dropdown!: ElementRef;
   @ViewChild('input') input!: ElementRef;
+  @ViewChild('inputElement') inputElement!: ElementRef;
   selected!: DropdownOption;
   Icons = Icons;
   touched = false;
@@ -31,7 +32,7 @@ export class SelectComponent implements ControlValueAccessor, AfterContentChecke
   ngAfterContentChecked(): void {
     if (!!this.dropdown && !!this.input) {
       const width = this.input.nativeElement.offsetWidth;
-      this.dropdown.nativeElement.style.width = `${width - 2}px`;
+      this.dropdown.nativeElement.style.width = `${width - 4}px`;
     }
   }
   writeValue(value: DropdownOption): void {
@@ -58,5 +59,8 @@ export class SelectComponent implements ControlValueAccessor, AfterContentChecke
       this.onTouched();
       this.touched = true;
     }
+  }
+  onInput() {
+    this.inputElement.nativeElement.value = this.selected.name;
   }
 }

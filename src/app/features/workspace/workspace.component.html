@@ -1,4 +1,5 @@
 <app-layout>
   <app-boards-preview-list [boards]="boards$ | async" [workspaces]="workspaces$ | async"
-    [workspace]="workspace$ | async" (boardClick)="onBoardClick($event)"></app-boards-preview-list>
+    [workspace]="workspace$ | async" (boardClick)="onBoardClick($event)" (createBoard)="onCreateBoard($event)">
+  </app-boards-preview-list>
 </app-layout>
