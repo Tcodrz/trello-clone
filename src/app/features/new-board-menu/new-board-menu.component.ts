@@ -16,28 +16,15 @@ export class NewBoardMenuComponent implements OnChanges, OnDestroy {
   };
   @Input() currentWorkspace: Workspace | null = null;
   @Output() submitNewBoard: EventEmitter<Partial<Board>> = new EventEmitter();
-  @HostListener('document:click', ['$event']) onClick(event: Event) {
-    const isOutside = !this.elementRef.nativeElement.contains(event.target);
-    if (isOutside) this.newBoardForm.reset();
-  }
   newBoardForm!: FormGroup;
   workspaceOptions: DropdownOption[] = [];
   constructor(
     private fb: FormBuilder,
-    private elementRef: ElementRef,
   ) { }
   ngOnDestroy(): void { this.newBoardForm.reset(); }
   ngOnChanges(): void {
     if (!this.newBoardForm) this.initForm();
-    let currentWorkspaceOption: DropdownOption | undefined = undefined;
-    if (this.currentWorkspace) {
-      currentWorkspaceOption = {
-        code: this.currentWorkspace.id,
-        name: this.currentWorkspace.name,
-      }
-      const control = this.newBoardForm.controls['workspace'];
-      if (!!control) control.patchValue(currentWorkspaceOption);
-    }
+    this.initWorkspaceList();
   }
   initForm() {
     this.newBoardForm = this.fb.group({
@@ -51,5 +38,22 @@ export class NewBoardMenuComponent implements OnChanges, OnDestroy {
       workspaceID: this.newBoardForm.value.workspace.code
     };
     this.submitNewBoard.emit(board);
+  }
+  initWorkspaceList() {
+    let currentWorkspaceOption: DropdownOption | undefined = undefined;
+    if (this.currentWorkspace) {
+      currentWorkspaceOption = {
+        code: this.currentWorkspace.id,
+        name: this.currentWorkspace.name,
+      }
+      const control = this.newBoardForm.controls['workspace'];
+      if (!!control) control.patchValue(currentWorkspaceOption);
+    }
+  }
+  resetForm() {
+    if (this.newBoardForm.touched) {
+      this.newBoardForm.reset();
+      this.initWorkspaceList()
+    }
   }
 }

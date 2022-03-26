@@ -40,6 +40,8 @@ app-select {
           border-bottom: none;
           border-bottom-left-radius: 0;
           border-bottom-right-radius: 0;
+          border: 2px solid $InputBorderFocus;
+          border-bottom: none;
         }
       }
 

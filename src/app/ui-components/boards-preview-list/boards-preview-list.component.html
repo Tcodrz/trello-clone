@@ -2,8 +2,9 @@
 <div class="boards-preview">
   <div class="board" (click)="toggleIfClosed()">
     <h3> Create new board </h3>
-    <app-menu #newBoardMenu [position]="'mid-right'" [title]="'Creat new board'">
-      <app-new-board-menu [workspaces]="workspaces" [currentWorkspace]="workspace" (submitNewBoard)="onSubmit($event)">
+    <app-menu #newBoardMenu [position]="'mid-right'" [title]="'Creat new board'" (toggle)="form.resetForm()">
+      <app-new-board-menu #form [workspaces]="workspaces" [currentWorkspace]="workspace"
+        (submitNewBoard)="onSubmit($event)">
       </app-new-board-menu>
     </app-menu>
   </div>
