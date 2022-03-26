@@ -1,3 +1,4 @@
+import { WorkspaceService } from './../../core/services/workspace.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private workspaceService: WorkspaceService,
+  ) { }
 
   ngOnInit(): void {
+    this.workspaceService.setCurrentWorkspace(null);
   }
 
 }

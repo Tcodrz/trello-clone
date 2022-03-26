@@ -33,7 +33,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
   constructor(
     private boardsService: BoardsService,
-    private elementRef: ElementRef,
+    public elementRef: ElementRef,
     private sidebarSercvice: SidebarService,
     private workspaceService: WorkspaceService,
   ) { }
