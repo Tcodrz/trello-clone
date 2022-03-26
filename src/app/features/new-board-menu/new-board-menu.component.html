@@ -1,11 +1,12 @@
 <div class="br mb-1"></div>
-<form [formGroup]="newBoard">
+<form [formGroup]="newBoardForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="">Board name</label>
     <input type="text" formControlName="boardName">
   </div>
   <div class="form-group mt-2">
-    <app-select [label]="'Workspace'" [options]="workspaceOptions" formControlName="workspaceID">
+    <app-select [label]="'Workspace'" [options]="workspaceOptions" formControlName="workspace">
     </app-select>
   </div>
+  <app-button className="primary mt-2 width-10" [disabled]="newBoardForm.invalid" type="submit">Create</app-button>
 </form>

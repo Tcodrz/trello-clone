@@ -6,7 +6,7 @@ button {
   justify-content: space-around;
   text-align: center;
   border-radius: $BorderRadius;
-  padding: times8(2) times8(3);
+  padding: times8(1) times8(3);
   border: none;
   background-color: transparent;
   color: inherit;
@@ -51,7 +51,7 @@ button {
     background-color: $Blue;
     font-weight: 600;
 
-    &:hover {
+    &:hover:not(:disabled) {
       background-color: $DarkBlue;
       transition: $transition;
     }

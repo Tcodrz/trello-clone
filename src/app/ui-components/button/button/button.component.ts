@@ -13,5 +13,4 @@ export class ButtonComponent {
   @Input() icon: Icons = Icons.None;
   @Input() className: string = '';
   @Input() disabled: boolean = false;
-
 }

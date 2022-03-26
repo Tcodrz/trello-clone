@@ -32,6 +32,8 @@ app-select {
       border-radius: $BorderRadius;
       border-top-left-radius: 0;
       border-top-right-radius: 0;
+      position: absolute;
+      background-color: $White;
 
       &.open {
         display: block;

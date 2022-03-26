@@ -1,6 +1,6 @@
 import { Icons } from './../button/icon/icons';
 import { DropdownOption } from '../../core/interface/dropdown-option.interface';
-import { Component, Input, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, Input, OnInit, ViewChild, ElementRef, OnChanges, SimpleChanges, AfterContentChecked, AfterContentInit, ChangeDetectionStrategy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
@@ -13,9 +13,10 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
       multi: true,
       useExisting: SelectComponent
     }
-  ]
+  ],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SelectComponent implements ControlValueAccessor {
+export class SelectComponent implements ControlValueAccessor, AfterContentChecked {
   @Input() label: string = '';
   @Input() options: DropdownOption[] = [];
   @ViewChild('dropdown') dropdown!: ElementRef;
@@ -27,6 +28,12 @@ export class SelectComponent implements ControlValueAccessor {
   onChange = (value: DropdownOption) => { };
   onTouched = () => { };
   constructor() { }
+  ngAfterContentChecked(): void {
+    if (!!this.dropdown && !!this.input) {
+      const width = this.input.nativeElement.offsetWidth;
+      this.dropdown.nativeElement.style.width = `${width - 2}px`;
+    }
+  }
   writeValue(value: DropdownOption): void {
     this.selected = value;
   }
@@ -40,7 +47,7 @@ export class SelectComponent implements ControlValueAccessor {
     this.markAsTouched();
     this.selected = option;
     this.onToggle();
-    this.onChange(option.code);
+    this.onChange(option);
   }
   onToggle() {
     this.dropdown.nativeElement.classList.toggle('open');
