@@ -1,6 +1,9 @@
 <div class="br mb-1"></div>
 <form [formGroup]="newBoardForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
+    <app-select [label]="'Theme Selector'" [options]="themeOptions" formControlName="theme"></app-select>
+  </div>
+  <div class="form-group">
     <label for="">Board name</label>
     <input type="text" formControlName="boardName">
   </div>

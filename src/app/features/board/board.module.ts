@@ -1,3 +1,4 @@
+import { ListModule } from './../list/list.module';
 import { ButtonModule } from './../../ui-components/button/button.module';
 import { CardModule } from './../../ui-components/card/card.module';
 import { LayoutModule } from './../layout/layout.module';
@@ -18,6 +19,7 @@ import { BoardComponent } from './board.component';
     CardModule,
     CommonModule,
     LayoutModule,
+    ListModule,
   ]
 })
 export class BoardModule { }
