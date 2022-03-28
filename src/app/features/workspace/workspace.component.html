@@ -1,5 +1,5 @@
-<app-layout>
-  <app-boards-preview-list [boards]="boards$ | async" [workspaces]="workspaces$ | async"
-    [workspace]="workspace$ | async" (boardClick)="onBoardClick($event)" (createBoard)="onCreateBoard($event)">
+<app-layout *ngIf="(view$ | async) as view">
+  <app-boards-preview-list [boards]="view.boards" [workspaces]="view.workspaces" [workspace]="view.currentWorkspace"
+    (boardClick)="onBoardClick($event)" (createBoard)="onCreateBoard($event)">
   </app-boards-preview-list>
 </app-layout>

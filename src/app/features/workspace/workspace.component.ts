@@ -1,9 +1,9 @@
-import { GotoService } from './../../core/services/goto.service';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { map, Observable, of } from 'rxjs';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { combineLatest, Observable, of } from 'rxjs';
 import { Board } from 'src/app/core/interface/board.interface';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { BoardsService } from './../../core/services/boards.service';
+import { GotoService } from './../../core/services/goto.service';
 import { WorkspaceService } from './../../core/services/workspace.service';
 
 @Component({
@@ -13,9 +13,10 @@ import { WorkspaceService } from './../../core/services/workspace.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkspaceComponent implements OnInit {
-  workspace$: Observable<Workspace | null> = of(null);
+  currentWorkspace$: Observable<Workspace | null> = of(null);
   workspaces$: Observable<Workspace[]> = of([]);
   boards$: Observable<Board[]> = of([]);
+  view$!: Observable<{ currentWorkspace: Workspace | null, workspaces: Workspace[], boards: Board[] }>;
   constructor(
     private boardsService: BoardsService,
     private workspaceService: WorkspaceService,
@@ -24,9 +25,11 @@ export class WorkspaceComponent implements OnInit {
 
   ngOnInit(): void {
     this.workspaceService.init();
-    this.workspace$ = this.workspaceService.getCurrentWorkspace();
-    this.workspaces$ = this.workspaceService.loadAll();
-    this.boards$ = this.boardsService.getBoards();
+    this.view$ = combineLatest({
+      currentWorkspace: this.workspaceService.getCurrentWorkspace(),
+      workspaces: this.workspaceService.loadAll(),
+      boards: this.boardsService.getBoards(),
+    });
   }
   onBoardClick(board: Board) {
     this.boardsService.setCurrentBoard(board);
