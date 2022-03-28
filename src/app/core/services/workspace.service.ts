@@ -1,24 +1,19 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map, Observable, switchMap } from 'rxjs';
-import { Board } from '../interface/board.interface';
 import { Workspace } from '../interface/workspace.interface';
-import { Action, StateService } from './../../state/state.service';
+import { StateService } from './../../state/state.service';
 import { MenuItem, MenuItems } from './../../ui-components/menu/menu/menu.component';
 import { CacheKeys, CacheService } from './cache.service';
 import { GotoService } from './goto.service';
-import { LogService } from './log.service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class WorkspaceService {
   private _workspaces: Workspace[] = [];
   constructor(
     private cache: CacheService,
     private firestore: AngularFirestore,
     private goto: GotoService,
-    private logger: LogService,
     private state: StateService,
   ) { }
   init() {
@@ -26,7 +21,6 @@ export class WorkspaceService {
     if (!!currentWorkspace) this.state.workspaceSetCurrent(currentWorkspace);
   }
   loadAll(): Observable<Workspace[]> {
-    this.logger.logAction({ action: Action.WorkspaceGet, value: this });
     const collection = this.firestore.collection<Workspace>('workspace');
     return this.state.getUser().pipe(
       switchMap(user => {
@@ -42,7 +36,6 @@ export class WorkspaceService {
     );
   }
   getCurrentWorkspace(): Observable<Workspace | null> {
-    this.logger.logAction({ action: Action.WorkspaceLoad, value: this });
     return this.state.getCurrentWorkspace();
   }
   setCurrentWorkspaceByID(workspaceID: string) {
@@ -67,7 +60,6 @@ export class WorkspaceService {
     });
   }
   getWorkspaceByID(workspaceID: string): Observable<Workspace> {
-    this.logger.logAction({ action: Action.WorkspaceGetByID, value: this });
     return this.firestore.doc(`workspaces/${workspaceID}`).get().pipe(
       map(ref => ref.data() as Workspace)
     );
