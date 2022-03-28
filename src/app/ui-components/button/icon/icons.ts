@@ -15,4 +15,7 @@ export enum Icons {
   Users = 'faUsers',
   Settings = 'faScrewdriver',
   Search = 'faSearch',
+  EllipsisH = 'faEllipsisH',
+  EllipsisV = 'faEllipsisV',
+  Times = 'faTimes',
 }
