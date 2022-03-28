@@ -1,6 +1,6 @@
 <app-layout>
-  <div *ngIf=" board$ | async" class="lists">
-    <ng-container *ngFor="let list of (board$ | async)?.lists">
+  <div *ngIf=" board$ | async as board" class="lists">
+    <ng-container *ngFor="let list of board.lists">
       <app-list [list]="list" (createCard)="onCardCreate($event)"></app-list>
     </ng-container>
     <app-card class="create-list">

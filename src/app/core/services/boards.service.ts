@@ -1,14 +1,12 @@
-import { ThemeSquares } from './../interface/themes';
-import { Card } from './../interface/card.interface';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map, mergeMap, Observable, of, switchMap } from 'rxjs';
 import { Board } from '../interface/board.interface';
-import { Action, StateService } from './../../state/state.service';
 import { List } from '../interface/list.interface';
+import { StateService } from './../../state/state.service';
 import { CacheKeys, CacheService } from './cache.service';
+import { CardService } from './card.service';
 import { GotoService } from './goto.service';
-import { LogService } from './log.service';
 import { WorkspaceService } from './workspace.service';
 
 @Injectable({
@@ -20,16 +18,15 @@ export class BoardsService {
     private cache: CacheService,
     private firestore: AngularFirestore,
     private goto: GotoService,
-    private logger: LogService,
     private state: StateService,
     private workspaceService: WorkspaceService,
+    private cardService: CardService,
   ) { }
   init() {
     const currentBoard = this.cache.getItem<Board>(CacheKeys.CurrentBoard);
     if (!!currentBoard) this.state.boardSetCurrent(currentBoard);
   }
   getBoards(): Observable<Board[]> {
-    this.logger.logAction({ action: Action.BoardsGet, value: this });
     const collection = this.firestore.collection<Board>('board');
     return collection.get().pipe(
       map(ref => ref.docs.map(x => ({ ...x.data() as Board, id: x.id }))),
@@ -41,9 +38,7 @@ export class BoardsService {
     );
   }
   getCurrentBoard(): Observable<Board | null> {
-    const cardsCollection = this.firestore.collection<Card>('card');
     const listCollection = this.firestore.collection<List>('list');
-    this.logger.logAction({ action: Action.BoardLoad, value: this });
     return this.state.getCurrentBoard().pipe(
       mergeMap(board => {
         if (!!board) {
@@ -56,20 +51,12 @@ export class BoardsService {
         }
         return of(board);
       }),
-      mergeMap((board) => {
-        return cardsCollection.get().pipe(
-          map(cards => {
-            const filteredCards = cards.docs.filter(c => board?.listIDs.includes(c.data().listID));
-            board?.lists?.forEach(list => {
-              list.cards = filteredCards
-                .filter(c => c.data().listID === list.id)
-                .map(c => ({ ...c.data() as Card, id: c.id }))
-                .sort((a, b) => a.position - b.position);
-            });
-            return board;
-          })
-        )
-      })
+      mergeMap((board) => this.cardService.getCardsByBoard(board as Board).pipe(
+        map(cards => {
+          if (!!board) board.lists?.forEach(list => list.cards = cards.filter(c => c.listID === list.id));
+          return board;
+        })
+      ))
     );
   }
   setCurrentBoard(board: Board | null) {

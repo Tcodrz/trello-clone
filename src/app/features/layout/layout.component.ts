@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, ElementRef, HostListener, ViewChild } from '@angular/core';
-import { BehaviorSubject, map, mergeMap } from 'rxjs';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, ViewChild, OnDestroy } from '@angular/core';
+import { BehaviorSubject, map, mergeMap, Subscription } from 'rxjs';
 import { ScreenSize } from 'src/app/core/interface/screen-size.enum';
 import { BoardsService } from './../../core/services/boards.service';
 import { WorkspaceService } from './../../core/services/workspace.service';
@@ -8,23 +8,24 @@ import { SidebarComponent } from './../sidebar/sidebar.component';
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss']
+  styleUrls: ['./layout.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class LayoutComponent implements AfterViewInit {
+export class LayoutComponent implements AfterViewInit, OnDestroy {
   @ViewChild('sidebar') sidebar!: SidebarComponent;
   @ViewChild('content') content!: ElementRef;
   @HostListener('window:resize') onResize() {
-    const isSmallScreen = window.innerWidth >= ScreenSize.Large;
-    this.isSmallScreen$.next(isSmallScreen);
+    this.isLargeScreen$.next(this.getIsLargeScreen());
   }
-  isSmallScreen$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  isLargeScreen$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(this.getIsLargeScreen());
+  subscription: Subscription = new Subscription();
   constructor(
     private elementRef: ElementRef,
     private workspaceService: WorkspaceService,
     private boardsService: BoardsService,
   ) { }
   ngAfterViewInit(): void {
-    this.isSmallScreen$.asObservable().pipe(
+    this.subscription = this.isLargeScreen$.asObservable().pipe(
       mergeMap((isLargeScreen) => this.workspaceService.getCurrentWorkspace().pipe(
         map(workspace => {
           if (!workspace && !!this.sidebar && !!this.content && isLargeScreen) {
@@ -37,17 +38,14 @@ export class LayoutComponent implements AfterViewInit {
           return workspace;
         }),
       )),
-      mergeMap(workspace =>
-        this.boardsService.getCurrentBoard().pipe(
-          map(board => {
-            if (!!board)
-              this.elementRef.nativeElement.style.backgroundColor = workspace?.backgroundColor;
-            else this.elementRef.nativeElement.style.backgroundColor = 'transparent';
-          })
-        ))).subscribe();
+    ).subscribe();
   }
+  ngOnDestroy(): void { this.subscription.unsubscribe(); }
   onSidebarToggle(isOpen: boolean): void {
     if (isOpen) this.elementRef.nativeElement.classList.remove('closed');
     else this.elementRef.nativeElement.classList.add('closed');
+  }
+  getIsLargeScreen(): boolean {
+    return window.innerWidth >= ScreenSize.Large;
   }
 }

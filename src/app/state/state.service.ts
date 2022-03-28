@@ -6,35 +6,23 @@ import { Workspace } from '../core/interface/workspace.interface';
 import { Card } from './../core/interface/card.interface';
 import { CacheKeys, CacheService } from './../core/services/cache.service';
 
-export enum Action {
-  WorkspaceLoad = '[WORKSPACE] LOAD',
-  BoardLoad = '[BOARD] LOAD',
-  UserSet = '[USER] LOGIN',
-  UserGet = '[USER] GET',
-  WorkspaceSet = '[WORKSPACES] SET',
-  WorkspaceGet = '[WORKSPACES] GET',
-  WorkspaceGetByID = '[WORKSPACES] GET BY ID',
-  WorkspaceGetCurrent = '[WORKSPACE] GET CURRENT',
-  BoardsGetCurrent = '[BOARD] GET CURRENT',
-  BoardsSet = '[BOARDS] SET',
-  BoardsGet = '[BOARDS] GET',
-}
 
 @Injectable({
   providedIn: 'root'
 })
 export class StateService {
-  private currentWorkspace$: BehaviorSubject<Workspace | null> = new BehaviorSubject<Workspace | null>(null);
-  private currentBoard$: BehaviorSubject<Board | null> = new BehaviorSubject<Board | null>(null);
-  private user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
-  private workspaces$: BehaviorSubject<Workspace[]> = new BehaviorSubject<Workspace[]>([]);
-  private boards$: BehaviorSubject<Board[]> = new BehaviorSubject<Board[]>([]);
+  private readonly user$: BehaviorSubject<User | null> = new BehaviorSubject<User | null>(null);
+  private readonly currentWorkspace$: BehaviorSubject<Workspace | null> = new BehaviorSubject<Workspace | null>(null);
+  private readonly currentBoard$: BehaviorSubject<Board | null> = new BehaviorSubject<Board | null>(null);
+  private readonly workspaces$: BehaviorSubject<Workspace[]> = new BehaviorSubject<Workspace[]>([]);
+  private readonly boards$: BehaviorSubject<Board[]> = new BehaviorSubject<Board[]>([]);
   constructor(
     private cache: CacheService,
   ) { }
   workspaceSetCurrent(workspace: Workspace | null) {
     this.cacheUpdate(CacheKeys.CurrentWorkspace, workspace);
-    this.currentWorkspace$.next(workspace);
+    if (!!workspace) this.currentWorkspace$.next({ ...workspace as Workspace });
+    else this.currentWorkspace$.next(null);
   }
   boardSetCurrent(board: Board | null) {
     this.cacheUpdate(CacheKeys.CurrentBoard, board);
@@ -48,7 +36,7 @@ export class StateService {
     this.workspaces$.next(workspaces);
   }
   setBoards(boards: Board[]) {
-    this.boards$.next(boards);
+    this.boards$.next([...boards]);
   }
   getWorkspaces(): Observable<Workspace[]> {
     return this.workspaces$.asObservable();
@@ -60,11 +48,7 @@ export class StateService {
     return this.user$.asObservable();
   }
   getCurrentWorkspace(): Observable<Workspace | null> {
-    return this.currentWorkspace$.asObservable().pipe(
-      map(workspace => {
-        return workspace;
-      })
-    );
+    return this.currentWorkspace$.asObservable();
   }
   getCurrentBoard(): Observable<Board | null> {
     return this.currentBoard$.asObservable();
