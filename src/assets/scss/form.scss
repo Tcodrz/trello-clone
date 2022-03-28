@@ -29,6 +29,21 @@ input {
   }
 }
 
+textarea {
+  font-family: 'Fredoka', sans-serif;
+
+
+  &.clean {
+    border: none;
+    outline: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+}
+
 
 @keyframes shadowBlink {
   0% {

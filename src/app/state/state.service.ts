@@ -1,10 +1,10 @@
-import { LogService } from './../core/services/log.service';
-import { CacheKeys, CacheService } from './../core/services/cache.service';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Board } from '../core/interface/board.interface';
 import { User } from '../core/interface/user.interface';
 import { Workspace } from '../core/interface/workspace.interface';
+import { Card } from './../core/interface/card.interface';
+import { CacheKeys, CacheService } from './../core/services/cache.service';
 
 export enum Action {
   WorkspaceLoad = '[WORKSPACE] LOAD',
@@ -32,7 +32,6 @@ export class StateService {
   constructor(
     private cache: CacheService,
   ) { }
-  //#region load
   workspaceSetCurrent(workspace: Workspace | null) {
     this.cacheUpdate(CacheKeys.CurrentWorkspace, workspace);
     this.currentWorkspace$.next(workspace);
@@ -41,8 +40,6 @@ export class StateService {
     this.cacheUpdate(CacheKeys.CurrentBoard, board);
     this.currentBoard$.next(board);
   }
-  //#endregion
-  //#region setters
   setUser(user: User | null) {
     this.cacheUpdate(CacheKeys.User, user);
     this.user$.next(user);
@@ -53,8 +50,6 @@ export class StateService {
   setBoards(boards: Board[]) {
     this.boards$.next(boards);
   }
-  //#endregion
-  //#region getters
   getWorkspaces(): Observable<Workspace[]> {
     return this.workspaces$.asObservable();
   }
@@ -74,11 +69,20 @@ export class StateService {
   getCurrentBoard(): Observable<Board | null> {
     return this.currentBoard$.asObservable();
   }
-  //#endregion
-  //#region cache utils
+  addCardToList(card: Card) {
+    const currentBoard = this.currentBoard$.getValue();
+    const list = currentBoard?.lists?.find(list => list.id === card.listID);
+    if (!list) { debugger; return; }
+    list.cards = list.cards.concat(card);
+    const board = {
+      ...currentBoard,
+      lists: currentBoard?.lists?.map(x => x.id === list.id ? list : x)
+    };
+    this.currentBoard$.next(board as Board);
+  }
+
   private cacheUpdate(key: CacheKeys, item: any) {
     if (!item) this.cache.deleteItem(key);
     else this.cache.setItem(key, item);
   }
-  //#endregion
 }

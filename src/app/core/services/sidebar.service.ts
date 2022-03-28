@@ -25,7 +25,7 @@ export class SidebarService {
     return [
       {
         label: 'Boards',
-        route: '/workspace/boards',
+        route: '/workspace',
         icon: Icons.ClipBoard,
       },
       {

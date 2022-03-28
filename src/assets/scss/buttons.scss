@@ -6,18 +6,18 @@ button {
   justify-content: space-around;
   text-align: center;
   border-radius: $BorderRadius;
-  padding: times8(1) times8(3);
+  padding: times8(1) times8(1);
   border: none;
   background-color: transparent;
   color: inherit;
+  font-size: $FontSmall;
   cursor: pointer;
 
   .content {
-    min-width: fit-content;
+    min-width: max-content;
 
     span {
       font-weight: 500;
-      font-size: 16px;
     }
 
   }
@@ -143,6 +143,10 @@ button {
   &:disabled {
     background-color: $LightGrey;
     cursor: initial;
+  }
+
+  &:hover {
+    background-color: $SidbarLinkHover;
   }
 
 }

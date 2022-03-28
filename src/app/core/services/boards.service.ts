@@ -1,3 +1,5 @@
+import { ThemeSquares } from './../interface/themes';
+import { Card } from './../interface/card.interface';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { map, mergeMap, Observable, of, switchMap } from 'rxjs';
@@ -39,12 +41,13 @@ export class BoardsService {
     );
   }
   getCurrentBoard(): Observable<Board | null> {
+    const cardsCollection = this.firestore.collection<Card>('card');
+    const listCollection = this.firestore.collection<List>('list');
     this.logger.logAction({ action: Action.BoardLoad, value: this });
     return this.state.getCurrentBoard().pipe(
       mergeMap(board => {
         if (!!board) {
-          const collection = this.firestore.collection<List>('list');
-          return collection.get().pipe(map(ref => {
+          return listCollection.get().pipe(map(ref => {
             const lists = ref.docs.map(list => ({ ...list.data() as List, id: list.id }))
               .filter(list => board.listIDs.includes(list.id));
             board.lists = lists.sort((a, b) => a.position - b.position);
@@ -52,6 +55,20 @@ export class BoardsService {
           }));
         }
         return of(board);
+      }),
+      mergeMap((board) => {
+        return cardsCollection.get().pipe(
+          map(cards => {
+            const filteredCards = cards.docs.filter(c => board?.listIDs.includes(c.data().listID));
+            board?.lists?.forEach(list => {
+              list.cards = filteredCards
+                .filter(c => c.data().listID === list.id)
+                .map(c => ({ ...c.data() as Card, id: c.id }))
+                .sort((a, b) => a.position - b.position);
+            });
+            return board;
+          })
+        )
       })
     );
   }
@@ -82,16 +99,19 @@ export class BoardsService {
         id: this.firestore.createId(),
         name: 'Todo',
         position: 1,
+        cards: [],
       },
       {
         id: this.firestore.createId(),
         name: 'Doing',
         position: 2,
+        cards: [],
       },
       {
         id: this.firestore.createId(),
         name: 'Done',
         position: 3,
+        cards: [],
       }
     ];
     cards.forEach(card => {

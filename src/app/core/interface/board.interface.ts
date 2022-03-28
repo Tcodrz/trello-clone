@@ -1,3 +1,4 @@
+import { Theme } from './themes';
 import { List } from "./list.interface";
 
 export interface Board {
@@ -8,4 +9,5 @@ export interface Board {
   lists?: List[];
   createdAt: number;
   updatedAt: number;
+  theme: Theme;
 }
