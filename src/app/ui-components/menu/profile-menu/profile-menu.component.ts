@@ -9,7 +9,7 @@ import { User } from '../../../core/interface/user.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfileMenuComponent implements OnInit {
-  @Input() user: Observable<User | null> = of(null);
+  @Input() user: User | null = null;
 
   constructor() { }
   ngOnInit(): void { }
