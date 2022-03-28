@@ -1,0 +1,23 @@
+@import "constants";
+@import "functions";
+
+:host {
+  min-width: 270px;
+
+  .list {
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 500;
+      margin-bottom: times8(1);
+
+    }
+
+    .footer {
+      display: flex;
+      column-gap: times8(1);
+      margin-top: times8(1);
+    }
+  }
+}
