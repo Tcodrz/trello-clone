@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { Board } from './../../../core/interface/board.interface';
 import { BoardsService } from './../../../core/services/boards.service';
 import { GotoService } from './../../../core/services/goto.service';
@@ -7,7 +7,8 @@ import { MenuItems } from './../menu/menu.component';
 @Component({
   selector: 'app-menu-boards',
   templateUrl: './menu-boards.component.html',
-  styleUrls: ['./menu-boards.component.scss']
+  styleUrls: ['./menu-boards.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuBoardsComponent implements OnInit, OnChanges {
   @Input() boards: Board[] | null = [];

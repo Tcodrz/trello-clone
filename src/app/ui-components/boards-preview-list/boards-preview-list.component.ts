@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
 import { Board } from 'src/app/core/interface/board.interface';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { MenuComponent } from './../menu/menu/menu.component';
@@ -6,7 +6,8 @@ import { MenuComponent } from './../menu/menu/menu.component';
 @Component({
   selector: 'app-boards-preview-list',
   templateUrl: './boards-preview-list.component.html',
-  styleUrls: ['./boards-preview-list.component.scss']
+  styleUrls: ['./boards-preview-list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BoardsPreviewListComponent implements OnInit {
   @Input() boards: Board[] | null = [];

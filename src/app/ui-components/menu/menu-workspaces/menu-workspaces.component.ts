@@ -1,12 +1,13 @@
 import { MenuItem } from './../menu/menu.component';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { Icons } from './../../button/icon/icons';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'app-menu-workspaces',
   templateUrl: './menu-workspaces.component.html',
-  styleUrls: ['./menu-workspaces.component.scss']
+  styleUrls: ['./menu-workspaces.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuWorkspacesComponent implements OnInit {
   @Input() workspaces: Workspace[] | null = [];

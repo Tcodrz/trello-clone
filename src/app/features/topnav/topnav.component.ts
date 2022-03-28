@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { User } from 'src/app/core/interface/user.interface';
 import { UserService } from 'src/app/core/services/user.service';
@@ -17,7 +17,8 @@ export interface Link {
 @Component({
   selector: 'app-topnav',
   templateUrl: './topnav.component.html',
-  styleUrls: ['./topnav.component.scss']
+  styleUrls: ['./topnav.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TopnavComponent implements OnInit {
   user$: Observable<User | null> = of(null);

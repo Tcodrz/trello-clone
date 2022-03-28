@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MenuItem } from '../menu/menu.component';
 import { IconComponent } from '../../button/icon/icon.component';
 import { Icons } from '../../button/icon/icons';
@@ -6,7 +6,8 @@ import { Icons } from '../../button/icon/icons';
 @Component({
   selector: 'app-sidebar-dropdown',
   templateUrl: './sidebar-dropdown.component.html',
-  styleUrls: ['./sidebar-dropdown.component.scss']
+  styleUrls: ['./sidebar-dropdown.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarDropdownComponent implements OnInit {
   @Input() title: string = '';

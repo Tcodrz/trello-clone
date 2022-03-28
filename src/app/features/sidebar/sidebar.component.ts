@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { BehaviorSubject, map, Observable, of, Subscription, switchMap, tap } from 'rxjs';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { UserService } from 'src/app/core/services/user.service';
@@ -14,7 +14,8 @@ import { WorkspaceService } from './../../core/services/workspace.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent implements OnInit, OnDestroy {
   @Output() open: EventEmitter<boolean> = new EventEmitter();

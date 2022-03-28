@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ElementRef, HostListener, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, ElementRef, HostListener, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Icons } from '../../button/icon/icons';
 
 export type MenuPosition = 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'mid-right' | 'mid-left';
@@ -18,7 +18,8 @@ export interface MenuItems {
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.scss']
+  styleUrls: ['./menu.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MenuComponent implements OnInit, Menu {
   @Input() title: string = '';

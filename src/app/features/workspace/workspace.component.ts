@@ -1,5 +1,5 @@
 import { GotoService } from './../../core/services/goto.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { map, Observable, of } from 'rxjs';
 import { Board } from 'src/app/core/interface/board.interface';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
@@ -9,7 +9,8 @@ import { WorkspaceService } from './../../core/services/workspace.service';
 @Component({
   selector: 'app-workspace',
   templateUrl: './workspace.component.html',
-  styleUrls: ['./workspace.component.scss']
+  styleUrls: ['./workspace.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkspaceComponent implements OnInit {
   workspace$: Observable<Workspace | null> = of(null);

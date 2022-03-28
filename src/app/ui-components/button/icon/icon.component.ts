@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnChanges } from '@angular/core';
+import { Component, ElementRef, Input, OnChanges, ChangeDetectionStrategy } from '@angular/core';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faApple, faGoogle, faMicrosoft, faTrello } from '@fortawesome/free-brands-svg-icons';
 import {
@@ -24,7 +24,8 @@ import { Icons } from './icons';
 @Component({
   selector: 'app-icon[icon]',
   templateUrl: './icon.component.html',
-  styleUrls: ['./icon.component.scss']
+  styleUrls: ['./icon.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconComponent implements OnChanges {
   @Input() icon: Icons | undefined = Icons.None;

@@ -1,13 +1,14 @@
 import { Card } from './../../core/interface/card.interface';
 import { Icons } from 'src/app/ui-components/button/icon/icons';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { List } from 'src/app/core/interface/list.interface';
 import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-list',
   templateUrl: './list.component.html',
-  styleUrls: ['./list.component.scss']
+  styleUrls: ['./list.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListComponent implements OnInit {
   @Input() list!: List;
