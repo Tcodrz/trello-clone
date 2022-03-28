@@ -13,6 +13,9 @@ import {
   faHeart,
   faScrewdriver,
   faSearch,
+  faEllipsisV,
+  faEllipsisH,
+  faTimes,
 } from '@fortawesome/free-solid-svg-icons';
 import { Icons } from './icons';
 
@@ -52,6 +55,9 @@ export class IconComponent implements OnChanges {
       case Icons.Users: return faUsers;
       case Icons.Settings: return faScrewdriver;
       case Icons.Search: return faSearch;
+      case Icons.EllipsisH: return faEllipsisH;
+      case Icons.EllipsisV: return faEllipsisV;
+      case Icons.Times: return faTimes;
       default: return null;
     }
   }
