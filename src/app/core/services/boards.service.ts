@@ -38,14 +38,16 @@ export class BoardsService {
     );
   }
   getCurrentBoard(): Observable<Board | null> {
-    const listCollection = this.firestore.collection<List>('list');
+    const collection = this.firestore.collection<List>('list');
     return this.state.getCurrentBoard().pipe(
       mergeMap(board => {
         if (!!board) {
-          return listCollection.get().pipe(map(ref => {
-            const lists = ref.docs.map(list => ({ ...list.data() as List, id: list.id }))
-              .filter(list => board.listIDs.includes(list.id));
-            board.lists = lists.sort((a, b) => a.position - b.position);
+          return collection.get().pipe(map(ref => {
+            const lists = ref.docs
+              .filter(list => board.listIDs.includes(list.id))
+              .map(list => ({ ...list.data() as List, id: list.id }))
+              .sort((a, b) => a.position - b.position);
+            board.lists = lists;
             return board;
           }));
         }
@@ -53,7 +55,7 @@ export class BoardsService {
       }),
       mergeMap((board) => this.cardService.getCardsByBoard(board as Board).pipe(
         map(cards => {
-          if (!!board) board.lists?.forEach(list => list.cards = cards.filter(c => c.listID === list.id));
+          if (!!board) board.lists?.forEach(list => list.cards = cards.filter(card => card.listID === list.id));
           return board;
         })
       ))
@@ -78,9 +80,9 @@ export class BoardsService {
         this.state.boardSetCurrent(board);
         this.workspaceService.setCurrentWorkspaceByID(board.workspaceID);
         this.goto.board();
-      })
+      });
   }
-  initNewBoardCards(): List[] {
+  private initNewBoardCards(): List[] {
     const cards: List[] = [
       {
         id: this.firestore.createId(),
