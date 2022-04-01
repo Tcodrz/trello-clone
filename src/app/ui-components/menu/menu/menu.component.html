@@ -4,7 +4,9 @@
       <ng-container *ngIf="title">
         <div class="title">{{ title }}</div>
       </ng-container>
+      <!-- Custom menu content -->
       <ng-content></ng-content>
+
       <div class="items" *ngFor="let menu of menus">
         <div class="br mb-1 mt-1"></div>
         <div class="headline">{{ menu.headline }}</div>

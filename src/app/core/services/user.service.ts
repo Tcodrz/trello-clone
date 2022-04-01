@@ -28,7 +28,7 @@ export class UserService {
     const id = this.firestore.createId();
     collection.doc(id).set(user).then(ref => {
       console.log(ref);
-      // this.goto.dashboard();
+      // TODO: IMPLEMENT SIGNIN WITH EMAIL AND PASSWORD
     });
   }
   signInWithGoogle() {

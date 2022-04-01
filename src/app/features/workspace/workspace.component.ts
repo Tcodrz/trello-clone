@@ -13,9 +13,6 @@ import { WorkspaceService } from './../../core/services/workspace.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkspaceComponent implements OnInit {
-  currentWorkspace$: Observable<Workspace | null> = of(null);
-  workspaces$: Observable<Workspace[]> = of([]);
-  boards$: Observable<Board[]> = of([]);
   view$!: Observable<{ currentWorkspace: Workspace | null, workspaces: Workspace[], boards: Board[] }>;
   constructor(
     private boardsService: BoardsService,
