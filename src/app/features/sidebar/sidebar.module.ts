@@ -2,11 +2,11 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ButtonModule } from './../../ui-components/button/button.module';
-import { MenuBoardsComponent } from './../../ui-components/menu/menu-boards/menu-boards.component';
-import { MenuWorkspacesComponent } from './../../ui-components/menu/menu-workspaces/menu-workspaces.component';
+import { MenuBoardsComponent } from './menu-boards/menu-boards.component';
+import { MenuWorkspacesComponent } from './menu-workspaces/menu-workspaces.component';
 import { MenuModule } from './../../ui-components/menu/menu.module';
-import { SidebarDropdownComponent } from './../../ui-components/menu/sidebar-dropdown/sidebar-dropdown.component';
-import { SidebarLinksComponent } from './../../ui-components/menu/sidebar-links/sidebar-links.component';
+import { SidebarDropdownComponent } from './sidebar-dropdown/sidebar-dropdown.component';
+import { SidebarLinksComponent } from './sidebar-links/sidebar-links.component';
 import { SidebarComponent } from './sidebar.component';
 
 @NgModule({

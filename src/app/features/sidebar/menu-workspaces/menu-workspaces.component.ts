@@ -1,6 +1,6 @@
-import { MenuItem } from './../menu/menu.component';
+import { MenuItem } from '../../../ui-components/menu/menu/menu.component';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
-import { Icons } from './../../button/icon/icons';
+import { Icons } from '../../../ui-components/button/icon/icons';
 import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
