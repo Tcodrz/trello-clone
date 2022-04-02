@@ -1,0 +1,13 @@
+@import "functions";
+
+.lists {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  column-gap: times8(2);
+  overflow: overlay;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

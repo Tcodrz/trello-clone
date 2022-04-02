@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -7,17 +8,17 @@ import { ListCardPreviewModule } from './../../ui-components/list-card-preview/l
 import { ListComponent } from './list.component';
 
 
-
 @NgModule({
   declarations: [
     ListComponent
   ],
   imports: [
-    CommonModule,
-    CardModule,
     ButtonModule,
-    ReactiveFormsModule,
+    CardModule,
+    CommonModule,
+    DragDropModule,
     ListCardPreviewModule,
+    ReactiveFormsModule,
   ],
   exports: [
     ListComponent,

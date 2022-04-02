@@ -3,9 +3,16 @@
     <div>{{ list.name }}</div>
     <app-button className="icon" [icon]="Icons.EllipsisV"></app-button>
   </div>
-  <ng-container *ngFor="let card of list.cards">
-    <app-list-card-preview [card]="card"></app-list-card-preview>
-  </ng-container>
+  <div cdkDropList #cards="cdkDropList" [cdkDropListData]="list.cards" (cdkDropListDropped)="onDrop($event)"
+    cdkDropListLockAxis="y" cdkDropListOrientation="vertical">
+    <ng-container *ngFor="let card of list.cards">
+      <div cdkDrag>
+        <div *cdkDragPlaceholder></div>
+        <app-list-card-preview [card]="card">
+        </app-list-card-preview>
+      </div>
+    </ng-container>
+  </div>
   <ng-container *ngIf="!createMode">
     <app-button [className]="'width-10'" (click)="onAddCard()">Add card</app-button>
   </ng-container>

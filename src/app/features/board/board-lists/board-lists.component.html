@@ -1,0 +1,11 @@
+<ng-container *ngIf="_lists.length > 0">
+  <div cdkDropList #lists="cdkDropList" [cdkDropListData]="_lists" (cdkDropListDropped)="onDrop($event)" class="lists"
+    cdkDropListLockAxis="x" cdkDropListOrientation="horizontal">
+    <ng-container *ngFor="let list of _lists">
+      <div cdkDrag>
+        <div *cdkDragPlaceholder></div>
+        <app-list [list]="list" (createCard)="onCardCreate($event)"></app-list>
+      </div>
+    </ng-container>
+  </div>
+</ng-container>

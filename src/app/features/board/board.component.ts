@@ -26,8 +26,6 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.boardService.init();
     this.board$ = this.boardService.getCurrentBoard();
   }
-  onCardCreate(newCard: Partial<Card>) {
-    console.log(newCard);
-    this.cardService.createCard(newCard);
-  }
+
+
 }

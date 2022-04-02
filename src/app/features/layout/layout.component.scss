@@ -5,7 +5,7 @@ $SidebarWidth: 300px;
 
 :host {
   display: grid;
-  grid-template: "topnav topnav"45px "sidebar content"100vh / 300px calc(100% - 300px);
+  grid-template: "topnav topnav"45px "sidebar content"calc(100vh - 45px) / 300px calc(100% - 300px);
 
   &:not(.closed) {
     .content {
@@ -15,10 +15,15 @@ $SidebarWidth: 300px;
   }
 
   &.closed {
-    grid-template: "topnav topnav"45px "sidebar content"calc(100vh - 45px) / 7% 93%;
+    grid-template: "topnav topnav"45px "sidebar content"calc(100vh - 45px) / 0% 100%;
 
     .content {
       transition: $transition;
+      z-index: 1;
+    }
+
+    app-sidebar {
+      z-index: 2;
     }
   }
 
@@ -26,6 +31,7 @@ $SidebarWidth: 300px;
     grid-area: sidebar;
     width: $SidebarWidth;
     transition: $transition;
+    max-height: calc(100vh - 45px);
   }
 
   app-topnav {
@@ -35,6 +41,7 @@ $SidebarWidth: 300px;
   .content {
     transform: translate3d(0%, 0, 0);
     transition: $transition;
+    max-height: calc(100vh - 45px);
   }
 
   @media only screen and(max-width: $LargeScreen) {
@@ -54,11 +61,7 @@ $SidebarWidth: 300px;
   }
 
   @media only screen and(max-width: $SmallScreen) {
-    grid-template: "topnav topnav"45px "sidebar content"calc(100vh - 45px) / 10% 90%;
-
-    &.closed {
-      grid-template: "topnav topnav"45px "sidebar content"calc(100vh - 45px) / 10% 90%;
-    }
+    grid-template: "topnav topnav"45px "sidebar content"calc(100vh - 45px) / 0% 100%;
 
     &:not(.closed) {
       .content {

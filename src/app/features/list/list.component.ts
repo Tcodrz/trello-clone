@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { Card } from './../../core/interface/card.interface';
 import { Icons } from 'src/app/ui-components/button/icon/icons';
 import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
@@ -29,5 +30,8 @@ export class ListComponent implements OnInit {
     };
     this.createCard.emit(card);
     this.createMode = false;
+  }
+  onDrop(event: CdkDragDrop<Card[]>) {
+    moveItemInArray(this.list.cards, event.previousIndex, event.currentIndex);
   }
 }
