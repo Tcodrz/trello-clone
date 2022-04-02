@@ -1,9 +1,10 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { Card } from './../../core/interface/card.interface';
-import { Icons } from 'src/app/ui-components/button/icon/icons';
-import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
-import { List } from 'src/app/core/interface/list.interface';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { List } from 'src/app/core/interface/list.interface';
+import { Icons } from 'src/app/ui-components/button/icon/icons';
+import { Card } from './../../core/interface/card.interface';
+import { ListCardPreviewComponent } from './../../ui-components/list-card-preview/list-card-preview.component';
 
 @Component({
   selector: 'app-list',
@@ -33,5 +34,9 @@ export class ListComponent implements OnInit {
   }
   onDrop(event: CdkDragDrop<Card[]>) {
     moveItemInArray(this.list.cards, event.previousIndex, event.currentIndex);
+  }
+  getHeight(element: ListCardPreviewComponent): string {
+    const height = element.elementRef.nativeElement.parentElement.offsetHeight;
+    return `${height}px`;
   }
 }

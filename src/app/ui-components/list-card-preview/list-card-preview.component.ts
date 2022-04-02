@@ -1,5 +1,5 @@
 import { Card } from './../../core/interface/card.interface';
-import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, ElementRef } from '@angular/core';
 
 @Component({
   selector: 'app-list-card-preview',
@@ -9,7 +9,9 @@ import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core
 })
 export class ListCardPreviewComponent implements OnInit {
   @Input() card!: Card;
-  constructor() { }
+  constructor(
+    public elementRef: ElementRef
+  ) { }
 
   ngOnInit(): void {
   }

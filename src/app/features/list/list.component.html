@@ -1,28 +1,23 @@
-<app-card class="list" className="list-card">
-  <div class="header">
-    <div>{{ list.name }}</div>
-    <app-button className="icon" [icon]="Icons.EllipsisV"></app-button>
-  </div>
-  <div cdkDropList #cards="cdkDropList" [cdkDropListData]="list.cards" (cdkDropListDropped)="onDrop($event)"
-    cdkDropListLockAxis="y" cdkDropListOrientation="vertical">
-    <ng-container *ngFor="let card of list.cards">
-      <div cdkDrag>
-        <div *cdkDragPlaceholder></div>
-        <app-list-card-preview [card]="card">
-        </app-list-card-preview>
-      </div>
-    </ng-container>
-  </div>
-  <ng-container *ngIf="!createMode">
-    <app-button [className]="'width-10'" (click)="onAddCard()">Add card</app-button>
-  </ng-container>
-  <ng-container *ngIf="createMode">
-    <app-card className="preview-card">
-      <textarea [formControl]="newCardName" name="" id="" cols="31" rows="3" autofocus class="clean"></textarea>
-    </app-card>
-    <div class="footer">
-      <app-button className="primary" (click)="onSubmit()">Add Card</app-button>
-      <app-button className="icon" [icon]="Icons.Times" (click)="onCancel()"></app-button>
+<div cdkDropList #cards="cdkDropList" [cdkDropListData]="list.cards" (cdkDropListDropped)="onDrop($event)"
+  cdkDropListLockAxis="y" cdkDropListOrientation="vertical">
+  <ng-container *ngFor="let card of list.cards">
+    <div cdkDrag class="mb-1">
+      <div *cdkDragPlaceholder [ngStyle]="{height: getHeight(cardPreview), marginBottom: '10px'}"></div>
+      <app-list-card-preview #cardPreview [card]="card" class="pointer">
+      </app-list-card-preview>
     </div>
   </ng-container>
-</app-card>
+</div>
+<ng-container *ngIf="!createMode">
+  <app-button [className]="'width-10'" (click)="onAddCard()">Add card</app-button>
+</ng-container>
+<ng-container *ngIf="createMode">
+  <app-card className="preview-card">
+    <textarea [formControl]="newCardName" name="" id="" cols="31" rows="3" autofocus class="clean"></textarea>
+  </app-card>
+  <div class="footer">
+    <app-button className="primary" (click)="onSubmit()">Add Card</app-button>
+    <app-button className="icon" [icon]="Icons.Times" (click)="onCancel()"></app-button>
+  </div>
+</ng-container>
+<!-- </app-card> -->

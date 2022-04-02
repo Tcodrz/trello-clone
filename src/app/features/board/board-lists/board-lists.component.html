@@ -3,8 +3,14 @@
     cdkDropListLockAxis="x" cdkDropListOrientation="horizontal">
     <ng-container *ngFor="let list of _lists">
       <div cdkDrag>
-        <div *cdkDragPlaceholder></div>
-        <app-list [list]="list" (createCard)="onCardCreate($event)"></app-list>
+        <app-card class="list" className="list-card">
+          <div *cdkDragPlaceholder style="width: 270px;"></div>
+          <div class="header pointer" cdkDragHandle>
+            <div>{{ list.name }}</div>
+            <app-button className="icon" [icon]="Icons.EllipsisV"></app-button>
+          </div>
+          <app-list [list]="list" (createCard)="onCardCreate($event)"></app-list>
+        </app-card>
       </div>
     </ng-container>
   </div>

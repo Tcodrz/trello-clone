@@ -1,3 +1,4 @@
+import { Icons } from 'src/app/ui-components/button/icon/icons';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { List } from 'src/app/core/interface/list.interface';
@@ -16,6 +17,7 @@ export class BoardListsComponent implements OnInit {
     if (!!lists) this._lists = lists;
   };
   _lists: List[] = [];
+  Icons = Icons;
   constructor(
     private cardService: CardService,
   ) { }
