@@ -2,7 +2,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
-import { map, tap, Observable } from 'rxjs';
+import { map } from 'rxjs';
 
 export interface WorkspacesState {
   workspaces: Workspace[];
