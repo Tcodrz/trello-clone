@@ -23,6 +23,10 @@ export class CardService {
       this.state.addCardToList(card);
     });
   }
+  updateCardsPosition(cards: Card[]) {
+    const collection = this.firestore.collection<Card>('card');
+    Promise.all(cards.map(card => collection.doc(card.id).set(card)))
+  }
   getCardsByListID(listID: string, board: Board): Observable<Card[]> {
     const collection = this.firestore.collection<Card>('card').get();
     const filtered = collection.pipe(map(cards => cards.docs.filter(c => listID === c.data().listID)));

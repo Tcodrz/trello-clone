@@ -1,9 +1,9 @@
-import { CardService } from './../../core/services/card.service';
-import { Card } from './../../core/interface/card.interface';
+import { DarkTheme } from './../../core/interface/themes';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Icons } from 'src/app/ui-components/button/icon/icons';
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy } from '@angular/core';
-import { Observable, of, tap } from 'rxjs';
 import { Board } from './../../core/interface/board.interface';
+import { List } from './../../core/interface/list.interface';
 import { BoardsService } from './../../core/services/boards.service';
 
 @Component({
@@ -17,7 +17,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   Icons = Icons;
   constructor(
     private boardService: BoardsService,
-    private cardService: CardService,
   ) { }
   ngOnDestroy(): void {
     this.boardService.setCurrentBoard(null);
@@ -25,7 +24,15 @@ export class BoardComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.boardService.init();
     this.board$ = this.boardService.getCurrentBoard();
+    // this.board$.subscribe(board => { // add DarkTheme to current board
+    //   if (!!board) {
+    //     debugger;
+    //     board.theme = DarkTheme;
+    //     this.boardService.updateBoard(board);
+    //   }
+    // })
   }
-
-
+  onUpdateLists(lists: List[]): void {
+    this.boardService.updateLists(lists);
+  }
 }

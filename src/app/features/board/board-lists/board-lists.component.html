@@ -4,12 +4,14 @@
     <ng-container *ngFor="let list of _lists">
       <div cdkDrag>
         <app-card class="list" className="list-card">
-          <div *cdkDragPlaceholder style="width: 270px;"></div>
-          <div class="header pointer" cdkDragHandle>
-            <div>{{ list.name }}</div>
-            <app-button className="icon" [icon]="Icons.EllipsisV"></app-button>
+          <div *cdkDragPlaceholder [ngStyle]="{ width: '270px' }"></div>
+          <div cdkDragHandle>
+            <div class="header pointer">
+              <div>{{ list.name }}</div>
+              <app-button className="icon" [icon]="Icons.EllipsisV"></app-button>
+            </div>
           </div>
-          <app-list [list]="list" (createCard)="onCardCreate($event)"></app-list>
+          <app-list [list]="list" (createCard)="onCardCreate($event)" (updateList)="onUpdateList($event)"></app-list>
         </app-card>
       </div>
     </ng-container>

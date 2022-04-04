@@ -1,7 +1,6 @@
-import { Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
 import { BehaviorSubject, map, Observable, of, Subscription, switchMap, tap } from 'rxjs';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
-import { UserService } from 'src/app/core/services/user.service';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
 import { Icons } from '../../ui-components/button/icon/icons';
 import { MenuItem } from '../../ui-components/menu/menu/menu.component';
@@ -29,6 +28,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   Icons = Icons;
   sidebarLinksStyle = {};
   userSubscription: Subscription = new Subscription();
+  board$: Observable<Board | null> = of(null);
   @HostListener('window:resize', ['$event']) onResize(event: Event) {
     this.initSidebar(event);
   }
@@ -46,6 +46,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.workspace$ = this.workspaceService.getCurrentWorkspace().pipe(tap(workspace => {
       this.sidebarLinksStyle = !!workspace ? {} : { 'display': 'block', 'margin-top': '30px' };
     }));
+    this.board$ = this.boardsService.getCurrentBoard();
     this.boards$ = this.boardsService.getBoards().pipe(
       map(boards => boards.sort((a, b) => b.updatedAt - a.updatedAt)));
     this.menuLinks$ = this.sidebarSercvice.getMenuLinks();

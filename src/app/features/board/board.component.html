@@ -1,8 +1,10 @@
-<app-layout>
-  <div *ngIf=" board$ | async as board" class="board">
-    <app-board-lists [lists]="board.lists"></app-board-lists>
-    <app-card class="create-list" className="list-card">
-      <app-button className="width-10">Add another List</app-button>
-    </app-card>
-  </div>
-</app-layout>
+<ng-container *ngIf=" board$ | async as board">
+  <app-layout [theme]="board.theme">
+    <div class="board">
+      <app-board-lists [lists]="board.lists" (updateLists)="onUpdateLists($event)"></app-board-lists>
+      <app-card class="create-list" className="list-card">
+        <app-button className="width-10">Add another List</app-button>
+      </app-card>
+    </div>
+  </app-layout>
+</ng-container>

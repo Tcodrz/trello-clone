@@ -1,4 +1,4 @@
-import { ThemeSquares, ThemeDark } from './../../core/interface/themes';
+import { Themes } from './../../core/interface/themes';
 import { Component, EventEmitter, HostListener, Input, OnChanges, OnDestroy, Output, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
@@ -20,8 +20,7 @@ export class NewBoardMenuComponent implements OnChanges, OnDestroy {
   @Output() submitNewBoard: EventEmitter<Partial<Board>> = new EventEmitter();
   newBoardForm!: FormGroup;
   workspaceOptions: DropdownOption[] = [];
-  THEMES = [new ThemeSquares(), new ThemeDark()];
-  themeOptions = this.THEMES.map(theme => ({ name: theme.name, code: theme.id }));
+  themes: DropdownOption[] = Object.values(Themes).map(theme => ({ code: theme.id, name: theme.name }))
   constructor(
     private fb: FormBuilder,
   ) { }
@@ -38,11 +37,9 @@ export class NewBoardMenuComponent implements OnChanges, OnDestroy {
     });
   }
   onSubmit() {
-    const theme = this.THEMES.find(x => x.id === this.newBoardForm.value.theme.code)
     const board = {
       name: this.newBoardForm.value.boardName,
       workspaceID: this.newBoardForm.value.workspace.code,
-      theme: theme,
     };
     debugger;
     this.submitNewBoard.emit(board);

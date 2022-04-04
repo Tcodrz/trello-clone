@@ -11,11 +11,9 @@
     display: none;
   }
 
-  .list {
-    .footer {
-      display: flex;
-      column-gap: times8(1);
-      margin-top: times8(1);
-    }
+  .footer {
+    display: flex;
+    column-gap: times8(1);
+    margin-top: times8(1);
   }
 }

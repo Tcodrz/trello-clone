@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { User } from 'src/app/core/interface/user.interface';
 import { UserService } from 'src/app/core/services/user.service';
@@ -26,6 +26,7 @@ export class TopnavComponent implements OnInit {
   profileMenuItems: MenuItems[] = [];
   Icons = Icons;
   constructor(
+    public elementRef: ElementRef,
     private goto: GotoService,
     private userService: UserService,
     private workspaceService: WorkspaceService,

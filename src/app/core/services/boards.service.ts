@@ -37,6 +37,14 @@ export class BoardsService {
       ))
     );
   }
+  updateBoard(board: Board) {
+    const collection = this.firestore.collection<Board>('board');
+    collection.doc(board.id).set(board);
+  }
+  updateLists(lists: List[]) {
+    const collection = this.firestore.collection<List>('list');
+    Promise.all(lists.map(list => collection.doc(list.id).set(list)));
+  }
   getCurrentBoard(): Observable<Board | null> {
     const collection = this.firestore.collection<List>('list');
     return this.state.getCurrentBoard().pipe(
@@ -53,13 +61,16 @@ export class BoardsService {
         }
         return of(board);
       }),
-      mergeMap((board) => this.cardService.getCardsByBoard(board as Board).pipe(
-        map(cards => {
-          if (!!board) board.lists?.forEach(list => list.cards = cards.filter(card => card.listID === list.id));
-          return board;
-        })
-      ))
-    );
+      mergeMap((board) => {
+        if (!!board) return this.cardService.getCardsByBoard(board as Board).pipe(
+          map(cards => {
+            if (!!board) board.lists?.forEach(list => list.cards = cards.filter(card => card.listID === list.id));
+            return board;
+          })
+        );
+        return of(null);
+      }));
+
   }
   setCurrentBoard(board: Board | null) {
     this.state.boardSetCurrent(board);

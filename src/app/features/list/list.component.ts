@@ -15,6 +15,7 @@ import { ListCardPreviewComponent } from './../../ui-components/list-card-previe
 export class ListComponent implements OnInit {
   @Input() list!: List;
   @Output() createCard: EventEmitter<Partial<Card>> = new EventEmitter();
+  @Output() updateList: EventEmitter<List> = new EventEmitter();
   Icons = Icons;
   createMode: boolean = false;
   newCardName: FormControl = new FormControl('');
@@ -34,6 +35,11 @@ export class ListComponent implements OnInit {
   }
   onDrop(event: CdkDragDrop<Card[]>) {
     moveItemInArray(this.list.cards, event.previousIndex, event.currentIndex);
+    const newList = {
+      ...this.list,
+      cards: this.list.cards.map((card, i) => ({ ...card, position: i + 1 }))
+    };
+    this.updateList.emit(newList);
   }
   getHeight(element: ListCardPreviewComponent): string {
     const height = element.elementRef.nativeElement.parentElement.offsetHeight;
