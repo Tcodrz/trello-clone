@@ -1,3 +1,4 @@
+import { Card } from './../../core/interface/card.interface';
 import { CacheKeys, CacheService } from './../../core/services/cache.service';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
@@ -66,6 +67,36 @@ export class BoardsStore extends Store<BoardState> {
         }
         this.cacheService.setItem(CacheKeys.CurrentBoard, board);
       });
+  }
+  addCardToList(card: Card) {
+    const addToList = (board: Board | null, c: Card): List[] => {
+      if (!board || !board.lists) return [];
+      return board.lists.map(list => list.id === c.listID ? { ...list, cards: list.cards.concat(c) } : list)
+    }
+
+    this.update(state => {
+      if (!state.currentBoard) {
+        debugger; // should not occur
+        return state;
+      }
+      return {
+        ...state,
+        currentBoard: {
+          ...state.currentBoard,
+          lists: addToList(state.currentBoard, card)
+        }
+      }
+    });
+    this.updateBoard(this.getValue().currentBoard as Board);
+
+  }
+  updateBoard(board: Board) {
+    this.update(state => {
+      return {
+        ...state,
+        boards: state.boards.map(x => x.id === board.id ? board : x),
+      }
+    });
   }
   private initNewBoardLists(): List[] {
     const lists: List[] = [

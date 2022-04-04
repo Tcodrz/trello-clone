@@ -1,3 +1,4 @@
+import { Card } from './../interface/card.interface';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Observable } from 'rxjs';
@@ -41,5 +42,18 @@ export class BoardsService {
   createNewBoard(newBoard: Partial<Board>) {
     this.boardsStore.create(newBoard);
     this.goto.board();
+  }
+  updateListCardsPosition(list: List) {
+    const collection = this.firestore.collection<Card>('card');
+    Promise.all(list.cards.map(card => collection.doc(card.id).set(card)));
+  }
+  createCard(c: Partial<Card>) {
+    const card: Card = {
+      id: this.firestore.createId(),
+      ...c
+    } as Card;
+    this.firestore.doc(`card/${card.id}`).set(card).then(() => {
+      this.boardsStore.addCardToList(card);
+    });
   }
 }

@@ -1,9 +1,9 @@
+import { BoardsService } from './../../../core/services/boards.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { List } from 'src/app/core/interface/list.interface';
 import { Icons } from 'src/app/ui-components/button/icon/icons';
 import { Card } from './../../../core/interface/card.interface';
-import { CardService } from './../../../core/services/card.service';
 
 @Component({
   selector: 'app-board-lists',
@@ -20,17 +20,17 @@ export class BoardListsComponent implements OnInit {
   _lists: List[] = [];
   Icons = Icons;
   constructor(
-    private cardService: CardService,
+    private boardService: BoardsService,
   ) { }
 
   ngOnInit(): void {
   }
   onCardCreate(newCard: Partial<Card>) {
     console.log(newCard);
-    this.cardService.createCard(newCard);
+    this.boardService.createCard(newCard);
   }
   onUpdateList(list: List) {
-    this.cardService.updateCardsPosition(list.cards);
+    this.boardService.updateListCardsPosition(list);
   }
   onDrop(event: CdkDragDrop<List[]>) {
     moveItemInArray(this._lists, event.previousIndex, event.currentIndex);
