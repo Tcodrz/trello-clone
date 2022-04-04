@@ -1,8 +1,10 @@
-import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Store, StoreConfig } from '@datorama/akita';
-import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { map } from 'rxjs';
+import { Workspace } from 'src/app/core/interface/workspace.interface';
+import { BoardsStore } from '../boards/boards.store';
+import { CacheKeys, CacheService } from './../../core/services/cache.service';
 
 export interface WorkspacesState {
   workspaces: Workspace[];
@@ -20,6 +22,8 @@ export function createInitialState(): WorkspacesState {
 export class WorkspaceStore extends Store<WorkspacesState> {
   collection = this.firestore.collection<Workspace>('workspace');
   constructor(
+    private boardsStore: BoardsStore,
+    private cacheService: CacheService,
     private firestore: AngularFirestore,
   ) {
     super(createInitialState());
@@ -35,7 +39,9 @@ export class WorkspaceStore extends Store<WorkspacesState> {
     if (index !== -1) this.setCurrentWorkspace(state.workspaces[index]);
   }
   setCurrentWorkspace(workspace: Workspace | null) {
+    if (!!workspace) this.boardsStore.init(workspace.id);
     this.update({ currentWorkspace: workspace });
+    this.cacheService.setItem(CacheKeys.CurrentWorkspace, workspace);
   }
   create(workspace: Partial<Workspace>) {
     const id = this.firestore.createId();
