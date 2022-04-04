@@ -1,12 +1,13 @@
+import { UserStore } from './../../state/user/user.store';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
 import { User } from '../interface/user.interface';
-import { StateService } from './../../state/state.service';
 import { CacheKeys, CacheService } from './cache.service';
 import { GotoService } from './goto.service';
+import { UserQuery } from 'src/app/state/user/user.query';
 
 @Injectable({
   providedIn: 'root',
@@ -18,10 +19,11 @@ export class UserService {
     private cacheService: CacheService,
     private firestore: AngularFirestore,
     private goto: GotoService,
-    private state: StateService,
+    private userStore: UserStore,
+    private userQuery: UserQuery,
   ) { }
   getUser(): Observable<User | null> {
-    return this.state.getUser();
+    return this.userQuery.user$;
   }
   register(user: Partial<User>) {
     const collection = this.firestore.collection('users');
@@ -39,15 +41,15 @@ export class UserService {
         email: creds.user?.email as string,
         picture: creds.user?.photoURL as string,
       }
-      this.state.setUser(user);
+      this.userStore.update({ user })
       this.cacheService.setItem(CacheKeys.User, user);
       this.goto.dashboard();
     });
   }
   logout() {
-    this.state.setUser(null);
+    this.userStore.logout();
   }
   login(user: User): void {
-    this.state.setUser(user);
+    this.userStore.login(user);
   }
 }

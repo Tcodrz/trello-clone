@@ -1,14 +1,14 @@
+import { UserQuery } from './../../state/user/user.query';
 import { Injectable } from '@angular/core';
 import { CanActivate, CanLoad, Router, UrlTree } from '@angular/router';
 import { map, Observable } from 'rxjs';
-import { StateService } from './../../state/state.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoggedInGuard implements CanLoad, CanActivate {
   constructor(
-    private state: StateService,
+    private userQuery: UserQuery,
     private router: Router,
   ) { }
   canActivate(): Observable<boolean | UrlTree> {
@@ -18,7 +18,7 @@ export class LoggedInGuard implements CanLoad, CanActivate {
     return this.isLoggedIn();
   }
   private isLoggedIn() {
-    return this.state.getUser().pipe(
+    return this.userQuery.user$.pipe(
       map(user => !!user ? this.router.createUrlTree(['/dashboard/boards']) : true)
     );
   }
