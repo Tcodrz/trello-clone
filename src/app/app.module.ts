@@ -6,6 +6,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { NG_ENTITY_SERVICE_CONFIG } from '@datorama/akita-ng-entity-service';
+import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
+import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
 
 // AngularFire Docs - https://www.npmjs.com/package/@angular/fire
 
@@ -19,8 +22,11 @@ import { AppComponent } from './app.component';
     AngularFireAuthModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    environment.production ? [] : AkitaNgDevtools.forRoot(),
+    // AkitaNgRouterStoreModule,
   ],
   providers: [
+    // { provide: NG_ENTITY_SERVICE_CONFIG, useValue: { baseUrl: 'https://jsonplaceholder.typicode.com' }}
   ],
   bootstrap: [AppComponent]
 })
