@@ -24,7 +24,7 @@ export class WorkspaceComponent implements OnInit {
     this.workspaceService.init();
     this.view$ = combineLatest({
       currentWorkspace: this.workspaceService.getCurrentWorkspace(),
-      workspaces: this.workspaceService.loadAll(),
+      workspaces: this.workspaceService.getAll(),
       boards: this.boardsService.getBoards(),
     });
   }

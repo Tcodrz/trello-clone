@@ -42,7 +42,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initSidebar();
     this.workspaceService.init();
-    this.workspaces$ = this.workspaceService.loadAll();
+    this.workspaces$ = this.workspaceService.getAll();
     this.workspace$ = this.workspaceService.getCurrentWorkspace().pipe(tap(workspace => {
       this.sidebarLinksStyle = !!workspace ? {} : { 'display': 'block', 'margin-top': '30px' };
     }));

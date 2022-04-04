@@ -1,8 +1,9 @@
-import { MenuItem } from './../../ui-components/menu/menu/menu.component';
-import { map, Observable } from 'rxjs';
-import { StateService } from './../../state/state.service';
 import { Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
+import { WorkspacesQuery } from 'src/app/state/workspaces/workspace.query';
+import { WorkspaceStore } from 'src/app/state/workspaces/workspaces.store';
 import { Icons } from 'src/app/ui-components/button/icon/icons';
+import { MenuItem } from './../../ui-components/menu/menu/menu.component';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +11,11 @@ import { Icons } from 'src/app/ui-components/button/icon/icons';
 export class SidebarService {
   Icons = Icons;
   constructor(
-    private state: StateService,
+    private workspaceQuery: WorkspacesQuery,
+    private workspaceStore: WorkspaceStore,
   ) { }
   getMenuLinks(): Observable<MenuItem[]> {
-    return this.state.getCurrentWorkspace().pipe(
+    return this.workspaceQuery.currentWorkspace$.pipe(
       map(workspace => {
         if (!!workspace) return this.getWorkspaceLinks();
         else return this.getDashboardLinks();
@@ -47,7 +49,7 @@ export class SidebarService {
         route: '/dashboard/boards',
         icon: Icons.ClipBoard,
         command: () => {
-          this.state.workspaceSetCurrent(null);
+          this.workspaceStore.setCurrentWorkspace(null);
         }
       },
       {
