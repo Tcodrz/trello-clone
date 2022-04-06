@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { MenuItems } from '../menu/menu.component';
+import { MenuItems } from '@ui-components';
 
 @Component({
   selector: 'ui-nav-menu',
