@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ElementRef, HostListener, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { Menu, MenuItem, MenuItems, MenuPosition } from '@ui-components';
+import { Menu, MenuItem, MenuItems, MenuPosition } from '../../../interface/menu.interface';
 
 @Component({
   selector: 'ui-menu',
