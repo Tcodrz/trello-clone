@@ -1,6 +1,6 @@
 import { AfterContentChecked, ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DropdownOption } from '../../../../../src/app/core/interface/dropdown-option.interface';
+import { DropdownOption } from '../../interface/dropdown-option.interface';
 import { Icons } from '../button/icon/icons';
 
 @Component({

@@ -2,7 +2,7 @@ import { Themes } from './../../core/interface/themes';
 import { Component, EventEmitter, HostListener, Input, OnChanges, OnDestroy, Output, ElementRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
-import { DropdownOption } from '../../core/interface/dropdown-option.interface';
+import { DropdownOption } from '../../../../projects/ui-components/src/interface/dropdown-option.interface';
 import { Board } from './../../core/interface/board.interface';
 
 @Component({
