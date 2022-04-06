@@ -1,11 +1,11 @@
-import { Card } from './../../core/interface/card.interface';
-import { CacheKeys, CacheService } from './../../core/services/cache.service';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Store, StoreConfig } from '@datorama/akita';
 import { map, mergeMap, tap } from 'rxjs';
 import { Board } from 'src/app/core/interface/board.interface';
 import { List } from 'src/app/core/interface/list.interface';
+import { Card } from './../../core/interface/card.interface';
+import { CacheKeys, CacheService } from './../../core/services/cache.service';
 
 export interface BoardState {
   boards: Board[];
@@ -38,11 +38,20 @@ export class BoardsStore extends Store<BoardState> {
     const listCollection = this.firestore.collection<List>('list');
     this.collection.valueChanges().pipe(
       map(boards => boards.filter(board => board.workspaceID === workspaceID)),
-      tap(boards => this.boardsCache.set(workspaceID, boards)),
-      tap(() => console.log(this.boardsCache)),
       mergeMap(boards => listCollection.get().pipe(
-        map(lists => lists.docs.map(list => ({ ...list.data() as List, id: list.id }))),
-        map(lists => boards.map(board => ({ ...board, lists: lists.filter(list => board.listIDs.includes(list.id)).sort((a, b) => a.position - b.position) })))
+        map(lists => {
+          const listIDs = boards.map(b => b.listIDs).flat();
+          const boardsLists = lists.docs
+            .filter(list => listIDs.includes(list.id))
+            .map(list => ({ ...list.data() as List, id: list.id }))
+          return boardsLists;
+        }),
+        map(lists => boards.map(board => ({
+          ...board, lists: lists
+            .filter(list => board.listIDs.includes(list.id))
+            .sort((a, b) => a.position - b.position)
+        }))),
+        tap(boards => this.boardsCache.set(workspaceID, boards)),
       ))
     ).subscribe(boards => this.update({ boards }))
   }
@@ -50,27 +59,24 @@ export class BoardsStore extends Store<BoardState> {
     const id = this.firestore.createId();
     const lists = this.initNewBoardLists();
     const listIDs: string[] = lists.map(x => x.id);
-    Promise.all(lists.map(list => this.firestore.doc(`list/${list.id}`).set(list)))
-      .then(() => {
-        const board: Board = {
-          ...newBoard, id,
-          listIDs: listIDs,
-          createdAt: new Date().getTime(),
-          updatedAt: new Date().getTime(),
-        } as Board;
-        this.firestore.doc<Board>(`board/${id}`).set(board);
-        this.update({ currentBoard: board });
-        const boards = this.boardsCache.get(board.workspaceID);
-        if (!!boards) {
-          boards.push(board);
-          this.boardsCache.set(board.workspaceID, boards);
-        }
-        this.cacheService.setItem(CacheKeys.CurrentBoard, board);
-      });
+    const board: Board = {
+      ...newBoard, id,
+      listIDs: listIDs,
+      createdAt: new Date().getTime(),
+      updatedAt: new Date().getTime(),
+    } as Board;
+    this.firestore.doc<Board>(`board/${id}`).set(board);
+    this.update({ currentBoard: board });
+    const boards = this.boardsCache.get(board.workspaceID);
+    if (!!boards) {
+      boards.push(board);
+      this.boardsCache.set(board.workspaceID, boards);
+    }
+    this.cacheService.setItem(CacheKeys.CurrentBoard, board);
   }
   addCardToList(card: Card) {
-    const addToList = (board: Board | null, c: Card): List[] => {
-      if (!board || !board.lists) return [];
+    const addToList = (board: Board, c: Card): List[] => {
+      if (!board.lists) return [];
       return board.lists.map(list => list.id === c.listID ? { ...list, cards: list.cards.concat(c) } : list)
     }
 
@@ -92,6 +98,8 @@ export class BoardsStore extends Store<BoardState> {
   }
   updateBoard(board: Board) {
     this.update(state => {
+      const boards = this.boardsCache.get(board.workspaceID);
+      if (boards) this.boardsCache.set(board.workspaceID, boards?.map(b => b.id === board.id ? board : b));
       return {
         ...state,
         boards: state.boards.map(x => x.id === board.id ? board : x),
