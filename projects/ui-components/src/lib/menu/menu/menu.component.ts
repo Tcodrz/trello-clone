@@ -1,20 +1,6 @@
 import { Component, Input, OnInit, ElementRef, HostListener, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { Icons } from '../../button/icon/icons';
+import { Menu, MenuItem, MenuItems, MenuPosition } from '@ui-components';
 
-export type MenuPosition = 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'mid-right' | 'mid-left';
-export interface MenuItem {
-  label: string;
-  icon?: Icons;
-  command?: (...args: any) => void;
-  route?: string;
-}
-export interface Menu {
-  onToggle: () => void;
-}
-export interface MenuItems {
-  headline: string;
-  items: MenuItem[];
-}
 @Component({
   selector: 'ui-menu',
   templateUrl: './menu.component.html',
