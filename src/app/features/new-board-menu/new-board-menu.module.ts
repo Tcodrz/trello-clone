@@ -1,5 +1,4 @@
-import { ButtonModule } from './../../ui-components/button/button.module';
-import { SelectModule } from './../../ui-components/select/select.module';
+import { ButtonModule, SelectModule } from '@ui-components';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';

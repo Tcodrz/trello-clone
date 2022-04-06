@@ -1,15 +1,15 @@
 <div class="br mb-1"></div>
 <form [formGroup]="newBoardForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
-    <app-select [label]="'Theme Selector'" [options]="themes" formControlName="theme"></app-select>
+    <ui-select [label]="'Theme Selector'" [options]="themes" formControlName="theme"></ui-select>
   </div>
   <div class="form-group">
     <label for="">Board name</label>
     <input type="text" formControlName="boardName">
   </div>
   <div class="form-group mt-2">
-    <app-select [label]="'Workspace'" [options]="workspaceOptions" formControlName="workspace">
-    </app-select>
+    <ui-select [label]="'Workspace'" [options]="workspaceOptions" formControlName="workspace">
+    </ui-select>
   </div>
-  <app-button className="primary mt-2 width-10" [disabled]="newBoardForm.invalid" type="submit">Create</app-button>
+  <ui-button className="primary mt-2 width-10" [disabled]="newBoardForm.invalid" type="submit">Create</ui-button>
 </form>

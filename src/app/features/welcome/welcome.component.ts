@@ -1,6 +1,6 @@
 import { CacheService, CacheKeys } from './../../core/services/cache.service';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Icons } from '../../ui-components/button/icon/icons';
+import { Icons } from '../../../../projects/ui-components/src/lib/button/icon/icons';
 import { isDev } from 'src/app/core/utils/utils';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Icons } from '@ui-components';
 import { UserService } from '../../core/services/user.service';
-import { Icons } from '../../ui-components/button/icon/icons';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

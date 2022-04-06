@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ButtonModule } from '@ui-components';
 import { LayoutModule } from '../layout/layout.module';
-import { ButtonModule } from '../../ui-components/button/button.module';
 import { WelcomeRoutingModule } from './welcome-routing.module';
 import { WelcomeComponent } from './welcome.component';
 

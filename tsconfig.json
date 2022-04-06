@@ -21,7 +21,14 @@
     "lib": [
       "es2020",
       "dom"
-    ]
+    ],
+    "paths": {
+      "@ui-components": [
+        "dist/ui-components/ui-components",
+        "dist/ui-components",
+        "projects/ui-components/src/libs.ts"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

@@ -1,6 +1,6 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { MenuItem } from '@ui-components';
 import { Theme } from 'src/app/core/interface/themes';
-import { MenuItem } from '../../../ui-components/menu/menu/menu.component';
 
 @Component({
   selector: 'app-sidebar-links',

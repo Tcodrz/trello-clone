@@ -1,7 +1,6 @@
-import { MenuItem } from '../../../ui-components/menu/menu/menu.component';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
-import { Icons } from '../../../ui-components/button/icon/icons';
 import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Icons, MenuItem } from '@ui-components';
 
 @Component({
   selector: 'app-menu-workspaces',

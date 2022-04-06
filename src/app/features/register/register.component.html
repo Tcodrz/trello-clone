@@ -1,5 +1,5 @@
 <div class="register bg-light center">
-  <app-card>
+  <ui-card>
     <h5 class="text-center c-grey">Sign up for your account</h5>
     <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       <div class="input mt-2">
@@ -9,23 +9,23 @@
         <p>By signing up, you confirm that you've read and accepted our Terms of Service and Privacy Policy.</p>
       </div>
       <div>
-        <app-button className="success width-10 mt-2" [disabled]="registerForm.invalid" type="submit">
+        <ui-button className="success width-10 mt-2" [disabled]="registerForm.invalid" type="submit">
           Continue
-        </app-button>
+        </ui-button>
       </div>
       <div class="mt-3 mb-3 text-center c-grey">OR</div>
       <div>
-        <app-button className="raised mt-2 width-10" (click)="onSignInWithGoogle()" [icon]="Icons.Google">Continue with
-          Google</app-button>
-        <app-button className="raised mt-2 width-10" [icon]="Icons.Microsoft">Continue with Microsoft</app-button>
-        <app-button className="raised mt-2 width-10" [icon]="Icons.Apple">Continue with Apple</app-button>
+        <ui-button className="raised mt-2 width-10" (click)="onSignInWithGoogle()" [icon]="Icons.Google">Continue with
+          Google</ui-button>
+        <ui-button className="raised mt-2 width-10" [icon]="Icons.Microsoft">Continue with Microsoft</ui-button>
+        <ui-button className="raised mt-2 width-10" [icon]="Icons.Apple">Continue with Apple</ui-button>
       </div>
       <div class="br mt-4 mb-2"></div>
       <div>
-        <app-button type="submit" className="link width-10" [routerLink]="['/login']">Already have an account? Log in
-        </app-button>
+        <ui-button type="submit" className="link width-10" [routerLink]="['/login']">Already have an account? Log in
+        </ui-button>
       </div>
 
     </form>
-  </app-card>
+  </ui-card>
 </div>

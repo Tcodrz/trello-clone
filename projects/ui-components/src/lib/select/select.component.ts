@@ -1,10 +1,10 @@
 import { AfterContentChecked, ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { DropdownOption } from '../../core/interface/dropdown-option.interface';
-import { Icons } from './../button/icon/icons';
+import { DropdownOption } from '../../../../../src/app/core/interface/dropdown-option.interface';
+import { Icons } from '../button/icon/icons';
 
 @Component({
-  selector: 'app-select',
+  selector: 'ui-select',
   templateUrl: './select.component.html',
   styleUrls: ['./select.component.scss'],
   providers: [

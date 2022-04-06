@@ -1,9 +1,8 @@
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
+import { Icons, MenuItem } from '@ui-components';
 import { BehaviorSubject, map, Observable, of, Subscription, switchMap, tap } from 'rxjs';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
-import { Icons } from '../../ui-components/button/icon/icons';
-import { MenuItem } from '../../ui-components/menu/menu/menu.component';
 import { Board } from './../../core/interface/board.interface';
 import { BoardsService } from './../../core/services/boards.service';
 import { SidebarService } from './../../core/services/sidebar.service';

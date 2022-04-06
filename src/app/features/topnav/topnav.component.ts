@@ -1,13 +1,11 @@
-import { Component, OnInit, ChangeDetectionStrategy, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
+import { Icons, MenuItem, MenuItems } from '@ui-components';
 import { Observable, of } from 'rxjs';
 import { User } from 'src/app/core/interface/user.interface';
 import { UserService } from 'src/app/core/services/user.service';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
-import { Icons } from '../../ui-components/button/icon/icons';
-import { MenuItem } from '../../ui-components/menu/menu/menu.component';
 import { GotoService } from './../../core/services/goto.service';
 import { WorkspaceService } from './../../core/services/workspace.service';
-import { MenuItems } from './../../ui-components/menu/menu/menu.component';
 
 export interface Link {
   route: string;

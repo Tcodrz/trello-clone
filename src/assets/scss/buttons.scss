@@ -145,7 +145,7 @@ button {
     cursor: initial;
   }
 
-  &:hover {
+  &:hover:not(:disabled) {
     background-color: $SidbarLinkHover;
   }
 

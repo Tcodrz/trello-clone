@@ -1,10 +1,10 @@
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { Icons } from '@ui-components';
 import { List } from 'src/app/core/interface/list.interface';
-import { Icons } from 'src/app/ui-components/button/icon/icons';
 import { Card } from './../../core/interface/card.interface';
-import { ListCardPreviewComponent } from './../../ui-components/list-card-preview/list-card-preview.component';
+import { ListCardPreviewComponent } from './list-card-preview/list-card-preview.component';
 
 @Component({
   selector: 'app-list',

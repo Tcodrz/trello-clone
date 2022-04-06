@@ -1,5 +1,5 @@
 <div class="login bg-light center">
-  <app-card>
+  <ui-card>
     <h5 class="text-center c-grey">Log in to Trello.</h5>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div class="input mt-2">
@@ -12,13 +12,13 @@
         <p *ngFor="let message of messages" class="font-sm center c-red"> {{ message }} </p>
       </div>
       <div>
-        <app-button className="success width-10 mt-2" type="submit">Log in</app-button>
+        <ui-button className="success width-10 mt-2" type="submit">Log in</ui-button>
         <div class="text-center mt-2 c-lightgrey">OR</div>
-        <app-button className="raised width-10 mt-2" (click)="onLogInWithGoogle()" [icon]="Icons.Google">Log in with
-          Google</app-button>
-        <app-button className="raised width-10 mt-2" [icon]="Icons.Microsoft">Log in with Microsoft</app-button>
-        <app-button className="raised width-10 mt-2" [icon]="Icons.Apple">Log in with Apple</app-button>
+        <ui-button className="raised width-10 mt-2" (click)="onLogInWithGoogle()" [icon]="Icons.Google">Log in with
+          Google</ui-button>
+        <ui-button className="raised width-10 mt-2" [icon]="Icons.Microsoft">Log in with Microsoft</ui-button>
+        <ui-button className="raised width-10 mt-2" [icon]="Icons.Apple">Log in with Apple</ui-button>
       </div>
     </form>
-  </app-card>
+  </ui-card>
 </div>

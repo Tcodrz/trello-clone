@@ -4,7 +4,7 @@ import { Icons } from '../icon/icons';
 export type ButtonTypes = 'button' | 'submit';
 
 @Component({
-  selector: 'app-button',
+  selector: 'ui-button',
   templateUrl: './button.component.html',
   styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

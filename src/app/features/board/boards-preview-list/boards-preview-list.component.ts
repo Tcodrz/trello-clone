@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ChangeDetectionStrategy } from '@angular/core';
+import { MenuComponent } from '@ui-components';
 import { Board } from 'src/app/core/interface/board.interface';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
-import { MenuComponent } from './../menu/menu/menu.component';
 
 @Component({
   selector: 'app-boards-preview-list',

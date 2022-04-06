@@ -1,7 +1,5 @@
 import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { MenuItem } from '../../../ui-components/menu/menu/menu.component';
-import { IconComponent } from '../../../ui-components/button/icon/icon.component';
-import { Icons } from '../../../ui-components/button/icon/icons';
+import { IconComponent, Icons, MenuItem } from '@ui-components';
 
 @Component({
   selector: 'app-sidebar-dropdown',

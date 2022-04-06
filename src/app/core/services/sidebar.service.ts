@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
+import { Icons, MenuItem } from '@ui-components';
 import { map, Observable } from 'rxjs';
 import { WorkspacesQuery } from 'src/app/state/workspaces/workspace.query';
 import { WorkspaceStore } from 'src/app/state/workspaces/workspaces.store';
-import { Icons } from 'src/app/ui-components/button/icon/icons';
-import { MenuItem } from './../../ui-components/menu/menu/menu.component';
 
 @Injectable({
   providedIn: 'root'

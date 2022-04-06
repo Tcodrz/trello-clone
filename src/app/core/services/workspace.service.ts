@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
+import { MenuItem, MenuItems } from '@ui-components';
 import { map, Observable } from 'rxjs';
 import { WorkspacesQuery } from 'src/app/state/workspaces/workspace.query';
 import { WorkspaceStore } from 'src/app/state/workspaces/workspaces.store';
 import { Workspace } from '../interface/workspace.interface';
-import { MenuItem, MenuItems } from './../../ui-components/menu/menu/menu.component';
 import { CacheKeys, CacheService } from './cache.service';
 import { GotoService } from './goto.service';
 

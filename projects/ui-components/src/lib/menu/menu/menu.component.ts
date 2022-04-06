@@ -16,7 +16,7 @@ export interface MenuItems {
   items: MenuItem[];
 }
 @Component({
-  selector: 'app-menu',
+  selector: 'ui-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

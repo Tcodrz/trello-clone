@@ -1,5 +1,5 @@
-import { Card } from './../../core/interface/card.interface';
 import { Component, OnInit, Input, ChangeDetectionStrategy, ElementRef } from '@angular/core';
+import { Card } from 'src/app/core/interface/card.interface';
 
 @Component({
   selector: 'app-list-card-preview',

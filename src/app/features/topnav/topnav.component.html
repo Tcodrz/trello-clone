@@ -5,26 +5,26 @@
       <span class="pointer ml-1" [routerLink]="['boards']" (click)="gotoDashboard()">Trello</span>
     </div>
     <div class="menus ml-3" *ngIf="!smallScreen">
-      <app-nav-menu [title]="'Workspaces'" position="right" [items]="workspaceMenu$ | async "></app-nav-menu>
-      <app-nav-menu [title]="'Recent'" position="right"></app-nav-menu>
-      <app-nav-menu [title]="'More'" position="right"></app-nav-menu>
+      <ui-nav-menu [title]="'Workspaces'" position="right" [items]="workspaceMenu$ | async "></ui-nav-menu>
+      <ui-nav-menu [title]="'Recent'" position="right"></ui-nav-menu>
+      <ui-nav-menu [title]="'More'" position="right"></ui-nav-menu>
     </div>
     <div class="menus ml-3" *ngIf="smallScreen">
-      <app-button (click)="menu.onToggle()">More</app-button>
-      <app-menu #menu></app-menu>
+      <ui-button (click)="menu.onToggle()">More</ui-button>
+      <ui-menu #menu></ui-menu>
     </div>
   </div>
   <div class="right">
     <div class="actions">
       <div class="search">
         <input type="text" *ngIf="!smallScreen">
-        <app-button *ngIf="smallScreen" className="icon" [icon]="Icons.Search"></app-button>
+        <ui-button *ngIf="smallScreen" className="icon" [icon]="Icons.Search"></ui-button>
       </div>
       <div class="profile" *ngIf="user$ | async as user">
         <img [src]="user?.picture" alt="" class="pic pointer" (click)="menu.onToggle()">
-        <app-menu [title]="'Account'" [position]="'left'" [menus]="profileMenuItems" #menu
+        <ui-menu [title]="'Account'" [position]="'left'" [menus]="profileMenuItems" #menu
           (itemClick)="onMenuItemClick($event)">
           <app-profile-menu [user]="user"></app-profile-menu>
-        </app-menu>
+        </ui-menu>
       </div>
     </div>

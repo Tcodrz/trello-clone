@@ -1,8 +1,8 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { MenuItems } from '@ui-components';
 import { Board } from '../../../core/interface/board.interface';
 import { BoardsService } from '../../../core/services/boards.service';
 import { GotoService } from '../../../core/services/goto.service';
-import { MenuItems } from '../../../ui-components/menu/menu/menu.component';
 
 @Component({
   selector: 'app-menu-boards',

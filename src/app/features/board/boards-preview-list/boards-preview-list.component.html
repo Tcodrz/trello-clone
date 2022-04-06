@@ -2,11 +2,11 @@
 <div class="boards-preview">
   <div class="board" (click)="toggleIfClosed()">
     <h3> Create new board </h3>
-    <app-menu #newBoardMenu [position]="'mid-right'" [title]="'Creat new board'" (toggle)="form.resetForm()">
+    <ui-menu #newBoardMenu [position]="'mid-right'" [title]="'Creat new board'" (toggle)="form.resetForm()">
       <app-new-board-menu #form [workspaces]="workspaces" [currentWorkspace]="workspace"
         (submitNewBoard)="onSubmit($event)">
       </app-new-board-menu>
-    </app-menu>
+    </ui-menu>
   </div>
   <div class="board" *ngFor="let board of boards" (click)="onBoardClick(board)">
     <h3> {{ board.name }} </h3>
