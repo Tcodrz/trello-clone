@@ -2,7 +2,7 @@
   <div class="label">{{ label }}</div>
   <div class="input" #input (click)="onToggle()">
     <input #inputElement type="button" [value]="selected?.name" (input)="onInput()">
-    <app-icon [icon]="Icons.ChevronDown"></app-icon>
+    <ui-icon [icon]="Icons.ChevronDown"></ui-icon>
   </div>
   <div class="options" #dropdown>
     <div *ngFor="let option of options" (click)="onSelect(option)" class="option">{{ option.name }}</div>

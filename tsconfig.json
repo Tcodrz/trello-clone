@@ -24,9 +24,9 @@
     ],
     "paths": {
       "@ui-components": [
+        "projects/ui-components/src/libs.ts",
         "dist/ui-components/ui-components",
         "dist/ui-components",
-        "projects/ui-components/src/libs.ts"
       ]
     }
   },

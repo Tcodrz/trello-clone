@@ -2,7 +2,7 @@
   <div class="link ml-2 mr-2" *ngFor="let item of menuItems; let i = index">
     <a [routerLink]="[item.route]" routerLinkActive="active" (mouseover)="onLinkHover(i)" (mouseleave)="onLinkBlur(i)"
       (click)="onItmeClick(item)">
-      <app-icon [icon]="item.icon"></app-icon>
+      <ui-icon [icon]="item.icon"></ui-icon>
       {{item.label}}
     </a>
   </div>

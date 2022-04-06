@@ -22,7 +22,7 @@ import { Icons } from './icons';
 
 
 @Component({
-  selector: 'app-icon[icon]',
+  selector: 'ui-icon [icon]',
   templateUrl: './icon.component.html',
   styleUrls: ['./icon.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

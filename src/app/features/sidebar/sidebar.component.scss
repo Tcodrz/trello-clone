@@ -6,7 +6,7 @@
   transition: all .3s ease-in-out;
 
   .sidebar {
-    app-icon.toggle {
+    ui-icon.toggle {
       position: absolute;
       top: times8(4);
       right: times8(3);
@@ -38,7 +38,7 @@
     opacity: .6;
 
     .sidebar {
-      app-icon.toggle {
+      ui-icon.toggle {
         width: initial;
         height: initial;
         transform: rotateZ(540deg);
