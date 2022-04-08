@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ListCardPreviewComponent } from './list-card-preview.component';
-import { CardModule } from '@ui-components';
+import { UICardModule } from '@ui-components';
 
 
 
@@ -11,7 +11,7 @@ import { CardModule } from '@ui-components';
   ],
   imports: [
     CommonModule,
-    CardModule,
+    UICardModule,
   ],
   exports: [
     ListCardPreviewComponent,

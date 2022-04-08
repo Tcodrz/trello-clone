@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login.component';
-import { ButtonModule, CardModule } from '@ui-components';
+import { ButtonModule, UICardModule } from '@ui-components';
 
 
 const routes: Routes = [
@@ -17,7 +17,7 @@ const routes: Routes = [
   ],
   imports: [
     ButtonModule,
-    CardModule,
+    UICardModule,
     CommonModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),

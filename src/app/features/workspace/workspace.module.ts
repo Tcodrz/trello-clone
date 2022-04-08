@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CardModule } from '@ui-components';
+import { UICardModule } from '@ui-components';
 import { BoardsPreviewListModule } from '../board/boards-preview-list/boards-preview-list.module';
 import { LayoutModule } from './../layout/layout.module';
 import { WorkspaceRoutingModule } from './workspace-routing.module';
@@ -14,7 +14,7 @@ import { WorkspaceComponent } from './workspace.component';
   ],
   imports: [
     BoardsPreviewListModule,
-    CardModule,
+    UICardModule,
     CommonModule,
     LayoutModule,
     WorkspaceRoutingModule,

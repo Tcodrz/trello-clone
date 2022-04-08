@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Store, StoreConfig } from '@datorama/akita';
-import { map } from 'rxjs';
+import { map, Subscription } from 'rxjs';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { BoardsStore } from '../boards/boards.store';
 import { CacheKeys, CacheService } from './../../core/services/cache.service';
@@ -20,7 +20,8 @@ export function createInitialState(): WorkspacesState {
 @Injectable({ providedIn: 'root' })
 @StoreConfig({ name: 'workspace' })
 export class WorkspaceStore extends Store<WorkspacesState> {
-  collection = this.firestore.collection<Workspace>('workspace');
+  private collection = this.firestore.collection<Workspace>('workspace');
+  private subscription!: Subscription;
   constructor(
     private boardsStore: BoardsStore,
     private cacheService: CacheService,
@@ -29,7 +30,8 @@ export class WorkspaceStore extends Store<WorkspacesState> {
     super(createInitialState());
   }
   init(userID: string): void {
-    this.collection.valueChanges().pipe(
+    if (!!this.subscription) return; // prevent multiple subscriptionsSS
+    this.subscription = this.collection.valueChanges().pipe(
       map(workspaces => workspaces.filter(workspace => workspace.userID === userID)),
     ).subscribe(workspaces => this.update({ workspaces }));
   }

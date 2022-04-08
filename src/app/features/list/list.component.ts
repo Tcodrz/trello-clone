@@ -20,8 +20,7 @@ export class ListComponent implements OnInit {
   createMode: boolean = false;
   newCardName: FormControl = new FormControl('');
   constructor() { }
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
   onAddCard() { this.createMode = true; }
   onCancel() { this.createMode = false; }
   onSubmit() {

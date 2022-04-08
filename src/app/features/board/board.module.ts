@@ -1,7 +1,7 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ButtonModule, CardModule } from '@ui-components';
+import { ButtonModule, UICardModule, MenuModule } from '@ui-components';
 import { LayoutModule } from './../layout/layout.module';
 import { ListModule } from './../list/list.module';
 import { BoardListsComponent } from './board-lists/board-lists.component';
@@ -17,11 +17,12 @@ import { BoardComponent } from './board.component';
   imports: [
     BoardRoutingModule,
     ButtonModule,
-    CardModule,
+    UICardModule,
     CommonModule,
     DragDropModule,
     LayoutModule,
     ListModule,
+    MenuModule,
   ]
 })
 export class BoardModule { }

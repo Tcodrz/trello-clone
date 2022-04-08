@@ -1,10 +1,9 @@
-import { DarkTheme } from './../../core/interface/themes';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { Icons } from '@ui-components';
 import { Observable, of } from 'rxjs';
 import { Board } from './../../core/interface/board.interface';
 import { List } from './../../core/interface/list.interface';
 import { BoardsService } from './../../core/services/boards.service';
-import { Icons } from '@ui-components';
 
 @Component({
   selector: 'app-board',

@@ -1,4 +1,5 @@
-import { Component, Input, OnInit, ElementRef, HostListener, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Icons } from 'projects/ui-components/src/lib/button/icon/icons';
+import { Component, Input, OnInit, ElementRef, HostListener, Output, EventEmitter, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { Menu, MenuItem, MenuItems, MenuPosition } from '../../../interface/menu.interface';
 
 @Component({
@@ -15,9 +16,11 @@ export class MenuComponent implements OnInit, Menu {
     this.initPosition(position);
   }
   @Input() disableToggleOnClick: boolean = false;
+  @Input() showCloseIcon: boolean = true;
   @Output() itemClick: EventEmitter<MenuItem> = new EventEmitter();
   @Output() toggle: EventEmitter<boolean> = new EventEmitter();
   _show: boolean = false;
+  Icons = Icons;
   @HostListener('document:click', ['$event']) onBlur(event: Event) {
     const isOutside = !this.elementRef.nativeElement.parentElement.contains(event.target);
     if (isOutside && this._show) this.onToggle();
@@ -28,6 +31,10 @@ export class MenuComponent implements OnInit, Menu {
   ngOnInit(): void { }
   onToggle() {
     this._show = !this._show;
+    this.toggle.emit(this._show);
+  }
+  onClose() {
+    this._show = false;
     this.toggle.emit(this._show);
   }
   onItemClick(item: MenuItem) {

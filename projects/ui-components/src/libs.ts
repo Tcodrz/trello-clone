@@ -13,6 +13,10 @@ export * from './lib/card/card.module';
 export * from './lib/menu/menu.module';
 export * from './lib/menu/menu/menu.component';
 export * from './lib/menu/nav-menu/nav-menu.component';
+export * from './lib/modal/di';
+export * from './lib/modal/modal.component';
+export * from './lib/modal/modal.module';
+export * from './lib/modal/modal.service';
 export * from './lib/select/select.component';
 export * from './lib/select/select.module';
 

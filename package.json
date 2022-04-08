@@ -29,6 +29,8 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "firebase": "^9.4.0",
+    "primeicons": "^5.0.0",
+    "primeng": "^13.3.2",
     "rxfire": "^6.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",

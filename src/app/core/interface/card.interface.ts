@@ -4,4 +4,6 @@ export interface Card {
   listID: string;
   position: number;
   createdAt: number;
+  cover?: string;
+  description?: string;
 }

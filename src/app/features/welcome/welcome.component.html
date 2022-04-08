@@ -5,8 +5,8 @@
       <div>Trello</div>
     </div>
     <div class="d-flex">
-      <button class="link" [routerLink]="['/login']">Log in</button>
-      <button class="primary ml-2" [routerLink]="['/register']">Sign up</button>
+      <ui-button className="link" [routerLink]="['/login']">Log in</ui-button>
+      <ui-button className="primary ml-2" [routerLink]="['/register']">Sign up</ui-button>
       <ui-button *ngIf="isDev" [routerLink]="['dashboard/boards']">Dashboard</ui-button>
 
     </div>
@@ -21,7 +21,7 @@
     </div>
     <div class="signup mt-4">
       <input type="text" placeholder="Email">
-      <button class="primary-outline">Sign up-it's free!</button>
+      <ui-button className="primary-outline">Sign up-it's free!</ui-button>
     </div>
   </div>
 </div>

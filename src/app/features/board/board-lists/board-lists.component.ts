@@ -3,7 +3,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { List } from 'src/app/core/interface/list.interface';
 import { Card } from './../../../core/interface/card.interface';
-import { Icons } from '@ui-components';
+import { Icons, MenuItems } from '@ui-components';
 
 @Component({
   selector: 'app-board-lists',
@@ -12,13 +12,21 @@ import { Icons } from '@ui-components';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoardListsComponent implements OnInit {
-  startX: number = 0;
   @Input() set lists(lists: List[] | undefined) {
     if (!!lists) this._lists = lists;
   };
   @Output() updateLists: EventEmitter<List[]> = new EventEmitter();
   _lists: List[] = [];
   Icons = Icons;
+  listMenu: MenuItems[] = [{
+    headline: '',
+    items: [
+      {
+        label: 'add card',
+      }
+    ]
+  }
+  ]
   constructor(
     private boardService: BoardsService,
   ) { }

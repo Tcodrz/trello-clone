@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MenuComponent } from './menu/menu.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { ButtonModule, CardModule } from '@ui-components';
+import { ButtonModule, UICardModule } from '@ui-components';
 
 @NgModule({
   declarations: [
@@ -12,7 +12,7 @@ import { ButtonModule, CardModule } from '@ui-components';
   ],
   imports: [
     ButtonModule,
-    CardModule,
+    UICardModule,
     CommonModule,
     RouterModule,
   ],

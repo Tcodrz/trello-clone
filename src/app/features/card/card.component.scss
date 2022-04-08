@@ -1,0 +1,25 @@
+:host {
+
+  .container {
+    background-color: #ffffff;
+    height: 100%;
+
+    display: flex;
+    flex-direction: row;
+
+    .card {
+      overflow: scroll;
+      flex-grow: 2;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+    }
+
+    .side-menu {
+      flex-grow: 1;
+      background-color: black;
+    }
+  }
+}

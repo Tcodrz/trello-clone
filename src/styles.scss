@@ -1,11 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "font";
 @import "constants";
-@import "buttons";
 @import "form";
 @import "media";
 @import "global";
-@import "menu";
 @import "sidebar";
 @import "select";
 
@@ -70,5 +68,12 @@ div.card.list-card {
 
 div.card.menu {
   background-color: $White !important;
+}
 
+.p-dialog-mask {
+  background-color: $ModalMaskBackground;
+}
+
+.p-dialog-header-icons {
+  display: none !important; // hide modal close button
 }

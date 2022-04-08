@@ -1,0 +1,29 @@
+<ng-container *ngIf="card$ | async as card">
+
+  <div class="container">
+
+    <div class="card">
+      <div class="cover" *ngIf="card.cover">
+
+      </div>
+      <div class="card-header">
+        {{ card.name }}
+      </div>
+      <div class="description">
+
+      </div>
+      <div class="attachements">
+
+      </div>
+      <div class="checklists">
+
+      </div>
+      <div class="activity">
+
+      </div>
+    </div>
+    <div class="side-menu">
+
+    </div>
+  </div>
+</ng-container>

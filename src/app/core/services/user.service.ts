@@ -1,13 +1,14 @@
-import { UserStore } from './../../state/user/user.store';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
+import { UserQuery } from 'src/app/state/user/user.query';
 import { User } from '../interface/user.interface';
+import { UserStore } from './../../state/user/user.store';
+import { WorkspaceStore } from './../../state/workspaces/workspaces.store';
 import { CacheKeys, CacheService } from './cache.service';
 import { GotoService } from './goto.service';
-import { UserQuery } from 'src/app/state/user/user.query';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,7 @@ export class UserService {
     private goto: GotoService,
     private userStore: UserStore,
     private userQuery: UserQuery,
+    private workspaceStore: WorkspaceStore,
   ) { }
   getUser(): Observable<User | null> {
     return this.userQuery.user$;
@@ -41,7 +43,7 @@ export class UserService {
         email: creds.user?.email as string,
         picture: creds.user?.photoURL as string,
       }
-      this.userStore.update({ user })
+      this.login(user);
       this.cacheService.setItem(CacheKeys.User, user);
       this.goto.dashboard();
     });
@@ -50,6 +52,7 @@ export class UserService {
     this.userStore.logout();
   }
   login(user: User): void {
+    this.workspaceStore.init(user.id);
     this.userStore.login(user);
   }
 }

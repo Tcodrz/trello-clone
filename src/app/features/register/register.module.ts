@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
-import { ButtonModule, CardModule } from '@ui-components';
+import { ButtonModule, UICardModule } from '@ui-components';
 import { LayoutModule } from '../layout/layout.module';
 import { LoggedInGuard } from './../../core/guards/logged-in.guard';
 import { RegisterComponent } from './register.component';
@@ -17,7 +17,7 @@ const routes: Routes = [
   ],
   imports: [
     ButtonModule,
-    CardModule,
+    UICardModule,
     CommonModule,
     LayoutModule,
     ReactiveFormsModule,
