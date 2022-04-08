@@ -1,3 +1,4 @@
+import { UserStore } from './../user/user.store';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Store, StoreConfig } from '@datorama/akita';
@@ -26,6 +27,7 @@ export class BoardsStore extends Store<BoardState> {
   constructor(
     private firestore: AngularFirestore,
     private cacheService: CacheService,
+    private userStore: UserStore,
   ) {
     super(createInitialState());
   }
@@ -59,11 +61,13 @@ export class BoardsStore extends Store<BoardState> {
     const id = this.firestore.createId();
     const lists = this.initNewBoardLists();
     const listIDs: string[] = lists.map(x => x.id);
+    const userState = this.userStore.getValue();
     const board: Board = {
       ...newBoard, id,
       listIDs: listIDs,
       createdAt: new Date().getTime(),
       updatedAt: new Date().getTime(),
+      members: [userState.user],
     } as Board;
     this.firestore.doc<Board>(`board/${id}`).set(board);
     this.update({ currentBoard: board });

@@ -1,4 +1,3 @@
-<div class="br mb-1"></div>
 <form [formGroup]="newBoardForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <ui-select [label]="'Theme Selector'" [options]="themes" formControlName="theme"></ui-select>
@@ -11,5 +10,5 @@
     <ui-select [label]="'Workspace'" [options]="workspaceOptions" formControlName="workspace">
     </ui-select>
   </div>
-  <ui-button className="primary mt-2 width-10" [disabled]="newBoardForm.invalid" type="submit">Create</ui-button>
+  <ui-button className="primary mt-2 width-10" [disabled]="newBoardForm.invalid" [type]="'submit'">Create</ui-button>
 </form>

@@ -1,9 +1,9 @@
-import { Themes } from './../../core/interface/themes';
-import { Component, EventEmitter, HostListener, Input, OnChanges, OnDestroy, Output, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { DropdownOption } from '../../../../projects/ui-components/src/interface/dropdown-option.interface';
 import { Board } from './../../core/interface/board.interface';
+import { Themes } from './../../core/interface/themes';
 
 @Component({
   selector: 'app-new-board-menu',
@@ -33,13 +33,14 @@ export class NewBoardMenuComponent implements OnChanges, OnDestroy {
     this.newBoardForm = this.fb.group({
       boardName: this.fb.control('', [Validators.required]),
       workspace: this.fb.control('', [Validators.required]),
-      theme: this.fb.control('', [Validators.required]),
+      theme: this.fb.control(this.themes[0], [Validators.required]),
     });
   }
   onSubmit() {
     const board = {
       name: this.newBoardForm.value.boardName,
       workspaceID: this.newBoardForm.value.workspace.code,
+      theme: Themes[this.newBoardForm.value.theme.name as keyof Themes]
     };
     debugger;
     this.submitNewBoard.emit(board);
