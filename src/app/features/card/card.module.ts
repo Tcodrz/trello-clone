@@ -1,17 +1,23 @@
+import { ButtonListModule } from './../../../../projects/ui-components/src/lib/button-list/button-list.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CardComponent } from './card.component';
-import { CardAddMenuComponent } from './card-add-menu/card-add-menu.component';
+import { CardSideMenuComponent } from './card-side-menu/card-side-menu.component';
+import { ButtonModule, MenuModule } from '@ui-components';
+import { MembersMenuComponent } from './card-side-menu/members-menu/members-menu.component';
 
 
 
 @NgModule({
   declarations: [
     CardComponent,
-    CardAddMenuComponent
+    CardSideMenuComponent,
+    MembersMenuComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ButtonModule,
+    MenuModule,
   ]
 })
 export class CardModule { }

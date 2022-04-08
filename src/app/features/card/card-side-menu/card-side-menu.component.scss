@@ -1,0 +1,17 @@
+@import "functions";
+@import "constants";
+
+.container {
+  padding: times8(2);
+  color: $MenuButtonText;
+
+  .list {
+    .list-title {
+      font-size: $FontSmall;
+    }
+
+    .menu {
+      position: relative;
+    }
+  }
+}

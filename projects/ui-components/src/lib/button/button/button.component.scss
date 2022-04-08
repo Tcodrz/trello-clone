@@ -13,23 +13,24 @@ button {
   font-size: $FontSmall;
   cursor: pointer;
 
+  &.btn {
+    background-color: $MenuButtonBackground;
+  }
+
   .content {
     min-width: max-content;
 
     span {
       font-weight: 500;
     }
-
   }
 
   &:disabled {
-    background-color: $LightGrey;
+    background-color: $LightGrey !important;
     cursor: initial;
   }
 
-  &:hover:not(:disabled) {
-    background-color: $SidbarLinkHover;
-  }
+
 
   &.icon {
     padding: 0;
@@ -38,7 +39,7 @@ button {
     display: grid;
     place-content: center;
 
-    &:hover {
+    &:hover:not(.no-hover) {
       background-color: $SidbarLinkHover;
     }
   }
@@ -146,6 +147,17 @@ button {
       transform: translateY(2px);
       transition: all ease-out .1s;
       box-shadow: 0 0 4px $Shadow;
+    }
+  }
+
+  &:hover:not(:disabled):not(.no-hover) {
+    background-color: $SidbarLinkHover;
+  }
+
+  &.text-left {
+    .content {
+      display: flex;
+      column-gap: times8(1);
     }
   }
 

@@ -1,7 +1,9 @@
+@import "constants";
+
 :host {
 
   .container {
-    background-color: #ffffff;
+    background-color: $CardModalBackgroung;
     height: 100%;
 
     display: flex;
@@ -9,7 +11,7 @@
 
     .card {
       overflow: scroll;
-      flex-grow: 2;
+      flex-grow: 5;
 
       &::-webkit-scrollbar {
         display: none;
@@ -19,7 +21,6 @@
 
     .side-menu {
       flex-grow: 1;
-      background-color: black;
     }
   }
 }

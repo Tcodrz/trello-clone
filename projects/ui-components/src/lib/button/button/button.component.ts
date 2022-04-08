@@ -10,8 +10,8 @@ export type ButtonTypes = 'button' | 'submit';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
-  @Input() type: ButtonTypes = 'button';
-  @Input() icon: Icons = Icons.None;
-  @Input() className: string = '';
-  @Input() disabled: boolean = false;
+  @Input() type: ButtonTypes | undefined = 'button';
+  @Input() icon: Icons | undefined = Icons.None;
+  @Input() className: string | undefined = '';
+  @Input() disabled: boolean | undefined = false;
 }
