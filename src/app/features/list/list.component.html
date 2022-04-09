@@ -1,5 +1,5 @@
-<div cdkDropList #cards="cdkDropList" [cdkDropListData]="list.cards" (cdkDropListDropped)="onDrop($event)"
-  cdkDropListLockAxis="y" cdkDropListOrientation="vertical">
+<div class="list" #cards="cdkDropList" cdkDropList [cdkDropListData]="list.cards" cdkDropListLockAxis="y"
+  cdkDropListOrientation="vertical" (cdkDropListDropped)="onDrop($event)">
   <ng-container *ngFor="let card of list.cards">
     <div cdkDrag class="mb-1">
       <div *cdkDragPlaceholder [ngStyle]="{height: getHeight(cardPreview), marginBottom: '10px'}"></div>

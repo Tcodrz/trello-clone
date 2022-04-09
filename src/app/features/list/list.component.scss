@@ -5,10 +5,14 @@
   display: block;
   min-width: 270px;
   max-width: 270px;
-  overflow: overlay;
 
-  &::-webkit-scrollbar {
-    display: none;
+  .list {
+    overflow: overlay;
+    max-height: 80vh;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
   .footer {

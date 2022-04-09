@@ -81,7 +81,10 @@ export class BoardsStore extends Store<BoardState> {
   addCardToList(card: Card) {
     const addToList = (board: Board, c: Card): List[] => {
       if (!board.lists) return [];
-      return board.lists.map(list => list.id === c.listID ? { ...list, cards: list.cards.concat(c) } : list)
+      return board.lists.map(list => {
+        return list.id === c.listID ?
+          { ...list, cards: list.cards.concat(c) } : list
+      });
     }
 
     this.update(state => {
