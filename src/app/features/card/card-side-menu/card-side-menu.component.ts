@@ -11,31 +11,6 @@ import { Board } from 'src/app/core/interface/board.interface';
 export class CardSideMenuComponent implements OnInit {
   @Input() board: Board | null = null;
   Icons = Icons;
-  labelsMenu: MenuItems[] = [
-    {
-      headline: '',
-      items: []
-    }
-  ];
-  checklistMenu: MenuItems[] = [
-    {
-      headline: '',
-      items: []
-    }
-  ];
-  datesMenu: MenuItems[] = [
-    {
-      headline: '',
-      items: []
-    }
-  ];
-  attachmentsMenu: MenuItems[] = [
-    {
-      headline: '',
-      items: []
-    }
-  ];
-
   constructor() { }
 
   ngOnInit(): void {

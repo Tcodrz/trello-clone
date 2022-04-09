@@ -1,0 +1,6 @@
+<div class="mt-1 menu">
+  <ui-button [className]="'btn text-left width-10'" [icon]="Icons.CheckSquare" (click)="menuChecklist.onToggle()">
+    Checklist
+  </ui-button>
+  <ui-menu [menus]="checklistMenu" [title]="'Checklist'" [position]="'top-left'" #menuChecklist></ui-menu>
+</div>

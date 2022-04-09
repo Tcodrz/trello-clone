@@ -1,0 +1,5 @@
+<div class="menu">
+  <ui-button [className]="'btn text-left  width-10'" [icon]="Icons.PaperClip" (click)="menuAttachements.onToggle()">
+    Attachments</ui-button>
+  <ui-menu [menus]="attachmentsMenu" [title]="'Attachments'" [position]="'top-left'" #menuAttachements></ui-menu>
+</div>

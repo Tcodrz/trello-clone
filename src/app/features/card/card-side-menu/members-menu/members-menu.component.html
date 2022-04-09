@@ -1,4 +1,4 @@
-<div class="mt-1 menu">
+<div class="menu">
   <ui-button [className]="'btn text-left width-10'" [icon]="Icons.User" (click)="menuMembers.onToggle()">Members
   </ui-button>
   <ui-menu [menus]="membersMenu" [title]="'Members'" [position]="'top-left'" #menuMembers>
@@ -6,12 +6,8 @@
     <div class="members mt-2">
       <div class="font-sm">Board members</div>
       <div class="member" *ngFor="let member of members">
-        <div class="picture">
-          <img [src]="member.picture" alt="">
-        </div>
-        <div class="name">
-          {{ member.name }}
-        </div>
+        <span class="picture"><img [src]="member.picture" alt=""></span>
+        <span class="name">{{ member.name }}</span>
       </div>
     </div>
     <div class="workspace-members mt-2">

@@ -1,0 +1,27 @@
+@import "functions";
+
+app-card {
+  .container {
+    .side-menu {
+      app-card-side-menu {
+        .container {
+          padding: times8(2);
+          color: $MenuButtonText;
+
+          .list {
+            margin-top: times8(3);
+
+            .list-title {
+              font-size: $FontSmall;
+            }
+
+            .menu {
+              position: relative;
+              margin-top: times8(1);
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,31 +1,14 @@
 <div class="container">
-  <div class="list mt-3">
+  <div class="list">
     <div class="list-title">Add to list</div>
     <app-members-menu [members]="board?.members"></app-members-menu>
-    <div class="mt-1 menu">
-      <ui-button [className]="'btn text-left width-10'" [icon]="Icons.Tags" (click)="menuLabels.onToggle()">Labels
-      </ui-button>
-      <ui-menu [menus]="labelsMenu" [title]="'Labels'" [position]="'top-left'" #menuLabels></ui-menu>
-    </div>
-    <div class="mt-1 menu">
-      <ui-button [className]="'btn text-left width-10'" [icon]="Icons.CheckSquare" (click)="menuChecklist.onToggle()">
-        Checklist
-      </ui-button>
-      <ui-menu [menus]="checklistMenu" [title]="'Checklist'" [position]="'top-left'" #menuChecklist></ui-menu>
-    </div>
-    <div class="mt-1 menu">
-      <ui-button [className]="'btn text-left width-10'" [icon]="Icons.Clock" (click)="menuDates.onToggle()">Dates
-      </ui-button>
-      <ui-menu [menus]="datesMenu" [title]="'Dates'" [position]="'top-left'" #menuDates></ui-menu>
-    </div>
-    <div class="mt-1 menu">
-      <ui-button [className]="'btn text-left  width-10'" [icon]="Icons.PaperClip" (click)="menuAttachements.onToggle()">
-        Attachments</ui-button>
-      <ui-menu [menus]="attachmentsMenu" [title]="'Attachments'" [position]="'top-left'" #menuAttachements></ui-menu>
-    </div>
+    <app-labels-menu></app-labels-menu>
+    <app-checklist-menu></app-checklist-menu>
+    <app-dates-menu></app-dates-menu>
+    <app-attachements-menu></app-attachements-menu>
   </div>
 
-  <div class="list mt-3">
+  <div class="list">
     <div class="list-title">Actions</div>
     <div class="mt-1">
       <ui-button [className]="'btn text-left width-10'" [icon]="Icons.ArrowRight">Move</ui-button>

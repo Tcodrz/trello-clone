@@ -1,0 +1,5 @@
+<div class="menu">
+  <ui-button [className]="'btn text-left width-10'" [icon]="Icons.Tags" (click)="menuLabels.onToggle()">Labels
+  </ui-button>
+  <ui-menu [menus]="labelsMenu" [title]="'Labels'" [position]="'top-left'" #menuLabels></ui-menu>
+</div>
