@@ -150,6 +150,15 @@ button {
     }
   }
 
+  &.danger {
+    background-color: $ButtonDanger;
+    color: $White;
+
+    &:hover:not(:disabled):not(.no-hover) {
+      background-color: $ButtonDangerHover;
+    }
+  }
+
   &:hover:not(:disabled):not(.no-hover) {
     background-color: $SidbarLinkHover;
   }

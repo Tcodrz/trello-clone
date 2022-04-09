@@ -1,7 +1,7 @@
 <div class="menu">
-  <ui-button [className]="'btn text-left width-10'" [icon]="Icons.User" (click)="menuMembers.onToggle()">Members
+  <ui-button [className]="'btn text-left width-10'" [icon]="Icons.User" (click)="menuMembers.onToggle($event)">Members
   </ui-button>
-  <ui-menu [menus]="membersMenu" [title]="'Members'" [position]="'top-left'" #menuMembers>
+  <ui-menu [menus]="membersMenu" [title]="'Members'" #menuMembers>
     <input type="text" placeholder="Search members">
     <div class="members mt-2">
       <div class="font-sm">Board members</div>

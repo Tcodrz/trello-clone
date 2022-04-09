@@ -1,5 +1,5 @@
 <div class="menu">
-  <ui-button [className]="'btn text-left width-10'" [icon]="Icons.Clock" (click)="menuDates.onToggle()">Dates
+  <ui-button [className]="'btn text-left width-10'" [icon]="Icons.Clock" (click)="menuDates.onToggle($event)">Dates
   </ui-button>
-  <ui-menu [menus]="datesMenu" [title]="'Dates'" [position]="'top-left'" #menuDates></ui-menu>
+  <ui-menu [menus]="datesMenu" [title]="'Dates'" #menuDates></ui-menu>
 </div>

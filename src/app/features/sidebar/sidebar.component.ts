@@ -81,4 +81,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.isOpen = true;
     this.open.emit(this.isOpen);
   }
+  onBoardClick(board: Board) {
+    this.boardsService.setCurrentBoard(board);
+  }
 }

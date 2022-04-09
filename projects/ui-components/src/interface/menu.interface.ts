@@ -1,8 +1,5 @@
 import { Icons } from 'projects/ui-components/src/lib/button/icon/icons';
 
-export interface Menu {
-  onToggle: () => void;
-}
 export interface MenuItem {
   label: string;
   icon?: Icons;

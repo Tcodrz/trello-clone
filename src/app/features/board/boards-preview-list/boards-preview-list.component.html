@@ -1,8 +1,8 @@
 <div class="title">Your boards</div>
 <div class="boards-preview">
-  <div class="board" (click)="toggleIfClosed()">
+  <div class="board">
     <h3> Create new board </h3>
-    <ui-menu #newBoardMenu [position]="'mid-right'" [title]="'Creat new board'" (toggle)="form.resetForm()">
+    <ui-menu #newBoardMenu [title]="'Creat new board'" (hide)="form.resetForm()">
       <app-new-board-menu #form [workspaces]="workspaces" [currentWorkspace]="workspace"
         (submitNewBoard)="onSubmit($event)">
       </app-new-board-menu>

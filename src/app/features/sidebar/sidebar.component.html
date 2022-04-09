@@ -10,7 +10,7 @@
 </div>
 
 <ng-template #boardsMenu>
-  <app-menu-boards [boards]="boards$ | async"></app-menu-boards>
+  <app-menu-boards [boards]="boards$ | async" (boardClick)="onBoardClick($event)"></app-menu-boards>
 </ng-template>
 
 <ng-template #workspaceMenu>

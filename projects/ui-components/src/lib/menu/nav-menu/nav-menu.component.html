@@ -1,2 +1,2 @@
-<ui-button (click)="menu.onToggle()">{{ title }}</ui-button>
-<ui-menu [title]="title" [position]="position" [menus]="items" #menu></ui-menu>
+<ui-button (click)="menu.onToggle($event)">{{ title }}</ui-button>
+<ui-menu [title]="title" [menus]="items" #menu></ui-menu>

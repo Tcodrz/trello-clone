@@ -7,9 +7,12 @@ import { SidebarDropdownComponent } from './sidebar-dropdown/sidebar-dropdown.co
 import { SidebarLinksComponent } from './sidebar-links/sidebar-links.component';
 import { SidebarComponent } from './sidebar.component';
 import { ButtonModule, MenuModule } from '@ui-components';
+import { CloseBoardMenuComponent } from './menu-boards/close-board-menu/close-board-menu.component';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 
 @NgModule({
   declarations: [
+    CloseBoardMenuComponent,
     MenuBoardsComponent,
     MenuWorkspacesComponent,
     SidebarComponent,
@@ -20,6 +23,7 @@ import { ButtonModule, MenuModule } from '@ui-components';
     ButtonModule,
     CommonModule,
     MenuModule,
+    OverlayPanelModule,
     RouterModule,
   ],
   exports: [

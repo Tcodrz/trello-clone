@@ -7,9 +7,11 @@
           <div *cdkDragPlaceholder [ngStyle]="{ width: '270px' }"></div>
           <div cdkDragHandle>
             <div class="header pointer">
-              <div>{{ list.name }}</div>
-              <ui-button className="icon" [icon]="Icons.EllipsisV" (click)="menu.onToggle()"></ui-button>
-              <ui-menu #menu [title]="'List actions'" [menus]="listMenu" [position]="'top-right'"></ui-menu>
+              <div class="list-name">{{ list.name }}</div>
+              <div>
+                <ui-button className="icon" [icon]="Icons.EllipsisV" (click)="menu.onToggle($event)"></ui-button>
+                <ui-menu #menu [title]="'List actions'" [menus]="listMenu"></ui-menu>
+              </div>
             </div>
           </div>
           <app-list [list]="list" (createCard)="onCardCreate($event)" (updateList)="onUpdateList($event)"></app-list>

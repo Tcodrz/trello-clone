@@ -1,5 +1,5 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { MenuItem } from '@ui-components';
+import { Icons, MenuItem } from '@ui-components';
 import { Theme } from 'src/app/core/interface/themes';
 
 @Component({
@@ -13,9 +13,7 @@ export class SidebarLinksComponent implements OnInit, AfterViewInit {
   @Input() theme: Theme | undefined;
   @ViewChild('links') links: ElementRef | undefined;
   linkStyles = {};
-  constructor(
-    private renderer: Renderer2,
-  ) { }
+  constructor() { }
   ngAfterViewInit(): void {
     this.initStyles();
   }

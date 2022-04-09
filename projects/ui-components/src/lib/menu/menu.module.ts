@@ -1,10 +1,10 @@
-import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { ButtonModule, UICardModule } from '@ui-components';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { MenuComponent } from './menu/menu.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { ButtonModule, UICardModule } from '@ui-components';
-
 @NgModule({
   declarations: [
     MenuComponent,
@@ -12,9 +12,10 @@ import { ButtonModule, UICardModule } from '@ui-components';
   ],
   imports: [
     ButtonModule,
-    UICardModule,
     CommonModule,
+    OverlayPanelModule,
     RouterModule,
+    UICardModule,
   ],
   exports: [
     MenuComponent,
