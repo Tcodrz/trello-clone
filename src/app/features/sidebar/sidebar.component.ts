@@ -5,6 +5,7 @@ import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
 import { Board } from './../../core/interface/board.interface';
 import { BoardsService } from './../../core/services/boards.service';
+import { GotoService } from './../../core/services/goto.service';
 import { SidebarService } from './../../core/services/sidebar.service';
 import { WorkspaceService } from './../../core/services/workspace.service';
 
@@ -33,9 +34,10 @@ export class SidebarComponent implements OnInit, OnDestroy {
   }
   constructor(
     private boardsService: BoardsService,
-    public elementRef: ElementRef,
+    private goto: GotoService,
     private sidebarSercvice: SidebarService,
     private workspaceService: WorkspaceService,
+    public elementRef: ElementRef,
   ) { }
 
   ngOnInit(): void {
@@ -82,6 +84,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.open.emit(this.isOpen);
   }
   onBoardClick(board: Board) {
+    this.goto.board();
     this.boardsService.setCurrentBoard(board);
   }
 }
