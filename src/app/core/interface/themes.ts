@@ -8,12 +8,12 @@ export interface Theme {
   topnavBackground: string;
 }
 export interface Themes {
-  lightBlue: Theme;
-  darkTheme: Theme;
+  LightBlue: Theme;
+  DarkMode: Theme;
 }
 
 export const LightBlueTheme: Theme = {
-  name: 'lightBlue',
+  name: 'LightBlue',
   sidebarBackground: '#17aaaf',
   sidebarText: '#091e42',
   sidebarLinksHover: '#091e422e',
@@ -21,7 +21,7 @@ export const LightBlueTheme: Theme = {
   topnavBackground: '#1d919d',
   id: 1,
 };
-export const DarkTheme: Theme = {
+export const DarkMode: Theme = {
   name: 'DarkMode',
   sidebarBackground: '#000000e8',
   sidebarText: '#ffffff',
@@ -32,6 +32,6 @@ export const DarkTheme: Theme = {
 };
 
 export const Themes: Themes = {
-  lightBlue: LightBlueTheme,
-  darkTheme: DarkTheme,
+  LightBlue: LightBlueTheme,
+  DarkMode: DarkMode,
 };

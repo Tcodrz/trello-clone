@@ -57,9 +57,9 @@ export class BoardsStore extends Store<BoardState> {
       ))
     ).subscribe(boards => this.update({ boards }))
   }
-  create(newBoard: Partial<Board>) {
+  async create(newBoard: Partial<Board>) {
     const id = this.firestore.createId();
-    const lists = this.initNewBoardLists();
+    const lists = await this.initNewBoardLists();
     const listIDs: string[] = lists.map(x => x.id);
     const userState = this.userStore.getValue();
     const board: Board = {
@@ -70,6 +70,7 @@ export class BoardsStore extends Store<BoardState> {
       members: [userState.user],
     } as Board;
     this.firestore.doc<Board>(`board/${id}`).set(board);
+    board.lists = lists;
     this.update({ currentBoard: board });
     const boards = this.boardsCache.get(board.workspaceID);
     if (!!boards) {
@@ -113,7 +114,7 @@ export class BoardsStore extends Store<BoardState> {
       }
     });
   }
-  private initNewBoardLists(): List[] {
+  private async initNewBoardLists(): Promise<List[]> {
     const lists: List[] = [
       {
         id: this.firestore.createId(),
@@ -134,9 +135,7 @@ export class BoardsStore extends Store<BoardState> {
         cards: [],
       }
     ];
-    lists.forEach(list => {
-      this.firestore.doc(`list/${list.id}`).set(list);
-    });
+    await Promise.all(lists.map(list => this.firestore.doc(`list/${list.id}`).set(list)));
     return lists;
   }
 }

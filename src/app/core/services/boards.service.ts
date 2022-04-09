@@ -67,8 +67,7 @@ export class BoardsService {
     this.cache.setItem(CacheKeys.CurrentBoard, board);
   }
   createNewBoard(newBoard: Partial<Board>): void {
-    this.boardsStore.create(newBoard);
-    this.goto.board();
+    this.boardsStore.create(newBoard).then(() => this.goto.board());
   }
   updateListCardsPosition(list: List): void {
     const collection = this.firestore.collection<Card>('card');
