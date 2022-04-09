@@ -1,11 +1,11 @@
-import { Card } from './../interface/card.interface';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { map, mergeMap, Observable, of } from 'rxjs';
 import { Board } from '../interface/board.interface';
 import { List } from '../interface/list.interface';
 import { BoardsQuery } from './../../state/boards/board.query';
 import { BoardsStore } from './../../state/boards/boards.store';
+import { Card } from './../interface/card.interface';
 import { CacheKeys, CacheService } from './cache.service';
 import { GotoService } from './goto.service';
 
@@ -13,6 +13,7 @@ import { GotoService } from './goto.service';
   providedIn: 'root'
 })
 export class BoardsService {
+  private _boards: Map<string, Board> = new Map<string, Board>();
 
   constructor(
     private boardsQuery: BoardsQuery,
@@ -21,33 +22,70 @@ export class BoardsService {
     private firestore: AngularFirestore,
     private goto: GotoService,
   ) { }
-  init() {
+  init(): void {
     const currentBoard = this.cache.getItem<Board>(CacheKeys.CurrentBoard);
     if (!!currentBoard) this.boardsStore.update({ currentBoard });
   }
   getBoards(): Observable<Board[]> {
     return this.boardsQuery.boards$;
   }
-  updateLists(lists: List[]) {
+  updateLists(lists: List[]): void {
     const collection = this.firestore.collection<List>('list');
     Promise.all(lists.map(list => collection.doc(list.id).set(list)));
   }
   getCurrentBoard(): Observable<Board | null> {
-    return this.boardsQuery.currentBoard$;
+    return this.boardsQuery.currentBoard$.pipe(
+      mergeMap(board => {
+        if (!board) return of(null);
+        const boardCache = this._boards.get(board.id);
+        if (boardCache) return of(boardCache) as Observable<Board>;
+        else return this.populateBoardLists(board);
+      })
+    );
   }
-  setCurrentBoard(board: Board | null) {
+  populateBoardLists(board: Board): Observable<Board> {
+    return this.firestore.collection<Card>('card').get().pipe(
+      map(cards => cards.docs.filter(c => board.listIDs.includes(c.data().listID))),
+      map(cards => cards.map(card => ({ ...card.data(), id: card.id }))),
+      map(cards => {
+        if (board && board.lists)
+          board.lists = board.lists.map(list => {
+            const listCards = cards
+              .filter(card => card.listID === list.id)
+              .sort((a, b) => a.position - b.position);
+            return {
+              ...list,
+              cards: listCards,
+            };
+          });
+        return board;
+      })
+    );
+  }
+  setCurrentBoard(board: Board | null): void {
     this.boardsStore.update({ currentBoard: board });
     this.cache.setItem(CacheKeys.CurrentBoard, board);
   }
-  createNewBoard(newBoard: Partial<Board>) {
+  createNewBoard(newBoard: Partial<Board>): void {
     this.boardsStore.create(newBoard);
     this.goto.board();
   }
-  updateListCardsPosition(list: List) {
+  updateListCardsPosition(list: List): void {
     const collection = this.firestore.collection<Card>('card');
     Promise.all(list.cards.map(card => collection.doc(card.id).set(card)));
+    this.boardsStore.update(state => {
+      const current = state.currentBoard;
+      if (current && current.lists) {
+        const listIndex = current.lists.findIndex(l => l.id === list.id);
+        if (listIndex > -1) current.lists[listIndex] = list;
+      }
+      return {
+        ...state,
+        currentBoard: current
+      };
+    })
   }
-  createCard(c: Partial<Card>) {
+  createCard(c: Partial<Card>): void {
     const card: Card = {
       id: this.firestore.createId(),
       ...c
