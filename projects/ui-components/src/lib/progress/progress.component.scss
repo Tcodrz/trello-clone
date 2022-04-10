@@ -1,0 +1,19 @@
+:host {
+  margin-left: 16px;
+  width: fit-content;
+
+  .progress-bar {
+    width: calc(100% - 39px);
+    height: 8px;
+    background-color: #091e4214;
+    display: inline-block;
+    vertical-align: middle;
+
+    .progress-value {
+      display: inline-block;
+      height: inherit;
+
+    }
+  }
+
+}

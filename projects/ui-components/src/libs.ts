@@ -17,6 +17,7 @@ export * from './lib/modal/di';
 export * from './lib/modal/modal.component';
 export * from './lib/modal/modal.module';
 export * from './lib/modal/modal.service';
+export * from './lib/progress/progress.component';
+export * from './lib/progress/progress.module';
 export * from './lib/select/select.component';
 export * from './lib/select/select.module';
-

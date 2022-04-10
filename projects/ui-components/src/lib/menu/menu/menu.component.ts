@@ -39,6 +39,7 @@ export class MenuComponent implements OnInit {
     this.itemClick.emit(item);
   }
   onHide() {
+    this.menu.hide();
     this.hide.emit();
   }
 }
