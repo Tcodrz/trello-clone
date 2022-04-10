@@ -12,6 +12,7 @@ export class ChecklistComponent implements OnInit {
   @Input() checklist!: Checklist;
   @Input() progress: number | null = null;
   @Output() addItem: EventEmitter<ChecklistItem> = new EventEmitter<ChecklistItem>();
+  @Output() delete: EventEmitter<Checklist> = new EventEmitter<Checklist>();
   Icons = Icons;
   progressStyles = {
     backgroundColor: '#091e4214',
@@ -34,5 +35,7 @@ export class ChecklistComponent implements OnInit {
     this.addItem.emit(checklistItem);
     this.createMode = false;
   }
-
+  onDeleteChecklist(checklist: Checklist) {
+    this.delete.emit(checklist);
+  }
 }

@@ -1,32 +1,39 @@
 <ng-container *ngIf="card$ | async as card">
-
-  <div class="container">
-
-    <div class="card">
-      <div class="cover" *ngIf="card.cover">
-
-      </div>
-      <div class="card-header">
-        {{ card.name }}
-      </div>
-      <div class="description">
-
-      </div>
-      <div class="attachements">
-
-      </div>
-      <div class="checklists">
-        <div *ngFor="let list of card.checklists">
-          <app-checklist [checklist]="list" [progress]="getChecklistProgress(list.id) | async"
-            (addItem)="onAddChecklistItem($event)"></app-checklist>
-        </div>
-      </div>
-      <div class="activity">
-
+  <div class="card">
+    <div class="cover" *ngIf="card.cover" #cover>
+      <div class="button">
+        <ui-button className="btn pl-1 pr-1">
+          <ui-icon [icon]="Icons.Brush"></ui-icon>
+          Cover
+        </ui-button>
       </div>
     </div>
-    <div class="side-menu">
-      <app-card-side-menu [board]="board$ | async" (addChecklist)="onChecklistAdd($event)"></app-card-side-menu>
+    <div class="close-icon">
+      <ui-button className="icon no-hover" [icon]="Icons.Times" (click)="onClose()"></ui-button>
+    </div>
+    <div class="container">
+      <div class="header">
+        <div class="title">{{ card.name }}</div>
+      </div>
+      <div class="layout">
+        <div class="components">
+          <div class="description"></div>
+
+          <div class="attachements"></div>
+
+          <div class="checklists">
+            <div *ngFor="let list of card.checklists">
+              <app-checklist [checklist]="list" [progress]="getChecklistProgress(list.id) | async"
+                (addItem)="onAddChecklistItem($event)" (delete)="onDeleteChecklist($event)"></app-checklist>
+            </div>
+          </div>
+
+          <div class="activity"></div>
+        </div>
+        <div class="side-menu">
+          <app-card-side-menu [board]="board$ | async" (addChecklist)="onChecklistAdd($event)"></app-card-side-menu>
+        </div>
+      </div>
     </div>
   </div>
 </ng-container>

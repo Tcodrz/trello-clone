@@ -2,10 +2,9 @@
 @import "functions";
 
 button {
-  display: block;
-  justify-content: space-around;
+  display: inline-block;
   text-align: center;
-  border-radius: $BorderRadius;
+  border-radius: 4px;
   padding: times8(1) times8(1);
   border: none;
   background-color: transparent;

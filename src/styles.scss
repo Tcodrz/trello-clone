@@ -8,15 +8,18 @@
 @import "select";
 @import "card-side-menu";
 
+* {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 body {
   margin: 0;
   font-family: 'Fredoka', sans-serif;
   font-size: $FontRegular;
   color: $Black;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
 }
 
 h1,
@@ -42,6 +45,10 @@ div.br {
 
 .d-flex {
   display: flex;
+}
+
+.d-none {
+  display: none;
 }
 
 .bg-light {
@@ -77,4 +84,9 @@ div.card.menu {
 
 .p-dialog-header-icons {
   display: none !important; // hide modal close button
+}
+
+.bg-card {
+  background-color: $CardModalBackgroung;
+
 }

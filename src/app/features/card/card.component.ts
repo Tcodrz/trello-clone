@@ -1,8 +1,11 @@
-import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, of, map } from 'rxjs';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { Icons } from '@ui-components';
+import { DynamicDialogRef } from 'primeng/dynamicdialog';
+import { map, Observable, of, tap } from 'rxjs';
 import { Board } from 'src/app/core/interface/board.interface';
 import { Card } from 'src/app/core/interface/card.interface';
 import { ChecklistItem } from 'src/app/core/interface/checklist.interface';
+import { Checklist } from './../../core/interface/checklist.interface';
 import { BoardsService } from './../../core/services/boards.service';
 import { CardService } from './../../core/services/card.service';
 
@@ -12,16 +15,28 @@ import { CardService } from './../../core/services/card.service';
   styleUrls: ['./card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardComponent implements OnInit, OnDestroy {
+export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
+  @Output() close: EventEmitter<void> = new EventEmitter<void>();
+  @ViewChild('cover', { static: false }) cover!: ElementRef;
   card$: Observable<Card | null> = of(null);
   board$: Observable<Board | null> = of(null);
-
+  Icons = Icons;
   constructor(
     private boardService: BoardsService,
     private cardService: CardService,
+    private ref: DynamicDialogRef,
   ) { }
+  ngAfterViewInit(): void {
+    // if (this.cover)
+    // this.cover.nativeElement.style.backgroundColor = 'green';
+  }
   ngOnInit(): void {
-    this.card$ = this.cardService.getCurrentCard();
+    this.card$ = this.cardService.getCurrentCard().pipe(
+      tap(card => {
+        if (card && card.cover && this.cover)
+          this.cover.nativeElement.style.backgroundColor = card.cover;
+      })
+    );
     this.board$ = this.boardService.getCurrentBoard();
   }
   ngOnDestroy(): void {
@@ -47,5 +62,10 @@ export class CardComponent implements OnInit, OnDestroy {
   onAddChecklistItem(item: ChecklistItem) {
     this.cardService.addChecklistItem(item);
   }
-
+  onClose() {
+    this.ref.close();
+  }
+  onDeleteChecklist(checklist: Checklist) {
+    this.cardService.checklistDelete(checklist);
+  }
 }

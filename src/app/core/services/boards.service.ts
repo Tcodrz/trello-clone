@@ -93,4 +93,8 @@ export class BoardsService {
       this.boardsStore.addCardToList(card);
     });
   }
+  getCurrentBoardValue(): Board | null {
+    return this.boardsStore.getValue().currentBoard;
+  }
+
 }

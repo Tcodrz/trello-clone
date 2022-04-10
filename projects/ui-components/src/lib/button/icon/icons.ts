@@ -25,4 +25,5 @@ export enum Icons {
   Trello = 'faTrello',
   User = 'faUser',
   Users = 'faUsers',
+  Brush = 'faBrush',
 }

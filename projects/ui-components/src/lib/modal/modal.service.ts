@@ -17,7 +17,7 @@ export class ModalService {
     private readonly _config: ModalConfig | null
   ) {
   }
-  open(modal: Modal) {
+  open(modal: Modal): void {
     this.modal$.next(modal);
   }
   config(): Observable<Modal> {

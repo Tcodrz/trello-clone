@@ -1,7 +1,8 @@
-import { ProgressModule } from './../../../../projects/ui-components/src/lib/progress/progress.module';
-import { ButtonModule } from './../../../../projects/ui-components/src/lib/button/button.module';
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { MenuModule } from '@ui-components';
+import { ButtonModule } from './../../../../projects/ui-components/src/lib/button/button.module';
+import { ProgressModule } from './../../../../projects/ui-components/src/lib/progress/progress.module';
 import { ChecklistComponent } from './checklist.component';
 
 
@@ -12,6 +13,7 @@ import { ChecklistComponent } from './checklist.component';
   imports: [
     CommonModule,
     ButtonModule,
+    MenuModule,
     ProgressModule,
   ],
   exports: [ChecklistComponent]

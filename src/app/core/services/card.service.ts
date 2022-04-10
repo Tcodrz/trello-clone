@@ -5,6 +5,7 @@ import { Checklist, ChecklistItem } from '../interface/checklist.interface';
 import { CardQuery } from './../../state/card/card.query';
 import { CardStore } from './../../state/card/card.store';
 import { Card } from './../interface/card.interface';
+import { BoardsService } from './boards.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,8 @@ export class CardService {
     private cardQuery: CardQuery,
     private cardStore: CardStore,
     private firestore: AngularFirestore,
+    private boardService: BoardsService,
+
   ) { }
   getCurrentCard(): Observable<Card | null> {
     return this.cardQuery.card$;
@@ -50,5 +53,21 @@ export class CardService {
         checklists: card.checklists.map(list => list.id === item.checklistID ? checklist : list)
       }
     })
+  }
+  checklistDelete(checklist: Checklist): void {
+    const collection = this.firestore.collection<Card>('card');
+    this.cardStore.update(state => {
+      if (!state.card) return state;
+      const checklists = state.card.checklists.filter(list => list.id !== checklist.id);
+      const card: Card = { ...state.card, checklists };
+      const board = this.boardService.getCurrentBoardValue();
+      if (board && board.lists) this.boardService.setCurrentBoard({
+        ...board,
+        lists: board.lists.map(list => list.id === card.listID ?
+          ({ ...list, cards: list.cards.map(c => card.id === c.id ? card : c) }) : list)
+      });
+      collection.doc(card.id).set(card);
+      return { card };
+    });
   }
 }

@@ -6,4 +6,5 @@ export const CARD_MODAL: DynamicDialogConfig = {
   closeOnEscape: true,
   dismissableMask: true,
   autoZIndex: true,
+  styleClass: 'bg-card',
 }
