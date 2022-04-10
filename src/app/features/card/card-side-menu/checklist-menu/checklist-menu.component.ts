@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { Icons, MenuItems } from '@ui-components';
 
 @Component({
@@ -8,18 +8,15 @@ import { Icons, MenuItems } from '@ui-components';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChecklistMenuComponent implements OnInit {
+  @Output() addChecklist: EventEmitter<string> = new EventEmitter<string>();
+  checklistMenu: MenuItems[] = [{
+    headline: '',
+    items: []
+  }];
   Icons = Icons;
-
-  checklistMenu: MenuItems[] = [
-    {
-      headline: '',
-      items: []
-    }
-  ];
-
   constructor() { }
-
-  ngOnInit(): void {
+  ngOnInit(): void { }
+  onAddChecklist(name: string) {
+    this.addChecklist.emit(name);
   }
-
 }

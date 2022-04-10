@@ -1,0 +1,22 @@
+<div class="checklist">
+  <div class="header">
+    <div class="icon">
+      <ui-icon [icon]="Icons.CheckSquare"></ui-icon>
+    </div>
+    <div class="list-name">{{ checklist.name }}</div>
+    <ui-button className="btn">Delete</ui-button>
+  </div>
+  <div class="progress">
+    <div>{{progress}}%</div>
+    <ui-progress [value]="progress"></ui-progress>
+  </div>
+  <div class="items mt-2">
+    <div *ngFor="let item of checklist.items" class="mt-1">{{ item.title }}</div>
+  </div>
+  <ng-container *ngIf="createMode">
+    <input type="text" class="mt-2" #itemName>
+    <ui-button className="primary width-2 mt-2" (click)="onSubmitItem(itemName.value)">Add</ui-button>
+    <ui-button className="icon no-hover" [icon]="Icons.Times" (click)="createMode = false"></ui-button>
+  </ng-container>
+  <ui-button *ngIf="!createMode" className="btn width-3 mt-2" (click)="onAddItem()">Add an item</ui-button>
+</div>

@@ -2,5 +2,13 @@
   <ui-button [className]="'btn text-left width-10'" [icon]="Icons.CheckSquare" (click)="menuChecklist.onToggle($event)">
     Checklist
   </ui-button>
-  <ui-menu [menus]="checklistMenu" [title]="'Checklist'" #menuChecklist></ui-menu>
+  <ui-menu [menus]="checklistMenu" [title]="'Checklist'" #menuChecklist>
+    <div class="mt-2">
+      <input type="text" [value]="'Checklist'" #name autofocus>
+    </div>
+    <div class="mt-2">
+      <ui-button className="primary width-3" (click)="onAddChecklist(name.value); menuChecklist.onHide()">Add
+      </ui-button>
+    </div>
+  </ui-menu>
 </div>

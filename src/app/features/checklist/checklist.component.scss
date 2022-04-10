@@ -1,0 +1,20 @@
+@import "functions";
+
+.checklist {
+  margin-top: times8(4);
+
+  .header {
+    display: flex;
+    column-gap: times8(3);
+    align-items: center;
+    justify-content: space-between;
+
+    .icon {
+      color: $GreyText;
+    }
+
+    .list-name {
+      flex-grow: 18;
+    }
+  }
+}
