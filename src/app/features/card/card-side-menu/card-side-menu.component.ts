@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Input, Output, EventEmitter } from '@angular/core';
 import { Icons, MenuItems } from '@ui-components';
 import { Board } from 'src/app/core/interface/board.interface';
 
@@ -10,10 +10,13 @@ import { Board } from 'src/app/core/interface/board.interface';
 })
 export class CardSideMenuComponent implements OnInit {
   @Input() board: Board | null = null;
+  @Output() addChecklist: EventEmitter<string> = new EventEmitter<string>();
   Icons = Icons;
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  onCheklistAdd(name: string) {
+    this.addChecklist.emit(name);
+  }
 }

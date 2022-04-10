@@ -1,3 +1,4 @@
+@import "functions";
 @import "constants";
 
 :host {
@@ -12,6 +13,7 @@
     .card {
       overflow: scroll;
       flex-grow: 5;
+      padding: times8(2);
 
       &::-webkit-scrollbar {
         display: none;

@@ -1,3 +1,5 @@
+import { Checklist } from "./checklist.interface";
+
 export interface Card {
   id: string;
   name: string;
@@ -6,4 +8,5 @@ export interface Card {
   createdAt: number;
   cover?: string;
   description?: string;
+  checklists: Checklist[];
 }

@@ -1,10 +1,10 @@
-import { BoardsQuery } from './../../state/boards/board.query';
-import { Observable, of } from 'rxjs';
-import { CardStore } from './../../state/card/card.store';
-import { Component, OnInit, ChangeDetectionStrategy, OnDestroy } from '@angular/core';
-import { CardQuery } from 'src/app/state/card/card.query';
-import { Card } from 'src/app/core/interface/card.interface';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable, of, map } from 'rxjs';
 import { Board } from 'src/app/core/interface/board.interface';
+import { Card } from 'src/app/core/interface/card.interface';
+import { ChecklistItem } from 'src/app/core/interface/checklist.interface';
+import { BoardsService } from './../../core/services/boards.service';
+import { CardService } from './../../core/services/card.service';
 
 @Component({
   selector: 'app-card',
@@ -17,18 +17,35 @@ export class CardComponent implements OnInit, OnDestroy {
   board$: Observable<Board | null> = of(null);
 
   constructor(
-    private cardQuery: CardQuery,
-    private cardStore: CardStore,
-    private boardQuery: BoardsQuery,
+    private boardService: BoardsService,
+    private cardService: CardService,
   ) { }
   ngOnInit(): void {
-    this.card$ = this.cardQuery.card$;
-    this.board$ = this.boardQuery.currentBoard$;
+    this.card$ = this.cardService.getCurrentCard();
+    this.board$ = this.boardService.getCurrentBoard();
   }
   ngOnDestroy(): void {
-    console.log('OnDestroy CardComponent');
-    this.cardStore.update({ card: null });
+    this.cardService.setCurrentCard(null);
   }
-
+  onChecklistAdd(name: string) {
+    this.cardService.addChecklist(name);
+  }
+  getChecklistProgress(checklistID: string): Observable<number> {
+    return this.card$.pipe(
+      map(card => {
+        const list = card?.checklists.find(list => list.id === checklistID);
+        if (list) {
+          const completed = list.items.filter(i => i.completed).length;
+          const totalItems = list.items.length;
+          if (!completed || !totalItems) return 0;
+          return Math.round(completed * 100 / totalItems);
+        }
+        return 0;
+      })
+    )
+  }
+  onAddChecklistItem(item: ChecklistItem) {
+    this.cardService.addChecklistItem(item);
+  }
 
 }

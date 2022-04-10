@@ -16,14 +16,17 @@
 
       </div>
       <div class="checklists">
-
+        <div *ngFor="let list of card.checklists">
+          <app-checklist [checklist]="list" [progress]="getChecklistProgress(list.id) | async"
+            (addItem)="onAddChecklistItem($event)"></app-checklist>
+        </div>
       </div>
       <div class="activity">
 
       </div>
     </div>
     <div class="side-menu">
-      <app-card-side-menu [board]="board$ | async"></app-card-side-menu>
+      <app-card-side-menu [board]="board$ | async" (addChecklist)="onChecklistAdd($event)"></app-card-side-menu>
     </div>
   </div>
 </ng-container>

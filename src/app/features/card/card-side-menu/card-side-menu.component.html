@@ -3,7 +3,7 @@
     <div class="list-title">Add to list</div>
     <app-members-menu [members]="board?.members"></app-members-menu>
     <app-labels-menu></app-labels-menu>
-    <app-checklist-menu></app-checklist-menu>
+    <app-checklist-menu (addChecklist)="onCheklistAdd($event)"></app-checklist-menu>
     <app-dates-menu></app-dates-menu>
     <app-attachements-menu></app-attachements-menu>
   </div>
