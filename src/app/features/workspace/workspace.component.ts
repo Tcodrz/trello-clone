@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { combineLatest, Observable, of } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { combineLatest, Observable } from 'rxjs';
 import { Board } from 'src/app/core/interface/board.interface';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { BoardsService } from './../../core/services/boards.service';
@@ -15,22 +16,23 @@ import { WorkspaceService } from './../../core/services/workspace.service';
 export class WorkspaceComponent implements OnInit {
   view$!: Observable<{ currentWorkspace: Workspace | null, workspaces: Workspace[], boards: Board[] }>;
   constructor(
+    private activeRoute: ActivatedRoute,
     private boardsService: BoardsService,
-    private workspaceService: WorkspaceService,
     private goto: GotoService,
+    private workspaceService: WorkspaceService,
   ) { }
 
   ngOnInit(): void {
-    this.workspaceService.init();
-    this.view$ = combineLatest({
-      currentWorkspace: this.workspaceService.getCurrentWorkspace(),
-      workspaces: this.workspaceService.getAll(),
-      boards: this.boardsService.getBoards(),
+    this.activeRoute.params.subscribe((params: any) => {
+      this.view$ = combineLatest({
+        currentWorkspace: this.workspaceService.getWorkspace(params.workspaceID),
+        workspaces: this.workspaceService.getAll(),
+        boards: this.boardsService.getBoards(params.workspaceID),
+      });
     });
   }
   onBoardClick(board: Board) {
-    this.boardsService.setCurrentBoard(board);
-    this.goto.board();
+    this.goto.board(board.id, board.workspaceID);
   }
   onCreateBoard(board: Partial<Board>) {
     this.boardsService.createNewBoard(board);

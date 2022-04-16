@@ -1,5 +1,7 @@
-import { WorkspaceService } from './../../core/services/workspace.service';
+import { GotoService } from './../../core/services/goto.service';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { UserStore } from 'src/app/state/user/user.store';
+import { WorkspaceStore } from 'src/app/state/workspaces/workspaces.store';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,11 +12,18 @@ import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 export class DashboardComponent implements OnInit {
 
   constructor(
-    private workspaceService: WorkspaceService,
+    private goto: GotoService,
+    private userStore: UserStore,
+    private workspaceStore: WorkspaceStore,
   ) { }
 
   ngOnInit(): void {
-    this.workspaceService.setCurrentWorkspace(null);
+    const userState = this.userStore.getValue();
+    if (!userState.user?.id) {
+      this.goto.login();
+      return;
+    }
+    this.workspaceStore.init(userState.user.id);
   }
 
 }

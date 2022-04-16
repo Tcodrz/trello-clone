@@ -1,6 +1,8 @@
-import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, OnDestroy, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Icons, MenuItem } from '@ui-components';
-import { BehaviorSubject, map, Observable, of, Subscription, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, of, switchMap, tap } from 'rxjs';
+import { Theme } from 'src/app/core/interface/themes';
 import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
 import { Board } from './../../core/interface/board.interface';
@@ -16,7 +18,8 @@ import { WorkspaceService } from './../../core/services/workspace.service';
   styleUrls: ['./sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarComponent implements OnInit, OnDestroy {
+export class SidebarComponent implements OnInit, OnChanges {
+  @Input() theme: Theme | undefined;
   @Output() open: EventEmitter<boolean> = new EventEmitter();
   workspaces$: Observable<Workspace[]> = of([]);
   workspace$: Observable<Workspace | null> = of(null);
@@ -27,40 +30,43 @@ export class SidebarComponent implements OnInit, OnDestroy {
   isOpen: boolean = true;
   Icons = Icons;
   sidebarLinksStyle = {};
-  userSubscription: Subscription = new Subscription();
   board$: Observable<Board | null> = of(null);
   @HostListener('window:resize', ['$event']) onResize(event: Event) {
     this.initSidebar(event);
   }
   constructor(
+    private activeRoute: ActivatedRoute,
     private boardsService: BoardsService,
     private goto: GotoService,
+    private renderer: Renderer2,
     private sidebarSercvice: SidebarService,
     private workspaceService: WorkspaceService,
     public elementRef: ElementRef,
   ) { }
+  ngOnChanges(changes: SimpleChanges): void {
+    const elements = this.elementRef.nativeElement.querySelectorAll('.sidebar-link');
+    elements.forEach((element: HTMLAnchorElement) => {
+      this.renderer.setStyle(element, 'color', this.theme?.sidebarText);
+    });
+  }
 
   ngOnInit(): void {
-    this.initSidebar();
-    this.workspaceService.init();
-    this.workspaces$ = this.workspaceService.getAll();
-    this.workspace$ = this.workspaceService.getCurrentWorkspace().pipe(tap(workspace => {
-      this.sidebarLinksStyle = !!workspace ? {} : { 'display': 'block', 'margin-top': '30px' };
-    }));
-    this.board$ = this.boardsService.getCurrentBoard();
-    this.boards$ = this.boardsService.getBoards().pipe(
-      map(boards => boards.sort((a, b) => b.updatedAt - a.updatedAt)));
-    this.menuLinks$ = this.sidebarSercvice.getMenuLinks();
+    this.activeRoute.params.subscribe((params: any) => {
+      this.initSidebar();
+      this.workspaces$ = this.workspaceService.getAll();
+      const workspaceID = params?.workspaceID; // workspaceID can be undefined
+      const boardID = params?.boardID; // boardID can be undefined
+      if (workspaceID) { this.initWorkspace(workspaceID); }
+      if (boardID) { this.board$ = this.boardsService.getBoard(boardID); }
+      this.menuLinks$ = this.sidebarSercvice.getMenuLinks();
+
+    });
     this.showToggler$ = this.isSmallScreen$.pipe(
       switchMap(isSmallScreen =>
         this.workspace$.pipe(map(workspace => {
-          if (isSmallScreen) return true;
-          else return !!workspace;
+          return !!isSmallScreen ?? !!workspace;
         }))
       ));
-  }
-  ngOnDestroy(): void {
-    this.userSubscription.unsubscribe();
   }
   initSidebar(event?: Event) {
     const width = (event?.target as Window)?.innerWidth || window.innerWidth;
@@ -68,6 +74,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.isSmallScreen$.next(isSmallScreen);
     if (isSmallScreen) this.hide();
     else this.show();
+  }
+  initWorkspace(workspaceID: string) {
+    this.workspace$ = this.workspaceService.getWorkspace(workspaceID).pipe(tap(workspace => {
+      this.sidebarLinksStyle = !!workspace ? {} : { 'display': 'block', 'margin-top': '30px' };
+    }));
+    this.boards$ = this.boardsService.getBoards(workspaceID).pipe(
+      map(boards => boards.sort((a, b) => b.updatedAt - a.updatedAt)));
   }
   onToggle() {
     if (this.isOpen) this.hide();
@@ -84,7 +97,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.open.emit(this.isOpen);
   }
   onBoardClick(board: Board) {
-    this.goto.board();
-    this.boardsService.setCurrentBoard(board);
+    this.goto.board(board.id, board.workspaceID);
   }
 }

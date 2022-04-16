@@ -30,7 +30,7 @@ export class WorkspaceStore extends Store<WorkspacesState> {
     super(createInitialState());
   }
   init(userID: string): void {
-    if (!!this.subscription) return; // prevent multiple subscriptionsSS
+    if (!!this.subscription) return; // prevent multiple subscriptions
     this.subscription = this.collection.valueChanges().pipe(
       map(workspaces => workspaces.filter(workspace => workspace.userID === userID)),
     ).subscribe(workspaces => this.update({ workspaces }));

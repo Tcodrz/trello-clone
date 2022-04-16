@@ -1,7 +1,6 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { Icons, MenuItems } from '@ui-components';
 import { Board } from '../../../core/interface/board.interface';
-import { BoardsService } from '../../../core/services/boards.service';
 import { GotoService } from '../../../core/services/goto.service';
 
 @Component({
@@ -16,7 +15,6 @@ export class MenuBoardsComponent implements OnInit, OnChanges {
   menuItems: MenuItems | null = null;
   Icons = Icons;
   constructor(
-    private boardsService: BoardsService,
     private goto: GotoService,
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
@@ -28,10 +26,7 @@ export class MenuBoardsComponent implements OnInit, OnChanges {
     if (!this.boards) return null;
     const boardItems = this.boards?.map(board => ({
       label: board.name,
-      command: () => {
-        this.boardsService.setCurrentBoard(board);
-        this.goto.board();
-      }
+      command: () => this.goto.board(board.id, board.workspaceID)
     }));
     const menuItems: MenuItems = {
       headline: 'Your boards',

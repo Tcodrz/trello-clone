@@ -42,7 +42,6 @@ export class NewBoardMenuComponent implements OnChanges, OnDestroy {
       workspaceID: this.newBoardForm.value.workspace.code,
       theme: Themes[this.newBoardForm.value.theme.name as keyof Themes]
     };
-    debugger;
     this.submitNewBoard.emit(board);
   }
   initWorkspaceList() {

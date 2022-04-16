@@ -42,7 +42,6 @@ export class TopnavComponent implements OnInit {
     if (item.command) item.command();
   }
   gotoDashboard() {
-    this.workspaceService.setCurrentWorkspace(null);
     this.goto.dashboard();
   }
   private initProfileMenu() {

@@ -1,12 +1,11 @@
-import { UserStore } from './../user/user.store';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Store, StoreConfig } from '@datorama/akita';
-import { map, mergeMap, tap } from 'rxjs';
+import { map, mergeMap } from 'rxjs';
 import { Board } from 'src/app/core/interface/board.interface';
 import { List } from 'src/app/core/interface/list.interface';
 import { Card } from './../../core/interface/card.interface';
-import { CacheKeys, CacheService } from './../../core/services/cache.service';
+import { UserStore } from './../user/user.store';
 
 export interface BoardState {
   boards: Board[];
@@ -26,7 +25,6 @@ export class BoardsStore extends Store<BoardState> {
   boardsCache: Map<string, Board[]> = new Map();
   constructor(
     private firestore: AngularFirestore,
-    private cacheService: CacheService,
     private userStore: UserStore,
   ) {
     super(createInitialState());
@@ -53,17 +51,17 @@ export class BoardsStore extends Store<BoardState> {
             .filter(list => board.listIDs.includes(list.id))
             .sort((a, b) => a.position - b.position)
         }))),
-        tap(boards => this.boardsCache.set(workspaceID, boards)),
       ))
     ).subscribe(boards => this.update({ boards }))
   }
-  async create(newBoard: Partial<Board>) {
+  async create(newBoard: Partial<Board>): Promise<Board> {
     const id = this.firestore.createId();
     const lists = await this.initNewBoardLists();
     const listIDs: string[] = lists.map(x => x.id);
     const userState = this.userStore.getValue();
     const board: Board = {
-      ...newBoard, id,
+      ...newBoard,
+      id,
       listIDs: listIDs,
       createdAt: new Date().getTime(),
       updatedAt: new Date().getTime(),
@@ -72,12 +70,7 @@ export class BoardsStore extends Store<BoardState> {
     this.firestore.doc<Board>(`board/${id}`).set(board);
     board.lists = lists;
     this.update({ currentBoard: board });
-    const boards = this.boardsCache.get(board.workspaceID);
-    if (!!boards) {
-      boards.push(board);
-      this.boardsCache.set(board.workspaceID, boards);
-    }
-    this.cacheService.setItem(CacheKeys.CurrentBoard, board);
+    return board;
   }
   addCardToList(card: Card) {
     const addToList = (board: Board, c: Card): List[] => {
