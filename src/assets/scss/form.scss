@@ -1,30 +1,33 @@
 @import "constants";
+@import "functions";
 
 input {
   &[type=button] {
     height: times8(4.5);
   }
 
-  color: $Grey;
-  padding: 4px 8px;
-  font-size: $FontSmall;
-  border: none;
-  border: 1px solid $InputBorder;
-  border-radius: 3px;
-  height: times8(3);
-  width: -webkit-fill-available;
-  background-color: $InputBackground;
+  &[type=text] {
 
-  &.ng-invalid.ng-touched {
-    outline: 2px solid $Red;
-    animation: shadowBlink 1s ease-in-out;
-  }
+    color: $Grey;
+    padding: 4px 8px;
+    font-size: $FontSmall;
+    border: 2px solid $InputBorder;
+    border-radius: 3px;
+    height: times8(4);
+    width: -webkit-fill-available;
+    background-color: $InputBackground;
 
-  &:focus {
-    outline: none;
+    &.ng-invalid.ng-touched {
+      outline: 2px solid $Red;
+      animation: shadowBlink 1s ease-in-out;
+    }
 
-    &:not(.ng-invalid.ng-touched) {
-      border: 2px solid $InputBorderFocus;
+    &:focus {
+      outline: none;
+
+      &:not(.ng-invalid.ng-touched) {
+        border: 2px solid $InputBorderFocus;
+      }
     }
   }
 }

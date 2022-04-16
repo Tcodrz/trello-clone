@@ -1,5 +1,5 @@
 <ng-container *ngIf=" board$ | async as board">
-  <app-layout [theme]="board.theme">
+  <app-layout [board]="board">
     <div class="board">
       <app-board-lists [lists]="board.lists" (updateLists)="onUpdateLists($event)"></app-board-lists>
       <ui-card class="create-list" className="list-card">

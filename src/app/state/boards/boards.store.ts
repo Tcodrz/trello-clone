@@ -73,38 +73,16 @@ export class BoardsStore extends Store<BoardState> {
     return board;
   }
   addCardToList(card: Card) {
-    const addToList = (board: Board, c: Card): List[] => {
-      if (!board.lists) return [];
-      return board.lists.map(list => {
-        return list.id === c.listID ?
-          { ...list, cards: list.cards.concat(c) } : list
-      });
-    }
-
     this.update(state => {
-      if (!state.currentBoard) {
-        debugger; // should not occur
-        return state;
-      }
       return {
         ...state,
-        currentBoard: {
-          ...state.currentBoard,
-          lists: addToList(state.currentBoard, card)
-        }
-      }
-    });
-    this.updateBoard(this.getValue().currentBoard as Board);
-
-  }
-  updateBoard(board: Board) {
-    this.update(state => {
-      const boards = this.boardsCache.get(board.workspaceID);
-      if (boards) this.boardsCache.set(board.workspaceID, boards?.map(b => b.id === board.id ? board : b));
-      return {
-        ...state,
-        boards: state.boards.map(x => x.id === board.id ? board : x),
-      }
+        boards: state.boards.map(board => {
+          if (board.listIDs.includes(card.listID)) {
+            board.lists = board.lists?.map(list => list.id === card.listID ? { ...list, cards: [...list.cards, card] } : list);
+          }
+          return board;
+        })
+      };
     });
   }
   private async initNewBoardLists(): Promise<List[]> {

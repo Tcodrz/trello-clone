@@ -15,12 +15,14 @@ export class WorkspaceService {
     private workspaceQuery: WorkspacesQuery,
     private workspaceStore: WorkspaceStore,
   ) { }
-  init() {
-    const currentWorkspace = this.cache.getItem<Workspace>(CacheKeys.CurrentWorkspace);
-    if (!!currentWorkspace) this.workspaceStore.setCurrentWorkspace(currentWorkspace);
-  }
   getAll(): Observable<Workspace[]> { return this.workspaceQuery.workspaces$; }
   getCurrentWorkspace(): Observable<Workspace | null> { return this.workspaceQuery.currentWorkspace$; }
+  getWorkspace(workspaceID: string): Observable<Workspace | null> {
+    return this.workspaceQuery.workspaces$.pipe(
+      map(workspaces => workspaces.find(workspace => workspace.id === workspaceID)),
+      map(workspace => workspace ?? null)
+    );
+  }
   setCurrentWorkspaceByID(workspaceID: string) { this.workspaceStore.setCurrentWorkspaceByID(workspaceID); }
   setCurrentWorkspace(workspace: Workspace | null) { this.workspaceStore.setCurrentWorkspace(workspace); }
   getMenuItems(): Observable<MenuItems[]> {
@@ -38,10 +40,7 @@ export class WorkspaceService {
     const items: MenuItem[] = workspaces.map(workspace => ({
       label: workspace.name,
       id: workspace.id,
-      command: () => {
-        this.workspaceStore.setCurrentWorkspace(workspace);
-        this.goto.workspace()
-      }
+      command: () => this.goto.workspace(workspace.id)
     }));
     return items;
   }

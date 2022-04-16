@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { Icons } from '@ui-components';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -15,29 +16,28 @@ import { CardService } from './../../core/services/card.service';
   styleUrls: ['./card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
+export class CardComponent implements OnInit, OnDestroy {
   @Output() close: EventEmitter<void> = new EventEmitter<void>();
   @ViewChild('cover', { static: false }) cover!: ElementRef;
   card$: Observable<Card | null> = of(null);
   board$: Observable<Board | null> = of(null);
   Icons = Icons;
   constructor(
+    private activeRoute: ActivatedRoute,
     private boardService: BoardsService,
     private cardService: CardService,
     private ref: DynamicDialogRef,
   ) { }
-  ngAfterViewInit(): void {
-    // if (this.cover)
-    // this.cover.nativeElement.style.backgroundColor = 'green';
-  }
   ngOnInit(): void {
+    this.activeRoute.params.subscribe((params: any) => {
+      this.board$ = this.boardService.getBoard(params.boardID);
+    });
     this.card$ = this.cardService.getCurrentCard().pipe(
       tap(card => {
         if (card && card.cover && this.cover)
           this.cover.nativeElement.style.backgroundColor = card.cover;
       })
     );
-    this.board$ = this.boardService.getCurrentBoard();
   }
   ngOnDestroy(): void {
     this.cardService.setCurrentCard(null);
@@ -59,7 +59,7 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
       })
     )
   }
-  onAddChecklistItem(item: ChecklistItem) {
+  onAddChecklistItem(item: Partial<ChecklistItem>) {
     this.cardService.addChecklistItem(item);
   }
   onClose() {
@@ -67,5 +67,8 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   onDeleteChecklist(checklist: Checklist) {
     this.cardService.checklistDelete(checklist);
+  }
+  onItemClicked(item: ChecklistItem) {
+    this.cardService.updateChecklistItem(item);
   }
 }

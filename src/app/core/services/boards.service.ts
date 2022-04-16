@@ -22,11 +22,8 @@ export class BoardsService {
     private firestore: AngularFirestore,
     private goto: GotoService,
   ) { }
-  init(): void {
-    const currentBoard = this.cache.getItem<Board>(CacheKeys.CurrentBoard);
-    if (!!currentBoard) this.boardsStore.update({ currentBoard });
-  }
-  getBoards(): Observable<Board[]> {
+  getBoards(workspaceID: string): Observable<Board[]> {
+    this.boardsStore.init(workspaceID);
     return this.boardsQuery.boards$;
   }
   updateLists(lists: List[]): void {
@@ -41,6 +38,12 @@ export class BoardsService {
         if (boardCache) return of(boardCache) as Observable<Board>;
         else return this.populateBoardLists(board);
       })
+    );
+  }
+  getBoard(boardID: string): Observable<Board | null> {
+    return this.boardsQuery.boards$.pipe(
+      map(boards => boards.find(board => board.id === boardID)),
+      map(board => board ?? null)
     );
   }
   populateBoardLists(board: Board): Observable<Board> {
@@ -67,7 +70,7 @@ export class BoardsService {
     this.cache.setItem(CacheKeys.CurrentBoard, board);
   }
   createNewBoard(newBoard: Partial<Board>): void {
-    this.boardsStore.create(newBoard).then(() => this.goto.board());
+    this.boardsStore.create(newBoard).then((board) => this.goto.board(board.id, board.workspaceID));
   }
   updateListCardsPosition(list: List): void {
     const collection = this.firestore.collection<Card>('card');

@@ -18,7 +18,7 @@ export class GotoService {
   home() { this.goto(''); }
   dashboard() { this.goto('dashboard/boards'); }
   login() { this.goto('home'); }
-  workspace() { this.goto('workspace'); }
+  workspace(workspaceID: string) { this.goto('workspace', { workspaceID }); }
   boards() { this.goto('/dashboard/boards'); }
-  board() { this.goto(`board`); }
+  board(boardID: string, workspaceID: string) { this.goto('board', { workspaceID, boardID }); }
 }
