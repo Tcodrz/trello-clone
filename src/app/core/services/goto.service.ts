@@ -1,4 +1,3 @@
-import { Board } from './../interface/board.interface';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -21,4 +20,5 @@ export class GotoService {
   workspace(workspaceID: string) { this.goto('workspace', { workspaceID }); }
   boards() { this.goto('/dashboard/boards'); }
   board(boardID: string, workspaceID: string) { this.goto('board', { workspaceID, boardID }); }
+  card(cardID: string, boardID: string, workspaceID: string) { this.goto('board', { workspaceID, boardID, cardID }); }
 }

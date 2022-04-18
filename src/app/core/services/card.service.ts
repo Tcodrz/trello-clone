@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Observable } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { Checklist, ChecklistItem } from '../interface/checklist.interface';
-import { CardQuery } from './../../state/card/card.query';
 import { CardStore } from './../../state/card/card.store';
 import { Card } from './../interface/card.interface';
 import { BoardsService } from './boards.service';
@@ -13,17 +12,15 @@ import { BoardsService } from './boards.service';
 export class CardService {
 
   constructor(
-    private cardQuery: CardQuery,
     private cardStore: CardStore,
     private firestore: AngularFirestore,
     private boardService: BoardsService,
 
   ) { }
-  getCurrentCard(): Observable<Card | null> {
-    return this.cardQuery.card$;
-  }
-  setCurrentCard(card: Card | null): void {
-    this.cardStore.update({ card });
+  getCard(cardID: string): Observable<Card> {
+    return this.firestore.doc<Card>(`card/${cardID}`).get()
+      .pipe(map(card => ({ ...card.data() as Card, id: card.id })),
+        tap(card => console.log(card)));
   }
   addChecklist(checkListName: string): void {
     const card = this.cardStore.getValue().card;
@@ -39,23 +36,22 @@ export class CardService {
     }
 
   }
-  addChecklistItem(item: ChecklistItem) {
+  addChecklistItem(item: Partial<ChecklistItem>) {
+    item.id = this.firestore.createId();
     const card = this.cardStore.getValue().card;
     if (!card) return;
     const index = card.checklists.findIndex(list => list.id === item.checklistID);
     if (index < 0) return;
     const checklist = card.checklists[index];
-    checklist.items = [...checklist.items, item];
-
-    this.cardStore.update({
-      card: {
-        ...card,
-        checklists: card.checklists.map(list => list.id === item.checklistID ? checklist : list)
-      }
-    })
+    checklist.items = [...checklist.items, item as ChecklistItem];
+    const newCard = {
+      ...card,
+      checklists: card.checklists.map(list => list.id === item.checklistID ? checklist : list)
+    };
+    this.cardStore.update({ card: newCard });
+    this.updateDB(newCard);
   }
   checklistDelete(checklist: Checklist): void {
-    const collection = this.firestore.collection<Card>('card');
     this.cardStore.update(state => {
       if (!state.card) return state;
       const checklists = state.card.checklists.filter(list => list.id !== checklist.id);
@@ -66,8 +62,24 @@ export class CardService {
         lists: board.lists.map(list => list.id === card.listID ?
           ({ ...list, cards: list.cards.map(c => card.id === c.id ? card : c) }) : list)
       });
-      collection.doc(card.id).set(card);
+      this.updateDB(card);
       return { card };
     });
+  }
+  updateChecklistItem(item: ChecklistItem) {
+    const card = this.cardStore.getValue().card;
+    if (!card) return;
+    const newCard: Card = {
+      ...card,
+      checklists: card.checklists
+        .map(list => list.id === item.checklistID ?
+          { ...list, items: list.items.map(i => i.id === item.id ? item : i) } : list)
+    }
+    this.updateDB(newCard);
+    this.cardStore.update({ card: newCard });
+  }
+
+  updateDB(card: Card) {
+    this.firestore.collection<Card>('card').doc(card.id).set(card);
   }
 }

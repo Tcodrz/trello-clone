@@ -2,8 +2,8 @@
   cdkDropListOrientation="vertical" (cdkDropListDropped)="onDrop($event)">
   <ng-container *ngFor="let card of list.cards">
     <div cdkDrag class="mb-1">
-      <div *cdkDragPlaceholder [ngStyle]="{height: getHeight(cardPreview), marginBottom: '10px'}"></div>
-      <app-list-card-preview #cardPreview [card]="card" class="pointer">
+      <div *cdkDragPlaceholder class="mb-1"></div>
+      <app-list-card-preview [card]="card" class="pointer" (open)="onCardOpen($event)">
       </app-list-card-preview>
     </div>
   </ng-container>

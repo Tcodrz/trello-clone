@@ -4,9 +4,7 @@ import { Store, StoreConfig } from '@datorama/akita';
 import { map, mergeMap } from 'rxjs';
 import { Board } from 'src/app/core/interface/board.interface';
 import { List } from 'src/app/core/interface/list.interface';
-import { Card } from './../../core/interface/card.interface';
 import { UserStore } from './../user/user.store';
-
 export interface BoardState {
   boards: Board[];
   currentBoard: Board | null;
@@ -71,19 +69,6 @@ export class BoardsStore extends Store<BoardState> {
     board.lists = lists;
     this.update({ currentBoard: board });
     return board;
-  }
-  addCardToList(card: Card) {
-    this.update(state => {
-      return {
-        ...state,
-        boards: state.boards.map(board => {
-          if (board.listIDs.includes(card.listID)) {
-            board.lists = board.lists?.map(list => list.id === card.listID ? { ...list, cards: [...list.cards, card] } : list);
-          }
-          return board;
-        })
-      };
-    });
   }
   private async initNewBoardLists(): Promise<List[]> {
     const lists: List[] = [

@@ -24,7 +24,8 @@
           <div class="checklists">
             <div *ngFor="let list of card.checklists">
               <app-checklist [checklist]="list" [progress]="getChecklistProgress(list.id) | async"
-                (addItem)="onAddChecklistItem($event)" (delete)="onDeleteChecklist($event)"></app-checklist>
+                (addItem)="onAddChecklistItem($event)" (delete)="onDeleteChecklist($event)"
+                (itemCompleted)="onItemCompleted($event)"></app-checklist>
             </div>
           </div>
 

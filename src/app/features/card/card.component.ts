@@ -1,5 +1,6 @@
-import { ActivatedRoute } from '@angular/router';
+import { GotoService } from './../../core/services/goto.service';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Icons } from '@ui-components';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { map, Observable, of, tap } from 'rxjs';
@@ -16,23 +17,34 @@ import { CardService } from './../../core/services/card.service';
   styleUrls: ['./card.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardComponent implements OnInit, OnDestroy {
+export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
   @Output() close: EventEmitter<void> = new EventEmitter<void>();
   @ViewChild('cover', { static: false }) cover!: ElementRef;
   card$: Observable<Card | null> = of(null);
   board$: Observable<Board | null> = of(null);
   Icons = Icons;
+  workspaceID!: string;
+  boardID!: string;
   constructor(
-    private activeRoute: ActivatedRoute,
+    private router: Router,
+    private goto: GotoService,
     private boardService: BoardsService,
     private cardService: CardService,
     private ref: DynamicDialogRef,
   ) { }
+  ngAfterViewInit(): void {
+    // if (this.cover)
+    // this.cover.nativeElement.style.backgroundColor = 'green';
+  }
   ngOnInit(): void {
-    this.activeRoute.params.subscribe((params: any) => {
-      this.board$ = this.boardService.getBoard(params.boardID);
-    });
-    this.card$ = this.cardService.getCurrentCard().pipe(
+    const url = this.router.url;
+    const parts = url.split(';');
+    this.workspaceID = parts[1].split('=')[1];
+    this.boardID = parts[2].split('=')[1];
+    const cardID = parts[3].split('=')[1];
+    if (!this.boardID || !cardID) debugger;
+    this.board$ = this.boardService.getBoard(this.boardID);
+    this.card$ = this.cardService.getCard(cardID).pipe(
       tap(card => {
         if (card && card.cover && this.cover)
           this.cover.nativeElement.style.backgroundColor = card.cover;
@@ -40,7 +52,7 @@ export class CardComponent implements OnInit, OnDestroy {
     );
   }
   ngOnDestroy(): void {
-    this.cardService.setCurrentCard(null);
+    this.goto.board(this.boardID, this.workspaceID); // clear card id from route
   }
   onChecklistAdd(name: string) {
     this.cardService.addChecklist(name);
@@ -59,16 +71,12 @@ export class CardComponent implements OnInit, OnDestroy {
       })
     )
   }
-  onAddChecklistItem(item: Partial<ChecklistItem>) {
-    this.cardService.addChecklistItem(item);
-  }
-  onClose() {
-    this.ref.close();
-  }
-  onDeleteChecklist(checklist: Checklist) {
+  onAddChecklistItem(item: Partial<ChecklistItem>) { this.cardService.addChecklistItem(item); }
+  onClose(): void { this.ref.close(); }
+  onDeleteChecklist(checklist: Checklist): void {
     this.cardService.checklistDelete(checklist);
   }
-  onItemClicked(item: ChecklistItem) {
+  onItemCompleted(item: ChecklistItem): void {
     this.cardService.updateChecklistItem(item);
   }
 }

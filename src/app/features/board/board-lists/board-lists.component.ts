@@ -1,3 +1,4 @@
+import { ListsStore } from './../../../state/lists/lists.store';
 import { BoardsService } from './../../../core/services/boards.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
@@ -12,10 +13,11 @@ import { Icons, MenuItems } from '@ui-components';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class BoardListsComponent implements OnInit {
-  @Input() set lists(lists: List[] | undefined) {
-    if (!!lists) this._lists = lists;
+  @Input() set lists(value: List[] | null) {
+    if (!!value) this._lists = value;
   };
-  @Output() updateLists: EventEmitter<List[]> = new EventEmitter();
+  @Output() updateLists: EventEmitter<List[]> = new EventEmitter<List[]>();
+  @Output() openCard: EventEmitter<Card> = new EventEmitter<Card>();
   _lists: List[] = [];
   Icons = Icons;
   listMenu: MenuItems[] = [{
@@ -29,20 +31,21 @@ export class BoardListsComponent implements OnInit {
   ]
   constructor(
     private boardService: BoardsService,
+    private listsStore: ListsStore,
   ) { }
-
-  ngOnInit(): void {
+  ngOnInit(): void { }
+  onCardCreate(newCard: Partial<Card>): void {
+    this.listsStore.createCard(newCard);
   }
-  onCardCreate(newCard: Partial<Card>) {
-    console.log(newCard);
-    this.boardService.createCard(newCard);
-  }
-  onUpdateList(list: List) {
+  onUpdateList(list: List): void {
     this.boardService.updateListCardsPosition(list);
   }
-  onDrop(event: CdkDragDrop<List[]>) {
+  onDrop(event: CdkDragDrop<List[]>): void {
     moveItemInArray(this._lists, event.previousIndex, event.currentIndex);
     const newLists = this._lists.map((list, i) => ({ ...list, position: i + 1 }));
     this.updateLists.emit(newLists);
+  }
+  onCardOpen(card: Card): void {
+    this.openCard.emit(card);
   }
 }

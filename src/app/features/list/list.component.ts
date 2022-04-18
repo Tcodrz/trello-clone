@@ -1,5 +1,6 @@
+import { GotoService } from './../../core/services/goto.service';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Icons } from '@ui-components';
 import { List } from 'src/app/core/interface/list.interface';
@@ -16,6 +17,7 @@ export class ListComponent implements OnInit {
   @Input() list!: List;
   @Output() createCard: EventEmitter<Partial<Card>> = new EventEmitter();
   @Output() updateList: EventEmitter<List> = new EventEmitter();
+  @Output() openCard: EventEmitter<Card> = new EventEmitter<Card>();
   Icons = Icons;
   createMode: boolean = false;
   newCardName: FormControl = new FormControl('');
@@ -40,8 +42,7 @@ export class ListComponent implements OnInit {
     };
     this.updateList.emit(newList);
   }
-  getHeight(element: ListCardPreviewComponent): string {
-    const height = element.elementRef.nativeElement.parentElement.offsetHeight;
-    return `${height}px`;
+  onCardOpen(card: Card) {
+    this.openCard.emit(card);
   }
 }

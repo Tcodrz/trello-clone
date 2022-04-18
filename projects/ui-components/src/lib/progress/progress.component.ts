@@ -7,15 +7,23 @@ import { ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProgressComponent {
-  @Input() set value(val: number | null) {
-    console.log(val);
-    if (this.progress && (val || val === 0)) this.setProgrssStyles(val);
+  @Input() set value(val: number | null) { this.setProgrssStyles(val ?? 0); };
+  @ViewChild('progress', { static: true }) progress!: ElementRef;
+  width: number = 0;
+  progressValueStyles = {
+    height: 'inherit',
+    transition: 'all 2s ease-in -out',
+    width: '0%',
+    backgroundColor: 'transparent'
   };
-  @ViewChild('progress') progress!: ElementRef;
   constructor() { }
   setProgrssStyles(i: number) {
-    const element = this.progress.nativeElement as HTMLDivElement;
-    element.style.width = `${i}%`;
-    element.style.backgroundColor = i === 100 ? '#61bd4f' : '#5ba4cf';
+    this.width = i;
+    this.progressValueStyles = {
+      ...this.progressValueStyles,
+      backgroundColor: i === 100 ? '#61bd4f' : '#5ba4cf',
+      width: this.width + '%',
+      transition: 'all 2s ease-in-out',
+    }
   }
 }

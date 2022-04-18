@@ -14,7 +14,8 @@
               </div>
             </div>
           </div>
-          <app-list [list]="list" (createCard)="onCardCreate($event)" (updateList)="onUpdateList($event)"></app-list>
+          <app-list [list]="list" (createCard)="onCardCreate($event)" (updateList)="onUpdateList($event)"
+            (openCard)="onCardOpen($event)"></app-list>
         </ui-card>
       </div>
     </ng-container>

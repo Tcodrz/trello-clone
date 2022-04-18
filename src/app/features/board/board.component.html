@@ -1,7 +1,8 @@
 <ng-container *ngIf=" board$ | async as board">
   <app-layout [board]="board">
     <div class="board">
-      <app-board-lists [lists]="board.lists" (updateLists)="onUpdateLists($event)"></app-board-lists>
+      <app-board-lists [lists]="lists$ | async" (updateLists)="onUpdateLists($event)" (openCard)="onCardOpen($event)">
+      </app-board-lists>
       <ui-card class="create-list" className="list-card">
         <ui-button className="width-10">Add another List</ui-button>
       </ui-card>
