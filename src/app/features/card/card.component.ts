@@ -1,16 +1,15 @@
-import { GotoService } from './../../core/services/goto.service';
+import { Location } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import { Icons } from '@ui-components';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { map, Observable, of, tap } from 'rxjs';
+import { map, Observable, of, Subscription, tap } from 'rxjs';
 import { Board } from 'src/app/core/interface/board.interface';
 import { Card } from 'src/app/core/interface/card.interface';
 import { ChecklistItem } from 'src/app/core/interface/checklist.interface';
+import { ModalService } from './../../../../projects/ui-components/src/lib/modal/modal.service';
 import { Checklist } from './../../core/interface/checklist.interface';
 import { BoardsService } from './../../core/services/boards.service';
 import { CardService } from './../../core/services/card.service';
-
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -25,11 +24,13 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
   Icons = Icons;
   workspaceID!: string;
   boardID!: string;
+  subscription!: Subscription;
+  cbOnClose: (() => void) | undefined;
   constructor(
-    private router: Router,
-    private goto: GotoService,
     private boardService: BoardsService,
     private cardService: CardService,
+    private location: Location,
+    private modal: ModalService,
     private ref: DynamicDialogRef,
   ) { }
   ngAfterViewInit(): void {
@@ -37,7 +38,7 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
     // this.cover.nativeElement.style.backgroundColor = 'green';
   }
   ngOnInit(): void {
-    const url = this.router.url;
+    const url = this.location.path();
     const parts = url.split(';');
     this.workspaceID = parts[1].split('=')[1];
     this.boardID = parts[2].split('=')[1];
@@ -50,9 +51,13 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
           this.cover.nativeElement.style.backgroundColor = card.cover;
       })
     );
+    this.subscription = this.modal.config().subscribe(modal => {
+      this.cbOnClose = modal.cbOnClose;
+    });
   }
   ngOnDestroy(): void {
-    this.goto.board(this.boardID, this.workspaceID); // clear card id from route
+    if (this.cbOnClose) this.cbOnClose();
+    this.subscription.unsubscribe();
   }
   onChecklistAdd(name: string) {
     this.cardService.addChecklist(name);

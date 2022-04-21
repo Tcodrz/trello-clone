@@ -6,6 +6,7 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 
 export interface Modal extends DynamicDialogConfig {
   component: Type<unknown> | null;
+  cbOnClose?: () => void
 }
 
 @Injectable()

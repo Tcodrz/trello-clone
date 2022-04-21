@@ -1,6 +1,6 @@
-import { Subscription } from 'rxjs';
-import { Component, OnInit, ChangeDetectionStrategy, Type, Input, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { DialogService, DynamicDialogConfig } from 'primeng/dynamicdialog';
+import { Subscription } from 'rxjs';
 import { Modal, ModalService } from './modal.service';
 
 @Component({

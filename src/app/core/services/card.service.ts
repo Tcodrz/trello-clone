@@ -19,8 +19,7 @@ export class CardService {
   ) { }
   getCard(cardID: string): Observable<Card> {
     return this.firestore.doc<Card>(`card/${cardID}`).get()
-      .pipe(map(card => ({ ...card.data() as Card, id: card.id })),
-        tap(card => console.log(card)));
+      .pipe(map(card => ({ ...card.data() as Card, id: card.id })));
   }
   addChecklist(checkListName: string): void {
     const card = this.cardStore.getValue().card;

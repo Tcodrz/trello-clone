@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -7,7 +8,8 @@ import { Router } from '@angular/router';
 export class GotoService {
 
   constructor(
-    private router: Router
+    private router: Router,
+    private location: Location
   ) { }
   private goto(route: string, params?: object) {
     const commands: any[] = [route];
@@ -20,5 +22,13 @@ export class GotoService {
   workspace(workspaceID: string) { this.goto('workspace', { workspaceID }); }
   boards() { this.goto('/dashboard/boards'); }
   board(boardID: string, workspaceID: string) { this.goto('board', { workspaceID, boardID }); }
-  card(cardID: string, boardID: string, workspaceID: string) { this.goto('board', { workspaceID, boardID, cardID }); }
+  cardToggle(cardID: string) {
+    const url = this.location.path();
+    const parts = url.split(';');
+    if (parts.length === 3) // no card selected
+      this.location.replaceState(url + ';cardID=' + cardID);
+    else if (parts.length === 4) // remove cardID from URL
+      this.location.replaceState(parts.slice(0, parts.length - 1).join(';'));
+    else debugger; // shold not occur
+  }
 }

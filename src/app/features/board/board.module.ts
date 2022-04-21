@@ -1,7 +1,7 @@
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ButtonModule, UICardModule, MenuModule } from '@ui-components';
+import { ButtonModule, MenuModule, UICardModule } from '@ui-components';
 import { LayoutModule } from './../layout/layout.module';
 import { ListModule } from './../list/list.module';
 import { BoardListsComponent } from './board-lists/board-lists.component';
