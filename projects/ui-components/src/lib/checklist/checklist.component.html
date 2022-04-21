@@ -1,0 +1,43 @@
+<ng-container *ngIf="checklist">
+
+  <div class="header">
+    <div class="icon">
+      <ui-icon [icon]="Icons.CheckSquare"></ui-icon>
+    </div>
+    <div class="list-name">{{ checklist.name }}</div>
+    <ui-button className="btn" (click)="closeMenu.onToggle($event)">Delete</ui-button>
+    <ui-menu #closeMenu [title]="'Delete checklist?'" class="d-none">
+      <div>Deleting a checklist is permanent and there is no way to get it back.</div>
+      <ui-button className="danger width-10 mt-2" (click)="onDeleteChecklist(); closeMenu.onHide()">
+        Delete checklist
+      </ui-button>
+    </ui-menu>
+  </div>
+
+  <div class="progress">
+    <div class="value">{{progress$ | async}}%</div>
+    <ui-progress [value]="progress$ | async"></ui-progress>
+  </div>
+
+  <form [formGroup]="form" (ngSubmit)="onAddItem()">
+    <ng-container formArrayName="items">
+      <ng-container *ngFor="let control of itemsControls.controls; let i = index">
+        <ui-checklist-item [item]="control.value" [selectedItemID]="selectedItemID" (updateItem)="onUpdateItem($event)"
+          (selectItem)="onItemSelected($event)" (unselectItem)="onItemUnselect()">
+        </ui-checklist-item>
+      </ng-container>
+    </ng-container>
+
+    <div *ngIf="!createMode">
+      <ui-button className="btn" (click)="toggleCreateMode()">Add an item</ui-button>
+    </div>
+
+    <div *ngIf="createMode" class="add-item">
+      <input type="text" formControlName="newItem" #addItemInput>
+      <div class="buttons">
+        <ui-button [className]="'primary w-30'" [type]="'submit'">Add</ui-button>
+        <ui-button className="icon" [icon]="Icons.Times" (click)="createMode = false"></ui-button>
+      </div>
+    </div>
+  </form>
+</ng-container>

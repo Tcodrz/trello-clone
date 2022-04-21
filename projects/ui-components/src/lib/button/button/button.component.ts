@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { Icons } from '../icon/icons';
 
 export type ButtonTypes = 'button' | 'submit';
@@ -14,4 +14,5 @@ export class ButtonComponent {
   @Input() icon: Icons | undefined = Icons.None;
   @Input() className: string | undefined = '';
   @Input() disabled: boolean | undefined = false;
+  @Output() submit: EventEmitter<void> = new EventEmitter<void>();
 }

@@ -10,19 +10,23 @@ import { BoardsService } from './boards.service';
   providedIn: 'root'
 })
 export class CardService {
-
+  private card: Card | null = null;
   constructor(
     private cardStore: CardStore,
     private firestore: AngularFirestore,
     private boardService: BoardsService,
 
   ) { }
-  getCard(cardID: string): Observable<Card> {
-    return this.firestore.doc<Card>(`card/${cardID}`).get()
-      .pipe(map(card => ({ ...card.data() as Card, id: card.id })));
+  getCard(cardID: string): Observable<Card | null> {
+    return this.firestore.doc<Card>(`card/${cardID}`).valueChanges()
+      .pipe(
+        tap(console.log),
+        map(card => card ?? null),
+        tap(card => this.card = card)
+      );
   }
   addChecklist(checkListName: string): void {
-    const card = this.cardStore.getValue().card;
+    const card = this.card;
     const collection = this.firestore.collection<Card>('card');
     const checklist: Checklist = {
       id: this.firestore.createId(),
@@ -31,13 +35,13 @@ export class CardService {
     };
     if (card) {
       card.checklists = !card.checklists ? [checklist] : [...card.checklists, checklist];
-      collection.doc(card.id).set(card).then(() => this.cardStore.update({ card }));
+      collection.doc(card.id).set(card);
     }
 
   }
   addChecklistItem(item: Partial<ChecklistItem>) {
     item.id = this.firestore.createId();
-    const card = this.cardStore.getValue().card;
+    const card = this.card;
     if (!card) return;
     const index = card.checklists.findIndex(list => list.id === item.checklistID);
     if (index < 0) return;
@@ -47,26 +51,19 @@ export class CardService {
       ...card,
       checklists: card.checklists.map(list => list.id === item.checklistID ? checklist : list)
     };
-    this.cardStore.update({ card: newCard });
     this.updateDB(newCard);
   }
   checklistDelete(checklist: Checklist): void {
-    this.cardStore.update(state => {
-      if (!state.card) return state;
-      const checklists = state.card.checklists.filter(list => list.id !== checklist.id);
-      const card: Card = { ...state.card, checklists };
-      const board = this.boardService.getCurrentBoardValue();
-      if (board && board.lists) this.boardService.setCurrentBoard({
-        ...board,
-        lists: board.lists.map(list => list.id === card.listID ?
-          ({ ...list, cards: list.cards.map(c => card.id === c.id ? card : c) }) : list)
-      });
-      this.updateDB(card);
-      return { card };
-    });
+    if (!this.card) return;
+    const checklists = this.card.checklists.filter(list => list.id !== checklist.id);
+    const card = {
+      ...this.card,
+      checklists
+    }
+    this.updateDB(card);
   }
   updateChecklistItem(item: ChecklistItem) {
-    const card = this.cardStore.getValue().card;
+    const card = this.card;
     if (!card) return;
     const newCard: Card = {
       ...card,
@@ -75,7 +72,6 @@ export class CardService {
           { ...list, items: list.items.map(i => i.id === item.id ? item : i) } : list)
     }
     this.updateDB(newCard);
-    this.cardStore.update({ card: newCard });
   }
 
   updateDB(card: Card) {

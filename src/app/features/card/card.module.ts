@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { ButtonModule, MenuModule } from '@ui-components';
-import { ChecklistModule } from './../checklist/checklist.module';
+import { ButtonModule, ChecklistModule, MenuModule } from '@ui-components';
 import { AttachementsMenuComponent } from './card-side-menu/attachements-menu/attachements-menu.component';
 import { CardSideMenuComponent } from './card-side-menu/card-side-menu.component';
 import { ChecklistMenuComponent } from './card-side-menu/checklist-menu/checklist-menu.component';

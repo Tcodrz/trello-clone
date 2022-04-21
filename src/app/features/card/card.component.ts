@@ -59,9 +59,7 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
     if (this.cbOnClose) this.cbOnClose();
     this.subscription.unsubscribe();
   }
-  onChecklistAdd(name: string) {
-    this.cardService.addChecklist(name);
-  }
+  onChecklistAdd(name: string) { this.cardService.addChecklist(name); }
   getChecklistProgress(checklistID: string): Observable<number> {
     return this.card$.pipe(
       map(card => {
@@ -78,10 +76,6 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
   }
   onAddChecklistItem(item: Partial<ChecklistItem>) { this.cardService.addChecklistItem(item); }
   onClose(): void { this.ref.close(); }
-  onDeleteChecklist(checklist: Checklist): void {
-    this.cardService.checklistDelete(checklist);
-  }
-  onItemCompleted(item: ChecklistItem): void {
-    this.cardService.updateChecklistItem(item);
-  }
+  onDeleteCheckList(checklist: Checklist): void { this.cardService.checklistDelete(checklist); }
+  onUpdateItem(item: ChecklistItem): void { this.cardService.updateChecklistItem(item); }
 }

@@ -12,6 +12,8 @@ export * from './lib/card/card.component';
 export * from './lib/card/card.module';
 export * from './lib/checkbox/checkbox.component';
 export * from './lib/checkbox/checkbox.module';
+export * from './lib/checklist/checklist.component';
+export * from './lib/checklist/checklist.module';
 export * from './lib/menu/menu.module';
 export * from './lib/menu/menu/menu.component';
 export * from './lib/menu/nav-menu/nav-menu.component';

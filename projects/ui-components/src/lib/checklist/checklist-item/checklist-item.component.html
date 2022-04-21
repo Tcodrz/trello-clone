@@ -1,0 +1,15 @@
+<ng-container *ngIf="item">
+  <div [ngClass]="editMode ? 'edit' : '' ">
+    <form [formGroup]="form" (ngSubmit)="onSaveItem()">
+      <div class="checklist-item">
+        <ui-checkbox formControlName="completed"></ui-checkbox>
+        <div *ngIf="!editMode" (click)="onItemClick()" class="title-preview">{{ item.title }}</div>
+        <input *ngIf="editMode" type="text" formControlName="title" #titleInput>
+      </div>
+      <div *ngIf="editMode" class="buttons">
+        <ui-button className="primary" [type]="'submit'">Save</ui-button>
+        <ui-button className="icon" [icon]="Icons.Times" (click)="unselectItem.emit()"></ui-button>
+      </div>
+    </form>
+  </div>
+</ng-container>

@@ -1,0 +1,46 @@
+@import "constants";
+@import "functions";
+
+:host {
+  display: block;
+  padding: 0 times8(1);
+  margin: times8(1) 0;
+  border-radius: 4px;
+
+  &:hover {
+    background-color: $SidbarLinkHover;
+  }
+
+  .edit {
+    padding: times8(1) 0;
+  }
+
+  .checklist-item {
+    display: flex;
+    align-items: center;
+    column-gap: times8(1);
+    cursor: pointer;
+
+    input:not(:focus):not(:active) {
+      border: none;
+      background-color: transparent;
+    }
+
+    .title-preview {
+      font-weight: 400;
+      font-size: 14px;
+      color: #495057;
+      width: 100%;
+      padding-left: times8(1);
+      padding-top: times8(1);
+      padding-bottom: times8(1);
+    }
+  }
+
+  .buttons {
+    display: flex;
+    column-gap: times8(1);
+    margin-top: times8(1);
+    padding-left: times8(3);
+  }
+}

@@ -1,0 +1,38 @@
+@import "constants";
+@import "functions";
+
+.header {
+  display: flex;
+  column-gap: times8(3);
+  align-items: center;
+  justify-content: space-between;
+
+  .icon {
+    color: $GreyText;
+  }
+
+  .list-name {
+    flex-grow: 18;
+  }
+}
+
+.progress {
+  display: flex;
+
+  .value {
+    display: inline;
+  }
+
+  ui-progress {
+    flex-grow: 1;
+  }
+}
+
+.add-item {
+
+  .buttons {
+    display: flex;
+    column-gap: times8(1);
+    margin-top: times8(1);
+  }
+}

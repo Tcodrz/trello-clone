@@ -5,6 +5,7 @@ export interface Checklist {
 }
 
 export interface ChecklistItem {
+  id: string;
   title: string;
   checklistID: string;
   completed: boolean;
