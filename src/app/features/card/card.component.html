@@ -9,7 +9,11 @@
       </div>
     </div>
     <div class="close-icon">
-      <ui-button className="icon no-hover" [icon]="Icons.Times" (click)="onClose()"></ui-button>
+      <ui-button
+        className="icon no-hover"
+        [icon]="Icons.Times"
+        (click)="onClose()"
+      ></ui-button>
     </div>
     <div class="container">
       <div class="header">
@@ -22,16 +26,23 @@
           <div class="attachements"></div>
 
           <div class="checklists">
-            <div *ngFor="let list of card.checklists">
-              <ui-checklist [checklist]="list" (addItem)="onAddChecklistItem($event)"
-                (updateItem)="onUpdateItem($event)" (deleteChecklist)="onDeleteCheckList($event)"></ui-checklist>
-            </div>
+            <ui-checklist
+              *ngFor="let list of card.checklists"
+              [checklist]="list"
+              (addItem)="onAddChecklistItem($event)"
+              (updateItem)="onUpdateItem($event)"
+              (deleteChecklist)="onDeleteCheckList($event)"
+              (updateChecklist)="onUpdateChecklist($event)"
+            ></ui-checklist>
           </div>
 
           <div class="activity"></div>
         </div>
         <div class="side-menu">
-          <app-card-side-menu [board]="board$ | async" (addChecklist)="onChecklistAdd($event)"></app-card-side-menu>
+          <app-card-side-menu
+            [board]="board$ | async"
+            (addChecklist)="onChecklistAdd($event)"
+          ></app-card-side-menu>
         </div>
       </div>
     </div>

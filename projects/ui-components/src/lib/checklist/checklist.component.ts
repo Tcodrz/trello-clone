@@ -1,3 +1,4 @@
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
@@ -16,27 +17,22 @@ export class ChecklistComponent implements OnInit {
   @Output() addItem: EventEmitter<Partial<ChecklistItem>> = new EventEmitter<Partial<ChecklistItem>>();
   @Output() updateItem: EventEmitter<ChecklistItem> = new EventEmitter<ChecklistItem>();
   @Output() deleteChecklist: EventEmitter<Checklist> = new EventEmitter<Checklist>();
+  @Output() updateChecklist: EventEmitter<Checklist> = new EventEmitter<Checklist>();
   @ViewChild('addItemInput', { static: false }) addItemInput!: ElementRef;
   progress$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   form!: FormGroup;
-  items: FormArray = new FormArray([]);
   Icons = Icons;
   createMode: boolean = false;
   selectedItemID!: string;
   constructor(
     private fb: FormBuilder,
   ) { }
-  get itemsControls(): FormArray { return this.form.get('items') as FormArray; }
   ngOnInit(): void {
     this.form = this.fb.group({
-      items: this.fb.array([]),
       newItem: this.fb.control(''),
     });
     if (this.checklist) {
-      this.checklist.items.forEach(item => {
-        const control = this.fb.control(item);
-        (this.form.get('items') as FormArray).push(control);
-      });
+      this.checklist.items.sort((a, b) => a.position - b.position);
       this.calcProgress(this.checklist);
     }
   }
@@ -55,8 +51,9 @@ export class ChecklistComponent implements OnInit {
     const title = this.form.value.newItem;
     const item = {
       title: title,
-      checklistID: this.checklist?.id,
+      checklistID: this.checklist.id,
       completed: false,
+      position: this.checklist.items.length
     } as ChecklistItem;
     this.addItem.emit(item);
   }
@@ -75,4 +72,10 @@ export class ChecklistComponent implements OnInit {
   onItemSelected(item: ChecklistItem): void { this.selectedItemID = item.id; }
   onItemUnselect(): void { this.selectedItemID = ''; }
   resetSelectedList() { this.selectedItemID = ''; }
+  onDrop(event: CdkDragDrop<ChecklistItem[]>) {
+    if (!this.checklist) return;
+    moveItemInArray(this.checklist.items, event.previousIndex, event.currentIndex);
+    this.checklist.items.forEach((item, i) => item.position = i + 1);
+    this.updateChecklist.emit(this.checklist);
+  }
 }

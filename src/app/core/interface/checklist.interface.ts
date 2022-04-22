@@ -9,4 +9,5 @@ export interface ChecklistItem {
   title: string;
   checklistID: string;
   completed: boolean;
+  position: number;
 }

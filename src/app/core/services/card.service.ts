@@ -97,6 +97,11 @@ export class CardService {
     }
     this.updateDB(newCard);
   }
+  updateChecklist(list: Checklist) {
+    if (!this.card) return;
+    this.card.checklists = this.card.checklists.map(x => x.id === list.id ? list : x);
+    this.updateDB(this.card);
+  }
   updateDB(card: Card) {
     this.firestore.collection<Card>('card').doc(card.id).set(card);
   }

@@ -78,4 +78,5 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
   onClose(): void { this.ref.close(); }
   onDeleteCheckList(checklist: Checklist): void { this.cardService.checklistDelete(checklist); }
   onUpdateItem(item: ChecklistItem): void { this.cardService.updateChecklistItem(item); }
+  onUpdateChecklist(list: Checklist): void { this.cardService.updateChecklist(list); }
 }

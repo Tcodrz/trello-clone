@@ -7,7 +7,6 @@ export class ClickOutsideDirective {
   @Output() clickOutside: EventEmitter<void> = new EventEmitter<void>();
   @HostListener('document:click') onClickOutside() {
     if (!this.inside) this.clickOutside.emit();
-    console.log(this.inside);
     this.inside = false;
   }
   @HostListener('click') onClickInside() {

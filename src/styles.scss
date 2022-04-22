@@ -90,3 +90,11 @@ div.card.menu {
   background-color: $CardModalBackgroung;
 
 }
+
+ui-checklist {
+
+  .cdk-drag-placeholder {
+    cursor: pointer;
+    background-color: $SidbarLinkHover;
+  }
+}
