@@ -1,22 +1,24 @@
-<div class="list" #cards="cdkDropList" cdkDropList [cdkDropListData]="list.cards" cdkDropListLockAxis="y"
-  cdkDropListOrientation="vertical" (cdkDropListDropped)="onDrop($event)">
-  <ng-container *ngFor="let card of list.cards">
-    <div cdkDrag class="mb-1">
-      <div *cdkDragPlaceholder class="mb-1"></div>
-      <app-list-card-preview [card]="card" class="pointer" (open)="onCardOpen($event)">
-      </app-list-card-preview>
+<ng-container *ngIf="list$ | async as list">
+  <div class="list" #cards="cdkDropList" cdkDropList [cdkDropListData]="list.cards" cdkDropListLockAxis="y"
+    cdkDropListOrientation="vertical" (cdkDropListDropped)="onDrop($event, list)">
+    <ng-container *ngFor="let card of list.cards">
+      <div cdkDrag class="mb-1">
+        <div *cdkDragPlaceholder class="mb-1"></div>
+        <app-list-card-preview [card]="card" class="pointer" (open)="onCardOpen($event)">
+        </app-list-card-preview>
+      </div>
+    </ng-container>
+  </div>
+  <ng-container *ngIf="!createMode">
+    <ui-button [className]="'width-10'" (click)="onAddCard()">Add card</ui-button>
+  </ng-container>
+  <ng-container *ngIf="createMode">
+    <ui-card className="preview-card">
+      <textarea [formControl]="newCardName" name="" id="" cols="31" rows="3" autofocus class="clean"></textarea>
+    </ui-card>
+    <div class="footer">
+      <ui-button className="primary" (click)="onSubmit(list)">Add Card</ui-button>
+      <ui-button className="icon no-hover" [icon]="Icons.Times" (click)="onCancel()"></ui-button>
     </div>
   </ng-container>
-</div>
-<ng-container *ngIf="!createMode">
-  <ui-button [className]="'width-10'" (click)="onAddCard()">Add card</ui-button>
-</ng-container>
-<ng-container *ngIf="createMode">
-  <ui-card className="preview-card">
-    <textarea [formControl]="newCardName" name="" id="" cols="31" rows="3" autofocus class="clean"></textarea>
-  </ui-card>
-  <div class="footer">
-    <ui-button className="primary" (click)="onSubmit()">Add Card</ui-button>
-    <ui-button className="icon no-hover" [icon]="Icons.Times" (click)="onCancel()"></ui-button>
-  </div>
 </ng-container>

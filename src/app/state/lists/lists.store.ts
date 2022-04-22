@@ -28,7 +28,8 @@ export class ListsStore extends Store<ListsState> {
   setLists(board: Board) {
     this.firestore.collection<List>('list').get().pipe(
       map(lists => lists.docs.filter(list => board.listIDs.includes(list.id))),
-      map(lists => lists.map(list => ({ ...list.data(), id: list.id })))
+      map(lists => lists.map(list => ({ ...list.data(), id: list.id }))),
+      map(lists => lists.sort((a, b) => a.position - b.position))
     ).subscribe(lists => this.update({ lists }));
   }
   createCard(c: Partial<Card>): void {

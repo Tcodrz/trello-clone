@@ -1,3 +1,4 @@
+import { CardService } from './../../core/services/card.service';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Icons } from '@ui-components';
@@ -35,6 +36,7 @@ export class BoardComponent implements OnInit {
     private modalService: ModalService,
     private listsQuery: ListsQuery,
     private listsStore: ListsStore,
+    private cardService: CardService,
   ) { }
   ngOnInit(): void {
     this.activeRoute.params.subscribe((params: any) => {
@@ -55,7 +57,10 @@ export class BoardComponent implements OnInit {
     this.modalService.open({
       ...CARD_MODAL,
       component: CardComponent,
-      cbOnClose: () => this.goto.cardToggle(this.cardID)
+      cbOnClose: () => {
+        this.cardService.saveCard();
+        this.goto.cardToggle(this.cardID);
+      }
     });
   }
   onUpdateLists(lists: List[]): void {

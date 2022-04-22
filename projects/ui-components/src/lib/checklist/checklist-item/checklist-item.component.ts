@@ -36,7 +36,7 @@ export class ChecklistItemComponent implements OnInit {
       completed: this.fb.control(this.item?.completed),
     });
     this.form.get('completed')?.valueChanges.pipe(
-      debounceTime(500)
+      debounceTime(200)
     ).subscribe(value => {
       if (this.item)
         this.updateItem.emit({

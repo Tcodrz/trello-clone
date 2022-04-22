@@ -1,11 +1,11 @@
-import { GotoService } from './../../core/services/goto.service';
+import { ListsService } from './../../core/services/lists.service';
+import { Observable, of } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, OnChanges, SimpleChanges } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Icons } from '@ui-components';
 import { List } from 'src/app/core/interface/list.interface';
 import { Card } from './../../core/interface/card.interface';
-import { ListCardPreviewComponent } from './list-card-preview/list-card-preview.component';
 
 @Component({
   selector: 'app-list',
@@ -14,31 +14,36 @@ import { ListCardPreviewComponent } from './list-card-preview/list-card-preview.
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListComponent implements OnInit {
-  @Input() list!: List;
+  @Input() set list(list: List) {
+    this.list$ = this.listsService.populateCards(list);
+  };
   @Output() createCard: EventEmitter<Partial<Card>> = new EventEmitter();
   @Output() updateList: EventEmitter<List> = new EventEmitter();
   @Output() openCard: EventEmitter<Card> = new EventEmitter<Card>();
+  list$: Observable<List | null> = of(null);
   Icons = Icons;
   createMode: boolean = false;
   newCardName: FormControl = new FormControl('');
-  constructor() { }
+  constructor(
+    private listsService: ListsService
+  ) { }
   ngOnInit(): void { }
   onAddCard() { this.createMode = true; }
   onCancel() { this.createMode = false; }
-  onSubmit() {
+  onSubmit(list: List) {
     const card: Partial<Card> = {
-      listID: this.list.id,
+      listID: list.id,
       name: this.newCardName.value,
-      position: this.list.cards.length,
+      position: list.cards.length,
     };
     this.createCard.emit(card);
     this.createMode = false;
   }
-  onDrop(event: CdkDragDrop<Card[]>) {
-    moveItemInArray(this.list.cards, event.previousIndex, event.currentIndex);
+  onDrop(event: CdkDragDrop<Card[]>, list: List) {
+    moveItemInArray(list.cards, event.previousIndex, event.currentIndex);
     const newList = {
-      ...this.list,
-      cards: this.list.cards.map((card, i) => ({ ...card, position: i + 1 }))
+      ...list,
+      cards: list.cards.map((card, i) => ({ ...card, position: i + 1 }))
     };
     this.updateList.emit(newList);
   }

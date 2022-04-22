@@ -1,9 +1,9 @@
 :host {
-  margin-left: 16px;
+  margin-left: 8px;
   width: fit-content;
 
   .progress-bar {
-    width: calc(100% - 39px);
+    width: 100%;
     height: 8px;
     background-color: #091e4214;
     display: inline-block;
