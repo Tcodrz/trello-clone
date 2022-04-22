@@ -1,3 +1,4 @@
+import { ClickOutsideModule } from './../click-outside/click-outside.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -11,7 +12,10 @@ import { ChecklistComponent } from './checklist.component';
 
 
 @NgModule({
-  declarations: [ChecklistComponent, ChecklistItemComponent],
+  declarations: [
+    ChecklistComponent,
+    ChecklistItemComponent,
+  ],
   imports: [
     ButtonModule,
     ButtonModule,
@@ -21,6 +25,7 @@ import { ChecklistComponent } from './checklist.component';
     MenuModule,
     ProgressModule,
     ReactiveFormsModule,
+    ClickOutsideModule,
   ],
   exports: [ChecklistComponent]
 })

@@ -23,7 +23,9 @@ export class ChecklistComponent implements OnInit {
   Icons = Icons;
   createMode: boolean = false;
   selectedItemID!: string;
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+  ) { }
   get itemsControls(): FormArray { return this.form.get('items') as FormArray; }
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -72,4 +74,5 @@ export class ChecklistComponent implements OnInit {
   }
   onItemSelected(item: ChecklistItem): void { this.selectedItemID = item.id; }
   onItemUnselect(): void { this.selectedItemID = ''; }
+  resetSelectedList() { this.selectedItemID = ''; }
 }
