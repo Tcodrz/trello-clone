@@ -1,5 +1,5 @@
 import { Location } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, EventEmitter, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Icons } from '@ui-components';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { map, Observable, of, Subscription, tap } from 'rxjs';
@@ -17,7 +17,6 @@ import { CardService } from './../../core/services/card.service';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
-  @Output() close: EventEmitter<void> = new EventEmitter<void>();
   @ViewChild('cover', { static: false }) cover!: ElementRef;
   card$: Observable<Card | null> = of(null);
   board$: Observable<Board | null> = of(null);
@@ -81,4 +80,10 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
   onDeleteItem(item: ChecklistItem): void { this.cardService.deleteChecklistItem(item); }
   onUpdateChecklist(list: Checklist): void { this.cardService.updateChecklist(list); }
   onCreateCardFromItem(item: ChecklistItem): void { this.cardService.createCardFromItem(item); }
+  onArchiveCard(card: Card) { this.cardService.archive(card); }
+  onUndoArchive(card: Card) { this.cardService.undoArchive(card); }
+  onDeleteCard(card: Card) {
+    this.ref.close();
+    this.cardService.deleteCard(card);
+  }
 }

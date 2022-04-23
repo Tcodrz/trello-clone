@@ -26,4 +26,7 @@ export enum Icons {
   User = 'faUser',
   Users = 'faUsers',
   Brush = 'faBrush',
+  Archive = 'faArchive',
+  Redo = 'faRedo',
+  Minus = 'faMinus',
 }

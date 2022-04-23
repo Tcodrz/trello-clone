@@ -9,4 +9,5 @@ export interface Card {
   cover?: string;
   description?: string;
   checklists: Checklist[];
+  archived: boolean;
 }

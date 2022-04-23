@@ -17,31 +17,6 @@ export class CardService {
     private listStore: ListsStore,
     private boardStore: BoardsStore,
   ) { }
-  createCardFromItem(item: ChecklistItem) {
-    if (!this.card) return;
-    const list = this.listStore.getValue().lists.find(list => list.id === this.card?.listID);
-    if (!list) return;
-    this.deleteChecklistItem(item);
-    const card: Card = {
-      id: this.firestore.createId(),
-      createdAt: new Date().getTime(),
-      listID: this.card.listID,
-      name: item.title,
-      checklists: [],
-      position: list.cards.length + 1,
-    };
-    list.cards.push(card);
-    this.boardStore.update(state => {
-      const board = state.boards.find(b => b.listIDs.includes(list.id));
-      if (!board) return state;
-      board.lists = board.lists?.map(l => l.id === list.id ? list : l);
-      return {
-        boards: state.boards.map(x => x.id === board.id ? board : x)
-      };
-    });
-    this.firestore.doc(`list/${list.id}`).set(list);
-    this.firestore.doc(`card/${card.id}`).set(card);
-  }
   getCard(cardID: string): Observable<Card | null> {
     return this.firestore.doc<Card>(`card/${cardID}`).valueChanges()
       .pipe(
@@ -54,6 +29,32 @@ export class CardService {
       map(cards => cards.docs.filter(c => c.data().listID === listID)),
       map(cards => cards.map(c => ({ ...c.data(), id: c.id })))
     );
+  }
+  archive(card: Card): void {
+    this.firestore.doc(`card/${card.id}`).set({
+      ...card, archived: true
+    });
+  }
+  undoArchive(card: Card) {
+    this.firestore.doc(`card/${card.id}`).set({
+      ...card,
+      archived: false
+    });
+  }
+  deleteCard(card: Card): void {
+    this.boardStore.update(state => {
+      const board = state.boards.find(board => board.listIDs.includes(card.listID))
+      if (!board) return state;
+      const list = board.lists?.find(list => list.id === card.listID);
+      if (!list) return state;
+      board.lists = board.lists?.map(x => x.id === list.id ? list : x);
+
+      return {
+        ...state.boards,
+        boards: state.boards.map(x => x.id !== board.id ? board : x)
+      };
+    });
+    this.firestore.doc(`card/${card.id}`).delete();
   }
   saveCard() {
     this.listStore.update(state => {
@@ -139,6 +140,32 @@ export class CardService {
     if (!this.card) return;
     this.card.checklists = this.card.checklists.map(x => x.id === list.id ? list : x);
     this.updateDB(this.card);
+  }
+  createCardFromItem(item: ChecklistItem) {
+    if (!this.card) return;
+    const list = this.listStore.getValue().lists.find(list => list.id === this.card?.listID);
+    if (!list) return;
+    this.deleteChecklistItem(item);
+    const card: Card = {
+      id: this.firestore.createId(),
+      createdAt: new Date().getTime(),
+      listID: this.card.listID,
+      name: item.title,
+      checklists: [],
+      position: list.cards.length + 1,
+      archived: false,
+    };
+    list.cards.push(card);
+    this.boardStore.update(state => {
+      const board = state.boards.find(b => b.listIDs.includes(list.id));
+      if (!board) return state;
+      board.lists = board.lists?.map(l => l.id === list.id ? list : l);
+      return {
+        boards: state.boards.map(x => x.id === board.id ? board : x)
+      };
+    });
+    this.firestore.doc(`list/${list.id}`).set(list);
+    this.firestore.doc(`card/${card.id}`).set(card);
   }
   updateDB(card: Card) {
     this.firestore.collection<Card>('card').doc(card.id).set(card);

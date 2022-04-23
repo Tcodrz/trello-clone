@@ -42,8 +42,12 @@
         </div>
         <div class="side-menu">
           <app-card-side-menu
+            [card]="card"
             [board]="board$ | async"
             (addChecklist)="onChecklistAdd($event)"
+            (archiveCard)="onArchiveCard($event)"
+            (undoArchiveCard)="onUndoArchive($event)"
+            (deleteCard)="onDeleteCard($event)"
           ></app-card-side-menu>
         </div>
       </div>

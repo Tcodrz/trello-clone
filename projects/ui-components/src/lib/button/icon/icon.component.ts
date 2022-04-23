@@ -24,6 +24,9 @@ import {
   faArrowRight,
   faPaste,
   faBrush,
+  faArchive,
+  faRedo,
+  faMinus,
 } from '@fortawesome/free-solid-svg-icons';
 import { Icons } from './icons';
 
@@ -50,8 +53,10 @@ export class IconComponent implements OnChanges {
   getIcon(icon: Icons): IconProp | null {
     switch (icon) {
       case Icons.Apple: return faApple;
+      case Icons.Archive: return faArchive;
       case Icons.ArrowRight: return faArrowRight;
       case Icons.BorderAll: return faBorderAll;
+      case Icons.Brush: return faBrush;
       case Icons.CheckSquare: return faCheckSquare;
       case Icons.ChevronDown: return faChevronDown;
       case Icons.ChevronLeft: return faChevronLeft;
@@ -63,9 +68,11 @@ export class IconComponent implements OnChanges {
       case Icons.Heart: return faHeart;
       case Icons.Home: return faHome;
       case Icons.Microsoft: return faMicrosoft;
+      case Icons.Minus: return faMinus;
       case Icons.PaperClip: return faPaperclip;
       case Icons.Paste: return faPaste;
       case Icons.Plus: return faPlus;
+      case Icons.Redo: return faRedo;
       case Icons.Search: return faSearch;
       case Icons.Settings: return faScrewdriver;
       case Icons.Tag: return faTag;
@@ -74,7 +81,6 @@ export class IconComponent implements OnChanges {
       case Icons.Trello: return faTrello;
       case Icons.User: return faUser;
       case Icons.Users: return faUsers;
-      case Icons.Brush: return faBrush;
       default: return null;
     }
   }
