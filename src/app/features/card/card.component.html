@@ -31,8 +31,10 @@
               [checklist]="list"
               (addItem)="onAddChecklistItem($event)"
               (updateItem)="onUpdateItem($event)"
+              (deleteItem)="onDeleteItem($event)"
               (deleteChecklist)="onDeleteCheckList($event)"
               (updateChecklist)="onUpdateChecklist($event)"
+              (createCardFromItem)="onCreateCardFromItem($event)"
             ></ui-checklist>
           </div>
 

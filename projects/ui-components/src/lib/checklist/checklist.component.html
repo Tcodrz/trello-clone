@@ -1,5 +1,5 @@
 <ng-container *ngIf="checklist">
-  <div clickOutside (clickOutside)="resetSelectedList()">
+  <div clickOutside>
     <div class="header">
       <div class="icon">
         <ui-icon [icon]="Icons.CheckSquare"></ui-icon>
@@ -37,10 +37,9 @@
           <div cdkDragHandle>
             <ui-checklist-item
               [item]="item"
-              [selectedItemID]="selectedItemID"
               (updateItem)="onUpdateItem($event)"
-              (selectItem)="onItemSelected($event)"
-              (unselectItem)="onItemUnselect()"
+              (deleteItem)="onDeleteItem($event)"
+              (createCardFromItem)="onCreateCardFromItem($event)"
             ></ui-checklist-item>
           </div>
         </div>

@@ -1,3 +1,4 @@
+import { UiInputModule } from './../ui-input/ui-input.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -28,6 +29,7 @@ import { ChecklistComponent } from './checklist.component';
     MenuModule,
     ProgressModule,
     ReactiveFormsModule,
+    UiInputModule,
   ],
   exports: [ChecklistComponent]
 })

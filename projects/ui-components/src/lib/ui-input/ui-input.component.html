@@ -1,0 +1,8 @@
+<textarea
+  pInputTextarea
+  [autoResize]="true"
+  [value]="value"
+  [rows]="2"
+  #input
+  (input)="onChange(input.value)"
+></textarea>

@@ -27,3 +27,5 @@ export * from './lib/progress/progress.component';
 export * from './lib/progress/progress.module';
 export * from './lib/select/select.component';
 export * from './lib/select/select.module';
+export * from './lib/ui-input/ui-input.component';
+export * from './lib/ui-input/ui-input.module';

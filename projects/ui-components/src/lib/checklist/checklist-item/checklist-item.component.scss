@@ -6,9 +6,24 @@
   padding: 0 times8(1);
   margin: times8(1) 0;
   border-radius: 4px;
+  width: -webkit-fill-available;
 
   &:hover {
     background-color: $SidbarLinkHover;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    form {
+      flex-grow: 2;
+    }
+  }
+
+  ui-menu {
+    display: none;
   }
 
   .edit {

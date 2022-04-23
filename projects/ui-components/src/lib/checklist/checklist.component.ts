@@ -16,14 +16,15 @@ export class ChecklistComponent implements OnInit {
   @Input() checklist: Checklist | undefined;
   @Output() addItem: EventEmitter<Partial<ChecklistItem>> = new EventEmitter<Partial<ChecklistItem>>();
   @Output() updateItem: EventEmitter<ChecklistItem> = new EventEmitter<ChecklistItem>();
+  @Output() deleteItem: EventEmitter<ChecklistItem> = new EventEmitter<ChecklistItem>();
   @Output() deleteChecklist: EventEmitter<Checklist> = new EventEmitter<Checklist>();
   @Output() updateChecklist: EventEmitter<Checklist> = new EventEmitter<Checklist>();
+  @Output() createCardFromItem: EventEmitter<ChecklistItem> = new EventEmitter<ChecklistItem>();
   @ViewChild('addItemInput', { static: false }) addItemInput!: ElementRef;
   progress$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   form!: FormGroup;
   Icons = Icons;
   createMode: boolean = false;
-  selectedItemID!: string;
   constructor(
     private fb: FormBuilder,
   ) { }
@@ -58,6 +59,8 @@ export class ChecklistComponent implements OnInit {
     this.addItem.emit(item);
   }
   onUpdateItem(item: ChecklistItem): void { this.updateItem.emit(item); }
+  onDeleteItem(item: ChecklistItem): void { this.deleteItem.emit(item) }
+  onCreateCardFromItem(item: ChecklistItem): void { this.createCardFromItem.emit(item); }
   onDeleteChecklist(): void { this.deleteChecklist.emit(this.checklist); }
   toggleCreateMode(): void {
     this.createMode = !this.createMode;
@@ -69,9 +72,6 @@ export class ChecklistComponent implements OnInit {
       });
     }
   }
-  onItemSelected(item: ChecklistItem): void { this.selectedItemID = item.id; }
-  onItemUnselect(): void { this.selectedItemID = ''; }
-  resetSelectedList() { this.selectedItemID = ''; }
   onDrop(event: CdkDragDrop<ChecklistItem[]>) {
     if (!this.checklist) return;
     moveItemInArray(this.checklist.items, event.previousIndex, event.currentIndex);

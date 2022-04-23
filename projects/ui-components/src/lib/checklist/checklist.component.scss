@@ -3,12 +3,10 @@
 
 :host {
   display: block;
-  padding: 0 times8(1);
   margin-top: times8(3);
 
   .header {
     display: flex;
-    column-gap: times8(3);
     align-items: center;
     justify-content: space-between;
     padding: 0 times8(1);
@@ -19,6 +17,7 @@
 
     .list-name {
       flex-grow: 18;
+      margin-left: times8(2);
     }
   }
 
@@ -30,7 +29,7 @@
     .value {
       width: times8(4);
       display: inline;
-      font-size: 14px;
+      font-size: 11px;
     }
 
     ui-progress {

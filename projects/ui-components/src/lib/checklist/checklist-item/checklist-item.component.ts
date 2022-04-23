@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild, ElementRef } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { MenuItems } from '@ui-components';
 import { debounceTime } from 'rxjs';
 import { ChecklistItem } from 'src/app/core/interface/checklist.interface';
+import { UiInputComponent } from '../../ui-input/ui-input.component';
 import { Icons } from './../../button/icon/icons';
 
 @Component({
@@ -11,24 +13,24 @@ import { Icons } from './../../button/icon/icons';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChecklistItemComponent implements OnInit {
+  @ViewChild('titleInput', { static: false }) titleInput!: UiInputComponent;
   @Input() item: ChecklistItem | null = null;
-  @Input() set selectedItemID(selectedItemID: string) {
-    this.editMode = !!this.item && selectedItemID === this.item.id;
-    if (this.editMode) {
-      setTimeout(() => {
-        const input = this.titleInput.nativeElement as HTMLInputElement;
-        input.focus();
-        input.select();
-      });
-    }
-  };
   @Output() updateItem: EventEmitter<ChecklistItem> = new EventEmitter<ChecklistItem>();
-  @Output() selectItem: EventEmitter<ChecklistItem> = new EventEmitter<ChecklistItem>();
-  @Output() unselectItem: EventEmitter<void> = new EventEmitter<void>();
-  @ViewChild('titleInput', { static: false }) titleInput!: ElementRef;
+  @Output() deleteItem: EventEmitter<ChecklistItem> = new EventEmitter<ChecklistItem>();
+  @Output() createCardFromItem: EventEmitter<ChecklistItem> = new EventEmitter<ChecklistItem>();
+  @HostListener('keypress', ['$event'])
+  onEnter(event: any) {
+    if (event.key === 'Enter') this.onSaveItem();
+  }
+  @HostListener('mouseenter')
+  onMouseEnter() { this.showMenuIcon = true; }
+  @HostListener('mouseleave')
+  onMouseLeave() { this.showMenuIcon = false; }
   form!: FormGroup;
   editMode: boolean = false;
   Icons = Icons;
+  itemMenu: MenuItems[] = [];
+  showMenuIcon: boolean = false;
   constructor(private fb: FormBuilder) { }
   ngOnInit(): void {
     this.form = this.fb.group({
@@ -44,15 +46,40 @@ export class ChecklistItemComponent implements OnInit {
           completed: value
         });
     });
+    this.initItemMenu();
   }
-  onItemClick() {
-    if (!this.item) return;
-    this.selectItem.emit(this.item);
+  initItemMenu() {
+    this.itemMenu = [
+      {
+        headline: '',
+        items: [
+          {
+            label: 'Convert to card',
+            command: () => {
+              if (this.item) this.createCardFromItem.emit(this.item);
+            },
+          },
+          {
+            label: 'Delete',
+            command: () => {
+              if (this.item) this.deleteItem.emit(this.item);
+            }
+          }
+        ]
+      }
+    ];
   }
   onSaveItem() {
     if (!this.item) return;
     const nextTitle = this.form.get('title')?.value ?? this.item.title;
     this.updateItem.emit({ ...this.item, title: nextTitle });
-    this.unselectItem.emit();
+    this.editMode = false;
+  }
+  onItemClick() {
+    this.editMode = true;
+    setTimeout(() => { // wait for titlInput to be rendered
+      this.titleInput.focus();
+      this.titleInput.select()
+    });
   }
 }
