@@ -1,11 +1,12 @@
-import { ListsService } from './../../core/services/lists.service';
-import { Observable, of } from 'rxjs';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Icons } from '@ui-components';
+import { Observable, of } from 'rxjs';
 import { List } from 'src/app/core/interface/list.interface';
+import { UiInputComponent } from './../../../../projects/ui-components/src/lib/ui-input/ui-input.component';
 import { Card } from './../../core/interface/card.interface';
+import { ListsService } from './../../core/services/lists.service';
 
 @Component({
   selector: 'app-list',
@@ -14,6 +15,7 @@ import { Card } from './../../core/interface/card.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ListComponent implements OnInit {
+  @ViewChild('input', { static: false }) input!: UiInputComponent;
   @Input() set list(list: List) {
     this.list$ = this.listsService.populateCards(list);
   };
@@ -28,7 +30,12 @@ export class ListComponent implements OnInit {
     private listsService: ListsService
   ) { }
   ngOnInit(): void { }
-  onAddCard() { this.createMode = true; }
+  onAddCard() {
+    this.createMode = true;
+    setTimeout(() => {
+      this.input.focus();
+    });
+  }
   onCancel() { this.createMode = false; }
   onSubmit(list: List) {
     const card: Partial<Card> = {
