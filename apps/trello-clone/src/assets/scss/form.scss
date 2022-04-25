@@ -1,5 +1,5 @@
-@import "constants";
-@import "functions";
+@import "./constants.scss";
+@import "./functions.scss";
 
 input {
   &[type=button] {

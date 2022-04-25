@@ -1,5 +1,5 @@
-@import 'constants';
-@import 'functions';
+@import '../../../assets/scss/constants.scss';
+@import '../../../assets/scss/functions';
 
 :host {
   transform: translate3d(0%, 0, 0);

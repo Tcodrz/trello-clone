@@ -1,4 +1,4 @@
-@import "constants";
+@import "./constants.scss";
 
 @function times8($num) {
   @return #{$num * 8}px;

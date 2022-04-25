@@ -8,7 +8,7 @@ import { MenuItems } from '../../../interface/menu.interface';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavMenuComponent implements OnInit {
-  @Input() title: string = '';
+  @Input() title = '';
   @Input() position: 'right' | 'left' = 'left';
   @Input() items: MenuItems[] | null = [];
   constructor() { }
