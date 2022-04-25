@@ -1,3 +1,4 @@
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Location } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { Icons } from '@ui-components';
@@ -85,5 +86,13 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
   onDeleteCard(card: Card) {
     this.ref.close();
     this.cardService.deleteCard(card);
+  }
+  onDropChecklistItem(event: CdkDragDrop<ChecklistItem[]>, checklist: Checklist): void {
+    const item: ChecklistItem = event.previousContainer.data[event.previousIndex];
+    if (event.previousContainer !== event.container) // move item from list to another list
+      this.cardService.transferChecklistItem(item, checklist.id, event.currentIndex);
+    else  // move item in list
+      this.cardService.moveChecklistItem(item, checklist, event.previousIndex, event.currentIndex);
+
   }
 }

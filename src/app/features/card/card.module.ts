@@ -1,3 +1,4 @@
+import { DragDropModule } from '@angular/cdk/drag-drop';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ButtonModule, ChecklistModule, MenuModule } from '@ui-components';
@@ -26,6 +27,7 @@ import { CardComponent } from './card.component';
     ChecklistModule,
     CommonModule,
     MenuModule,
+    DragDropModule,
   ]
 })
 export class CardModule { }

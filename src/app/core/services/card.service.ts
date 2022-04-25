@@ -6,6 +6,7 @@ import { List } from '../interface/list.interface';
 import { BoardsStore } from './../../state/boards/boards.store';
 import { ListsStore } from './../../state/lists/lists.store';
 import { Card } from './../interface/card.interface';
+import { moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Injectable({
   providedIn: 'root'
@@ -44,9 +45,9 @@ export class CardService {
   deleteCard(card: Card): void {
     this.boardStore.update(state => {
       const board = state.boards.find(board => board.listIDs.includes(card.listID))
-      if (!board) return state;
+      if (!board) { debugger; return state; }
       const list = board.lists?.find(list => list.id === card.listID);
-      if (!list) return state;
+      if (!list) { debugger; return state; }
       board.lists = board.lists?.map(x => x.id === list.id ? list : x);
 
       return {
@@ -58,10 +59,7 @@ export class CardService {
   }
   saveCard() {
     this.listStore.update(state => {
-      if (!this.card) {
-        debugger;
-        return state;
-      }
+      if (!this.card) { debugger; return state; }
       const lists = state.lists;
       const index = lists.findIndex(list => list.id === this.card?.listID);
       if (index === -1) return state;
@@ -91,7 +89,7 @@ export class CardService {
     }
   }
   checklistDelete(checklist: Checklist): void {
-    if (!this.card) return;
+    if (!this.card) { debugger; return; }
     const checklists = this.card.checklists.filter(list => list.id !== checklist.id);
     const card = {
       ...this.card,
@@ -102,9 +100,9 @@ export class CardService {
   addChecklistItem(item: Partial<ChecklistItem>) {
     item.id = this.firestore.createId();
     const card = this.card;
-    if (!card) return;
+    if (!card) { debugger; return; }
     const index = card.checklists.findIndex(list => list.id === item.checklistID);
-    if (index < 0) return;
+    if (index < 0) { debugger; return; }
     const checklist = card.checklists[index];
     checklist.items = [...checklist.items, item as ChecklistItem];
     const newCard = {
@@ -115,7 +113,7 @@ export class CardService {
   }
   updateChecklistItem(item: ChecklistItem) {
     const card = this.card;
-    if (!card) return;
+    if (!card) { debugger; return; }
     const newCard: Card = {
       ...card,
       checklists: card.checklists
@@ -125,9 +123,9 @@ export class CardService {
     this.updateDB(newCard);
   }
   deleteChecklistItem(item: ChecklistItem): void {
-    if (!this.card) return;
+    if (!this.card) { debugger; return; }
     const checklist = this.card.checklists.find(c => c.id === item.checklistID);
-    if (!checklist) return;
+    if (!checklist) { debugger; return; }
     checklist.items = checklist?.items.filter(i => i.id !== item.id);
     const newCard: Card = {
       ...this.card,
@@ -167,7 +165,51 @@ export class CardService {
     this.firestore.doc(`list/${list.id}`).set(list);
     this.firestore.doc(`card/${card.id}`).set(card);
   }
-  updateDB(card: Card) {
-    this.firestore.collection<Card>('card').doc(card.id).set(card);
+  transferChecklistItem(item: ChecklistItem, currentListID: string, currentIndex: number): void {
+    if (!this.card) return;
+    let prevList = this.card.checklists.find(list => list.id === item.checklistID);
+    let currentList = this.card.checklists.find(list => list.id === currentListID)
+    if (currentList) {
+      item = {
+        ...item,
+        checklistID: currentListID
+      }
+      currentList = {
+        ...currentList,
+        items: currentList.items
+          .slice(0, currentIndex)
+          .concat(item)
+          .concat(currentList.items.slice(currentIndex))
+      };
+      currentList.items.forEach((x, i) => x.position = i);
+      this.updateList(currentList);
+    }
+    if (prevList) {
+      prevList = {
+        ...prevList,
+        items: prevList.items.filter(i => i.id !== item.id)
+      };
+      this.updateList(prevList);
+    }
+    const card: Card = {
+      ...this.card,
+      checklists: this.card.checklists.map(list => {
+        if (list.id === currentList?.id) return currentList;
+        else if (list.id === prevList?.id) return prevList;
+        return list;
+      })
+    }
+    this.updateDB(card);
   }
+  moveChecklistItem(item: ChecklistItem, checklist: Checklist, prevIndex: number, currentIndex: number) {
+    if (!this.card) { debugger; return; }
+    item.checklistID = checklist.id;
+    moveItemInArray(checklist.items, prevIndex, currentIndex);
+    checklist.items.forEach((x, i) => x.position = i);
+    const card = this.card;
+    card.checklists = card.checklists.map(list => list.id === checklist.id ? checklist : list);
+    this.updateDB(card);
+  }
+  updateDB(card: Card) { this.firestore.doc(`card/${card.id}`).set(card); }
+  updateList(list: Checklist) { this.firestore.doc(`list/${list.id}`).set(list); }
 }

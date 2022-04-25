@@ -25,17 +25,19 @@
 
           <div class="attachements"></div>
 
-          <div class="checklists">
-            <ui-checklist
-              *ngFor="let list of card.checklists"
-              [checklist]="list"
-              (addItem)="onAddChecklistItem($event)"
-              (updateItem)="onUpdateItem($event)"
-              (deleteItem)="onDeleteItem($event)"
-              (deleteChecklist)="onDeleteCheckList($event)"
-              (updateChecklist)="onUpdateChecklist($event)"
-              (createCardFromItem)="onCreateCardFromItem($event)"
-            ></ui-checklist>
+          <div class="checklists" cdkDropListGroup>
+            <div *ngFor="let list of card.checklists" [id]="list.id">
+              <ui-checklist
+                [checklist]="list"
+                (addItem)="onAddChecklistItem($event)"
+                (updateItem)="onUpdateItem($event)"
+                (deleteItem)="onDeleteItem($event)"
+                (deleteChecklist)="onDeleteCheckList($event)"
+                (updateChecklist)="onUpdateChecklist($event)"
+                (createCardFromItem)="onCreateCardFromItem($event)"
+                (drop)="onDropChecklistItem($event, list)"
+              ></ui-checklist>
+            </div>
           </div>
 
           <div class="activity"></div>

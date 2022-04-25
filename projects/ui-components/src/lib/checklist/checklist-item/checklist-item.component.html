@@ -1,23 +1,32 @@
 <div
   *ngIf="item"
-  [ngClass]="editMode ? 'edit' : ''"
-  (clickOutside)="editMode = false"
+  [ngClass]="item.onEditMode ? 'edit' : ''"
+  (clickOutside)="toggleEditMode(false)"
 >
   <form [formGroup]="form">
     <div class="checklist-item">
       <ui-checkbox formControlName="completed"></ui-checkbox>
-      <div *ngIf="!editMode" (click)="onItemClick()" class="title-preview">
+      <div
+        *ngIf="!item.onEditMode"
+        (click)="onItemClick()"
+        class="title-preview"
+      >
         {{ item.title }}
       </div>
-      <ui-input *ngIf="editMode" formControlName="title" #titleInput></ui-input>
+      <ui-input
+        *ngIf="item.onEditMode"
+        type="primary"
+        formControlName="title"
+        #titleInput
+      ></ui-input>
     </div>
-    <div *ngIf="editMode" class="buttons">
+    <div *ngIf="item.onEditMode" class="buttons">
       <div>
         <ui-button className="primary" (click)="onSaveItem()">Save</ui-button>
         <ui-icon
           class="ml-2 pointer"
           [icon]="Icons.Times"
-          (click)="editMode = false"
+          (click)="toggleEditMode(false)"
         ></ui-icon>
       </div>
       <ui-icon
@@ -29,7 +38,7 @@
   </form>
 
   <ui-icon
-    *ngIf="!editMode && showMenuIcon"
+    *ngIf="!item.onEditMode && showMenuIcon"
     class="pointer"
     [icon]="Icons.EllipsisH"
     (click)="menu.onToggle($event)"

@@ -1,39 +1,40 @@
 <ng-container *ngIf="checklist">
-  <div clickOutside>
-    <div class="header">
-      <div class="icon">
-        <ui-icon [icon]="Icons.CheckSquare"></ui-icon>
-      </div>
-      <div class="list-name">{{ checklist.name }}</div>
-      <ui-button className="btn" (click)="closeMenu.onToggle($event)">
-        Delete
-      </ui-button>
-      <ui-menu #closeMenu [title]="'Delete checklist?'" class="d-none">
-        <div>
-          Deleting a checklist is permanent and there is no way to get it back.
+  <div
+    cdkDropList
+    #lists="cdkDropList"
+    [cdkDropListData]="checklist.items"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    <div clickOutside>
+      <div class="header">
+        <div class="icon">
+          <ui-icon [icon]="Icons.CheckSquare"></ui-icon>
         </div>
-        <ui-button
-          className="danger width-10 mt-2"
-          (click)="onDeleteChecklist(); closeMenu.onHide()"
-        >
-          Delete checklist
+        <div class="list-name">{{ checklist.name }}</div>
+        <ui-button className="btn" (click)="closeMenu.onToggle($event)">
+          Delete
         </ui-button>
-      </ui-menu>
-    </div>
+        <ui-menu #closeMenu [title]="'Delete checklist?'" class="d-none">
+          <div>
+            Deleting a checklist is permanent and there is no way to get it
+            back.
+          </div>
+          <ui-button
+            className="danger width-10 mt-2"
+            (click)="onDeleteChecklist(); closeMenu.onHide()"
+          >
+            Delete checklist
+          </ui-button>
+        </ui-menu>
+      </div>
 
-    <div class="progress">
-      <div class="value">{{ progress$ | async }}%</div>
-      <ui-progress [value]="progress$ | async"></ui-progress>
-    </div>
+      <div class="progress">
+        <div class="value">{{ progress$ | async }}%</div>
+        <ui-progress [value]="progress$ | async"></ui-progress>
+      </div>
 
-    <div
-      cdkDropList
-      #lists="cdkDropList"
-      [cdkDropListData]="checklist.items"
-      (cdkDropListDropped)="onDrop($event)"
-    >
       <ng-container *ngFor="let item of checklist.items; let i = index">
-        <div cdkDrag>
+        <div cdkDrag [cdkDragDisabled]="item.onEditMode">
           <div cdkDragHandle>
             <ui-checklist-item
               [item]="item"
@@ -44,12 +45,16 @@
           </div>
         </div>
       </ng-container>
-    </div>
 
-    <div *ngIf="!createMode">
-      <ui-button className="btn" (click)="toggleCreateMode()">
-        Add an item
-      </ui-button>
+      <div cdkDrag [cdkDragDisabled]="true">
+        <div cdkDragHandle>
+          <div *ngIf="!createMode">
+            <ui-button className="btn" (click)="toggleCreateMode()">
+              Add an item
+            </ui-button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <form [formGroup]="form" (ngSubmit)="onAddItem()">

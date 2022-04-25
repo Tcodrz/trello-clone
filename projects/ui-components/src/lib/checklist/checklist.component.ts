@@ -1,6 +1,6 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { BehaviorSubject } from 'rxjs';
 import { Checklist, ChecklistItem } from './../../../../../src/app/core/interface/checklist.interface';
 import { Icons } from './../button/icon/icons';
@@ -20,6 +20,7 @@ export class ChecklistComponent implements OnInit {
   @Output() deleteChecklist: EventEmitter<Checklist> = new EventEmitter<Checklist>();
   @Output() updateChecklist: EventEmitter<Checklist> = new EventEmitter<Checklist>();
   @Output() createCardFromItem: EventEmitter<ChecklistItem> = new EventEmitter<ChecklistItem>();
+  @Output() drop: EventEmitter<CdkDragDrop<ChecklistItem[]>> = new EventEmitter<CdkDragDrop<ChecklistItem[]>>();
   @ViewChild('addItemInput', { static: false }) addItemInput!: ElementRef;
   progress$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   form!: FormGroup;
@@ -73,9 +74,6 @@ export class ChecklistComponent implements OnInit {
     }
   }
   onDrop(event: CdkDragDrop<ChecklistItem[]>) {
-    if (!this.checklist) return;
-    moveItemInArray(this.checklist.items, event.previousIndex, event.currentIndex);
-    this.checklist.items.forEach((item, i) => item.position = i + 1);
-    this.updateChecklist.emit(this.checklist);
+    this.drop.emit(event);
   }
 }

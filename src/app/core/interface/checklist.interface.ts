@@ -10,4 +10,5 @@ export interface ChecklistItem {
   checklistID: string;
   completed: boolean;
   position: number;
+  onEditMode: boolean;
 }

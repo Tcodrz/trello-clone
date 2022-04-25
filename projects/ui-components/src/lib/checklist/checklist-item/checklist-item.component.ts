@@ -27,7 +27,6 @@ export class ChecklistItemComponent implements OnInit {
   @HostListener('mouseleave')
   onMouseLeave() { this.showMenuIcon = false; }
   form!: FormGroup;
-  editMode: boolean = false;
   Icons = Icons;
   itemMenu: MenuItems[] = [];
   showMenuIcon: boolean = false;
@@ -73,13 +72,16 @@ export class ChecklistItemComponent implements OnInit {
     if (!this.item) return;
     const nextTitle = this.form.get('title')?.value ?? this.item.title;
     this.updateItem.emit({ ...this.item, title: nextTitle });
-    this.editMode = false;
+    this.toggleEditMode(false);
   }
   onItemClick() {
-    this.editMode = true;
+    this.toggleEditMode(true);
     setTimeout(() => { // wait for titlInput to be rendered
       this.titleInput.focus();
       this.titleInput.select()
     });
+  }
+  toggleEditMode(onEditMode: boolean) {
+    if (this.item) this.item.onEditMode = onEditMode;
   }
 }
