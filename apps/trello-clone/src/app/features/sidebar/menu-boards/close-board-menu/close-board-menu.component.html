@@ -1,0 +1,14 @@
+<ui-button [icon]="Icons.EllipsisH" className="no-hover" (click)="menu.onToggle($event)"></ui-button>
+<ui-menu #menu [title]="board.name" (hide)="onHide()">
+  <div *ngIf="page === 1">
+    <ui-button className="btn width-10 text-left" (click)="next(1)">
+      Close board...
+    </ui-button>
+  </div>
+  <div class="confirm" *ngIf="page === 2">
+    <div class="message">
+      You can find and reopen closed boards at the bottom of your boards page.
+    </div>
+    <ui-button className="width-10 danger mt-2">Close</ui-button>
+  </div>
+</ui-menu>

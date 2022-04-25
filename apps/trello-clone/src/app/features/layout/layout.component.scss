@@ -1,0 +1,77 @@
+@import "constants";
+@import "media";
+
+$SidebarWidth: 300px;
+
+:host {
+  display: grid;
+  grid-template: "topnav topnav"45px "sidebar content"calc(100vh - 45px) / 300px calc(100% - 300px);
+
+  &:not(.closed) {
+    .content {
+      transform: translate3d(0, 0, 0);
+      transition: $transition;
+    }
+  }
+
+  &.closed {
+    grid-template: "topnav topnav"45px "sidebar content"calc(100vh - 45px) / 0% 100%;
+
+    .content {
+      transition: $transition;
+      z-index: 1;
+    }
+
+    app-sidebar {
+      z-index: 2;
+    }
+  }
+
+  app-sidebar {
+    grid-area: sidebar;
+    width: $SidebarWidth;
+    transition: $transition;
+    max-height: calc(100vh - 45px);
+  }
+
+  app-topnav {
+    grid-area: topnav;
+  }
+
+  .content {
+    transform: translate3d(0%, 0, 0);
+    transition: $transition;
+    max-height: calc(100vh - 45px);
+  }
+
+  @media only screen and(max-width: $LargeScreen) {
+    &.closed {
+      .content {
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    app-sidebar {
+      padding-left: 0;
+    }
+
+    .content {
+      margin-left: 0;
+    }
+  }
+
+  @media only screen and(max-width: $SmallScreen) {
+    grid-template: "topnav topnav"45px "sidebar content"calc(100vh - 45px) / 0% 100%;
+
+    &:not(.closed) {
+      .content {
+        z-index: 1;
+      }
+
+      app-sidebar {
+        z-index: 2;
+        background-color: $White;
+      }
+    }
+  }
+}

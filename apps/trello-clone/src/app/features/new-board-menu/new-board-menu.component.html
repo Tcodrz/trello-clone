@@ -1,0 +1,14 @@
+<form [formGroup]="newBoardForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <ui-select [label]="'Theme Selector'" [options]="themes" formControlName="theme"></ui-select>
+  </div>
+  <div class="form-group">
+    <label for="">Board name</label>
+    <input type="text" formControlName="boardName">
+  </div>
+  <div class="form-group mt-2">
+    <ui-select [label]="'Workspace'" [options]="workspaceOptions" formControlName="workspace">
+    </ui-select>
+  </div>
+  <ui-button className="primary mt-2 width-10" [disabled]="newBoardForm.invalid" [type]="'submit'">Create</ui-button>
+</form>

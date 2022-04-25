@@ -1,0 +1,56 @@
+@import 'constants';
+
+:host {
+  .navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: $White;
+    height: $TopnavHeight;
+
+    .left {
+      display: flex;
+      align-items: center;
+
+      .logo {
+        font-size: $FontLarge;
+      }
+
+      .menus {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+      }
+    }
+
+    .right {
+      .actions {
+        display: flex;
+
+        .search {
+          display: grid;
+          place-content: center;
+
+          input {
+            height: 20px;
+            outline: none;
+          }
+        }
+      }
+
+      .profile {
+        display: grid;
+        place-content: center;
+        margin: 0 8px 0 24px;
+        position: relative;
+
+        .pic {
+          width: 35px;
+          height: 35px;
+          border-radius: 50%;
+        }
+      }
+    }
+  }
+}

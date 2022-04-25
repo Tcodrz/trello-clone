@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="list">
+    <div class="list-title">Add to list</div>
+    <app-members-menu [members]="board?.members"></app-members-menu>
+    <app-labels-menu></app-labels-menu>
+    <app-checklist-menu
+      (addChecklist)="onCheklistAdd($event)"
+    ></app-checklist-menu>
+    <app-dates-menu></app-dates-menu>
+    <app-attachements-menu></app-attachements-menu>
+  </div>
+
+  <div class="list">
+    <div class="list-title">Actions</div>
+    <div class="mt-1">
+      <ui-button
+        [className]="'btn text-left width-10'"
+        [icon]="Icons.ArrowRight"
+      >
+        Move
+      </ui-button>
+    </div>
+    <div class="mt-1">
+      <ui-button [className]="'btn text-left width-10'" [icon]="Icons.Paste">
+        Copy
+      </ui-button>
+    </div>
+    <hr />
+    <div class="mt-1" *ngIf="!card?.archived">
+      <ui-button
+        [className]="'btn text-left width-10'"
+        [icon]="Icons.Archive"
+        (click)="onArchiveCard()"
+      >
+        Archive
+      </ui-button>
+    </div>
+    <div class="mt-1" *ngIf="card?.archived">
+      <ui-button
+        [className]="'btn text-left width-10'"
+        [icon]="Icons.Redo"
+        (click)="onUndoArchive()"
+      >
+        Send to board
+      </ui-button>
+      <ui-button
+        [className]="'danger text-left width-10 mt-1'"
+        [icon]="Icons.Minus"
+        (click)="onDeleteCard()"
+      >
+        Delete
+      </ui-button>
+    </div>
+  </div>
+</div>

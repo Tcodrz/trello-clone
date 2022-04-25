@@ -1,0 +1,5 @@
+<app-topnav #topnav></app-topnav>
+<app-sidebar (open)="onSidebarToggle($event)" #sidebar [theme]="board?.theme"></app-sidebar>
+<div class="content" #content>
+  <ng-content></ng-content>
+</div>

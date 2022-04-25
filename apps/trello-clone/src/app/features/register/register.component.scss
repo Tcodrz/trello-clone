@@ -1,0 +1,9 @@
+@import "constants";
+
+.register {
+  height: 100vh;
+
+  ui-card {
+    width: $CardWidthDefualt;
+  }
+}

@@ -1,0 +1,66 @@
+@import "constants";
+@import "functions";
+
+$sizes: 1 2 3 4 5 6 7 8 9 10;
+
+@each $size in $sizes {
+  .width-#{$size} {
+    width: #{$size * 10%};
+  }
+
+  .p-#{$size} {
+    padding: times8($size);
+  }
+
+  .pt-#{$size} {
+    padding-top: times8($size);
+  }
+
+  .pb-#{$size} {
+    padding-bottom: times8($size);
+  }
+
+  .pl-#{$size} {
+    padding-left: times8($size);
+  }
+
+  .pr-#{$size} {
+    padding-right: times8($size);
+  }
+
+  .m-#{$size} {
+    margin: times8($size);
+  }
+
+  .mt-#{$size} {
+    margin-top: times8($size);
+  }
+
+  .mb-#{$size} {
+    margin-bottom: times8($size);
+  }
+
+  .ml-#{$size} {
+    margin-left: times8($size);
+  }
+
+  .mr-#{$size} {
+    margin-right: times8($size);
+  }
+}
+
+$colors: blue grey white lightgrey red;
+
+@each $color in $colors {
+  .c-#{$color} {
+    color: getColor($color);
+  }
+}
+
+$fontSizes: 'sm''regular''md''lg''xl';
+
+@each $size in $fontSizes {
+  .font-#{$size} {
+    font-size: getFontSize($size);
+  }
+}

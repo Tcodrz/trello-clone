@@ -1,1 +1,100 @@
 /* You can add global styles to this file, and also import other style files */
+@import "font";
+@import "constants";
+@import "form";
+@import "media";
+@import "global";
+@import "sidebar";
+@import "select";
+@import "card-side-menu";
+
+* {
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: 'Fredoka', sans-serif;
+  font-size: $FontRegular;
+  color: $Black;
+
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 500;
+}
+
+h1 {
+  font-size: 40px;
+}
+
+h5 {
+  font-size: $FontMedium;
+}
+
+div.br {
+  border-bottom: 1px solid $LightGrey;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.d-none {
+  display: none;
+}
+
+.bg-light {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(234, 230, 255, 1) 100%);
+}
+
+.center {
+  display: grid;
+  place-content: center;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+div.preview-card {
+  background-color: #ffffff;
+}
+
+div.card.list-card {
+  background-color: #ebecf0 !important;
+
+}
+
+div.card.menu {
+  background-color: $White !important;
+}
+
+.p-dialog-mask {
+  background-color: $ModalMaskBackground;
+}
+
+.p-dialog-header-icons {
+  display: none !important; // hide modal close button
+}
+
+.bg-card {
+  background-color: $CardModalBackgroung;
+
+}
+
+ui-checklist {
+
+  .cdk-drag-placeholder {
+    cursor: pointer;
+    background-color: $SidbarLinkHover;
+  }
+}

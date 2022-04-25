@@ -1,0 +1,28 @@
+<p-overlayPanel #menu [style]="menuStyles" (onHide)="onHide()">
+
+  <div class="menu">
+    <ng-container *ngIf="title">
+      <div class="title">
+        <div class="left-space"></div>
+        <div class="title-text">{{ title }}</div>
+        <ui-button *ngIf="showCloseIcon" className="icon no-hover" [icon]="Icons.Times" class="close-icon"
+          (click)="onClose($event)">
+        </ui-button>
+      </div>
+      <div class="br mb-1"></div>
+    </ng-container>
+    <!-- Custom menu content -->
+    <ng-content></ng-content>
+
+    <div class="items" *ngFor="let menu of menus">
+      <ng-container *ngIf="menu.items.length > 0">
+        <div class="headline">{{ menu.headline }}</div>
+        <ng-container *ngFor="let item of menu.items">
+          <div class="item" (click)="onItemClick(item)">{{ item.label }}</div>
+        </ng-container>
+        <div class="br mb-1 mt-1" *ngIf="menus && menus.length > 1"></div>
+      </ng-container>
+    </div>
+  </div>
+
+</p-overlayPanel>

@@ -1,0 +1,58 @@
+<ng-container *ngIf="card$ | async as card">
+  <div class="card">
+    <div class="cover" *ngIf="card.cover" #cover>
+      <div class="button">
+        <ui-button className="btn pl-1 pr-1">
+          <ui-icon [icon]="Icons.Brush"></ui-icon>
+          Cover
+        </ui-button>
+      </div>
+    </div>
+    <div class="close-icon">
+      <ui-button
+        className="icon no-hover"
+        [icon]="Icons.Times"
+        (click)="onClose()"
+      ></ui-button>
+    </div>
+    <div class="container">
+      <div class="header">
+        <div class="title">{{ card.name }}</div>
+      </div>
+      <div class="layout">
+        <div class="components">
+          <div class="description"></div>
+
+          <div class="attachements"></div>
+
+          <div class="checklists" cdkDropListGroup>
+            <div *ngFor="let list of card.checklists" [id]="list.id">
+              <ui-checklist
+                [checklist]="list"
+                (addItem)="onAddChecklistItem($event)"
+                (updateItem)="onUpdateItem($event)"
+                (deleteItem)="onDeleteItem($event)"
+                (deleteChecklist)="onDeleteCheckList($event)"
+                (updateChecklist)="onUpdateChecklist($event)"
+                (createCardFromItem)="onCreateCardFromItem($event)"
+                (drop)="onDropChecklistItem($event, list)"
+              ></ui-checklist>
+            </div>
+          </div>
+
+          <div class="activity"></div>
+        </div>
+        <div class="side-menu">
+          <app-card-side-menu
+            [card]="card"
+            [board]="board$ | async"
+            (addChecklist)="onChecklistAdd($event)"
+            (archiveCard)="onArchiveCard($event)"
+            (undoArchiveCard)="onUndoArchive($event)"
+            (deleteCard)="onDeleteCard($event)"
+          ></app-card-side-menu>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

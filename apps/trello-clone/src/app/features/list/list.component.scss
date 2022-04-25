@@ -1,0 +1,23 @@
+@import "constants";
+@import "functions";
+
+:host {
+  display: block;
+  min-width: 270px;
+  max-width: 270px;
+
+  .list {
+    overflow: overlay;
+    max-height: 80vh;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .footer {
+    display: flex;
+    column-gap: times8(1);
+    margin-top: times8(1);
+  }
+}
