@@ -1,6 +1,7 @@
-import { User } from 'src/app/core/interface/user.interface';
-import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
-import { Icons, MenuItems } from '@ui-components';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { MenuItems } from './../../../../../../../../libs/ui-components/src/interface/menu.interface';
+import { Icons } from './../../../../../../../../libs/ui-components/src/lib/button/icon/icons';
+import { User } from './../../../../core/interface/user.interface';
 
 @Component({
   selector: 'app-members-menu',
@@ -8,7 +9,7 @@ import { Icons, MenuItems } from '@ui-components';
   styleUrls: ['./members-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MembersMenuComponent implements OnInit {
+export class MembersMenuComponent {
   @Input() members: User[] | undefined = [];
   Icons = Icons;
   membersMenu: MenuItems[] = [
@@ -17,6 +18,4 @@ export class MembersMenuComponent implements OnInit {
       items: []
     }
   ];
-  constructor() { }
-  ngOnInit(): void { }
 }

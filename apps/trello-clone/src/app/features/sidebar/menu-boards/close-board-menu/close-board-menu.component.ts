@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Icons, MenuComponent } from '@ui-components';
-import { Board } from 'src/app/core/interface/board.interface';
+import { MenuComponent } from './../../../../../../../../libs/ui-components/src/lib/menu/menu/menu.component';
+import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
+import { Icons } from './../../../../../../../../libs/ui-components/src/lib/button/icon/icons';
+import { Board } from './../../../../core/interface/board.interface';
 
 @Component({
   selector: 'app-close-board-menu',
@@ -8,14 +9,11 @@ import { Board } from 'src/app/core/interface/board.interface';
   styleUrls: ['./close-board-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CloseBoardMenuComponent implements OnInit {
+export class CloseBoardMenuComponent {
   @Input() board!: Board;
   @ViewChild('menu') menu!: MenuComponent;
-  page: number = 1;
+  page = 1;
   Icons = Icons;
-  constructor() { }
-  ngOnDestroy(): void { }
-  ngOnInit(): void { }
   next(i: number) { this.page += i; }
   onHide(): void { this.page = 1; }
 }

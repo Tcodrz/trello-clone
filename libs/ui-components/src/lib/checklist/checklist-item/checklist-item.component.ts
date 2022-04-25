@@ -1,8 +1,8 @@
+import { MenuItems } from './../../../interface/menu.interface';
+import { ChecklistItem } from './../../../../../../apps/trello-clone/src/app/core/interface/checklist.interface';
 import { ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MenuItems } from '@ui-components';
 import { debounceTime } from 'rxjs';
-import { ChecklistItem } from 'src/app/core/interface/checklist.interface';
 import { UiInputComponent } from '../../ui-input/ui-input.component';
 import { Icons } from './../../button/icon/icons';
 

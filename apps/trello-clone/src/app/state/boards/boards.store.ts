@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Store, StoreConfig } from '@datorama/akita';
 import { map, mergeMap } from 'rxjs';
-import { Board } from 'src/app/core/interface/board.interface';
-import { List } from 'src/app/core/interface/list.interface';
+import { Board } from '../../core/interface/board.interface';
+import { List } from '../../core/interface/list.interface';
 import { UserStore } from './../user/user.store';
 export interface BoardState {
   boards: Board[];

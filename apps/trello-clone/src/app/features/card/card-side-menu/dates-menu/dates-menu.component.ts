@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Icons, MenuItems } from '@ui-components';
+import { MenuItems } from './../../../../../../../../libs/ui-components/src/interface/menu.interface';
+import { Icons } from './../../../../../../../../libs/ui-components/src/lib/button/icon/icons';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-dates-menu',
@@ -7,7 +8,7 @@ import { Icons, MenuItems } from '@ui-components';
   styleUrls: ['./dates-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DatesMenuComponent implements OnInit {
+export class DatesMenuComponent {
   Icons = Icons;
   datesMenu: MenuItems[] = [
     {
@@ -15,10 +16,4 @@ export class DatesMenuComponent implements OnInit {
       items: []
     }
   ];
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

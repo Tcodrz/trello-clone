@@ -1,10 +1,11 @@
-import { ListsStore } from './../../../state/lists/lists.store';
-import { BoardsService } from './../../../core/services/boards.service';
+import { MenuItems } from './../../../../../../../libs/ui-components/src/interface/menu.interface';
+import { Icons } from './../../../../../../../libs/ui-components/src/lib/button/icon/icons';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { List } from 'src/app/core/interface/list.interface';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { List } from '../../../core/interface/list.interface';
 import { Card } from './../../../core/interface/card.interface';
-import { Icons, MenuItems } from '@ui-components';
+import { BoardsService } from './../../../core/services/boards.service';
+import { ListsStore } from './../../../state/lists/lists.store';
 
 @Component({
   selector: 'app-board-lists',
@@ -12,9 +13,9 @@ import { Icons, MenuItems } from '@ui-components';
   styleUrls: ['./board-lists.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class BoardListsComponent implements OnInit {
+export class BoardListsComponent {
   @Input() set lists(value: List[] | null) {
-    if (!!value) this._lists = value;
+    if (value) this._lists = value;
   };
   @Output() updateLists: EventEmitter<List[]> = new EventEmitter<List[]>();
   @Output() openCard: EventEmitter<Card> = new EventEmitter<Card>();
@@ -33,7 +34,6 @@ export class BoardListsComponent implements OnInit {
     private boardService: BoardsService,
     private listsStore: ListsStore,
   ) { }
-  ngOnInit(): void { }
   onCardCreate(newCard: Partial<Card>): void {
     this.listsStore.createCard(newCard);
   }

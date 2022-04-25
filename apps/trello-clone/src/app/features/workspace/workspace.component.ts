@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
-import { Board } from 'src/app/core/interface/board.interface';
-import { Workspace } from 'src/app/core/interface/workspace.interface';
+import { Board } from '../../core/interface/board.interface';
+import { Workspace } from '../../core/interface/workspace.interface';
 import { BoardsService } from './../../core/services/boards.service';
 import { GotoService } from './../../core/services/goto.service';
 import { WorkspaceService } from './../../core/services/workspace.service';

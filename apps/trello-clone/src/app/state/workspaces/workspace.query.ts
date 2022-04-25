@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Query } from '@datorama/akita';
 import { Observable } from 'rxjs';
-import { WorkspaceStore } from 'src/app/state/workspaces/workspaces.store';
 import { Workspace } from './../../core/interface/workspace.interface';
-import { WorkspacesState } from './workspaces.store';
+import { WorkspacesState, WorkspaceStore } from './workspaces.store';
 
 
 @Injectable({ providedIn: 'root' })

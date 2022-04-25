@@ -1,6 +1,7 @@
-import { Workspace } from 'src/app/core/interface/workspace.interface';
+import { MenuItem } from './../../../../../../../libs/ui-components/src/interface/menu.interface';
+import { Icons } from './../../../../../../../libs/ui-components/src/lib/button/icon/icons';
+import { Workspace } from './../../../core/interface/workspace.interface';
 import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Icons, MenuItem } from '@ui-components';
 
 @Component({
   selector: 'app-menu-workspaces',
@@ -12,8 +13,6 @@ export class MenuWorkspacesComponent implements OnInit {
   @Input() workspaces: Workspace[] | null = [];
   Icons = Icons;
   workspaceMenuItems: MenuItem[] = [];
-  constructor() { }
-
   ngOnInit(): void {
     this.initWorkspaceMenu();
   }

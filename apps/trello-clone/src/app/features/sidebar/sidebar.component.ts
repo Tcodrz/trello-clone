@@ -1,10 +1,11 @@
+import { MenuItem } from './../../../../../../libs/ui-components/src/interface/menu.interface';
+import { Icons } from './../../../../../../libs/ui-components/src/lib/button/icon/icons';
+import { Workspace } from './../../core/interface/workspace.interface';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, OnInit, Output, Renderer2, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Icons, MenuItem } from '@ui-components';
 import { BehaviorSubject, map, Observable, of, switchMap, tap } from 'rxjs';
-import { Theme } from 'src/app/core/interface/themes';
-import { Workspace } from 'src/app/core/interface/workspace.interface';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
+import { Theme } from '../../core/interface/themes';
 import { Board } from './../../core/interface/board.interface';
 import { BoardsService } from './../../core/services/boards.service';
 import { GotoService } from './../../core/services/goto.service';
@@ -20,14 +21,14 @@ import { WorkspaceService } from './../../core/services/workspace.service';
 })
 export class SidebarComponent implements OnInit, OnChanges {
   @Input() theme: Theme | undefined;
-  @Output() open: EventEmitter<boolean> = new EventEmitter();
+  @Output() open: EventEmitter<boolean> = new EventEmitter<boolean>();
   workspaces$: Observable<Workspace[]> = of([]);
   workspace$: Observable<Workspace | null> = of(null);
   boards$: Observable<Board[]> = of([]);
   menuLinks$: Observable<MenuItem[]> = of([]);
   isSmallScreen$ = new BehaviorSubject<boolean>(false);
   showToggler$: Observable<boolean> = of(false);
-  isOpen: boolean = true;
+  isOpen = true;
   Icons = Icons;
   sidebarLinksStyle = {};
   board$: Observable<Board | null> = of(null);
@@ -77,7 +78,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
   initWorkspace(workspaceID: string) {
     this.workspace$ = this.workspaceService.getWorkspace(workspaceID).pipe(tap(workspace => {
-      this.sidebarLinksStyle = !!workspace ? {} : { 'display': 'block', 'margin-top': '30px' };
+      this.sidebarLinksStyle = workspace ? {} : { 'display': 'block', 'margin-top': '30px' };
     }));
     this.boards$ = this.boardsService.getBoards(workspaceID).pipe(
       map(boards => boards.sort((a, b) => b.updatedAt - a.updatedAt)));

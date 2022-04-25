@@ -1,5 +1,7 @@
-import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { IconComponent, Icons, MenuItem } from '@ui-components';
+import { ChangeDetectionStrategy, Component, ElementRef, Input, TemplateRef, ViewChild } from '@angular/core';
+import { MenuItem } from './../../../../../../../libs/ui-components/src/interface/menu.interface';
+import { IconComponent } from './../../../../../../../libs/ui-components/src/lib/button/icon/icon.component';
+import { Icons } from './../../../../../../../libs/ui-components/src/lib/button/icon/icons';
 
 @Component({
   selector: 'app-sidebar-dropdown',
@@ -7,19 +9,16 @@ import { IconComponent, Icons, MenuItem } from '@ui-components';
   styleUrls: ['./sidebar-dropdown.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarDropdownComponent implements OnInit {
-  @Input() title: string = '';
+export class SidebarDropdownComponent {
+  @Input() title = '';
   @Input() items: MenuItem[] = [];
   @ViewChild('dropdown', { static: true }) dropdown?: ElementRef;
   @ViewChild('icon') iconElement?: TemplateRef<IconComponent>;
   Icons = Icons;
   icon: Icons = Icons.None;
   private ITEM_HEIGHT = 35;
-  private _isOpen: boolean = false;
+  private _isOpen = false;
   get isOpen(): boolean { return this._isOpen; }
-  constructor() { }
-  ngOnInit(): void {
-  }
   onToggle() {
     if (!this.dropdown) return;
     const initialHeight = this.ITEM_HEIGHT;

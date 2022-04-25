@@ -1,5 +1,6 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Icons, MenuItems } from '@ui-components';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { MenuItems } from './../../../../../../../../libs/ui-components/src/interface/menu.interface';
+import { Icons } from './../../../../../../../../libs/ui-components/src/lib/button/icon/icons';
 
 @Component({
   selector: 'app-labels-menu',
@@ -7,7 +8,7 @@ import { Icons, MenuItems } from '@ui-components';
   styleUrls: ['./labels-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LabelsMenuComponent implements OnInit {
+export class LabelsMenuComponent {
   labelsMenu: MenuItems[] = [
     {
       headline: '',
@@ -15,9 +16,5 @@ export class LabelsMenuComponent implements OnInit {
     }
   ];
   Icons = Icons;
-  constructor() { }
-
-  ngOnInit(): void {
-  }
 
 }

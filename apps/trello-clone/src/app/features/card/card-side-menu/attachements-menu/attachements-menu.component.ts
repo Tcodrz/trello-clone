@@ -1,5 +1,6 @@
-import { Icons, MenuItems } from '@ui-components';
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { MenuItems } from './../../../../../../../../libs/ui-components/src/interface/menu.interface';
+import { Icons } from './../../../../../../../../libs/ui-components/src/lib/button/icon/icons';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-attachements-menu',
@@ -7,7 +8,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
   styleUrls: ['./attachements-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class AttachementsMenuComponent implements OnInit {
+export class AttachementsMenuComponent {
   Icons = Icons;
   attachmentsMenu: MenuItems[] = [
     {
@@ -15,10 +16,4 @@ export class AttachementsMenuComponent implements OnInit {
       items: []
     }
   ];
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
 }

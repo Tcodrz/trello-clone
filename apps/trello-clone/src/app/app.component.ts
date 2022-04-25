@@ -1,9 +1,8 @@
-import { WorkspaceStore } from 'src/app/state/workspaces/workspaces.store';
-import { WorkspaceService } from './core/services/workspace.service';
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { UserService } from 'src/app/core/services/user.service';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { User } from './core/interface/user.interface';
 import { CacheKeys, CacheService } from './core/services/cache.service';
+import { UserService } from './core/services/user.service';
+import { WorkspaceStore } from './state/workspaces/workspaces.store';
 
 @Component({
   selector: 'app-root',
@@ -11,15 +10,15 @@ import { CacheKeys, CacheService } from './core/services/cache.service';
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   constructor(
     private cacheService: CacheService,
     private userService: UserService,
     private workspaceStore: WorkspaceStore,
   ) { }
-  ngOnInit() {
+  ngOnInit(): void {
     const user = this.cacheService.getItem<User>(CacheKeys.User);
-    if (!!user) {
+    if (user) {
       this.userService.login(user);
       this.workspaceStore.init(user.id);
     }

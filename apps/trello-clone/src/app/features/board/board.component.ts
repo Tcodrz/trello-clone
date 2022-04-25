@@ -1,11 +1,10 @@
+import { Icons } from './../../../../../../libs/ui-components/src/lib/button/icon/icons';
+import { ModalService } from './../../../../../../libs/ui-components/src/lib/modal/modal.service';
 import { CardService } from './../../core/services/card.service';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Icons } from '@ui-components';
 import { Observable, of, tap } from 'rxjs';
-import { BoardsStore } from 'src/app/state/boards/boards.store';
 import { CARD_MODAL } from '../card/card-modal.config';
-import { ModalService } from './../../../../projects/ui-components/src/lib/modal/modal.service';
 import { Board } from './../../core/interface/board.interface';
 import { Card } from './../../core/interface/card.interface';
 import { List } from './../../core/interface/list.interface';
@@ -14,6 +13,7 @@ import { GotoService } from './../../core/services/goto.service';
 import { ListsQuery } from './../../state/lists/lists.query';
 import { ListsStore } from './../../state/lists/lists.store';
 import { CardComponent } from './../card/card.component';
+import { BoardsStore } from '../../state/boards/boards.store';
 
 @Component({
   selector: 'app-board',
@@ -24,10 +24,10 @@ import { CardComponent } from './../card/card.component';
 export class BoardComponent implements OnInit {
   board$: Observable<Board | null> = of(null);
   Icons = Icons;
-  boardID: any;
+  boardID!: string;
   lists$: Observable<List[]> = of([]);
-  workspaceID: any;
-  cardID: any;
+  workspaceID!: string;
+  cardID!: string;
   constructor(
     private activeRoute: ActivatedRoute,
     private boardService: BoardsService,

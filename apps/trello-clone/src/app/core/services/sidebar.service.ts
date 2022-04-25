@@ -1,8 +1,9 @@
+import { Icons } from './../../../../../../libs/ui-components/src/lib/button/icon/icons';
+import { MenuItem } from './../../../../../../libs/ui-components/src/interface/menu.interface';
 import { Injectable } from '@angular/core';
-import { Icons, MenuItem } from '@ui-components';
 import { map, Observable } from 'rxjs';
-import { WorkspacesQuery } from 'src/app/state/workspaces/workspace.query';
-import { WorkspaceStore } from 'src/app/state/workspaces/workspaces.store';
+import { WorkspacesQuery } from '../../state/workspaces/workspace.query';
+import { WorkspaceStore } from '../../state/workspaces/workspaces.store';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class SidebarService {
   getMenuLinks(): Observable<MenuItem[]> {
     return this.workspaceQuery.currentWorkspace$.pipe(
       map(workspace => {
-        if (!!workspace) return this.getWorkspaceLinks();
+        if (workspace) return this.getWorkspaceLinks();
         else return this.getDashboardLinks();
       })
     );

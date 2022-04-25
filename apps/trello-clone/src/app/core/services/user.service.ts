@@ -1,9 +1,9 @@
+import { UserQuery } from './../../state/user/user.query';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import firebase from 'firebase/compat/app';
 import { Observable } from 'rxjs';
-import { UserQuery } from 'src/app/state/user/user.query';
 import { User } from '../interface/user.interface';
 import { UserStore } from './../../state/user/user.store';
 import { CacheKeys, CacheService } from './cache.service';

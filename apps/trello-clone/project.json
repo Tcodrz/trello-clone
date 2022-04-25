@@ -2,11 +2,13 @@
   "projectType": "application",
   "root": "apps/trello-clone",
   "sourceRoot": "apps/trello-clone/src",
-  "prefix": "trello-clone",
+  "prefix": "app",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/trello-clone",
         "index": "apps/trello-clone/src/index.html",
@@ -18,7 +20,9 @@
           "apps/trello-clone/src/favicon.ico",
           "apps/trello-clone/src/assets"
         ],
-        "styles": ["apps/trello-clone/src/styles.scss"],
+        "styles": [
+          "apps/trello-clone/src/styles.scss"
+        ],
         "scripts": []
       },
       "configurations": {
@@ -83,7 +87,9 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/trello-clone"],
+      "outputs": [
+        "coverage/apps/trello-clone"
+      ],
       "options": {
         "jestConfig": "apps/trello-clone/jest.config.ts",
         "passWithNoTests": true

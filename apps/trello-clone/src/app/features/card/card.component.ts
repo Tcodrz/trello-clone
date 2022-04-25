@@ -1,14 +1,13 @@
+import { ModalService } from './../../../../../../libs/ui-components/src/lib/modal/modal.service';
+import { Icons } from './../../../../../../libs/ui-components/src/lib/button/icon/icons';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { Location } from '@angular/common';
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { Icons } from '@ui-components';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { map, Observable, of, Subscription, tap } from 'rxjs';
-import { Board } from 'src/app/core/interface/board.interface';
-import { Card } from 'src/app/core/interface/card.interface';
-import { ChecklistItem } from 'src/app/core/interface/checklist.interface';
-import { ModalService } from './../../../../projects/ui-components/src/lib/modal/modal.service';
-import { Checklist } from './../../core/interface/checklist.interface';
+import { Board } from '../../core/interface/board.interface';
+import { Card } from '../../core/interface/card.interface';
+import { Checklist, ChecklistItem } from './../../core/interface/checklist.interface';
 import { BoardsService } from './../../core/services/boards.service';
 import { CardService } from './../../core/services/card.service';
 @Component({
@@ -33,6 +32,7 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
     private modal: ModalService,
     private ref: DynamicDialogRef,
   ) { }
+  // eslint-disable-next-line @angular-eslint/no-empty-lifecycle-method
   ngAfterViewInit(): void {
     // if (this.cover)
     // this.cover.nativeElement.style.backgroundColor = 'green';
@@ -43,6 +43,7 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
     this.workspaceID = parts[1].split('=')[1];
     this.boardID = parts[2].split('=')[1];
     const cardID = parts[3].split('=')[1];
+    // eslint-disable-next-line no-debugger
     if (!this.boardID || !cardID) debugger;
     this.board$ = this.boardService.getBoard(this.boardID);
     this.card$ = this.cardService.getCard(cardID).pipe(

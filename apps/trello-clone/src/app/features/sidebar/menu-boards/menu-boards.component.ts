@@ -1,5 +1,6 @@
+import { Icons } from './../../../../../../../libs/ui-components/src/lib/button/icon/icons';
+import { MenuItems } from './../../../../../../../libs/ui-components/src/interface/menu.interface';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Icons, MenuItems } from '@ui-components';
 import { Board } from '../../../core/interface/board.interface';
 import { GotoService } from '../../../core/services/goto.service';
 
@@ -9,7 +10,7 @@ import { GotoService } from '../../../core/services/goto.service';
   styleUrls: ['./menu-boards.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MenuBoardsComponent implements OnInit, OnChanges {
+export class MenuBoardsComponent implements OnChanges {
   @Input() boards: Board[] | null = [];
   @Output() boardClick: EventEmitter<Board> = new EventEmitter<Board>();
   menuItems: MenuItems | null = null;
@@ -19,8 +20,6 @@ export class MenuBoardsComponent implements OnInit, OnChanges {
   ) { }
   ngOnChanges(changes: SimpleChanges): void {
     this.menuItems = this.initMenuItems();
-  }
-  ngOnInit(): void {
   }
   initMenuItems(): MenuItems | null {
     if (!this.boards) return null;

@@ -1,4 +1,5 @@
-import { ButtonModule, SelectModule } from '@ui-components';
+import { ButtonModule } from './../../../../../../libs/ui-components/src/lib/button/button.module';
+import { SelectModule } from './../../../../../../libs/ui-components/src/lib/select/select.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -11,10 +12,10 @@ import { NewBoardMenuComponent } from './new-board-menu.component';
     NewBoardMenuComponent
   ],
   imports: [
+    ButtonModule,
     CommonModule,
     ReactiveFormsModule,
     SelectModule,
-    ButtonModule,
   ],
   exports: [
     NewBoardMenuComponent,

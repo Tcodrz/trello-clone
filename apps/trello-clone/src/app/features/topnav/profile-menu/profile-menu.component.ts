@@ -1,5 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { User } from '../../../core/interface/user.interface';
 
 @Component({
@@ -8,9 +7,7 @@ import { User } from '../../../core/interface/user.interface';
   styleUrls: ['./profile-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProfileMenuComponent implements OnInit {
+export class ProfileMenuComponent {
   @Input() user: User | null = null;
 
-  constructor() { }
-  ngOnInit(): void { }
 }

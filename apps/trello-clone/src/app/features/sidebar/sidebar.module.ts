@@ -1,3 +1,5 @@
+import { MenuModule } from './../../../../../../libs/ui-components/src/lib/menu/menu.module';
+import { ButtonModule } from './../../../../../../libs/ui-components/src/lib/button/button.module';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -6,7 +8,6 @@ import { MenuWorkspacesComponent } from './menu-workspaces/menu-workspaces.compo
 import { SidebarDropdownComponent } from './sidebar-dropdown/sidebar-dropdown.component';
 import { SidebarLinksComponent } from './sidebar-links/sidebar-links.component';
 import { SidebarComponent } from './sidebar.component';
-import { ButtonModule, MenuModule } from '@ui-components';
 import { CloseBoardMenuComponent } from './menu-boards/close-board-menu/close-board-menu.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
 

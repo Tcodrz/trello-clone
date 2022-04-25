@@ -1,7 +1,7 @@
+import { DropdownOption } from './../../../../../../libs/ui-components/src/interface/dropdown-option.interface';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Workspace } from 'src/app/core/interface/workspace.interface';
-import { DropdownOption } from '../../../../projects/ui-components/src/interface/dropdown-option.interface';
+import { Workspace } from '../../core/interface/workspace.interface';
 import { Board } from './../../core/interface/board.interface';
 import { Themes } from './../../core/interface/themes';
 
@@ -52,7 +52,7 @@ export class NewBoardMenuComponent implements OnChanges, OnDestroy {
         name: this.currentWorkspace.name,
       }
       const control = this.newBoardForm.controls['workspace'];
-      if (!!control) control.patchValue(currentWorkspaceOption);
+      if (control) control.patchValue(currentWorkspaceOption);
     }
   }
   resetForm() {

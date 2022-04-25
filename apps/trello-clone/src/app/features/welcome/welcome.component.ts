@@ -1,7 +1,7 @@
+import { Icons } from './../../../../../../libs/ui-components/src/lib/button/icon/icons';
 import { CacheService, CacheKeys } from './../../core/services/cache.service';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { Icons } from '../../../../projects/ui-components/src/lib/button/icon/icons';
-import { isDev } from 'src/app/core/utils/utils';
+import { isDev } from '../../core/utils/utils';
 
 @Component({
   selector: 'app-welcome',
@@ -11,7 +11,7 @@ import { isDev } from 'src/app/core/utils/utils';
 })
 export class WelcomeComponent implements OnInit {
   Icons = Icons;
-  isDev: boolean = false;
+  isDev = false;
   constructor(
     private cache: CacheService,
   ) { }

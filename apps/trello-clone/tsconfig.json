@@ -19,7 +19,13 @@
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@ui-components": [
+        "libs/ui-components/src/libs.ts",
+        "/libs/ui-components/src/lib.ts"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": true,

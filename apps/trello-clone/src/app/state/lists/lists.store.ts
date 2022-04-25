@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
 import { List } from './../../core/interface/list.interface';
 import { map } from 'rxjs';
-import { Board } from 'src/app/core/interface/board.interface';
+import { Board } from '../../core/interface/board.interface';
 
 
 export interface ListsState {

@@ -1,10 +1,10 @@
+import { MenuItems, MenuItem } from './../../../../../../libs/ui-components/src/interface/menu.interface';
 import { Injectable } from '@angular/core';
-import { MenuItem, MenuItems } from '@ui-components';
 import { map, Observable } from 'rxjs';
-import { WorkspacesQuery } from 'src/app/state/workspaces/workspace.query';
-import { WorkspaceStore } from 'src/app/state/workspaces/workspaces.store';
+import { WorkspacesQuery } from '../../state/workspaces/workspace.query';
+import { WorkspaceStore } from '../../state/workspaces/workspaces.store';
 import { Workspace } from '../interface/workspace.interface';
-import { CacheKeys, CacheService } from './cache.service';
+import { CacheService } from './cache.service';
 import { GotoService } from './goto.service';
 
 @Injectable({ providedIn: 'root' })

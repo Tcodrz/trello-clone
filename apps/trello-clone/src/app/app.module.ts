@@ -1,3 +1,4 @@
+import { ModalModule } from './../../../../libs/ui-components/src/lib/modal/modal.module';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
@@ -9,7 +10,6 @@ import { AppComponent } from './app.component';
 import { NG_ENTITY_SERVICE_CONFIG } from '@datorama/akita-ng-entity-service';
 import { AkitaNgDevtools } from '@datorama/akita-ngdevtools';
 import { AkitaNgRouterStoreModule } from '@datorama/akita-ng-router-store';
-import { ModalModule } from '@ui-components';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 // AngularFire Docs - https://www.npmjs.com/package/@angular/fire

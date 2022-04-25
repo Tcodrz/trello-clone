@@ -1,6 +1,6 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { Icons, MenuItem } from '@ui-components';
-import { Theme } from 'src/app/core/interface/themes';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
+import { MenuItem } from './../../../../../../../libs/ui-components/src/interface/menu.interface';
+import { Theme } from './../../../core/interface/themes';
 
 @Component({
   selector: 'app-sidebar-links',
@@ -8,16 +8,13 @@ import { Theme } from 'src/app/core/interface/themes';
   styleUrls: ['./sidebar-links.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarLinksComponent implements OnInit, AfterViewInit {
+export class SidebarLinksComponent implements AfterViewInit {
   @Input() menuItems: MenuItem[] | null = [];
   @Input() theme: Theme | undefined;
   @ViewChild('links') links: ElementRef | undefined;
   linkStyles = {};
-  constructor() { }
   ngAfterViewInit(): void {
     this.initStyles();
-  }
-  ngOnInit(): void {
   }
   initStyles() {
     this.setLinksStyle({
@@ -27,7 +24,7 @@ export class SidebarLinksComponent implements OnInit, AfterViewInit {
 
   }
   onItmeClick(item: MenuItem) {
-    if (!!item.command) item.command();
+    if (item.command) item.command();
   }
   onLinkHover(index: number) {
     this.setSingleLinkSyle({
@@ -40,7 +37,7 @@ export class SidebarLinksComponent implements OnInit, AfterViewInit {
     }, index);
   }
   setLinksStyle(styles: object) { // set styles to all links
-    if (!!this.links) {
+    if (this.links) {
       const collection = (this.links.nativeElement.children as HTMLCollection);
       let i = 0;
       while (i < collection.length) {
@@ -52,7 +49,7 @@ export class SidebarLinksComponent implements OnInit, AfterViewInit {
     }
   }
   setSingleLinkSyle(styles: object, index: number) {
-    if (!!this.links) {
+    if (this.links) {
       const collection = this.links.nativeElement.children as HTMLCollection;
       const element = collection.item(index)?.children.item(0) as HTMLAnchorElement;
       Object.assign(element.style, styles);

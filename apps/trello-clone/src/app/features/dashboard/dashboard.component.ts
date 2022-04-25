@@ -1,7 +1,7 @@
 import { GotoService } from './../../core/services/goto.service';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
-import { UserStore } from 'src/app/state/user/user.store';
-import { WorkspaceStore } from 'src/app/state/workspaces/workspaces.store';
+import { UserStore } from '../../state/user/user.store';
+import { WorkspaceStore } from '../../state/workspaces/workspaces.store';
 
 @Component({
   selector: 'app-dashboard',

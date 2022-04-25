@@ -1,9 +1,10 @@
+import { MenuItem, MenuItems } from './../../../../../../libs/ui-components/src/interface/menu.interface';
+import { Icons } from './../../../../../../libs/ui-components/src/lib/button/icon/icons';
 import { ChangeDetectionStrategy, Component, ElementRef, OnInit } from '@angular/core';
-import { Icons, MenuItem, MenuItems } from '@ui-components';
 import { Observable, of } from 'rxjs';
-import { User } from 'src/app/core/interface/user.interface';
-import { UserService } from 'src/app/core/services/user.service';
 import { ScreenSize } from '../../core/interface/screen-size.enum';
+import { User } from '../../core/interface/user.interface';
+import { UserService } from '../../core/services/user.service';
 import { GotoService } from './../../core/services/goto.service';
 import { WorkspaceService } from './../../core/services/workspace.service';
 

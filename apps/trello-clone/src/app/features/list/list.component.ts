@@ -1,11 +1,11 @@
+import { Icons } from './../../../../../../libs/ui-components/src/lib/button/icon/icons';
+import { Card } from './../../core/interface/card.interface';
+import { List } from './../../core/interface/list.interface';
+import { UiInputComponent } from './../../../../../../libs/ui-components/src/lib/ui-input/ui-input.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Icons } from '@ui-components';
 import { Observable, of } from 'rxjs';
-import { List } from 'src/app/core/interface/list.interface';
-import { UiInputComponent } from './../../../../projects/ui-components/src/lib/ui-input/ui-input.component';
-import { Card } from './../../core/interface/card.interface';
 import { ListsService } from './../../core/services/lists.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { ListsService } from './../../core/services/lists.service';
   styleUrls: ['./list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListComponent implements OnInit {
+export class ListComponent {
   @ViewChild('input', { static: false }) input!: UiInputComponent;
   @Input() set list(list: List) {
     this.list$ = this.listsService.populateCards(list);
@@ -24,12 +24,11 @@ export class ListComponent implements OnInit {
   @Output() openCard: EventEmitter<Card> = new EventEmitter<Card>();
   list$: Observable<List | null> = of(null);
   Icons = Icons;
-  createMode: boolean = false;
+  createMode = false;
   newCardName: FormControl = new FormControl('');
   constructor(
     private listsService: ListsService
   ) { }
-  ngOnInit(): void { }
   onAddCard() {
     this.createMode = true;
     setTimeout(() => {

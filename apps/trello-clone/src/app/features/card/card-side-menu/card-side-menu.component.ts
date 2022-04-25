@@ -1,7 +1,7 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Icons } from '@ui-components';
-import { Board } from 'src/app/core/interface/board.interface';
-import { Card } from 'src/app/core/interface/card.interface';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
+import { Board } from '../../../core/interface/board.interface';
+import { Icons } from './../../../../../../../libs/ui-components/src/lib/button/icon/icons';
+import { Card } from './../../../core/interface/card.interface';
 
 @Component({
   selector: 'app-card-side-menu',
@@ -9,7 +9,7 @@ import { Card } from 'src/app/core/interface/card.interface';
   styleUrls: ['./card-side-menu.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CardSideMenuComponent implements OnInit {
+export class CardSideMenuComponent {
   @Input() board: Board | null = null;
   @Input() card: Card | null = null;
   @Output() addChecklist: EventEmitter<string> = new EventEmitter<string>();
@@ -17,10 +17,6 @@ export class CardSideMenuComponent implements OnInit {
   @Output() undoArchiveCard: EventEmitter<Card> = new EventEmitter<Card>();
   @Output() deleteCard: EventEmitter<Card> = new EventEmitter<Card>();
   Icons = Icons;
-  constructor() { }
-
-  ngOnInit(): void {
-  }
   onCheklistAdd(name: string) {
     this.addChecklist.emit(name);
   }

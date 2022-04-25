@@ -1,12 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
-@import "font";
-@import "constants";
-@import "form";
-@import "media";
-@import "global";
-@import "sidebar";
-@import "select";
-@import "card-side-menu";
+@import "assets/scss/font";
+@import "assets/scss/constants";
+@import "assets/scss/form";
+@import "assets/scss/media";
+@import "assets/scss/global";
+@import "assets/scss/sidebar";
+@import "assets/scss/select";
+@import "assets/scss/card-side-menu";
 
 * {
   &::-webkit-scrollbar {
