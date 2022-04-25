@@ -1,0 +1,7 @@
+{
+  "version": 2,
+  "projects": {
+    "trello-clone": "apps/trello-clone",
+    "trello-clone-e2e": "apps/trello-clone-e2e"
+  }
+}
