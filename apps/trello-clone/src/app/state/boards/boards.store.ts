@@ -1,10 +1,11 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Store, StoreConfig } from '@datorama/akita';
-import { map, mergeMap } from 'rxjs';
-import { Board } from '../../core/interface/board.interface';
-import { List } from '../../core/interface/list.interface';
-import { UserStore } from './../user/user.store';
+import {Injectable} from '@angular/core';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {Store, StoreConfig} from '@datorama/akita';
+import {map, mergeMap} from 'rxjs';
+import {Board} from '../../core/interface/board.interface';
+import {List} from '../../core/interface/list.interface';
+import {UserStore} from '../user/user.store';
+
 export interface BoardState {
   boards: Board[];
   currentBoard: Board | null;
@@ -32,17 +33,16 @@ export class BoardsStore extends Store<BoardState> {
     if (boards) {
       this.update({ boards });
       return;
-    };
+    }
     const listCollection = this.firestore.collection<List>('list');
     this.collection.valueChanges().pipe(
       map(boards => boards.filter(board => board.workspaceID === workspaceID)),
       mergeMap(boards => listCollection.get().pipe(
         map(lists => {
           const listIDs = boards.map(b => b.listIDs).flat();
-          const boardsLists = lists.docs
+          return lists.docs
             .filter(list => listIDs.includes(list.id))
-            .map(list => ({ ...list.data() as List, id: list.id }))
-          return boardsLists;
+            .map(list => ({...list.data() as List, id: list.id}));
         }),
         map(lists => boards.map(board => ({
           ...board, lists: lists
@@ -65,7 +65,7 @@ export class BoardsStore extends Store<BoardState> {
       updatedAt: new Date().getTime(),
       members: [userState.user],
     } as Board;
-    this.firestore.doc<Board>(`board/${id}`).set(board);
+    await this.firestore.doc<Board>(`board/${id}`).set(board);
     board.lists = lists;
     this.update({ currentBoard: board });
     return board;

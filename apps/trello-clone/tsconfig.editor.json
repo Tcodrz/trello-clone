@@ -4,6 +4,9 @@
     "**/*.ts"
   ],
   "compilerOptions": {
-    "types": []
+    "types": [
+      "jest",
+      "node"
+    ]
   }
 }

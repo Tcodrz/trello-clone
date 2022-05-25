@@ -1,4 +1,4 @@
-import { Icons } from './../../button/icon/icons';
+import { Icons } from '../../button/icon/icons';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { OverlayPanel } from 'primeng/overlaypanel';
 import { MenuItem, MenuItems } from '../../../interface/menu.interface';

@@ -10,5 +10,3 @@ export interface MenuItems {
   headline: string;
   items: MenuItem[];
 }
-
-export type MenuPosition = 'left' | 'right' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'mid-right' | 'mid-left';
