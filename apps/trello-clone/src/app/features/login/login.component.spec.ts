@@ -3,9 +3,14 @@ import {LoginComponent} from './login.component';
 import {UserService} from "../../core/services/user.service";
 import {FormBuilder} from "@angular/forms";
 import {ButtonModule} from "@ui-components";
-import {createUserServiceMock} from "../../mocks/user.service.mock";
 
+type UserServiceMock = Partial<Record<keyof UserService, jest.Mock<UserService>>>;
 
+function createUserServiceMock(): UserServiceMock {
+  return {
+    signInWithGoogle: jest.fn()
+  };
+}
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
