@@ -1,4 +1,4 @@
-import { Icons } from './../../../../../../libs/ui-components/src/lib/button/icon/icons';
+import { Icons } from '@ui-components';
 import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from '../../core/services/user.service';
