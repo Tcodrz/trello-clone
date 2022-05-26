@@ -1,10 +1,10 @@
-import { ChecklistItem } from './../../../../../apps/trello-clone/src/app/core/interface/checklist.interface';
+import { ChecklistItem } from '../../../../../apps/trello-clone/src/app/core/interface/checklist.interface';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { ChangeDetectionStrategy, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Checklist } from 'apps/trello-clone/src/app/core/interface/checklist.interface';
 import { BehaviorSubject } from 'rxjs';
-import { Icons } from './../button/icon/icons';
+import { Icons } from '../button/icon/icons';
 
 @Component({
   selector: 'ui-checklist',

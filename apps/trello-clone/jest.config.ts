@@ -12,7 +12,9 @@ module.exports = {
   transform: {
     '^.+\\.(ts|mjs|js|html)$': 'jest-preset-angular',
   },
-  transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
+  // transformIgnorePatterns: ['node_modules/(?!.*\\.mjs$)'],
+  // https://github.com/salesforce/akita/issues/781#issuecomment-1018856090
+  transformIgnorePatterns: ['node_modules/(?!.*.mjs$|@datorama/akita)'],
   snapshotSerializers: [
     'jest-preset-angular/build/serializers/no-ng-attributes',
     'jest-preset-angular/build/serializers/ng-snapshot',
