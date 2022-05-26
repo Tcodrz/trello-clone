@@ -5,5 +5,6 @@ export type GotoServiceMock = Partial<Record<keyof GotoService, jest.Mock<GotoSe
 export function createGotoServiceMock(): GotoServiceMock {
   return {
     board: jest.fn(),
+    dashboard: jest.fn()
   };
 }
