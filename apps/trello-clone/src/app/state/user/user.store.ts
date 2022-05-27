@@ -1,7 +1,7 @@
-import { CacheKeys, CacheService } from './../../core/services/cache.service';
+import { CacheKeys, CacheService } from '../../core/services/cache.service';
 import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
-import { User } from './../../core/interface/user.interface';
+import { User } from '@trello-clone/trello-interface';
 
 export interface UserState {
   user: User | null;

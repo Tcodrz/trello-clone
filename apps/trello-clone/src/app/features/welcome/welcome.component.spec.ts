@@ -3,7 +3,7 @@ import { WelcomeComponent } from './welcome.component';
 import {RouterTestingModule} from "@angular/router/testing";
 import {ButtonModule} from "@ui-components";
 import {CacheKeys, CacheService} from "../../core/services/cache.service";
-import {createCacheServiceMock} from "../../mocks/cache.service.mock";
+import {createCacheServiceMock} from "@trello-clone/trello-mocks";
 import * as utils from "../../core/utils/utils";
 
 describe('HomeComponent', () => {

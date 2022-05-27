@@ -3,8 +3,7 @@ import {LoginComponent} from './login.component';
 import {UserService} from "../../core/services/user.service";
 import {FormBuilder} from "@angular/forms";
 import {ButtonModule} from "@ui-components";
-import {createUserServiceMock} from "../../mocks/user.service.mock";
-
+import {createUserServiceMock} from "@trello-clone/trello-mocks";
 
 
 describe('LoginComponent', () => {

@@ -1,10 +1,17 @@
-import { ScreenSize } from './../../core/interface/screen-size.enum';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, OnDestroy, ViewChild, OnChanges, SimpleChanges } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Board } from './../../core/interface/board.interface';
-import { SidebarComponent } from './../sidebar/sidebar.component';
-import { TopnavComponent } from './../topnav/topnav.component';
-import { AppColors } from '../../core/interface/app-colors.enum';
+import {AppColors, Board, ScreenSize} from '@trello-clone/trello-interface';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnChanges,
+  ViewChild
+} from '@angular/core';
+import {BehaviorSubject} from 'rxjs';
+import {SidebarComponent} from '../sidebar/sidebar.component';
+import {TopnavComponent} from '../topnav/topnav.component';
 
 @Component({
   selector: 'app-layout',
@@ -24,7 +31,7 @@ export class LayoutComponent implements AfterViewInit, OnChanges {
   constructor(
     private elementRef: ElementRef,
   ) { }
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.setBoardTheme(this.board);
   }
   ngAfterViewInit(): void {

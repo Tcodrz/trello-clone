@@ -1,7 +1,6 @@
-import { MenuComponent } from './../../../../../../../../libs/ui-components/src/lib/menu/menu/menu.component';
-import { ChangeDetectionStrategy, Component, Input, ViewChild } from '@angular/core';
-import { Icons } from './../../../../../../../../libs/ui-components/src/lib/button/icon/icons';
-import { Board } from './../../../../core/interface/board.interface';
+import {Icons, MenuComponent} from '@ui-components';
+import {ChangeDetectionStrategy, Component, Input, ViewChild} from '@angular/core';
+import {Board} from '@trello-clone/trello-interface';
 
 @Component({
   selector: 'app-close-board-menu',

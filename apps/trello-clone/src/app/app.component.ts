@@ -1,5 +1,5 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
-import {User} from './core/interface/user.interface';
+import {User} from '@trello-clone/trello-interface';
 import {CacheKeys, CacheService} from './core/services/cache.service';
 import {UserService} from './core/services/user.service';
 import {WorkspaceStore} from './state/workspaces/workspaces.store';

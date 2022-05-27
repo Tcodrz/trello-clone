@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {AngularFirestore} from '@angular/fire/compat/firestore';
 import {Store, StoreConfig} from '@datorama/akita';
 import {map, mergeMap} from 'rxjs';
-import {Board} from '../../core/interface/board.interface';
-import {List} from '../../core/interface/list.interface';
+import {Board, List} from '@trello-clone/trello-interface';
 import {UserStore} from '../user/user.store';
 
 export interface BoardState {

@@ -1,15 +1,17 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {WorkspaceComponent} from './workspace.component';
-import {createBoardsServiceMock} from "../../mocks/board.service.mock";
 import {BoardsService} from "../../core/services/boards.service";
 import {GotoService} from "../../core/services/goto.service";
 import {WorkspaceService} from "../../core/services/workspace.service";
-import {createGotoServiceMock} from "../../mocks/goto.service.mock";
-import {createWorkspaceServiceMock, MOCK_WORKSPACE} from "../../mocks/workspace.service.mock";
+import {
+  createBoardsServiceMock,
+  createGotoServiceMock,
+  createWorkspaceServiceMock,
+  MOCK_WORKSPACE
+} from "@trello-clone/trello-mocks";
 import {ActivatedRoute, ParamMap} from "@angular/router";
 import {of} from "rxjs";
-import {Board} from "../../core/interface/board.interface";
-import {Theme} from "../../core/interface/themes";
+import {Board, Theme} from "@trello-clone/trello-interface";
 
 
 function createActivatedRouteMock(): Partial<ActivatedRoute> {

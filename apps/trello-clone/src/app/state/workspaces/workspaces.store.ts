@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Store, StoreConfig } from '@datorama/akita';
 import { map, Subscription } from 'rxjs';
-import { Workspace } from '../../core/interface/workspace.interface';
+import { Workspace } from '@trello-clone/trello-interface';
 import { BoardsStore } from '../boards/boards.store';
-import { CacheKeys, CacheService } from './../../core/services/cache.service';
+import { CacheKeys, CacheService } from '../../core/services/cache.service';
 
 export interface WorkspacesState {
   workspaces: Workspace[];

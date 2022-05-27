@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Query } from '@datorama/akita';
 import { Observable } from 'rxjs';
-import { Workspace } from './../../core/interface/workspace.interface';
+import { Workspace } from '@trello-clone/trello-interface';
 import { WorkspacesState, WorkspaceStore } from './workspaces.store';
 
 

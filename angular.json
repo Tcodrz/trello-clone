@@ -2,6 +2,8 @@
   "version": 2,
   "projects": {
     "trello-clone": "apps/trello-clone",
-    "trello-clone-e2e": "apps/trello-clone-e2e"
+    "trello-clone-e2e": "apps/trello-clone-e2e",
+    "trello-interface": "libs/trello-interface",
+    "trello-mocks": "libs/trello-mocks"
   }
 }

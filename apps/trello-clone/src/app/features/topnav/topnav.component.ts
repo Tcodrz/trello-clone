@@ -1,8 +1,7 @@
 import {Icons, MenuItem, MenuItems} from '@ui-components';
 import {ChangeDetectionStrategy, Component, ElementRef, OnInit} from '@angular/core';
 import {Observable, of} from 'rxjs';
-import {ScreenSize} from '../../core/interface/screen-size.enum';
-import {User} from '../../core/interface/user.interface';
+import {User, ScreenSize} from '@trello-clone/trello-interface';
 import {UserService} from '../../core/services/user.service';
 import {GotoService} from '../../core/services/goto.service';
 import {WorkspaceService} from '../../core/services/workspace.service';

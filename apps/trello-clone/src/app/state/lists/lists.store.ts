@@ -1,10 +1,10 @@
-import { Card } from './../../core/interface/card.interface';
+import { Card } from '@trello-clone/trello-interface';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
-import { List } from './../../core/interface/list.interface';
+import { List } from '@trello-clone/trello-interface';
 import { map } from 'rxjs';
-import { Board } from '../../core/interface/board.interface';
+import { Board } from '@trello-clone/trello-interface';
 
 
 export interface ListsState {

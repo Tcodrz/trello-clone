@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { User } from '../../../core/interface/user.interface';
+import { User } from '@trello-clone/trello-interface';
 
 @Component({
   selector: 'app-profile-menu',

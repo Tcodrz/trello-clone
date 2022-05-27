@@ -1,11 +1,9 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {TopnavComponent} from './topnav.component';
 import {GotoService} from "../../core/services/goto.service";
-import {createGotoServiceMock} from "../../mocks/goto.service.mock";
+import {createGotoServiceMock, createUserServiceMock, createWorkspaceServiceMock} from "@trello-clone/trello-mocks";
 import {UserService} from "../../core/services/user.service";
-import {createUserServiceMock} from "../../mocks/user.service.mock";
 import {WorkspaceService} from "../../core/services/workspace.service";
-import {createWorkspaceServiceMock} from "../../mocks/workspace.service.mock";
 import {ButtonModule, MenuItem, MenuModule} from "@ui-components";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 

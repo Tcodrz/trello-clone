@@ -1,6 +1,6 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild } from '@angular/core';
-import { MenuItem } from './../../../../../../../libs/ui-components/src/interface/menu.interface';
-import { Theme } from './../../../core/interface/themes';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {MenuItem} from '@ui-components';
+import {Theme} from '@trello-clone/trello-interface';
 
 @Component({
   selector: 'app-sidebar-links',

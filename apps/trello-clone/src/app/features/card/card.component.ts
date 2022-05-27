@@ -1,15 +1,21 @@
-import { ModalService } from './../../../../../../libs/ui-components/src/lib/modal/modal.service';
-import { Icons } from './../../../../../../libs/ui-components/src/lib/button/icon/icons';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
-import { Location } from '@angular/common';
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { DynamicDialogRef } from 'primeng/dynamicdialog';
-import { map, Observable, of, Subscription, tap } from 'rxjs';
-import { Board } from '../../core/interface/board.interface';
-import { Card } from '../../core/interface/card.interface';
-import { Checklist, ChecklistItem } from './../../core/interface/checklist.interface';
-import { BoardsService } from './../../core/services/boards.service';
-import { CardService } from './../../core/services/card.service';
+import {Icons, ModalService} from '@ui-components';
+import {CdkDragDrop} from '@angular/cdk/drag-drop';
+import {Location} from '@angular/common';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild
+} from '@angular/core';
+import {DynamicDialogRef} from 'primeng/dynamicdialog';
+import {map, Observable, of, Subscription, tap} from 'rxjs';
+import {Board, Card, Checklist, ChecklistItem} from '@trello-clone/trello-interface';
+import {BoardsService} from '../../core/services/boards.service';
+import {CardService} from '../../core/services/card.service';
+
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',

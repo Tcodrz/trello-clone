@@ -1,11 +1,9 @@
-import { MenuItems } from './../../../../../../../libs/ui-components/src/interface/menu.interface';
-import { Icons } from './../../../../../../../libs/ui-components/src/lib/button/icon/icons';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { List } from '../../../core/interface/list.interface';
-import { Card } from './../../../core/interface/card.interface';
-import { BoardsService } from './../../../core/services/boards.service';
-import { ListsStore } from './../../../state/lists/lists.store';
+import {Icons, MenuItems} from '@ui-components';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {Card, List} from '@trello-clone/trello-interface';
+import {BoardsService} from '../../../core/services/boards.service';
+import {ListsStore} from '../../../state/lists/lists.store';
 
 @Component({
   selector: 'app-board-lists',

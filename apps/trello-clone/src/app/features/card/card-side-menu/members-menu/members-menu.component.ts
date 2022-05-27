@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { MenuItems } from './../../../../../../../../libs/ui-components/src/interface/menu.interface';
-import { Icons } from './../../../../../../../../libs/ui-components/src/lib/button/icon/icons';
-import { User } from './../../../../core/interface/user.interface';
+import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import {Icons, MenuItems} from '@ui-components';
+import {User} from '@trello-clone/trello-interface';
 
 @Component({
   selector: 'app-members-menu',

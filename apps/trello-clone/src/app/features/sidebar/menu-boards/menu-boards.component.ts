@@ -1,8 +1,7 @@
-import { Icons } from './../../../../../../../libs/ui-components/src/lib/button/icon/icons';
-import { MenuItems } from './../../../../../../../libs/ui-components/src/interface/menu.interface';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { Board } from '../../../core/interface/board.interface';
-import { GotoService } from '../../../core/services/goto.service';
+import {Icons, MenuItems} from '@ui-components';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
+import {Board} from '@trello-clone/trello-interface';
+import {GotoService} from '../../../core/services/goto.service';
 
 @Component({
   selector: 'app-menu-boards',
@@ -18,7 +17,7 @@ export class MenuBoardsComponent implements OnChanges {
   constructor(
     private goto: GotoService,
   ) { }
-  ngOnChanges(changes: SimpleChanges): void {
+  ngOnChanges(): void {
     this.menuItems = this.initMenuItems();
   }
   initMenuItems(): MenuItems | null {
@@ -27,11 +26,10 @@ export class MenuBoardsComponent implements OnChanges {
       label: board.name,
       command: () => this.goto.board(board.id, board.workspaceID)
     }));
-    const menuItems: MenuItems = {
+    return {
       headline: 'Your boards',
       items: boardItems,
     };
-    return menuItems;
   }
   onBoardClick(board: Board) {
     this.boardClick.emit(board);

@@ -1,11 +1,11 @@
-import { MenuItems, MenuItem } from './../../../../../../libs/ui-components/src/interface/menu.interface';
-import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
-import { WorkspacesQuery } from '../../state/workspaces/workspace.query';
-import { WorkspaceStore } from '../../state/workspaces/workspaces.store';
-import { Workspace } from '../interface/workspace.interface';
-import { CacheService } from './cache.service';
-import { GotoService } from './goto.service';
+import {MenuItem, MenuItems} from '@ui-components';
+import {Injectable} from '@angular/core';
+import {map, Observable} from 'rxjs';
+import {WorkspacesQuery} from '../../state/workspaces/workspace.query';
+import {WorkspaceStore} from '../../state/workspaces/workspaces.store';
+import {Workspace} from '@trello-clone/trello-interface';
+import {CacheService} from './cache.service';
+import {GotoService} from './goto.service';
 
 @Injectable({ providedIn: 'root' })
 export class WorkspaceService {

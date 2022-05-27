@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Query } from '@datorama/akita';
 import { Observable } from 'rxjs';
-import { Board } from './../../core/interface/board.interface';
+import { Board } from '@trello-clone/trello-interface';
 import { BoardsStore, BoardState } from './boards.store';
 
 

@@ -1,4 +1,4 @@
-import { Card } from './../../../core/interface/card.interface';
+import { Card } from '@trello-clone/trello-interface';
 import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 })
 export class ListCardPreviewComponent {
   @Input() card!: Card;
+  // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() open: EventEmitter<Card> = new EventEmitter<Card>();
   openCard(): void { this.open.emit(this.card); }
 }

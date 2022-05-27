@@ -1,6 +1,5 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Board } from '../../../core/interface/board.interface';
-import { Workspace } from '../../../core/interface/workspace.interface';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {Board, Workspace} from '@trello-clone/trello-interface';
 
 @Component({
   selector: 'app-boards-preview-list',

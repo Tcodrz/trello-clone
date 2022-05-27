@@ -1,8 +1,8 @@
-import { Observable } from 'rxjs';
-import { Injectable } from "@angular/core";
-import { Query } from "@datorama/akita";
-import { ListsState, ListsStore } from "./lists.store";
-import { List } from '../../core/interface/list.interface';
+import {Observable} from 'rxjs';
+import {Injectable} from "@angular/core";
+import {Query} from "@datorama/akita";
+import {ListsState, ListsStore} from "./lists.store";
+import {List} from '@trello-clone/trello-interface';
 
 @Injectable({ providedIn: 'root' })
 export class ListsQuery extends Query<ListsState> {

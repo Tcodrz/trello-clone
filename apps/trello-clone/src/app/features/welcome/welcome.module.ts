@@ -1,4 +1,4 @@
-import { ButtonModule } from './../../../../../../libs/ui-components/src/lib/button/button.module';
+import { ButtonModule } from '@ui-components';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';

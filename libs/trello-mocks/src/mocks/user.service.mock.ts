@@ -1,5 +1,6 @@
-import {UserService} from "../core/services/user.service";
-import {User} from "../core/interface/user.interface";
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import {UserService} from "../../../../apps/trello-clone/src/app/core/services/user.service";
+import {User} from "@trello-clone/trello-interface";
 import {of} from "rxjs";
 
 const MOCK_USER: User = {

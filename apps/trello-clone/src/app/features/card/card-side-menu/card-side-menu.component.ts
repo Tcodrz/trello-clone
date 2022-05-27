@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
-import { Board } from '../../../core/interface/board.interface';
-import { Icons } from './../../../../../../../libs/ui-components/src/lib/button/icon/icons';
-import { Card } from './../../../core/interface/card.interface';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output} from '@angular/core';
+import {Board, Card} from '@trello-clone/trello-interface';
+import {Icons} from '@ui-components';
 
 @Component({
   selector: 'app-card-side-menu',

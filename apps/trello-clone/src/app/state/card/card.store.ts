@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Store, StoreConfig } from '@datorama/akita';
-import { Card } from 'src/app/core/interface/card.interface';
+import {Card} from "@trello-clone/trello-interface";
 
 export interface CardState {
   card: Card | null;

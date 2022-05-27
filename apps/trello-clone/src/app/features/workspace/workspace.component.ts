@@ -1,8 +1,7 @@
 import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {combineLatest, Observable, switchMap} from 'rxjs';
-import {Board} from '../../core/interface/board.interface';
-import {Workspace} from '../../core/interface/workspace.interface';
+import {Board, Workspace} from '@trello-clone/trello-interface';
 import {BoardsService} from '../../core/services/boards.service';
 import {GotoService} from '../../core/services/goto.service';
 import {WorkspaceService} from '../../core/services/workspace.service';

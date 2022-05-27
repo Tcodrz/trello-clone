@@ -1,9 +1,7 @@
-import { DropdownOption } from './../../../../../../libs/ui-components/src/interface/dropdown-option.interface';
-import { ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Workspace } from '../../core/interface/workspace.interface';
-import { Board } from './../../core/interface/board.interface';
-import { Themes } from './../../core/interface/themes';
+import {DropdownOption} from '@ui-components';
+import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnChanges, OnDestroy, Output} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Board, Themes, Workspace} from '@trello-clone/trello-interface';
 
 @Component({
   selector: 'app-new-board-menu',

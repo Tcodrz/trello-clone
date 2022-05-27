@@ -1,5 +1,6 @@
-import {WorkspaceService} from "../core/services/workspace.service";
-import {Workspace} from "../core/interface/workspace.interface";
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
+import {WorkspaceService} from "../../../../apps/trello-clone/src/app/core/services/workspace.service";
+import {Workspace} from "@trello-clone/trello-interface";
 import {of} from "rxjs";
 
 export const MOCK_WORKSPACE: Workspace = {

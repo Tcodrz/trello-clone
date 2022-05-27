@@ -1,4 +1,4 @@
-import { User } from './../../core/interface/user.interface';
+import { User } from '@trello-clone/trello-interface';
 import { Observable } from 'rxjs';
 import { Query } from '@datorama/akita';
 import { UserState, UserStore } from './user.store';

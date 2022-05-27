@@ -1,12 +1,10 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map, Observable, tap } from 'rxjs';
-import { Checklist, ChecklistItem } from '../interface/checklist.interface';
-import { List } from '../interface/list.interface';
-import { BoardsStore } from './../../state/boards/boards.store';
-import { ListsStore } from './../../state/lists/lists.store';
-import { Card } from './../interface/card.interface';
-import { moveItemInArray } from '@angular/cdk/drag-drop';
+import {Injectable} from '@angular/core';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {map, Observable, tap} from 'rxjs';
+import {Card, Checklist, ChecklistItem, List} from '@trello-clone/trello-interface';
+import {BoardsStore} from '../../state/boards/boards.store';
+import {ListsStore} from '../../state/lists/lists.store';
+import {moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Injectable({
   providedIn: 'root'
@@ -45,9 +43,9 @@ export class CardService {
   deleteCard(card: Card): void {
     this.boardStore.update(state => {
       const board = state.boards.find(board => board.listIDs.includes(card.listID))
-      if (!board) { debugger; return state; }
+      if (!board) { return state; }
       const list = board.lists?.find(list => list.id === card.listID);
-      if (!list) { debugger; return state; }
+      if (!list) { return state; }
       board.lists = board.lists?.map(x => x.id === list.id ? list : x);
 
       return {
@@ -55,11 +53,11 @@ export class CardService {
         boards: state.boards.map(x => x.id !== board.id ? board : x)
       };
     });
-    this.firestore.doc(`card/${card.id}`).delete();
+    this.firestore.doc(`card/${card.id}`).delete().then();
   }
   saveCard() {
     this.listStore.update(state => {
-      if (!this.card) { debugger; return state; }
+      if (!this.card) { return state; }
       const lists = state.lists;
       const index = lists.findIndex(list => list.id === this.card?.listID);
       if (index === -1) return state;
@@ -89,7 +87,7 @@ export class CardService {
     }
   }
   checklistDelete(checklist: Checklist): void {
-    if (!this.card) { debugger; return; }
+    if (!this.card) { return; }
     const checklists = this.card.checklists.filter(list => list.id !== checklist.id);
     const card = {
       ...this.card,
@@ -100,9 +98,9 @@ export class CardService {
   addChecklistItem(item: Partial<ChecklistItem>) {
     item.id = this.firestore.createId();
     const card = this.card;
-    if (!card) { debugger; return; }
+    if (!card) { return; }
     const index = card.checklists.findIndex(list => list.id === item.checklistID);
-    if (index < 0) { debugger; return; }
+    if (index < 0) { return; }
     const checklist = card.checklists[index];
     checklist.items = [...checklist.items, item as ChecklistItem];
     const newCard = {
@@ -113,7 +111,7 @@ export class CardService {
   }
   updateChecklistItem(item: ChecklistItem) {
     const card = this.card;
-    if (!card) { debugger; return; }
+    if (!card) { return; }
     const newCard: Card = {
       ...card,
       checklists: card.checklists
@@ -123,9 +121,9 @@ export class CardService {
     this.updateDB(newCard);
   }
   deleteChecklistItem(item: ChecklistItem): void {
-    if (!this.card) { debugger; return; }
+    if (!this.card) { return; }
     const checklist = this.card.checklists.find(c => c.id === item.checklistID);
-    if (!checklist) { debugger; return; }
+    if (!checklist) { return; }
     checklist.items = checklist?.items.filter(i => i.id !== item.id);
     const newCard: Card = {
       ...this.card,
@@ -202,7 +200,7 @@ export class CardService {
     this.updateDB(card);
   }
   moveChecklistItem(item: ChecklistItem, checklist: Checklist, prevIndex: number, currentIndex: number) {
-    if (!this.card) { debugger; return; }
+    if (!this.card) { return; }
     item.checklistID = checklist.id;
     moveItemInArray(checklist.items, prevIndex, currentIndex);
     checklist.items.forEach((x, i) => x.position = i);

@@ -1,6 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
 import {ProfileMenuComponent} from './profile-menu.component';
-import {User} from "../../../core/interface/user.interface";
+import {User} from "@trello-clone/trello-interface";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {By} from "@angular/platform-browser";
 

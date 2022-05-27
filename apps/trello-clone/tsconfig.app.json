@@ -7,6 +7,12 @@
     "paths": {
       "@ui-components": [
         "libs/ui-components/src/libs.ts"
+      ],
+      "@trello-clone/trello-mocks": [
+        "libs/trello-mocks/src/index.ts"
+      ],
+      "@trello-clone/trello-interface": [
+        "libs/trello-interface/src/index.ts"
       ]
     }
   },

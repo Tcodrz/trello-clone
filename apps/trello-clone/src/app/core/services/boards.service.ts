@@ -1,20 +1,16 @@
-import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { map, mergeMap, Observable, of, tap } from 'rxjs';
-import { Board } from '../interface/board.interface';
-import { List } from '../interface/list.interface';
-import { BoardsQuery } from './../../state/boards/board.query';
-import { BoardsStore } from './../../state/boards/boards.store';
-import { Card } from './../interface/card.interface';
-import { CacheKeys, CacheService } from './cache.service';
-import { GotoService } from './goto.service';
+import {Injectable} from '@angular/core';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
+import {map, mergeMap, Observable} from 'rxjs';
+import {Board, Card, List} from '@trello-clone/trello-interface';
+import {BoardsQuery} from '../../state/boards/board.query';
+import {BoardsStore} from '../../state/boards/boards.store';
+import {CacheKeys, CacheService} from './cache.service';
+import {GotoService} from './goto.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class BoardsService {
-  private _boards: Map<string, Board> = new Map<string, Board>();
-
   constructor(
     private boardsQuery: BoardsQuery,
     private boardsStore: BoardsStore,
