@@ -75,12 +75,15 @@ export class SidebarComponent implements OnInit, OnChanges {
       this.menuLinks$ = this.sidebarSercvice.getMenuLinks();
 
     });
-    this.showToggler$ = this.isSmallScreen$.pipe(
-      switchMap(isSmallScreen =>
-        this.workspace$.pipe(map(workspace => {
-          return isSmallScreen ?? !!workspace;
-        }))
-      ));
+    this.showToggler$ = this.isSmallScreen$
+      .pipe(
+        switchMap(isSmallScreen => this.board$
+          .pipe(
+            map(board =>
+              isSmallScreen ? isSmallScreen : !!board)
+          )
+        )
+      );
   }
 
   updateTheme(): void {
