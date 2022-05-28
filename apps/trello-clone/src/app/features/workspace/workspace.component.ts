@@ -13,24 +13,25 @@ import {WorkspaceService} from '../../core/services/workspace.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class WorkspaceComponent implements OnInit {
-  view$!: Observable<{ currentWorkspace: Workspace | null, workspaces: Workspace[], boards: Board[] }>;
+  view$!: Observable<[Workspace | null, Workspace[], Board[]]>;
 
   constructor(
     private activeRoute: ActivatedRoute,
     private boardsService: BoardsService,
     private goto: GotoService,
     private workspaceService: WorkspaceService,
-  ) { }
+  ) {
+  }
 
   ngOnInit(): void {
     this.view$ = this.activeRoute.params
       .pipe(
         switchMap((params: Params) => {
-            return combineLatest({
-              currentWorkspace: this.workspaceService.getWorkspace(params['workspaceID']),
-              workspaces: this.workspaceService.getAll(),
-              boards: this.boardsService.getBoards(params['workspaceID']),
-            })
+            return combineLatest([
+              this.workspaceService.getWorkspace(params['workspaceID']),
+              this.workspaceService.getAll(),
+              this.boardsService.getBoards(params['workspaceID']),
+            ])
           }
         )
       );

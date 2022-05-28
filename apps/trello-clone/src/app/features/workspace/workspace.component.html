@@ -1,6 +1,6 @@
-<app-layout *ngIf="(view$ | async) as view">
+<app-layout *ngIf="(view$ | async) as view" [workspace]="view[0]">
   <div class="ml-4">
-    <app-boards-preview-list [boards]="view.boards" [workspaces]="view.workspaces" [workspace]="view.currentWorkspace"
+    <app-boards-preview-list [boards]="view[2]" [workspaces]="view[1]" [workspace]="view[0]"
       (boardClick)="onBoardClick($event)" (createBoard)="onCreateBoard($event)">
     </app-boards-preview-list>
   </div>

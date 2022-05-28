@@ -77,10 +77,10 @@ export class SidebarComponent implements OnInit, OnChanges {
     });
     this.showToggler$ = this.isSmallScreen$
       .pipe(
-        switchMap(isSmallScreen => this.board$
+        switchMap(isSmallScreen => this.workspace$
           .pipe(
-            map(board =>
-              isSmallScreen ? isSmallScreen : !!board)
+            map(workspace =>
+              isSmallScreen ? isSmallScreen : !!workspace)
           )
         )
       );

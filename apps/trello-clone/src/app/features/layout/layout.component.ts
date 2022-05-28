@@ -1,4 +1,4 @@
-import {AppColors, Board, ScreenSize} from '@trello-clone/trello-interface';
+import {AppColors, Board, ScreenSize, Workspace} from '@trello-clone/trello-interface';
 import {
   AfterViewInit,
   ChangeDetectionStrategy,
@@ -22,6 +22,7 @@ import {TopnavComponent} from '../topnav/topnav.component';
 })
 export class LayoutComponent implements AfterViewInit, OnChanges, OnDestroy {
   @Input() board: Board | undefined;
+  @Input() workspace: Workspace | null = null;
   @ViewChild('sidebar') sidebar!: SidebarComponent;
   @ViewChild('topnav') topnav!: TopnavComponent;
   @ViewChild('content') content!: ElementRef;
@@ -39,6 +40,7 @@ export class LayoutComponent implements AfterViewInit, OnChanges, OnDestroy {
 
   ngOnChanges(): void {
     this.hasChanges = true;
+    if (this.workspace) this.setMargin(0);
   }
 
   ngAfterViewInit(): void {
@@ -58,7 +60,7 @@ export class LayoutComponent implements AfterViewInit, OnChanges, OnDestroy {
     this.isLargeScreen$.pipe(
       takeUntil(this.destroyed$),
       tap(isLargeScreen => {
-        const margin = (isLargeScreen && !this.board) ? 300 : 0;
+        const margin = (!this.workspace && !this.board && isLargeScreen) ? 300 : 0;
         this.setMargin(margin);
       })
     ).subscribe();

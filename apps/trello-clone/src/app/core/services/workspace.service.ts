@@ -7,24 +7,41 @@ import {Workspace} from '@trello-clone/trello-interface';
 import {CacheService} from './cache.service';
 import {GotoService} from './goto.service';
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class WorkspaceService {
   constructor(
     private cache: CacheService,
     private goto: GotoService,
     private workspaceQuery: WorkspacesQuery,
     private workspaceStore: WorkspaceStore,
-  ) { }
-  getAll(): Observable<Workspace[]> { return this.workspaceQuery.workspaces$; }
-  getCurrentWorkspace(): Observable<Workspace | null> { return this.workspaceQuery.currentWorkspace$; }
+  ) {
+  }
+
+  getAll(): Observable<Workspace[]> {
+    return this.workspaceQuery.workspaces$;
+  }
+
+  getCurrentWorkspace(): Observable<Workspace | null> {
+    return this.workspaceQuery.currentWorkspace$;
+  }
+
   getWorkspace(workspaceID: string): Observable<Workspace | null> {
     return this.workspaceQuery.workspaces$.pipe(
       map(workspaces => workspaces.find(workspace => workspace.id === workspaceID)),
-      map(workspace => workspace ?? null)
+      map(workspace => {
+        return workspace ?? null
+      })
     );
   }
-  setCurrentWorkspaceByID(workspaceID: string) { this.workspaceStore.setCurrentWorkspaceByID(workspaceID); }
-  setCurrentWorkspace(workspace: Workspace | null) { this.workspaceStore.setCurrentWorkspace(workspace); }
+
+  setCurrentWorkspaceByID(workspaceID: string) {
+    this.workspaceStore.setCurrentWorkspaceByID(workspaceID);
+  }
+
+  setCurrentWorkspace(workspace: Workspace | null) {
+    this.workspaceStore.setCurrentWorkspace(workspace);
+  }
+
   getMenuItems(): Observable<MenuItems[]> {
     return this.workspaceQuery.workspaces$.pipe(
       map(workspaces => {
@@ -36,11 +53,14 @@ export class WorkspaceService {
       })
     );
   }
+
   private prepareMenuItems(workspaces: Workspace[]) {
     const items: MenuItem[] = workspaces.map(workspace => ({
       label: workspace.name,
       id: workspace.id,
-      command: () => this.goto.workspace(workspace.id)
+      command: () => {
+        this.goto.workspace(workspace.id);
+      }
     }));
     return items;
   }
