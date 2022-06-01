@@ -12,7 +12,7 @@ export class ContentComponent {
 
   @Input() set workspace(workspace: Workspace | null) {
     this._workspace = workspace;
-    this.calcPosition();
+    this.calcPosition(this._width);
   }
 
   @Input() set theme(theme: Theme | null) {
@@ -20,18 +20,20 @@ export class ContentComponent {
       this.setTheme(theme);
   }
 
-  @HostListener('window:resize', ['$event']) onResize(event: Event) {
+  @HostListener('window:resize', ['$event'])
+  onResize(event: Event) {
     this._width = (event?.target as Window)?.innerWidth || window.innerWidth;
-    this.calcPosition();
+    this.calcPosition(this._width);
   }
 
   constructor(private elementRef: ElementRef) {
   }
 
-  calcPosition() {
-    console.log(this._workspace, this._width);
-    const isMediumScreen = this._width <= ScreenSize.Medium;
-    const isLargeScreen = this._width > ScreenSize.Medium;
+  calcPosition(width: number) {
+    console.log(width);
+    console.log(this._workspace);
+    const isMediumScreen = width <= ScreenSize.Medium;
+    const isLargeScreen = width > ScreenSize.Medium;
     if (!!this._workspace || isMediumScreen) this.setMargin(0);
     else if (isLargeScreen && !this._workspace) this.setMargin(300)
   }

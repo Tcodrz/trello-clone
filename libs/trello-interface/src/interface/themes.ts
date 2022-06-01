@@ -24,9 +24,9 @@ export const LightBlueTheme: Theme = {
 export const DarkMode: Theme = {
   name: 'DarkMode',
   sidebarBackground: '#000000e8',
-  sidebarText: '#ffffff',
-  sidebarLinksHover: '#747474',
-  boardBackground: '#2e2e2e',
+  sidebarText: 'rgb(255, 255, 255)',
+  sidebarLinksHover: 'rgb(116, 116, 116)',
+  boardBackground: 'rgb(46, 46, 46)',
   topnavBackground: '#000000e8',
   id: 2,
 };
