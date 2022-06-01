@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { SidebarModule } from '../sidebar/sidebar.module';
 import { TopnavModule } from '../topnav/topnav.module';
 import { LayoutComponent } from './layout.component';
+import {ContentModule} from "../content/content.module";
 
 @NgModule({
   declarations: [
@@ -12,6 +13,7 @@ import { LayoutComponent } from './layout.component';
     CommonModule,
     SidebarModule,
     TopnavModule,
+    ContentModule
   ],
   exports: [
     LayoutComponent,

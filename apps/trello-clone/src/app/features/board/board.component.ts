@@ -3,7 +3,7 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Params} from '@angular/router';
 import {Observable, of, tap} from 'rxjs';
 import {CARD_MODAL} from '../card/card-modal.config';
-import {Board, Card, List} from '@trello-clone/trello-interface';
+import {Board, Card, List, Workspace} from '@trello-clone/trello-interface';
 import {BoardsService} from '../../core/services/boards.service';
 import {GotoService} from '../../core/services/goto.service';
 import {ListsQuery} from '../../state/lists/lists.query';
@@ -11,6 +11,7 @@ import {ListsStore} from '../../state/lists/lists.store';
 import {CardComponent} from '../card/card.component';
 import {BoardsStore} from '../../state/boards/boards.store';
 import {Icons, ModalService} from "@ui-components";
+import {WorkspaceService} from "../../core/services/workspace.service";
 
 @Component({
   selector: 'app-board',
@@ -23,6 +24,7 @@ export class BoardComponent implements OnInit {
   Icons = Icons;
   boardID!: string;
   lists$: Observable<List[]> = of([]);
+  workspace$: Observable<Workspace | null> = of(null);
   workspaceID!: string;
   cardID!: string;
 
@@ -35,12 +37,14 @@ export class BoardComponent implements OnInit {
     private listsQuery: ListsQuery,
     private listsStore: ListsStore,
     private cardService: CardService,
+    private workspaceService: WorkspaceService,
   ) {
   }
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe((params: Params) => {
       this.workspaceID = params['workspaceID'];
+      this.workspace$ = this.workspaceService.getWorkspace(this.workspaceID);
       this.boardID = params['boardID'];
       this.boardStore.init(this.workspaceID);
       this.board$ = this.boardService.getBoard(this.boardID).pipe(

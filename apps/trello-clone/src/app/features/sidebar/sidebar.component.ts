@@ -7,7 +7,6 @@ import {
   EventEmitter,
   HostListener,
   Input,
-  OnChanges,
   OnInit,
   Output,
   Renderer2
@@ -26,8 +25,19 @@ import {WorkspaceService} from '../../core/services/workspace.service';
   styleUrls: ['./sidebar.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class SidebarComponent implements OnInit, OnChanges {
-  @Input() theme: Theme | undefined;
+export class SidebarComponent implements OnInit {
+  private _workspace: Workspace | null = null;
+  private _width: number = window.innerWidth;
+
+  @Input() set theme(theme: Theme | null) {
+    if (theme) this.updateTheme(theme);
+  };
+
+  @Input() set workspace(workspace: Workspace | null) {
+    this._workspace = workspace;
+    this.initSidebar();
+  }
+
   // eslint-disable-next-line @angular-eslint/no-output-native
   @Output() open: EventEmitter<boolean> = new EventEmitter<boolean>();
   workspaces$: Observable<Workspace[]> = of([]);
@@ -42,7 +52,8 @@ export class SidebarComponent implements OnInit, OnChanges {
   board$: Observable<Board | null> = of(null);
 
   @HostListener('window:resize', ['$event']) onResize(event: Event) {
-    this.initSidebar(event);
+    this._width = (event.target as Window).innerWidth || window.innerWidth
+    this.initSidebar();
   }
 
   constructor(
@@ -50,14 +61,10 @@ export class SidebarComponent implements OnInit, OnChanges {
     private boardsService: BoardsService,
     private goto: GotoService,
     private renderer: Renderer2,
-    private sidebarSercvice: SidebarService,
+    private sidebarService: SidebarService,
     private workspaceService: WorkspaceService,
     public elementRef: ElementRef,
   ) {
-  }
-
-  ngOnChanges(): void {
-    this.updateTheme();
   }
 
   ngOnInit(): void {
@@ -72,7 +79,7 @@ export class SidebarComponent implements OnInit, OnChanges {
       if (boardID) {
         this.board$ = this.boardsService.getBoard(boardID);
       }
-      this.menuLinks$ = this.sidebarSercvice.getMenuLinks();
+      this.menuLinks$ = this.sidebarService.getMenuLinks();
 
     });
     this.showToggler$ = this.isSmallScreen$
@@ -86,16 +93,25 @@ export class SidebarComponent implements OnInit, OnChanges {
       );
   }
 
-  updateTheme(): void {
+  updateTheme(theme: Theme): void {
+    this.elementRef.nativeElement.style.backgroundColor = theme.sidebarBackground;
+    this.elementRef.nativeElement.style.color = theme.sidebarText;
     const elements = this.elementRef.nativeElement.querySelectorAll('.sidebar-link');
     elements.forEach((element: HTMLAnchorElement) => {
-      this.renderer.setStyle(element, 'color', this.theme?.sidebarText);
+      this.renderer.setStyle(element, 'color', theme.sidebarText);
     });
   }
 
-  initSidebar(event?: Event): void {
-    const width = (event?.target as Window)?.innerWidth || window.innerWidth;
-    const isSmallScreen = width <= ScreenSize.Small;
+  setMargin(margin: number) {
+    this.elementRef.nativeElement.style.marginLeft = `${margin}px`;
+  }
+
+  initSidebar(): void {
+    const isSmallScreen = this._width <= ScreenSize.Small;
+    const isMediumScreen = this._width <= ScreenSize.Medium && this._width > ScreenSize.Small;
+    const isLargeScreen = this._width > ScreenSize.Medium;
+    if (!!this._workspace || isMediumScreen) this.setMargin(0);
+    else if (isLargeScreen && !this._workspace) this.setMargin(300);
     this.isSmallScreen$.next(isSmallScreen);
     if (isSmallScreen) this.hide();
     else this.show();

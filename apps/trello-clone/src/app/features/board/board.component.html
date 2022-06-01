@@ -1,5 +1,5 @@
 <ng-container *ngIf=" board$ | async as board">
-  <app-layout [board]="board">
+  <app-layout [board]="board" [workspace]="workspace$ | async">
     <div class="board">
       <app-board-lists [lists]="lists$ | async" (updateLists)="onUpdateLists($event)" (openCard)="onCardOpen($event)">
       </app-board-lists>
