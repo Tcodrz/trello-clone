@@ -5,19 +5,23 @@ import { NgModule } from '@angular/core';
 import { BoardsRoutingModule } from './boards-routing.module';
 import { BoardsComponent } from './boards.component';
 import { WorkspacePreviewComponent } from './workspace-preview/workspace-preview.component';
-import { PreviewCardListModule } from "@ui-components";
+import { LogoPreviewModule, PreviewCardListModule, ToolbarModule } from '@ui-components';
+import { WorkspacePreviewToolbarComponent } from './workspace-preview-toolbar/workspace-preview-toolbar.component';
 
 @NgModule({
   declarations: [
     BoardsComponent,
     WorkspacePreviewComponent,
+    WorkspacePreviewToolbarComponent,
   ],
-	imports: [
+  imports: [
     BoardsRoutingModule,
     ButtonModule,
     CommonModule,
     RouterModule,
-    PreviewCardListModule
+    PreviewCardListModule,
+    LogoPreviewModule,
+    ToolbarModule,
   ],
 })
 export class BoardsModule {}

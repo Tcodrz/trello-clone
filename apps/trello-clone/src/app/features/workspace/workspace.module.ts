@@ -1,4 +1,4 @@
-import { ButtonModule, TabsModule, UICardModule } from '@ui-components';
+import { ButtonModule, LogoPreviewModule, TabsModule, UICardModule } from '@ui-components';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { BoardsPreviewListModule } from '../board/boards-preview-list/boards-preview-list.module';
@@ -17,6 +17,7 @@ import { WorkspaceHeaderComponent } from './workspace-header/workspace-header.co
     WorkspaceRoutingModule,
     TabsModule,
     ButtonModule,
+    LogoPreviewModule,
   ],
 })
 export class WorkspaceModule {}

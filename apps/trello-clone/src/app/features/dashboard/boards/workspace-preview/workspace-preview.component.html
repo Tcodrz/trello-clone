@@ -1,5 +1,16 @@
 <div class="workspace-preview">
-  <div class="workspace-title">{{workspace.name}}</div>
+  <div class="workspace-title">
+    <div class="left">
+      <ui-logo-preview [name]="workspaceLogoConfig.name"
+                       [size]="workspaceLogoConfig.size"
+      ></ui-logo-preview>
+      <span class="ml-1">{{workspace.name}}</span>
+    </div>
+    <div class="right">
+      <app-workspace-preview-toolbar [workspace]="workspace"
+      ></app-workspace-preview-toolbar>
+    </div>
+  </div>
   <ui-preview-card-list
     [items]="boards$ | async"
     [showLastCard]="true"

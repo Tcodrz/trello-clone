@@ -1,4 +1,4 @@
-<div *ngFor="let workspace of workspaces$ | async">
-<app-workspace-preview [workspace]="workspace"
-></app-workspace-preview>
-</div>
+<h3>YOUR WORKSPACES</h3>
+<app-workspace-preview *ngFor="let workspace of workspaces$ | async"
+                       [workspace]="workspace">
+</app-workspace-preview>
