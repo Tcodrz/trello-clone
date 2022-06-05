@@ -18,6 +18,9 @@ button {
 
   .content {
     min-width: max-content;
+    display: flex;
+    justify-content: center;
+    column-gap: 8px;
 
     span {
       font-weight: 500;
