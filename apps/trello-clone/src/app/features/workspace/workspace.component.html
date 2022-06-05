@@ -1,7 +1,32 @@
 <app-layout *ngIf="(view$ | async) as view" [workspace]="view[0]">
-  <div class="ml-4">
-    <app-boards-preview-list [boards]="view[2]" [workspaces]="view[1]" [workspace]="view[0]"
-      (boardClick)="onBoardClick($event)" (createBoard)="onCreateBoard($event)">
-    </app-boards-preview-list>
+  <div class="wrapper">
+
+    <app-workspace-header [workspace]="view[0]"></app-workspace-header>
+
+    <ui-tabs [tabs]="tabs">
+      <div content1>
+        <app-boards-preview-list [boards]="view[2]"
+                                 [workspaces]="view[1]"
+                                 [workspace]="view[0]"
+                                 (boardClick)="onBoardClick($event)"
+                                 (createBoard)="onCreateBoard($event)"
+        >
+        </app-boards-preview-list>
+      </div>
+
+      <div content2>
+        this is content 2
+      </div>
+
+      <div content3>
+        this is content 3
+      </div>
+
+      <div content4>
+        this is content 4
+      </div>
+
+    </ui-tabs>
+
   </div>
 </app-layout>
