@@ -4,6 +4,7 @@
     "trello-clone": "apps/trello-clone",
     "trello-clone-e2e": "apps/trello-clone-e2e",
     "trello-interface": "libs/trello-interface",
-    "trello-mocks": "libs/trello-mocks"
+    "trello-mocks": "libs/trello-mocks",
+    "ui-components": "libs/ui-components"
   }
 }
