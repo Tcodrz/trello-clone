@@ -1,0 +1,9 @@
+export const SMALL_LOGO_WIDTH = 21;
+export const SMALL_LOGO_HEIGHT = 21;
+export const SMALL_LOGO_FONT_SIZE = 16;
+export const MEDIUM_LOGO_WIDTH = 32;
+export const MEDIUM_LOGO_HEIGHT = 32;
+export const MEDIUM_LOGO_FONT_SIZE = 22;
+export const LARGE_LOGO_WIDTH = 95;
+export const LARGE_LOGO_HEIGHT = 100;
+export const LARGE_LOGO_FONT_SIZE = 72;

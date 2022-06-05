@@ -14,17 +14,6 @@
     background-color: $SidbarLinkHover;
   }
 
-  .icon {
-    display: grid;
-    place-content: center;
-    background-color: #ffffff;
-    width: 20px;
-    height: 20px;
-    user-select: none;
-    color: $Black;
-    border: 1px solid $Blue;
-  }
-
   .name {
     flex-grow: 1;
     font-size: $FontSmall;
