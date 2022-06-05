@@ -1,0 +1,16 @@
+<div class="tabs">
+  <p-tabView (onChange)="onTabChange($event);" [(activeIndex)]="activeIndex">
+    <p-tabPanel [header]="tabs[0].title">
+      <ng-content select="[content1]"></ng-content>
+    </p-tabPanel>
+    <p-tabPanel [header]="tabs[1].title">
+      <ng-content select="[content2]"></ng-content>
+    </p-tabPanel>
+    <p-tabPanel [header]="tabs[2].title">
+      <ng-content select="[content3]"></ng-content>
+    </p-tabPanel>
+    <p-tabPanel [header]="tabs[3].title">
+      <ng-content select="[content4]"></ng-content>
+    </p-tabPanel>
+  </p-tabView>
+</div>

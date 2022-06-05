@@ -27,6 +27,7 @@ import {
   faArchive,
   faRedo,
   faMinus,
+  faPen,
 } from '@fortawesome/free-solid-svg-icons';
 import { Icons } from './icons';
 
@@ -81,6 +82,7 @@ export class IconComponent implements OnChanges {
       case Icons.Trello: return faTrello;
       case Icons.User: return faUser;
       case Icons.Users: return faUsers;
+      case Icons.Pen: return faPen;
       default: return null;
     }
   }

@@ -29,4 +29,5 @@ export enum Icons {
   Archive = 'faArchive',
   Redo = 'faRedo',
   Minus = 'faMinus',
+  Pen = 'faPen'
 }
