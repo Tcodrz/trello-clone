@@ -1,0 +1,6 @@
+<ui-preview-card *ngFor="let item of items"
+                 [title]="item.name"
+                 [theme]="item.theme"
+></ui-preview-card>
+<ui-preview-card *ngIf="showLastCard"
+                 [title]="lastCardTitle"></ui-preview-card>
