@@ -1,6 +1,24 @@
+<!-- CUSTOM FIRST CARD -->
+<ui-preview-card *ngIf="showFirstCard"
+                 [title]="firstCardTitle"
+                 (click)="firstCardClick.emit($event)"
+>
+  <ng-content select="[firstMenu]"></ng-content>
+</ui-preview-card>
+
+<!-- PREVIEW CARDS LIST -->
 <ui-preview-card *ngFor="let item of items"
                  [title]="item.name"
                  [theme]="item.theme"
-></ui-preview-card>
+                 (click)="item?.action()"
+>
+</ui-preview-card>
+
+
+<!-- CUSTOM LAST CARD -->
 <ui-preview-card *ngIf="showLastCard"
-                 [title]="lastCardTitle"></ui-preview-card>
+                 [title]="lastCardTitle"
+                 (click)="lastCardClick.emit($event)"
+>
+  <ng-content select="[lastMenu]"></ng-content>
+</ui-preview-card>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { PreviewItem } from "@trello-clone/trello-interface";
 
 
@@ -9,6 +9,10 @@ import { PreviewItem } from "@trello-clone/trello-interface";
 })
 export class PreviewCardListComponent {
   @Input() items: PreviewItem[] | null = [];
+  @Input() showFirstCard: boolean = false;
   @Input() showLastCard: boolean = false;
+  @Input() firstCardTitle: string = '';
   @Input() lastCardTitle: string = '';
+  @Output() firstCardClick: EventEmitter<Event> = new EventEmitter<Event>();
+  @Output() lastCardClick: EventEmitter<Event> = new EventEmitter<Event>();
 }

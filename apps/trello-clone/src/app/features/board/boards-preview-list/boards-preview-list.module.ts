@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { NewBoardMenuModule } from '../../new-board-menu/new-board-menu.module';
 import { BoardsPreviewListComponent } from './boards-preview-list.component';
+import { PreviewCardListModule } from "@ui-components";
 
 
 
@@ -16,6 +17,7 @@ import { BoardsPreviewListComponent } from './boards-preview-list.component';
     CommonModule,
     MenuModule,
     NewBoardMenuModule,
+    PreviewCardListModule,
   ],
   exports: [
     BoardsPreviewListComponent,

@@ -3,9 +3,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { combineLatest, Observable, switchMap } from 'rxjs';
 import { Board, Workspace } from '@trello-clone/trello-interface';
 import { BoardsService } from '../../core/services/boards.service';
-import { GotoService } from '../../core/services/goto.service';
 import { WorkspaceService } from '../../core/services/workspace.service';
-import { Icons, Tab } from "@ui-components";
+import { Tab } from "@ui-components";
 
 @Component({
   selector: 'app-workspace',
@@ -15,7 +14,6 @@ import { Icons, Tab } from "@ui-components";
 })
 export class WorkspaceComponent implements OnInit {
   view$!: Observable<[Workspace | null, Workspace[], Board[]]>;
-  Icons = Icons;
   tabs: Tab[] = [
     {
       id: 1,
@@ -42,7 +40,6 @@ export class WorkspaceComponent implements OnInit {
   constructor(
     private activeRoute: ActivatedRoute,
     private boardsService: BoardsService,
-    private goto: GotoService,
     private workspaceService: WorkspaceService,
   ) {
   }
@@ -59,10 +56,6 @@ export class WorkspaceComponent implements OnInit {
           }
         )
       );
-  }
-
-  onBoardClick(board: Board) {
-    this.goto.board(board.id, board.workspaceID);
   }
 
   onCreateBoard(board: Partial<Board>) {
