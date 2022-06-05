@@ -1,5 +1,5 @@
 {
-  "extends": ["../../.eslintrc.json"],
+  "extends": ["/Users/tom.zohar/projects/trello-clone/.eslintrc.json"],
   "ignorePatterns": ["!**/*"],
   "overrides": [
     {

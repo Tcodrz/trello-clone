@@ -55,6 +55,7 @@ export class TopnavComponent implements OnInit {
   }
 
   gotoDashboard() {
+    this.workspaceService.setCurrentWorkspace(null);
     this.goto.dashboard();
   }
 

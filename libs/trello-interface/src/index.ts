@@ -8,3 +8,4 @@ export * from './interface/screen-size.enum';
 export * from './interface/themes';
 export * from './interface/user.interface';
 export * from './interface/workspace.interface';
+export * from './interface/preview-item.interface';
