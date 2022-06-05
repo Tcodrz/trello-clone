@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Icons, ToolbarItem } from "@ui-components";
 import { GotoService } from "../../../../core/services/goto.service";
 import { Workspace } from "@trello-clone/trello-interface";
+import { WorkspaceService } from "../../../../core/services/workspace.service";
 
 @Component({
   selector: 'app-workspace-preview-toolbar',
@@ -18,6 +19,7 @@ export class WorkspacePreviewToolbarComponent {
       icon: Icons.Trello,
       action: () => {
         this.goto.workspace(this.workspace.id);
+        this.workspaceService.setCurrentWorkspace(this.workspace);
       }
     },
     {
@@ -35,6 +37,7 @@ export class WorkspacePreviewToolbarComponent {
   ];
 
   constructor(
-    private goto: GotoService
+    private goto: GotoService,
+    private workspaceService: WorkspaceService
   ) {}
 }

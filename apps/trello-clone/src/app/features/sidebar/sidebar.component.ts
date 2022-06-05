@@ -100,10 +100,6 @@ export class SidebarComponent implements OnInit {
   updateTheme(theme: Theme): void {
     this.elementRef.nativeElement.style.backgroundColor = theme.sidebarBackground;
     this.elementRef.nativeElement.style.color = theme.sidebarText;
-    const elements = this.elementRef.nativeElement.querySelectorAll('.sidebar-link');
-    elements.forEach((element: HTMLAnchorElement) => {
-      this.renderer.setStyle(element, 'color', theme.sidebarText);
-    });
   }
 
   setMargin(margin: number) {

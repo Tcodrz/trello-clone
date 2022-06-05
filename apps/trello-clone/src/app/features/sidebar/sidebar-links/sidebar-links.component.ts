@@ -2,7 +2,7 @@ import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, V
 import { MenuItem } from '@ui-components';
 import { Theme } from '@trello-clone/trello-interface';
 
-const DEFAULT_LINK_HOVER_COLOR = 'rgba(9, 30, 66, 0.08)';
+export const DEFAULT_LINK_HOVER_COLOR = 'rgba(9, 30, 66, 0.08)';
 
 @Component({
   selector: 'app-sidebar-links',
@@ -14,36 +14,33 @@ export class SidebarLinksComponent implements AfterViewInit {
   @Input() menuItems: MenuItem[] | null = [];
   @Input() theme: Theme | undefined;
   @ViewChild('links') links: ElementRef | undefined;
-  linkStyles = {};
 
   ngAfterViewInit(): void {
     this.initStyles();
   }
 
-  initStyles() {
+  initStyles(): void {
     this.setLinksStyle({
       color: this.theme?.sidebarText,
-      // backgroundColor: 'initial'
     });
   }
 
-  onItmeClick(item: MenuItem) {
+  onItemClick(item: MenuItem): void {
     if (item.command) item.command();
     this.resetLinksStyles()
   }
 
   onLinkHover(index: number) {
     const backgroundColor = this.theme?.sidebarLinksHover || DEFAULT_LINK_HOVER_COLOR;
-    this.setSingleLinkSyle({
+    this.setSingleLinkStyle({
       backgroundColor: backgroundColor
     }, index);
   }
 
   onLinkBlur(index: number) {
-    const backgroundColor = this.theme?.sidebarBackground || 'initial';
     if (!this.isActiveLink(index)) {
-      this.setSingleLinkSyle({
-        backgroundColor: backgroundColor
+      this.setSingleLinkStyle({
+        backgroundColor: 'transparent'
       }, index);
     } else {
       this.setActiveLinkBackground(index);
@@ -54,19 +51,16 @@ export class SidebarLinksComponent implements AfterViewInit {
     if (this.links) {
       const collection = (this.links.nativeElement.children as HTMLCollection);
       let i = 0;
-      while (i < collection.length) {
-        const parent = collection.item(i) as HTMLDivElement;
-        const element = parent.children.item(0) as HTMLAnchorElement;
-        Object.assign(element.style, styles);
-        i++;
-      }
+      while (i < collection.length)
+        this.setSingleLinkStyle(styles, i++);
     }
   }
 
-  setSingleLinkSyle(styles: object, index: number) {
+  setSingleLinkStyle(styles: object, index: number): void {
     if (this.links) {
       const collection = this.links.nativeElement.children as HTMLCollection;
       const element = collection.item(index)?.children.item(0) as HTMLAnchorElement;
+      if (!element) return;
       Object.assign(element.style, styles);
     }
   }
