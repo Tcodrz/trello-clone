@@ -1,5 +1,5 @@
-import {Icons, MenuItem} from '@ui-components';
-import {Board, ScreenSize, Theme, Workspace} from '@trello-clone/trello-interface';
+import { Icons, MenuItem } from '@ui-components';
+import { Board, ScreenSize, Theme, Workspace } from '@trello-clone/trello-interface';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,12 +11,12 @@ import {
   Output,
   Renderer2
 } from '@angular/core';
-import {ActivatedRoute, Params} from '@angular/router';
-import {BehaviorSubject, map, Observable, of, switchMap, tap} from 'rxjs';
-import {BoardsService} from '../../core/services/boards.service';
-import {GotoService} from '../../core/services/goto.service';
-import {SidebarService} from '../../core/services/sidebar.service';
-import {WorkspaceService} from '../../core/services/workspace.service';
+import { ActivatedRoute, Params } from '@angular/router';
+import { BehaviorSubject, map, Observable, of, switchMap, tap } from 'rxjs';
+import { BoardsService } from '../../core/services/boards.service';
+import { GotoService } from '../../core/services/goto.service';
+import { SidebarService } from '../../core/services/sidebar.service';
+import { WorkspaceService } from '../../core/services/workspace.service';
 
 
 @Component({
@@ -30,11 +30,15 @@ export class SidebarComponent implements OnInit {
   private _width: number = window.innerWidth;
 
   @Input() set theme(theme: Theme | null) {
-    if (theme) this.updateTheme(theme);
+    if (theme) {
+      this.updateTheme(theme);
+      this.setBackgroundColor(theme);
+    }
   };
 
   @Input() set workspace(workspace: Workspace | null) {
     this._workspace = workspace;
+    this.setBackgroundColor();
     this.initSidebar();
   }
 
@@ -119,7 +123,7 @@ export class SidebarComponent implements OnInit {
 
   initWorkspace(workspaceID: string): void {
     this.workspace$ = this.workspaceService.getWorkspace(workspaceID).pipe(tap(workspace => {
-      this.sidebarLinksStyle = workspace ? {} : {'display': 'block', 'margin-top': '30px'};
+      this.sidebarLinksStyle = workspace ? {} : { 'display': 'block', 'margin-top': '30px' };
     }));
     this.boards$ = this.boardsService.getBoards(workspaceID).pipe(
       map(boards => boards.sort((a, b) => b.updatedAt - a.updatedAt)));
@@ -144,5 +148,18 @@ export class SidebarComponent implements OnInit {
 
   onBoardClick(board: Board): void {
     this.goto.board(board.id, board.workspaceID);
+  }
+
+  private setBackgroundColor(theme?: Theme) {
+    if (this._workspace) {
+      const borderColor = theme ? theme?.sidebarBackground : '#DFE1E6';
+      const backGroundColor = theme ? theme?.sidebarBackground : '#FAFBFC';
+      this.elementRef.nativeElement.style.backgroundColor = backGroundColor;
+      this.elementRef.nativeElement.style.borderRight = `1px solid ${borderColor}`;
+    } else {
+      const borderColor = theme ? theme?.sidebarBackground : '#ffffff';
+      this.elementRef.nativeElement.style.backgroundColor = 'initial';
+      this.elementRef.nativeElement.style.borderRight = `1px solid ${borderColor}`;
+    }
   }
 }

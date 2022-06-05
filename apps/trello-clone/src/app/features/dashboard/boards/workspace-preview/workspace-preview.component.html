@@ -12,8 +12,20 @@
     </div>
   </div>
   <ui-preview-card-list
-    [items]="boards$ | async"
+    [items]="boardsPreviewItems$ | async"
     [showLastCard]="true"
     [lastCardTitle]="'Create new board'"
-  ></ui-preview-card-list>
+    (lastCardClick)="menu.onToggle($event)"
+  >
+    <ui-menu firstMenu
+             #menu
+             [title]="'Create new board'">
+
+      <app-new-board-menu [workspaces]="workspaces$ | async"
+                          [currentWorkspace]="null"
+                          (submitNewBoard)="createNewBoard($event)"
+      ></app-new-board-menu>
+
+    </ui-menu>
+  </ui-preview-card-list>
 </div>
