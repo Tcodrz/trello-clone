@@ -1,0 +1,44 @@
+.workspace-details {
+  background-color: #f4f5f7;
+  height: 210px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+  .layout {
+    display: flex;
+    flex-direction: row;
+    column-gap: 24px;
+
+    .workspace-logo {
+      background: linear-gradient(#0747a6, #008da6);
+      border-radius: 4px;
+      width: 95px;
+      height: 100px;
+      display: grid;
+      place-content: center;
+
+      .letter {
+        color: white;
+        font-size: 72px;
+        text-transform: capitalize;
+        font-weight: bold;
+      }
+    }
+
+    .details {
+      .top {
+        display: flex;
+
+        .workspace-title {
+          font-size: 24px;
+        }
+      }
+
+      .bottom {
+        margin-top: 16px;
+      }
+    }
+  }
+}

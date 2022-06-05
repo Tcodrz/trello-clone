@@ -1,0 +1,21 @@
+<ng-container *ngIf="workspace">
+  <div class="workspace-details">
+    <div class="layout">
+      <div class="workspace-logo">
+        <div class="letter">
+          {{workspace.name | slice : 0 : 1 }}
+        </div>
+      </div>
+      <div class="details">
+        <div class="top">
+          <div class="workspace-title">{{workspace.name}}</div>
+        </div>
+        <div class="bottom">
+          <ui-button className="btn" [icon]="Icons.Pen">
+            Edit Workspace details
+          </ui-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>
