@@ -1,6 +1,9 @@
 <div class="dropdown" #dropdown>
   <div class="header" (click)="onToggle()">
-    <span class="title">{{ title }}</span>
+    <div class="header-title">
+      <ui-logo-preview [name]="title" [size]="0"></ui-logo-preview>
+      <span class="title">{{ title }}</span>
+    </div>
     <ui-icon class="pointer" #icon [icon]="Icons.ChevronDown">
     </ui-icon>
   </div>

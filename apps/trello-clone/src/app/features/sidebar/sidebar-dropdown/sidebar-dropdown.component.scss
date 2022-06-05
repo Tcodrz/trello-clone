@@ -13,6 +13,11 @@
     align-items: center;
     padding: times8(1) times8(1);
 
+    .header-title {
+      display: flex;
+      column-gap: 8px;
+    }
+
     &:hover {
       background-color: $SidbarLinkHover;
       cursor: pointer;

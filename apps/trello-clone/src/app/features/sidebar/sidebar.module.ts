@@ -10,6 +10,7 @@ import { SidebarLinksComponent } from './sidebar-links/sidebar-links.component';
 import { SidebarComponent } from './sidebar.component';
 import { CloseBoardMenuComponent } from './menu-boards/close-board-menu/close-board-menu.component';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { LogoPreviewModule } from "@ui-components";
 
 @NgModule({
   declarations: [
@@ -20,13 +21,14 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     SidebarDropdownComponent,
     SidebarLinksComponent,
   ],
-  imports: [
-    ButtonModule,
-    CommonModule,
-    MenuModule,
-    OverlayPanelModule,
-    RouterModule,
-  ],
+	imports: [
+		ButtonModule,
+		CommonModule,
+		MenuModule,
+		OverlayPanelModule,
+		RouterModule,
+		LogoPreviewModule,
+	],
   exports: [
     SidebarComponent,
   ]

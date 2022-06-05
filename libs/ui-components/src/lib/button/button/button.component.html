@@ -1,7 +1,7 @@
 <button [type]="type" [class]="className" [disabled]="disabled" (submit)="submit.emit()">
-  <div class="content">
+  <div class="content" #content>
     <ui-icon *ngIf="icon" [icon]="icon"></ui-icon>
-    <span class="btn-text">
+    <span class="btn-text" #btnText>
       <ng-content></ng-content>
     </span>
   </div>
