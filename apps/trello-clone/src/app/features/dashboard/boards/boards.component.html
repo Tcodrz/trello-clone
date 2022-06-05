@@ -1,10 +1,4 @@
-<pre>
-  ng b --source-map
-  npx source-map-explorer
-
-  Minko  Gechev
-
-  Guess.js
-
-  dynamic component loading
-</pre>
+<div *ngFor="let workspace of workspaces$ | async">
+<app-workspace-preview [workspace]="workspace"
+></app-workspace-preview>
+</div>

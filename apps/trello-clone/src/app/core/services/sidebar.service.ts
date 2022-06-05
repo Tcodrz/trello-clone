@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { WorkspacesQuery } from '../../state/workspaces/workspace.query';
 import { WorkspaceStore } from '../../state/workspaces/workspaces.store';
+import { Workspace } from "@trello-clone/trello-interface";
 
 @Injectable({
   providedIn: 'root'
@@ -17,18 +18,21 @@ export class SidebarService {
   getMenuLinks(): Observable<MenuItem[]> {
     return this.workspaceQuery.currentWorkspace$.pipe(
       map(workspace => {
-        if (workspace) return this.getWorkspaceLinks();
+        if (workspace) return this.getWorkspaceLinks(workspace);
         else return this.getDashboardLinks();
       })
     );
   }
 
-  getWorkspaceLinks() {
+  getWorkspaceLinks(workspace: Workspace) {
     return [
       {
         label: 'Boards',
-        route: '/workspace',
+        route: `/workspace`,
         icon: Icons.ClipBoard,
+        routeParams: {
+          workspaceID: workspace.id
+        }
       },
       {
         label: 'Members',

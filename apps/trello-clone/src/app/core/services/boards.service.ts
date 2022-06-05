@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {AngularFirestore} from '@angular/fire/compat/firestore';
-import {map, mergeMap, Observable} from 'rxjs';
-import {Board, Card, List} from '@trello-clone/trello-interface';
-import {BoardsQuery} from '../../state/boards/board.query';
-import {BoardsStore} from '../../state/boards/boards.store';
-import {CacheKeys, CacheService} from './cache.service';
-import {GotoService} from './goto.service';
+import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { map, mergeMap, Observable } from 'rxjs';
+import { Board, Card, List } from '@trello-clone/trello-interface';
+import { BoardsQuery } from '../../state/boards/board.query';
+import { BoardsStore } from '../../state/boards/boards.store';
+import { CacheKeys, CacheService } from './cache.service';
+import { GotoService } from './goto.service';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,12 @@ export class BoardsService {
   getBoards(workspaceID: string): Observable<Board[]> {
     this.boardsStore.init(workspaceID);
     return this.boardsQuery.boards$;
+  }
+  getWorkspaceBoards(workspaceID: string): Observable<Board[]> {
+    return this.firestore.collection<Board>('board').get().pipe(
+      map(boards => boards.docs.map(b => b.data())),
+      map(boards => boards.filter(b => b.workspaceID === workspaceID))
+    );
   }
   updateLists(lists: List[]): void {
     const collection = this.firestore.collection<List>('list');

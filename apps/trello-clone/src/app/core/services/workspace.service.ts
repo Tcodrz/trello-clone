@@ -59,6 +59,7 @@ export class WorkspaceService {
       label: workspace.name,
       id: workspace.id,
       command: () => {
+        this.workspaceStore.setCurrentWorkspace(workspace);
         this.goto.workspace(workspace.id);
       }
     }));
