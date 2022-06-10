@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       this.showMessage('Looks like one or more details is incorrect.');
     }
-    console.log(this.loginForm.value);
   }
 
   showMessage(message: string): void {

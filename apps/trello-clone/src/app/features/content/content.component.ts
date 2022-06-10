@@ -35,7 +35,7 @@ export class ContentComponent implements AfterViewInit {
     this.setMaxWidth(this._width);
   }
 
-  calcPosition(width: number) {
+  private calcPosition(width: number) {
     const isMediumScreen = width <= ScreenSize.Medium;
     const isLargeScreen = width > ScreenSize.Medium;
     if (!!this._workspace || isMediumScreen) this.setMargin(0);
@@ -43,11 +43,11 @@ export class ContentComponent implements AfterViewInit {
 
   }
 
-  setMargin(margin: number): void {
+  private setMargin(margin: number): void {
     this.elementRef.nativeElement.style.marginLeft = `${margin}px`;
   }
 
-  setTheme(theme: Theme): void {
+  private setTheme(theme: Theme): void {
     this.elementRef.nativeElement.style.backgroundColor = theme.boardBackground;
   }
 
