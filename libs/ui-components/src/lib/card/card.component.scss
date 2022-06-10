@@ -1,0 +1,9 @@
+@import "../../../../../apps/trello-clone/src/assets/scss/constants.scss";
+@import "../../../../../apps/trello-clone/src/assets/scss/functions.scss";
+
+.card {
+  box-shadow: $BoxShadow;
+  border-radius: $BorderRadius;
+  margin: 0 auto;
+  padding: times8(1);
+}

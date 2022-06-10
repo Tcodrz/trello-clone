@@ -1,0 +1,16 @@
+@import "./constants.scss";
+@import "./functions.scss";
+
+.sidebar {
+  .sub-menu {
+    margin-top: times8(2);
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-left: times8(2);
+      margin-right: times8(3);
+    }
+  }
+}

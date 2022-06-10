@@ -1,0 +1,25 @@
+{
+  "projectType": "library",
+  "sourceRoot": "libs/trello-mocks/src",
+  "prefix": "trello-clone",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/trello-mocks"],
+      "options": {
+        "jestConfig": "libs/trello-mocks/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/trello-mocks/**/*.ts",
+          "libs/trello-mocks/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

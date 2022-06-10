@@ -1,0 +1,5 @@
+<div class="menu">
+  <ui-button [className]="'btn text-left width-10'" [icon]="Icons.Clock" (click)="menuDates.onToggle($event)">Dates
+  </ui-button>
+  <ui-menu [menus]="datesMenu" [title]="'Dates'" #menuDates></ui-menu>
+</div>

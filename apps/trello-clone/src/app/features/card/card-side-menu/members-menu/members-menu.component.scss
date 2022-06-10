@@ -1,0 +1,27 @@
+@import "../../../../../assets/scss/functions.scss";
+@import "../../../../../assets/scss/constants";
+
+
+.members {
+  .member {
+    display: flex;
+    align-items: center;
+    column-gap: times8(2);
+    margin-top: times8(1);
+    padding: times8(.5) times8(1);
+    cursor: pointer;
+    border-radius: 4px;
+
+    .picture>img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      display: grid;
+      place-content: center;
+    }
+
+    &:hover {
+      background-color: $SidbarLinkHover;
+    }
+  }
+}

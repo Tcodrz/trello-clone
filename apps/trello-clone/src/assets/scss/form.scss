@@ -1,0 +1,60 @@
+@import "./constants.scss";
+@import "./functions.scss";
+
+input {
+  &[type=button] {
+    height: times8(4.5);
+  }
+
+  &[type=text] {
+
+    color: $Grey;
+    padding: 4px 8px;
+    font-size: $FontSmall;
+    border: 2px solid $InputBorder;
+    border-radius: 3px;
+    height: times8(4);
+    width: -webkit-fill-available;
+    background-color: $InputBackground;
+
+    &.ng-invalid.ng-touched {
+      outline: 2px solid $Red;
+      animation: shadowBlink 1s ease-in-out;
+    }
+
+    &:focus {
+      outline: none;
+
+      &:not(.ng-invalid.ng-touched) {
+        border: 2px solid $InputBorderFocus;
+      }
+    }
+  }
+}
+
+textarea {
+  font-family: 'Fredoka', sans-serif;
+
+
+  &.clean {
+    border: none;
+    outline: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+}
+
+
+@keyframes shadowBlink {
+  0% {
+    box-shadow: 0 0 20px $Red;
+  }
+
+  100% {
+
+    box-shadow: 0 0 0 $Red;
+  }
+}

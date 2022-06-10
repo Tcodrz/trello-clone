@@ -1,0 +1,20 @@
+<div class="title">Your boards</div>
+<ui-preview-card-list [items]="boardPreviewItems"
+                      [showFirstCard]="true"
+                      [firstCardTitle]="'Create new board'"
+                      (firstCardClick)="newBoardMenu.onToggle($event)"
+>
+    <ui-menu firstMenu
+             #newBoardMenu
+             [title]="'Creat new board'"
+             (hide)="form.resetForm()">
+
+      <app-new-board-menu #form
+                          [workspaces]="workspaces"
+                          [currentWorkspace]="workspace"
+                          (submitNewBoard)="onSubmit($event)">
+      </app-new-board-menu>
+
+    </ui-menu>
+
+</ui-preview-card-list>

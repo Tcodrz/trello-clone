@@ -1,0 +1,40 @@
+<ng-container *ngIf="_lists.length > 0">
+  <div
+    cdkDropList
+    #lists="cdkDropList"
+    [cdkDropListData]="_lists"
+    (cdkDropListDropped)="onDrop($event)"
+    class="lists"
+    cdkDropListLockAxis="x"
+    cdkDropListOrientation="horizontal"
+  >
+    <div *ngFor="let list of _lists" cdkDrag [cdkDragData]="list">
+      <ui-card class="list" className="list-card">
+        <div *cdkDragPlaceholder [ngStyle]="{ width: '270px' }"></div>
+        <div cdkDragHandle>
+          <div class="header pointer">
+            <div class="list-name">{{ list.name }}</div>
+            <div>
+              <ui-button
+                className="icon"
+                [icon]="Icons.EllipsisV"
+                (click)="menu.onToggle($event)"
+              ></ui-button>
+              <ui-menu
+                #menu
+                [title]="'List actions'"
+                [menus]="listMenu"
+              ></ui-menu>
+            </div>
+          </div>
+        </div>
+        <app-list
+          [list]="list"
+          (createCard)="onCardCreate($event)"
+          (updateList)="onUpdateList($event)"
+          (openCard)="onCardOpen($event)"
+        ></app-list>
+      </ui-card>
+    </div>
+  </div>
+</ng-container>

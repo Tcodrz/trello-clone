@@ -1,0 +1,38 @@
+<script src="../../../../../../libs/ui-components/src/lib/paragraph/paragraph.component.ts"></script>
+<app-layout *ngIf="(view$ | async) as view" [workspace]="view[0]">
+  <div class="wrapper">
+
+    <app-workspace-header [workspace]="view[0]"></app-workspace-header>
+
+    <ui-tabs [tabs]="tabs"
+             [activeIndex]="activeTab">
+    </ui-tabs>
+
+    <div class="content-wrapper">
+      <ng-container [ngSwitch]="activeTab">
+
+        <ng-container *ngSwitchCase="WorkspaceTabs.Boards">
+          <app-boards-preview-list [boards]="view[2]"
+                                   [workspaces]="view[1]"
+                                   [workspace]="view[0]"
+                                   (createBoard)="onCreateBoard($event)">
+          </app-boards-preview-list>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="WorkspaceTabs.WorkspaceTable">
+          <!-- TODO WORKSPACE TABLE -->
+        </ng-container>
+
+        <ng-container *ngSwitchCase="WorkspaceTabs.Members">
+          <app-members></app-members>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="WorkspaceTabs.Settings">
+          <!--TODO WORKSPACE SETTINGS -->
+        </ng-container>
+
+      </ng-container>
+    </div>
+
+  </div>
+</app-layout>

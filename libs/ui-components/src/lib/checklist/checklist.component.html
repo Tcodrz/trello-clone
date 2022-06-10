@@ -1,0 +1,76 @@
+<ng-container *ngIf="checklist">
+  <div
+    cdkDropList
+    #lists="cdkDropList"
+    [cdkDropListData]="checklist.items"
+    (cdkDropListDropped)="onDrop($event)"
+  >
+    <div clickOutside>
+      <div class="header">
+        <div class="icon">
+          <ui-icon [icon]="Icons.CheckSquare"></ui-icon>
+        </div>
+        <div class="list-name">{{ checklist.name }}</div>
+        <ui-button className="btn" (click)="closeMenu.onToggle($event)">
+          Delete
+        </ui-button>
+        <ui-menu #closeMenu [title]="'Delete checklist?'" class="d-none">
+          <div>
+            Deleting a checklist is permanent and there is no way to get it
+            back.
+          </div>
+          <ui-button
+            className="danger width-10 mt-2"
+            (click)="onDeleteChecklist(); closeMenu.onHide()"
+          >
+            Delete checklist
+          </ui-button>
+        </ui-menu>
+      </div>
+
+      <div class="progress">
+        <div class="value">{{ progress$ | async }}%</div>
+        <ui-progress [value]="progress$ | async"></ui-progress>
+      </div>
+
+      <ng-container *ngFor="let item of checklist.items; let i = index">
+        <div cdkDrag [cdkDragDisabled]="item.onEditMode">
+          <div cdkDragHandle>
+            <ui-checklist-item
+              [item]="item"
+              (updateItem)="onUpdateItem($event)"
+              (deleteItem)="onDeleteItem($event)"
+              (createCardFromItem)="onCreateCardFromItem($event)"
+            ></ui-checklist-item>
+          </div>
+        </div>
+      </ng-container>
+
+      <div cdkDrag [cdkDragDisabled]="true">
+        <div cdkDragHandle>
+          <div *ngIf="!createMode">
+            <ui-button className="btn" (click)="toggleCreateMode()">
+              Add an item
+            </ui-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onAddItem()">
+      <div *ngIf="createMode" class="add-item">
+        <input type="text" formControlName="newItem" #addItemInput />
+        <div class="buttons">
+          <ui-button [className]="'primary w-30'" [type]="'submit'">
+            Add
+          </ui-button>
+          <ui-button
+            className="icon"
+            [icon]="Icons.Times"
+            (click)="createMode = false"
+          ></ui-button>
+        </div>
+      </div>
+    </form>
+  </div>
+</ng-container>

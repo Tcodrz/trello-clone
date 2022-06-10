@@ -1,0 +1,13 @@
+<app-topnav [theme]="theme$ | async"></app-topnav>
+<app-sidebar
+  [theme]="theme$ | async"
+  [workspace]="workspace"
+  (open)="onSidebarToggle($event)"
+></app-sidebar>
+
+<app-content
+  [workspace]="workspace"
+  [theme]="theme$  | async"
+>
+  <ng-content></ng-content>
+</app-content>

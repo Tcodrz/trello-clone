@@ -1,0 +1,9 @@
+<div class="toolbar-container">
+  <ui-button *ngFor="let item of items"
+             className="btn"
+             [icon]="item.icon"
+             (click)="onItemClick(item)"
+  >
+    {{item.title}}
+  </ui-button>
+</div>

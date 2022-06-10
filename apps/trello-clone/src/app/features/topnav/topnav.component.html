@@ -1,0 +1,30 @@
+<div class="navbar">
+  <div class="left">
+    <div class="logo ml-1">
+      <app-logo (clicked)="gotoDashboard()"></app-logo>
+    </div>
+    <div class="menus ml-3" *ngIf="!smallScreen">
+      <ui-nav-menu [title]="'Workspaces'" position="right" [items]="workspaceMenu$ | async "></ui-nav-menu>
+      <ui-nav-menu [title]="'Recent'" position="right"></ui-nav-menu>
+      <ui-nav-menu [title]="'More'" position="right"></ui-nav-menu>
+    </div>
+    <div class="menus ml-3" *ngIf="smallScreen">
+      <ui-button (click)="menu.onToggle($event)">More</ui-button>
+      <ui-menu #menu></ui-menu>
+    </div>
+  </div>
+  <div class="right">
+    <div class="actions">
+      <div class="search">
+        <input type="text" *ngIf="!smallScreen">
+        <ui-button *ngIf="smallScreen" className="icon" [icon]="Icons.Search"></ui-button>
+      </div>
+      <div class="profile" *ngIf="user$ | async as user">
+        <img [src]="user?.picture" alt="" class="pic pointer" (click)="menu.onToggle($event)">
+        <ui-menu [title]="'Account'" [menus]="profileMenuItems" #menu (itemClick)="onMenuItemClick($event)">
+          <app-profile-menu [user]="user"></app-profile-menu>
+        </ui-menu>
+      </div>
+    </div>
+  </div>
+</div>

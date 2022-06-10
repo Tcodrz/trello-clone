@@ -1,0 +1,17 @@
+.preview-card {
+  background-color: #091e420a;
+  width: 180px;
+  height: 80px;
+  border-radius: 4px;
+  display: inline-grid;
+
+  &:hover {
+    cursor: pointer;
+    background-color: #091e4214;
+  }
+
+  .title {
+    padding: 8px;
+    user-select: none;
+  }
+}

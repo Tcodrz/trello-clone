@@ -1,0 +1,83 @@
+@import "./constants.scss";
+@import "./functions.scss";
+
+ui-select {
+
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Old versions of Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+
+  .select {
+    &:focus {
+      border: 3px solid black;
+    }
+
+    .input {
+      input {
+        cursor: pointer;
+        caret-color: transparent;
+
+        &[type=button] {
+          text-align: left;
+        }
+
+        &:focus {
+          text-decoration: none;
+          text-emphasis: none;
+        }
+      }
+
+      &.open {
+        input {
+          border-bottom: none;
+          border-bottom-left-radius: 0;
+          border-bottom-right-radius: 0;
+          border: 2px solid $InputBorderFocus;
+          border-bottom: none;
+        }
+      }
+
+      position: relative;
+
+      ui-icon {
+        position: absolute;
+        right: times8(1);
+        top: calc(50% - times8(1));
+      }
+    }
+
+    .options {
+      display: none;
+      border: 1px solid $InputBorder;
+      border-radius: $BorderRadius;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+      position: absolute;
+      background-color: $White;
+
+      &.open {
+        display: block;
+        border-top: none;
+        border: 2px solid $InputBorderFocus;
+        border-top: none;
+      }
+
+      .option {
+        padding: 8px 8px;
+
+        &:hover {
+
+          background-color: $SidbarLinkHover;
+        }
+      }
+    }
+  }
+}

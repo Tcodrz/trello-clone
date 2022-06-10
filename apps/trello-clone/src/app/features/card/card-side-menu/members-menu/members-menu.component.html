@@ -1,0 +1,17 @@
+<div class="menu">
+  <ui-button [className]="'btn text-left width-10'" [icon]="Icons.User" (click)="menuMembers.onToggle($event)">Members
+  </ui-button>
+  <ui-menu [menus]="membersMenu" [title]="'Members'" #menuMembers>
+    <input type="text" placeholder="Search members">
+    <div class="members mt-2">
+      <div class="font-sm">Board members</div>
+      <div class="member" *ngFor="let member of members">
+        <span class="picture"><img [src]="member.picture" alt=""></span>
+        <span class="name">{{ member.name }}</span>
+      </div>
+    </div>
+    <div class="workspace-members mt-2">
+      <ui-button className="btn width-10">Show other Workspace members</ui-button>
+    </div>
+  </ui-menu>
+</div>

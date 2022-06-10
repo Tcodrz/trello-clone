@@ -1,0 +1,9 @@
+@import "../../../assets/scss/constants.scss";
+
+.register {
+  height: 100vh;
+
+  ui-card {
+    width: $CardWidthDefualt;
+  }
+}

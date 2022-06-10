@@ -1,0 +1,47 @@
+<div
+  *ngIf="item"
+  [ngClass]="item.onEditMode ? 'edit' : ''"
+  (clickOutside)="toggleEditMode(false)"
+>
+  <form [formGroup]="form">
+    <div class="checklist-item">
+      <ui-checkbox formControlName="completed"></ui-checkbox>
+      <div
+        *ngIf="!item.onEditMode"
+        (click)="onItemClick()"
+        class="title-preview"
+      >
+        {{ item.title }}
+      </div>
+      <ui-input
+        *ngIf="item.onEditMode"
+        type="primary"
+        formControlName="title"
+        #titleInput
+      ></ui-input>
+    </div>
+    <div *ngIf="item.onEditMode" class="buttons">
+      <div>
+        <ui-button className="primary" (click)="onSaveItem()">Save</ui-button>
+        <ui-icon
+          class="ml-2 pointer"
+          [icon]="Icons.Times"
+          (click)="toggleEditMode(false)"
+        ></ui-icon>
+      </div>
+      <ui-icon
+        class="pointer"
+        [icon]="Icons.EllipsisH"
+        (click)="menu.onToggle($event)"
+      ></ui-icon>
+    </div>
+  </form>
+
+  <ui-icon
+    *ngIf="!item.onEditMode && showMenuIcon"
+    class="pointer"
+    [icon]="Icons.EllipsisH"
+    (click)="menu.onToggle($event)"
+  ></ui-icon>
+  <ui-menu #menu [menus]="itemMenu" [title]="'Item actions'"></ui-menu>
+</div>

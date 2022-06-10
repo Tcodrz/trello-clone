@@ -1,0 +1,14 @@
+<div class="links" #links>
+  <div class="link" *ngFor="let item of menuItems; let i = index">
+    <a [routerLink]="[item.route, item.routeParams ?? {}]"
+       routerLinkActive="active"
+       class="sidebar-link"
+       (mouseover)="onLinkHover(i)"
+       (mouseleave)="onLinkBlur(i)"
+       (click)="onItemClick(item)"
+    >
+      <ui-icon [icon]="item.icon"></ui-icon>
+      {{item.label}}
+    </a>
+  </div>
+</div>

@@ -1,0 +1,13 @@
+<hr *ngIf="dividerTop">
+<h3 class="title">{{title}}</h3>
+<div class="text-wrapper">
+  <div class="text">{{text}}</div>
+  <div *ngIf="textLink" class="text-link">
+    <ui-button [icon]="textLink.icon"
+               [className]="textLink.className"
+               (click)="textLink.action($event)">
+      {{textLink.text}}
+    </ui-button>
+  </div>
+</div>
+<hr *ngIf="dividerBottom" class="mt-2 c-grey">

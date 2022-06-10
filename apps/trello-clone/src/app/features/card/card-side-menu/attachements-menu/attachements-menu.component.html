@@ -1,0 +1,6 @@
+<div class="menu">
+  <ui-button [className]="'btn text-left  width-10'" [icon]="Icons.PaperClip"
+    (click)="menuAttachements.onToggle($event)">
+    Attachments</ui-button>
+  <ui-menu [menus]="attachmentsMenu" [title]="'Attachments'" #menuAttachements></ui-menu>
+</div>

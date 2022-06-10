@@ -1,0 +1,31 @@
+<div class="workspace-preview">
+  <div class="workspace-title">
+    <div class="left">
+      <ui-logo-preview [name]="workspaceLogoConfig.name"
+                       [size]="workspaceLogoConfig.size"
+      ></ui-logo-preview>
+      <span class="ml-1">{{workspace.name}}</span>
+    </div>
+    <div class="right">
+      <app-workspace-preview-toolbar [workspace]="workspace"
+      ></app-workspace-preview-toolbar>
+    </div>
+  </div>
+  <ui-preview-card-list
+    [items]="boardsPreviewItems$ | async"
+    [showLastCard]="true"
+    [lastCardTitle]="'Create new board'"
+    (lastCardClick)="menu.onToggle($event)"
+  >
+    <ui-menu firstMenu
+             #menu
+             [title]="'Create new board'">
+
+      <app-new-board-menu [workspaces]="workspaces$ | async"
+                          [currentWorkspace]="null"
+                          (submitNewBoard)="createNewBoard($event)"
+      ></app-new-board-menu>
+
+    </ui-menu>
+  </ui-preview-card-list>
+</div>

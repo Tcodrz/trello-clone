@@ -1,0 +1,53 @@
+@import "../../../../assets/scss/constants.scss";
+@import "../../../../assets/scss/functions";
+
+.dropdown {
+  height: 40px;
+  overflow: hidden;
+  margin-top: times8(1);
+  transition: all .3s ease-in-out;
+
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: times8(1) times8(1);
+
+    .header-title {
+      display: flex;
+      column-gap: 8px;
+    }
+
+    &:hover {
+      background-color: $SidbarLinkHover;
+      cursor: pointer;
+      border-radius: $BorderRadius;
+    }
+
+    .title {
+      font-size: $FontSmall;
+      font-weight: 700;
+    }
+
+    ui-icon {
+      transform: rotateZ(0);
+      transition: $transition;
+      color: $GreyText;
+
+      &.open {
+        transform: rotateZ(180deg);
+        transition: $transition;
+      }
+    }
+  }
+
+  .items {
+    margin-top: times8(1);
+
+    .menu-item {
+      padding-left: times8(7);
+      height: times8(4);
+      font-size: $FontSmall;
+    }
+  }
+}

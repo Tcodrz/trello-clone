@@ -1,5 +1,11 @@
 {
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
-  "projects": {}
+  "projects": {
+    "trello-clone": "apps/trello-clone",
+    "trello-clone-e2e": "apps/trello-clone-e2e",
+    "trello-interface": "libs/trello-interface",
+    "trello-mocks": "libs/trello-mocks",
+    "ui-components": "libs/ui-components"
+  }
 }

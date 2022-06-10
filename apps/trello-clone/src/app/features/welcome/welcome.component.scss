@@ -1,0 +1,89 @@
+@import "../../../assets/scss/media.scss";
+@import "../../../assets/scss/constants.scss";
+@import "../../../assets/scss/functions.scss";
+
+.home {
+  .topbar {
+    margin: 0 0 50px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .logo {
+      font-size: $FontXL;
+      display: flex;
+      align-items: center;
+      column-gap: times8(1);
+
+      ui-icon {
+        color: $Blue;
+      }
+    }
+  }
+
+  .container {
+    padding: 0 450px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .signup {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      width: 100%;
+
+      input {
+        width: 65%;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $LargeScreen) {
+  .home {
+    .container {
+      padding: 0 250px;
+
+      .signup {
+        input {
+          width: 65%;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $MediumScreen) {
+  .home {
+    .container {
+      padding: 0 100px;
+
+      .signup {
+        input {
+          width: 60%;
+        }
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: $SmallScreen) {
+  .home {
+    .container {
+      padding: 0 50px;
+
+      .signup {
+        input {
+          width: 100%;
+        }
+
+        button {
+          width: 100%;
+          margin-top: 16px;
+        }
+      }
+    }
+  }
+}

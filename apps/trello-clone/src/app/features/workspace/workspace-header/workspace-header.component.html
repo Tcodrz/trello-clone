@@ -1,0 +1,19 @@
+<ng-container *ngIf="workspace">
+  <div class="workspace-details">
+    <div class="layout">
+
+      <ui-logo-preview [name]="logoPreviewConfig.name" [size]="logoPreviewConfig.size"></ui-logo-preview>
+
+      <div class="details">
+        <div class="top">
+          <div class="workspace-title">{{workspace.name}}</div>
+        </div>
+        <div class="bottom">
+          <ui-button className="btn" [icon]="Icons.Pen">
+            Edit Workspace details
+          </ui-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-container>

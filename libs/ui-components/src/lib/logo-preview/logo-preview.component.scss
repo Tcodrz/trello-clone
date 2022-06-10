@@ -1,0 +1,17 @@
+:host {
+  display: inline-block;
+
+  .logo-container {
+    background: linear-gradient(#0747a6, #008da6);
+    border-radius: 4px;
+    width: 95px;
+    height: 100px;
+    display: grid;
+    place-content: center;
+
+    .letter {
+      color: white;
+      text-transform: capitalize;
+    }
+  }
+}

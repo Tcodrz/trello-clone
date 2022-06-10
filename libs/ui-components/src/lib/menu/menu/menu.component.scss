@@ -1,0 +1,48 @@
+@import "../../../../../../apps/trello-clone/src/assets/scss/functions";
+@import "../../../../../../apps/trello-clone/src/assets/scss/constants";
+
+.menu {
+  color: $GreyText;
+
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: times8(.5) 0;
+
+    .left-space {
+      flex-grow: 1.3;
+    }
+
+    .title-text {
+      flex-grow: 1;
+      user-select: none;
+    }
+  }
+
+  .items {
+    .item {
+      cursor: pointer;
+      line-height: times8(3);
+      padding: 4px;
+      font-weight: 300;
+      font-size: 14px;
+
+      &:hover {
+        background-color: $SidbarLinkHover;
+      }
+    }
+  }
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: $Grey;
+  font-weight: 400;
+
+  &:hover {
+    background-color: $SidbarLinkHover;
+  }
+}

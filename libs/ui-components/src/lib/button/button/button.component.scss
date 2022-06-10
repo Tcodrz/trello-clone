@@ -1,0 +1,176 @@
+@import "../../../../../../apps/trello-clone/src/assets/scss/constants.scss";
+@import "../../../../../../apps/trello-clone/src/assets/scss/functions.scss";
+
+button {
+  display: inline-block;
+  text-align: center;
+  border-radius: 4px;
+  padding: times8(1) times8(1);
+  border: none;
+  background-color: transparent;
+  color: inherit;
+  font-size: $FontSmall;
+  cursor: pointer;
+
+  &.btn {
+    background-color: $MenuButtonBackground;
+  }
+
+  .content {
+    min-width: max-content;
+    display: flex;
+    justify-content: center;
+
+    span {
+      font-weight: 500;
+    }
+  }
+
+  &:disabled {
+    background-color: $LightGrey !important;
+    cursor: initial;
+  }
+
+
+
+  &.icon {
+    padding: 0;
+    width: times8(4);
+    height: times8(4);
+    display: grid;
+    place-content: center;
+
+    &:hover:not(.no-hover) {
+      background-color: $SidbarLinkHover;
+    }
+  }
+
+  ui-icon {
+    display: inline-block;
+
+    fa-icon {
+      margin: 0 times8(1);
+    }
+  }
+
+  &:focus:not(.raised) {
+    outline: none;
+  }
+
+  &.primary {
+    color: $White;
+    background-color: $Blue;
+    font-weight: 600;
+
+    &:hover:not(:disabled):not(.no-hover) {
+      background-color: $DarkBlue;
+      transition: $transition;
+    }
+  }
+
+  &.primary-outline {
+    color: $Blue;
+    border: 1px solid $Blue;
+    font-weight: 600;
+
+    &:hover {
+      background-color: $Blue;
+      color: $White;
+      transition: $transition;
+    }
+  }
+
+  &.link {
+    color: $Blue;
+    font-weight: 600;
+
+    &:hover {
+      text-decoration: underline;
+      transition: $transition;
+    }
+  }
+
+  &.success {
+    color: $White;
+    background-color: $Green;
+
+    &:hover:not(:disabled) {
+      background-color: $LightGreen;
+      transition: $transition;
+    }
+  }
+
+  &.primary.raised {
+    color: $White;
+    background-color: $Blue;
+    box-shadow: 0 4px 8px #6a5959;
+
+    &:hover {
+      background-color: $DarkBlue;
+      transition: $transition;
+    }
+
+    &:active {
+      transform: translateY(2px);
+      transition: all ease-out .1s;
+      box-shadow: 0 0 4px $Shadow;
+    }
+  }
+
+  &.success.raised {
+    color: $White;
+    background-color: $Green;
+    box-shadow: 0 4px 8px #6a5959;
+
+    &:hover:not(disabled) {
+      background-color: $LightGreen;
+      transition: $transition;
+    }
+
+    &:active {
+      transform: translateY(2px);
+      transition: all ease-out .1s;
+      box-shadow: 0 0 4px $Shadow;
+    }
+  }
+
+  &.raised {
+    background-color: transparent;
+    box-shadow: 0 2px 10px $Shadow;
+    color: $GreyText;
+
+    &:hover {
+      background-color: $WhiteHover;
+      transition: $transition;
+    }
+
+    &:active {
+      transform: translateY(2px);
+      transition: all ease-out .1s;
+      box-shadow: 0 0 4px $Shadow;
+    }
+  }
+
+  &.danger {
+    background-color: $ButtonDanger;
+    color: $White;
+
+    &:hover:not(:disabled):not(.no-hover) {
+      background-color: $ButtonDangerHover;
+    }
+  }
+
+  &:hover:not(:disabled):not(.no-hover) {
+    background-color: $SidbarLinkHover;
+  }
+
+  &.text-left {
+    .content {
+      display: flex;
+      column-gap: times8(1);
+    }
+  }
+
+
+
+}

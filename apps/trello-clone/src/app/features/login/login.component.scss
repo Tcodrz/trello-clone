@@ -1,0 +1,15 @@
+@import "../../../assets/scss/constants.scss";
+
+:host {
+  .login {
+    height: 100vh;
+
+    ui-card {
+      width: $CardWidthDefualt;
+
+      .messages {
+        height: 30px;
+      }
+    }
+  }
+}

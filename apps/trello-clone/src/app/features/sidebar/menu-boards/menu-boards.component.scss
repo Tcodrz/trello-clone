@@ -1,0 +1,22 @@
+@import "../../../../assets/scss/functions.scss";
+@import "../../../../assets/scss/constants";
+
+.board {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  column-gap: times8(2);
+  padding: 0 times8(3);
+  position: relative;
+
+
+  &:hover {
+    background-color: $SidbarLinkHover;
+  }
+
+  .name {
+    flex-grow: 1;
+    font-size: $FontSmall;
+    cursor: pointer;
+  }
+}

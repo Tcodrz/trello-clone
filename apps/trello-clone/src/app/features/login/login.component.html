@@ -1,0 +1,24 @@
+<div class="login bg-light center">
+  <ui-card>
+    <h5 class="text-center c-grey">Log in to Trello.</h5>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <div class="input mt-2">
+        <input formControlName="email" type="text" placeholder="Enter email">
+      </div>
+      <div class="input mt-2">
+        <input formControlName="password" type="password" placeholder="Enter password">
+      </div>
+      <div class="messages">
+        <p *ngFor="let message of messages" class="font-sm center c-red"> {{ message }} </p>
+      </div>
+      <div>
+        <ui-button className="success width-10 mt-2" type="submit">Log in</ui-button>
+        <div class="text-center mt-2 c-lightgrey">OR</div>
+        <ui-button className="raised width-10 mt-2" (click)="onLogInWithGoogle()" [icon]="Icons.Google">Log in with
+          Google</ui-button>
+        <ui-button className="raised width-10 mt-2" [icon]="Icons.Microsoft">Log in with Microsoft</ui-button>
+        <ui-button className="raised width-10 mt-2" [icon]="Icons.Apple">Log in with Apple</ui-button>
+      </div>
+    </form>
+  </ui-card>
+</div>

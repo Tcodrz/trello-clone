@@ -1,0 +1,54 @@
+@import '../../../assets/scss/constants.scss';
+@import '../../../assets/scss/functions';
+
+:host {
+  transform: translate3d(0%, 0, 0);
+  transition: all .3s ease-in-out;
+
+  .sidebar {
+    ui-icon.toggle {
+      position: absolute;
+      top: times8(4);
+      right: times8(3);
+      background-color: transparent;
+      display: grid;
+      place-content: center;
+      width: 25px;
+      height: 25px;
+
+      &:hover {
+        transition: all .3s ease-in-out;
+        background-color: $SidbarLinkHover;
+      }
+    }
+
+    .current-workspace {
+      margin: 0 24px;
+      height: times8(7);
+      border-bottom: 1px solid $LightGrey;
+    }
+
+
+  }
+
+  &.closed {
+    transform: translate3d(-95%, 0, 0);
+    transition: all .3s ease-in-out;
+    border-right: 1px solid black;
+    opacity: .6;
+
+    .sidebar {
+      ui-icon.toggle {
+        width: initial;
+        height: initial;
+        transform: rotateZ(540deg);
+        transition: all .3s ease-in-out;
+        right: -13px;
+        background-color: $White;
+        box-shadow: #000000 0 0 3px;
+        border-radius: 50%;
+        padding: 2px 7px;
+      }
+    }
+  }
+}

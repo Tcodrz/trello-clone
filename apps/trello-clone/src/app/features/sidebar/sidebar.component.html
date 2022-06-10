@@ -1,0 +1,18 @@
+<div class="sidebar">
+  <div class="current-workspace" *ngIf="workspace$ | async as workspace">
+    <h5> {{ workspace.name }} </h5>
+  </div>
+  <ui-icon *ngIf="showToggler$ | async" [icon]="Icons.ChevronLeft" (click)="onToggle()" class="toggle pointer">
+  </ui-icon>
+  <app-sidebar-links [ngStyle]="sidebarLinksStyle" [menuItems]="menuLinks$ | async" [theme]="(board$ | async)?.theme">
+  </app-sidebar-links>
+  <ng-container [ngTemplateOutlet]="(workspace$ | async) ?  boardsMenu : workspaceMenu"></ng-container>
+</div>
+
+<ng-template #boardsMenu>
+  <app-menu-boards [boards]="boards$ | async" (boardClick)="onBoardClick($event)"></app-menu-boards>
+</ng-template>
+
+<ng-template #workspaceMenu>
+  <app-menu-workspaces [workspaces]="workspaces$ | async"></app-menu-workspaces>
+</ng-template>
