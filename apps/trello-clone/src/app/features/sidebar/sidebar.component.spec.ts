@@ -10,13 +10,13 @@ import {SidebarService} from "../../core/services/sidebar.service";
 import {WorkspaceService} from "../../core/services/workspace.service";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {createWorkspaceServiceMock, MOCK_WORKSPACE} from "../../mocks/workspace.service.mock";
-import {createBoardsServiceMock, MOCK_BOARD} from "../../mocks/board.service.mock";
+import {createBoardsServiceMock, boardMock} from "../../mocks/board.service.mock";
 import {createGotoServiceMock} from "../../mocks/goto.service.mock";
 import {createActiveRouteMock, MockParams} from "../../mocks/active-route.mock";
 
 const activatedRouteParamsMock: MockParams = {
   workspaceID: MOCK_WORKSPACE.id,
-  boardID: MOCK_BOARD.id
+  boardID: boardMock.id
 }
 
 describe('SidebarComponent', () => {

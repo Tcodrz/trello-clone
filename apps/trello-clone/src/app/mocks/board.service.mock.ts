@@ -3,7 +3,7 @@ import {BoardsService} from "../core/services/boards.service";
 import {Board, Theme} from "@trello-clone/trello-interface";
 import {of} from "rxjs";
 
-export const MOCK_BOARD: Board = {
+export const boardMock: Board = {
   createdAt: 1234,
   id: "1234",
   listIDs: ['1234', '5678', '3690'],
@@ -18,10 +18,10 @@ export type BoardsServiceMock = Partial<Record<keyof BoardsService, jest.Mock>>;
 
 export function createBoardsServiceMock(): BoardsServiceMock {
   return {
-    getBoards: jest.fn(() => of([MOCK_BOARD])),
+    getBoards: jest.fn(() => of([boardMock])),
     createNewBoard: jest.fn(),
-    getBoard: jest.fn(() => of(MOCK_BOARD)),
+    getBoard: jest.fn(() => of(boardMock)),
     updateListCardsPosition: jest.fn(),
-    getWorkspaceBoards: jest.fn(() => of([]))
+    getWorkspaceBoards: jest.fn(() => of([boardMock]))
   };
 }
