@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { SidebarDropdownComponent } from './sidebar-dropdown.component';
+import {MockComponent} from "ng-mocks";
+import {IconComponent, LogoPreviewComponent} from "@ui-components";
 
 describe('SidebarDropdownComponent', () => {
   let component: SidebarDropdownComponent;
@@ -8,7 +10,11 @@ describe('SidebarDropdownComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SidebarDropdownComponent ]
+      declarations: [
+        SidebarDropdownComponent,
+        MockComponent(LogoPreviewComponent),
+        MockComponent(IconComponent),
+      ]
     })
     .compileComponents();
   });
@@ -16,6 +22,8 @@ describe('SidebarDropdownComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(SidebarDropdownComponent);
     component = fixture.componentInstance;
+    component.title = 'mock';
+    component.items = [];
     fixture.detectChanges();
   });
 

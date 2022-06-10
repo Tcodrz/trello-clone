@@ -68,7 +68,7 @@ export class WorkspaceComponent implements OnInit {
       .pipe(
         tap((params: Params) => {
           this.workspaceID = params['workspaceID'];
-          if (params['activeTab'] >= 0) {
+          if (+params['activeTab'] >= 0) {
             this.activeTab = +params['activeTab'];
           }
         }),

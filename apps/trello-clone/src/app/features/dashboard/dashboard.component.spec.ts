@@ -7,6 +7,9 @@ import {WorkspaceStore} from "../../state/workspaces/workspaces.store";
 import {createWorkspaceStoreMock} from "../../mocks/workspace-store.mock";
 import {UserStore} from "../../state/user/user.store";
 import {createUserStoreMock} from "../../mocks/user-store.mock";
+import {RouterTestingModule} from "@angular/router/testing";
+import {MockComponent} from "ng-mocks";
+import {LayoutComponent} from "../layout/layout.component";
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -14,7 +17,13 @@ describe('DashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DashboardComponent ],
+      declarations: [
+        DashboardComponent,
+        MockComponent(LayoutComponent)
+      ],
+      imports: [
+        RouterTestingModule
+      ],
       providers: [
         {
           provide: GotoService,
@@ -29,7 +38,7 @@ describe('DashboardComponent', () => {
           useValue: createUserStoreMock({
             user:null})
         }
-      ]
+      ],
     })
     .compileComponents();
   });

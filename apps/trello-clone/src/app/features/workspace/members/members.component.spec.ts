@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MembersComponent } from './members.component';
+import {MockComponent} from "ng-mocks";
+import {ParagraphComponent} from "@ui-components";
 
 describe('MembersComponent', () => {
   let component: MembersComponent;
@@ -8,7 +10,7 @@ describe('MembersComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MembersComponent],
+      declarations: [MembersComponent, MockComponent(ParagraphComponent)],
     }).compileComponents();
   });
 

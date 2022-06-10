@@ -8,5 +8,6 @@ export function createGotoServiceMock(): GotoServiceMock {
     board: jest.fn(),
     dashboard: jest.fn(),
     login: jest.fn(),
+    workspace: jest.fn()
   };
 }

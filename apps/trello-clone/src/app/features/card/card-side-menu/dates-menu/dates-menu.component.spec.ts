@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DatesMenuComponent } from './dates-menu.component';
+import {MockComponent} from "ng-mocks";
+import {ButtonComponent, MenuComponent} from "@ui-components";
 
 describe('DatesMenuComponent', () => {
   let component: DatesMenuComponent;
@@ -8,7 +10,11 @@ describe('DatesMenuComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DatesMenuComponent ]
+      declarations: [
+        DatesMenuComponent,
+        MockComponent(ButtonComponent),
+        MockComponent(MenuComponent)
+      ]
     })
     .compileComponents();
   });

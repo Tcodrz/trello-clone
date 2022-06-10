@@ -1,9 +1,10 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {LoginComponent} from './login.component';
 import {UserService} from "../../core/services/user.service";
-import {FormBuilder} from "@angular/forms";
-import {ButtonModule} from "@ui-components";
+import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
+import {ButtonComponent, ButtonModule, CardComponent} from "@ui-components";
 import {createUserServiceMock} from "@trello-clone/trello-mocks";
+import {MockComponent} from "ng-mocks";
 
 
 describe('LoginComponent', () => {
@@ -15,12 +16,16 @@ describe('LoginComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [LoginComponent],
+      declarations: [
+        LoginComponent,
+        MockComponent(ButtonComponent),
+        MockComponent(CardComponent)
+      ],
       providers: [
         {provide: UserService, useValue: createUserServiceMock()},
         FormBuilder
       ],
-      imports: [ButtonModule]
+      imports: [ReactiveFormsModule]
     })
       .compileComponents();
   });

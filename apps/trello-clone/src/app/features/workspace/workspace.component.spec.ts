@@ -3,17 +3,26 @@ import {WorkspaceComponent} from './workspace.component';
 import {BoardsService} from "../../core/services/boards.service";
 import {GotoService} from "../../core/services/goto.service";
 import {WorkspaceService} from "../../core/services/workspace.service";
-import {ActivatedRoute, ParamMap} from "@angular/router";
+import {ActivatedRoute, ParamMap, Params} from "@angular/router";
 import {of} from "rxjs";
 import {Board, Theme} from "@trello-clone/trello-interface";
 import {createWorkspaceServiceMock, MOCK_WORKSPACE} from "../../mocks/workspace.service.mock";
 import {createBoardsServiceMock} from "../../mocks/board.service.mock";
 import {createGotoServiceMock} from "../../mocks/goto.service.mock";
+import {MockComponent} from "ng-mocks";
+import {WorkspaceHeaderComponent} from "./workspace-header/workspace-header.component";
+import {TabsComponent} from "@ui-components";
+import {BoardsPreviewListComponent} from "../board/boards-preview-list/boards-preview-list.component";
+import {MembersComponent} from "./members/members.component";
+import {LayoutComponent} from "../layout/layout.component";
 
 
 function createActivatedRouteMock(): Partial<ActivatedRoute> {
   return {
-    params: of({'workspaceID': MOCK_WORKSPACE.id} as unknown as ParamMap),
+    params: of({
+      'workspaceID': MOCK_WORKSPACE.id,
+      'activeTab': 0
+    } as unknown as ParamMap),
   };
 }
 
@@ -39,7 +48,14 @@ describe('WorkspaceComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [WorkspaceComponent],
+      declarations: [
+        WorkspaceComponent,
+        MockComponent(WorkspaceHeaderComponent),
+        MockComponent(TabsComponent),
+        MockComponent(BoardsPreviewListComponent),
+        MockComponent(MembersComponent),
+        MockComponent(LayoutComponent)
+      ],
       providers: [
         {provide: ActivatedRoute, useValue: createActivatedRouteMock()},
         {provide: BoardsService, useValue: createBoardsServiceMock()},
