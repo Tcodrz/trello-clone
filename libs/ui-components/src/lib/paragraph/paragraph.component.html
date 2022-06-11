@@ -1,5 +1,10 @@
 <hr *ngIf="dividerTop">
-<h3 class="title">{{title}}</h3>
+<div class="header">
+  <h3 class="title">{{title}}</h3>
+    <ui-chip *ngIf="chipConfig"
+             [chipConfig]="chipConfig">
+    </ui-chip>
+</div>
 <div class="text-wrapper">
   <div class="text">{{text}}</div>
   <div *ngIf="textLink" class="text-link">

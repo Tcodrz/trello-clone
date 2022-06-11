@@ -1,12 +1,18 @@
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .text-wrapper {
   display: flex;
+  justify-content: space-between;
 
   .text {
-    flex: 1
+    max-width: 50%;
   }
 
   .text-link {
-    flex: 1;
-
   }
 }
