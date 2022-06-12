@@ -47,3 +47,6 @@ export * from './lib/paragraph/paragraph.component';
 export * from './lib/paragraph/paragraph.module';
 export * from './interface/paragraph.interface';
 export * from './interface/ui-button.interface';
+export * from './lib/ui-chip/ui-chip.module';
+export * from './lib/ui-chip/chip/chip.component';
+export * from './lib/ui-chip/chip-config.interface';

@@ -1,0 +1,13 @@
+<ng-container *ngIf="showChip$ | async">
+  <p-chip [icon]="chipConfig.icon"
+          [label]="chipConfig.label"
+          [removable]="chipConfig.removable"
+          [styleClass]="chipConfig?.styleClass || ''"
+          (onRemove)="onRemove($event)"
+          [style]="{
+        'backgroundColor': chipConfig.color,
+        'color': textColor
+        }"
+  ></p-chip>
+</ng-container>
+
