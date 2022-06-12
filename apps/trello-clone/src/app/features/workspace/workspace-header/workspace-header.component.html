@@ -2,17 +2,26 @@
   <div class="workspace-details">
     <div class="layout">
 
-      <ui-logo-preview [name]="logoPreviewConfig.name" [size]="logoPreviewConfig.size"></ui-logo-preview>
+      <div class="left">
 
-      <div class="details">
-        <div class="top">
-          <div class="workspace-title">{{workspace.name}}</div>
+        <ui-logo-preview [name]="logoPreviewConfig.name"
+                         [size]="logoPreviewConfig.size">
+        </ui-logo-preview>
+
+        <div class="details">
+          <div class="top">
+            <div class="workspace-title">{{workspace.name}}</div>
+          </div>
+          <div class="bottom">
+            <ui-button className="btn" [icon]="Icons.Pen">
+              Edit Workspace details
+            </ui-button>
+          </div>
         </div>
-        <div class="bottom">
-          <ui-button className="btn" [icon]="Icons.Pen">
-            Edit Workspace details
-          </ui-button>
-        </div>
+      </div>
+
+      <div class="invite-btn">
+        <ui-button className="primary" [icon]="Icons.User">Invite workspace member</ui-button>
       </div>
     </div>
   </div>
