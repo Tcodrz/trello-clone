@@ -98,3 +98,15 @@ ui-checklist {
     background-color: $SidbarLinkHover;
   }
 }
+
+.p-overlaypanel .p-overlaypanel-content {
+  padding: 0;
+}
+
+.p-dialog .p-dialog-header,
+.p-dialog .p-dialog-content{
+  padding: 0;
+}
+.p-dialog-content {
+  border-radius: 4px;
+}

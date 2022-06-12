@@ -1,31 +1,28 @@
-.tabs {
-  display: flex;
-  justify-content: space-around;
-
-
-  ul.p-tabview-nav {
-    li.p-highlight {
-      background-color: black;
-    }
-  }
-}
-
 :host ::ng-deep {
-  .p-tabview-nav {
-    li {
-      padding: 12px 24px;
-      font-weight: 500;
-      background-color: #dfe1e6;
-      margin: 0 2px;
-      border-top-left-radius: 2px;
-      border-top-right-radius: 2px;
+  .tabs {
+    display: flex;
+    justify-content: center;
+
+    p-tabview {
+      max-height: 0;
     }
 
-    .p-highlight {
-      background-color: white;
-      border-top: 1px solid #dfe1e6;
-      border-right: 1px solid #dfe1e6;
-      border-left: 1px solid #dfe1e6;
+    .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+      padding: 0.75rem 1.25rem;
+    }
+
+    .p-tabview .p-tabview-nav li .p-tabview-nav-link {
+      background-color: transparent;
+    }
+    .p-tabview .p-tabview-nav {
+      background: transparent;
+    }
+    .p-tabview .p-tabview-nav .p-tabview-nav-link {
+      background: transparent;
+    }
+    li.p-highlight {
+      background-color: #ffffff;
     }
   }
 }
+

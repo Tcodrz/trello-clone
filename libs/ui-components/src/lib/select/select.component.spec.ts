@@ -1,5 +1,6 @@
 import {ComponentFixture, TestBed} from '@angular/core/testing';
-import {SelectComponent} from '@ui-components';
+import {IconComponent, SelectComponent} from '@ui-components';
+import {MockComponent} from "ng-mocks";
 
 describe('SelectComponent', () => {
   let component: SelectComponent;
@@ -7,7 +8,7 @@ describe('SelectComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SelectComponent ]
+      declarations: [ SelectComponent, MockComponent(IconComponent) ]
     })
     .compileComponents();
   });

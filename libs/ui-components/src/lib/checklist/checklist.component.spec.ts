@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { ChecklistComponent } from '@ui-components';
+import {ButtonComponent, ChecklistComponent, MenuComponent} from '@ui-components';
+import {MockComponent} from "ng-mocks";
 
 describe('ChecklistComponent', () => {
   let component: ChecklistComponent;
@@ -7,7 +8,11 @@ describe('ChecklistComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ChecklistComponent ]
+      declarations: [
+        ChecklistComponent,
+        MockComponent(ButtonComponent),
+        MockComponent(MenuComponent),
+      ]
     })
     .compileComponents();
   });

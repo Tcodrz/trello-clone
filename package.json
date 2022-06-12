@@ -7,6 +7,7 @@
     "build": "nx build",
     "test": "nx run-many --target=test --projects=trello-clone,ui-components --verbose",
     "test:trello": "nx run trello-clone:test --verbose --watch",
+    "test:ui-components": "nx run ui-components:test --verbose --watch",
     "postinstall": "ngcc --properties es2020 browser module main"
   },
   "private": true,
