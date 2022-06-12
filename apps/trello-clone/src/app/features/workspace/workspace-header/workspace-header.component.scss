@@ -8,20 +8,25 @@
 
   .layout {
     display: flex;
-    flex-direction: row;
-    column-gap: 24px;
+    width: 800px;
+    justify-content: space-between;
 
-    .details {
-      .top {
-        display: flex;
+    .left {
+      display: flex;
+      column-gap: 16px;
 
-        .workspace-title {
-          font-size: 24px;
+      .details {
+        .top {
+          display: flex;
+
+          .workspace-title {
+            font-size: 24px;
+          }
         }
-      }
 
-      .bottom {
-        margin-top: 16px;
+        .bottom {
+          margin-top: 16px;
+        }
       }
     }
   }
