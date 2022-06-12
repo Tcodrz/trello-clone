@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {Icons, Paragraph} from "@ui-components";
+import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
+import {ChipColors, Icons, Paragraph} from "@ui-components";
 
 @Component({
   selector: 'app-members',
   templateUrl: './members.component.html',
   styleUrls: ['./members.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MembersComponent implements OnInit {
   membersParagraph!: Paragraph;
@@ -35,8 +36,21 @@ export class MembersComponent implements OnInit {
         icon: Icons.PaperClip,
         className: 'btn',
         action: () => {
-
+          this.initChipConfig()
         }
+      }
+    };
+  }
+
+  private initChipConfig() {
+    this.inviteParagraph = {
+      ...this.inviteParagraph,
+      chipConfig: {
+        icon: 'pi pi-check',
+        label: 'Link has been copied to clipboard',
+        removable: false,
+        color: ChipColors.Success,
+        timeOut: 2
       }
     };
   }
